@@ -1,6 +1,6 @@
 /*!
 
-ZipUtils - A collection of cross-browser utilities to go along with JSZip.
+JSZipUtils - A collection of cross-browser utilities to go along with JSZip.
 <http://stuk.github.io/jszip-utils>
 
 (c) 2014 Stuart Knightley, David Duponchel
