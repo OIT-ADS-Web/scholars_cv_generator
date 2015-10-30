@@ -15,17 +15,30 @@ var run_template= function(data) {
     saveAs(out,"output.docx")
   });
 };
-  
+
+function getParameterByName(name) {
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+};
+
 var get_data = function() {
   var base_url = "https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.jsonp?"; 
-  var person_uri = "uri=https://scholars.duke.edu/individual/per3668152";
+  var uri = getParameterByName('uri');
+  var person_uri = "uri=" + uri;
   var url = base_url + person_uri;
+  console.log(url);
   $.ajax({
     url: url,
     cache: false,
     dataType: "jsonp",
     method: 'GET',
     }).done(function(data) { 
+
+
+   
+
 
       //gets ride of html tags
       var stripHtml = /(<([^>]+)>)/ig;
