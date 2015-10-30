@@ -27,7 +27,7 @@ for SERVER in "${SERVERS[@]}"; do
   ssh tomcat@$SERVER "[ -d $deploy_dir ] || mkdir $deploy_dir"
  
   echo "rsyncing files to $SERVER..."
-  rsync -avz index.html tomcat@$SERVER:$deploy_dir/index.html
+  rsync -avz cv_generator.html tomcat@$SERVER:$deploy_dir/cv_generator.html
  
   # NOTE: do NOT compress 
   echo "rsyncing files to $SERVER..."
