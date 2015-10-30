@@ -5,8 +5,8 @@ var loadFile=function(url,callback){
 var run_template= function(data) {
   loadFile("cv_template.docx",function(err,content){
     if (err) { 
-      console.debug(err);
-      throw e
+      //console.debug(err);
+      throw err
     };
     doc=new Docxgen(content);
     doc.setData(data);    
@@ -24,7 +24,7 @@ var get_data = function() {
     url: url,
     cache: false,
     dataType: "jsonp",
-    method: 'GET',
+    method: 'GET'
     }).done(function(data) { 
 
       //gets ride of html tags
@@ -98,7 +98,7 @@ var get_data = function() {
                       'journalIssues': 'http://vivo.duke.edu/vivo/ontology/duke-extension#JournalIssue',
                       'reports': 'http://purl.org/ontology/bibo/Report', 
                       'scholarlyEdition': 'http://purl.org/ontology/bibo/EditedBook', 
-                      'theses': 'http://purl.org/ontology/bibo/Thesis',               
+                      'theses': 'http://purl.org/ontology/bibo/Thesis'               
       };
 
       var pubs = data['publications'];
@@ -236,7 +236,7 @@ var get_data = function() {
 
 
       }).fail(function(xhr, textStatus, err) {
-        console.log(textStatus);
+        //console.log(textStatus);
       });
     };
 
