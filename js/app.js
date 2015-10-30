@@ -259,7 +259,6 @@ var get_data = function() {
       $("#create_file").click(function(e) {
         e.preventDefault();
         get_data();
-        console.log("hello");
 
       });
     });
