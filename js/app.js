@@ -16,11 +16,12 @@ var run_template= function(data) {
   });
 };
 
+// this returns query string (everything after =)
 function getParameterByName(name) {
   name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-      results = regex.exec(location.search);
-      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+  results = regex.exec(location.search);
+  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 };
 
 var get_data = function() {
@@ -34,11 +35,7 @@ var get_data = function() {
     cache: false,
     dataType: "jsonp",
     method: 'GET'
-    }).done(function(data) { 
-
-
-   
-
+    }).done(function(data) {
 
       //gets ride of html tags
       var stripHtml = /(<([^>]+)>)/ig;
