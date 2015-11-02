@@ -30,10 +30,12 @@
 
       
         var uri = getParameterByName('uri');
-        if (uri) {
-          alert(uri);
-        }
-
+        console.log(uri);
+        $('a').on('click', function() {
+          if (uri) {
+            alert(uri);
+          }
+        });
       });
 
 

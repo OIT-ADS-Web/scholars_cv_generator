@@ -252,10 +252,5 @@ var get_data = function() {
 
 
     $(document).ready(function() {
-
-      $("#create_file").click(function(e) {
-        e.preventDefault();
-        get_data();
-
-      });
+      get_data();
     });
