@@ -12,7 +12,7 @@ var run_template= function(data) {
     doc.setData(data);    
     doc.render(); //apply them (replace all occurences of {first_name} by Hipp, ...)
     out=doc.getZip().generate({type:"blob"}) //Output the document using Data-URI
-    saveAs(out,"output.docx")
+    saveAs(out,"cv.docx")
   });
 };
 
