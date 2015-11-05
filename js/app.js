@@ -100,7 +100,7 @@ var get_data = function() {
       var pubTypes = {
                       'academicArticles': 'http://purl.org/ontology/bibo/AcademicArticle',
                       'books': 'http://purl.org/ontology/bibo/Book', 
-                      'bookReviews': 'http://v1ivoweb.org/ontology/core#Review', 
+                      'bookReviews': 'http://vivoweb.org/ontology/core#Review', 
                       'bookSections': 'http://purl.org/ontology/bibo/BookSection', 
                       'bookSeries': 'http://vivo.duke.edu/vivo/ontology/duke-extension#BookSeries',
                       'conferencePapers': 'http://vivoweb.org/ontology/core#ConferencePaper',
