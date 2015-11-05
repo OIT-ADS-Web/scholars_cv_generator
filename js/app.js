@@ -89,14 +89,16 @@ var get_data = function() {
         });
       };
       //research interests
-      var overview = data['attributes']['overview'];
-      if (typeof overview != 'undefined' && overview != null && overview.length > 0) {
-        var research_interests = overview.replace(stripHtml, "");
-        results['researchInterestsLabel'] = "Research Interests:";  
+      if (data['attributes']['overview'] != null) {
+        var overview = data['attributes']['overview'];
+        var researchInterests = overview.replace(stripHtml, "");
+        if (typeof overview != 'undefined' && overview != null && overview.length > 0) {
+          results['researchInterestsLabel'] = "Research Interests:";  
+        };
       };
 
       results['cv'].push({'first_name': first_name, 'last_name': last_name,'primaryPosition': [],
-                          'secondaryPosition': [], 'title': title, 'research_interests': research_interests });   
+                          'secondaryPosition': [], 'title': title, 'researchInterests': researchInterests });   
       var pubTypes = {
                       'academicArticles': 'http://purl.org/ontology/bibo/AcademicArticle',
                       'books': 'http://purl.org/ontology/bibo/Book', 
