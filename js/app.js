@@ -43,29 +43,49 @@ var get_data = function() {
       var stripClosingTag = /<\/a>/i;
 
       // encompassing hash
-      var results = {'cv': [], 'primaryPositionLabel': [], 'secondaryPositionLabel': [], 'educationsLabel': [],'educations': [], 'publicationsLabel': [], 'academicArticlesLabel': [], 'booksLabel': [], 
-                     'bookReviewsLabel': [], 'bookSectionsLabel': [], 'bookSeriesLabel': [], 'conferencePapersLabel': [], 'datasetsLabel': [], 
-                     'digitalPublicationsLabel': [], 'journalIssuesLabel': [], 'reportsLabel': [], 'scholarlyEditionsLabel': [], 'thesesLabel': [], 
-                     'academicArticles': [], 'books': [], 'bookReviews': [], 'bookSections': [], 'bookSeries': [], 'conferencePapers': [], 'datasets': [], 
-                     'digitalPublications': [], 'journalIssues': [], 'reports': [], 'scholarlyEdition': [], 'theses': [], 'teachingLabel': [], 'teaching': [], 
-                     'grantsLabel': [], 'grants': [],'researchInterestsLabel': [], 'awardsLabel': [], 'awards': [], 'presentationsLabel': [], 'presentations': [], 
-                     'servicesToProfessionLabel': [], 'servicesToProfession': [], 'servicesToDukeLabel': [], 'servicesToDuke': [], 'outreachLabel': [], 
-                     'outreach': []
+      var results = {'cv': [], 'primaryPositionLabel': [], 'primaryPosition': [], 'secondaryPositionLabel': [], 'secondaryPosition': [], 'educationsLabel': [],
+                     'educations': [], 'publicationsLabel': [], 'academicArticlesLabel': [], 'booksLabel': [], 
+                     'bookReviewsLabel': [], 'bookSectionsLabel': [], 'bookSeriesLabel': [], 'conferencePapersLabel': [],
+                     'datasetsLabel': [], 'digitalPublicationsLabel': [], 'journalIssuesLabel': [], 'reportsLabel': [], 
+                     'scholarlyEditionsLabel': [], 'thesesLabel': [], 'academicArticles': [], 'books': [], 
+                     'bookReviews': [], 'bookSections': [], 'bookSeries': [], 'conferencePapers': [], 'datasets': [], 
+                     'digitalPublications': [], 'journalIssues': [], 'reports': [], 'scholarlyEdition': [], 'theses': [],
+                     'teachingLabel': [], 'teaching': [], 'grantsLabel': [], 'grants': [],'researchInterestsLabel': [], 
+                     'awardsLabel': [], 'awards': [], 'presentationsLabel': [], 'presentations': [], 
+                     'servicesToProfessionLabel': [], 'servicesToProfession': [], 'servicesToDukeLabel': [], 
+                     'servicesToDuke': [], 'outreachLabel': [], 'outreach': []
       };   
+
       var first_name = data['attributes']['firstName'];
 
       var last_name = data['attributes']['lastName'];
 
+      // primary & secondary positions
       var positions =  data['positions'];
-      if (typeof positions[0] != 'undefined' && positions[0] != null && positions[0].length > 0) {
-        results['primaryPositionLabel'] = "Primary Appointment:";
-        var primaryPosition = positions[0]['label'];
-        console.log(primaryPosition);
+
+      var positionTypes = {
+        'primaryPosition': 'http://vivoweb.org/ontology/core#PrimaryPosition',
+        'secondaryPosition': 'http://vivoweb.org/ontology/core#SecondaryPosition'
       };
 
-      if (typeof positions[1] != 'undefined' && positions[1] != null && positions[1].length > 0) {
-        results['secondaryPositionLabel'] = "Secondary Appointment:";
-        var secondaryPosition = positions[1]['label'];
+      if (typeof positions != 'undefined' && positions != null && positions.length > 0) {
+        $.each(positions, function(index, value) { 
+          var vivoType = value['vivoType'];
+          var label = value['label'];
+          if (vivoType != null) {
+            switch (vivoType) {
+              case positionTypes['primaryPosition']:
+                results['primaryPositionLabel'][0] = "Primary Appointment:";
+                results['primaryPosition'].push({'label': label});
+              break;
+              case positionTypes['secondaryPosition']:
+                results['secondaryPositionLabel'][0] = "Secondary Appointment:";
+                results['secondaryPosition'].push({'label': label});
+              break;
+            
+            };
+          };
+        });
       };
 
       var title = data['title'];
@@ -89,20 +109,17 @@ var get_data = function() {
         });
       };
       //research interests
-      if (data['attributes']['overview'] != null) {
-        var overview = data['attributes']['overview'];
-        var researchInterests = overview.replace(stripHtml, "");
-        if (typeof overview != 'undefined' && overview != null && overview.length > 0) {
-          results['researchInterestsLabel'] = "Research Interests:";  
-        };
+      var overview = data['attributes']['overview'];
+      if (typeof overview != 'undefined' && overview != null && overview.length > 0) {
+        var research_interests = overview.replace(stripHtml, "");
+        results['researchInterestsLabel'] = "Research Interests:";  
       };
 
-      results['cv'].push({'first_name': first_name, 'last_name': last_name,'primaryPosition': [],
-                          'secondaryPosition': [], 'title': title, 'researchInterests': researchInterests });   
+      results['cv'].push({'first_name': first_name, 'last_name': last_name,'title': title, 'research_interests': research_interests });   
       var pubTypes = {
                       'academicArticles': 'http://purl.org/ontology/bibo/AcademicArticle',
                       'books': 'http://purl.org/ontology/bibo/Book', 
-                      'bookReviews': 'http://vivoweb.org/ontology/core#Review', 
+                      'bookReviews': 'http://v1ivoweb.org/ontology/core#Review', 
                       'bookSections': 'http://purl.org/ontology/bibo/BookSection', 
                       'bookSeries': 'http://vivo.duke.edu/vivo/ontology/duke-extension#BookSeries',
                       'conferencePapers': 'http://vivoweb.org/ontology/core#ConferencePaper',
