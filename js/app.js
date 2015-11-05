@@ -27,9 +27,9 @@ function getParameterByName(name) {
 var get_data = function() {
   var base_url = "https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.jsonp?"; 
   var uri = getParameterByName('uri');
+  console.log(uri);
   var person_uri = "uri=" + uri;
   var url = base_url + person_uri;
-  console.log(url);
   $.ajax({
     url: url,
     cache: false,
@@ -43,7 +43,7 @@ var get_data = function() {
       var stripClosingTag = /<\/a>/i;
 
       // encompassing hash
-      var results = {'cv': [], 'educationsLabel': [],'educations': [], 'publicationsLabel': [], 'academicArticlesLabel': [], 'booksLabel': [], 
+      var results = {'cv': [], 'primaryPositionLabel': [], 'secondaryPositionLabel': [], 'educationsLabel': [],'educations': [], 'publicationsLabel': [], 'academicArticlesLabel': [], 'booksLabel': [], 
                      'bookReviewsLabel': [], 'bookSectionsLabel': [], 'bookSeriesLabel': [], 'conferencePapersLabel': [], 'datasetsLabel': [], 
                      'digitalPublicationsLabel': [], 'journalIssuesLabel': [], 'reportsLabel': [], 'scholarlyEditionsLabel': [], 'thesesLabel': [], 
                      'academicArticles': [], 'books': [], 'bookReviews': [], 'bookSections': [], 'bookSeries': [], 'conferencePapers': [], 'datasets': [], 
@@ -56,11 +56,15 @@ var get_data = function() {
 
       var last_name = data['attributes']['lastName'];
 
-      var primary_position = data['positions'][0]['label'];
-
       var positions =  data['positions'];
+      if (typeof positions[0] != 'undefined' && positions[0] != null && positions[0].length > 0) {
+        results['primaryPositionLabel'] = "Primary Appointment:";
+        var primaryPosition = positions[0]['label'];
+        console.log(primaryPosition);
+      };
+
       if (typeof positions[1] != 'undefined' && positions[1] != null && positions[1].length > 0) {
-        results['cv']['secondaryPositionLabel'] = "Secondary Appointment:";
+        results['secondaryPositionLabel'] = "Secondary Appointment:";
         var secondaryPosition = positions[1]['label'];
       };
 
@@ -84,7 +88,6 @@ var get_data = function() {
 
         });
       };
-
       //research interests
       var overview = data['attributes']['overview'];
       if (typeof overview != 'undefined' && overview != null && overview.length > 0) {
@@ -92,14 +95,12 @@ var get_data = function() {
         results['researchInterestsLabel'] = "Research Interests:";  
       };
 
-      results['cv'].push({'first_name': first_name, 'last_name': last_name, 'primary_position': primary_position, 'secondaryPositionLabel': [], 
-                          'secondaryPosition': [], 'title': title, 'research_interests': research_interests });
-
-      //PUBLICATIONS
+      results['cv'].push({'first_name': first_name, 'last_name': last_name,'primaryPosition': [],
+                          'secondaryPosition': [], 'title': title, 'research_interests': research_interests });   
       var pubTypes = {
                       'academicArticles': 'http://purl.org/ontology/bibo/AcademicArticle',
                       'books': 'http://purl.org/ontology/bibo/Book', 
-                      'bookReviews': 'http://vivoweb.org/ontology/core#Review', 
+                      'bookReviews': 'http://v1ivoweb.org/ontology/core#Review', 
                       'bookSections': 'http://purl.org/ontology/bibo/BookSection', 
                       'bookSeries': 'http://vivo.duke.edu/vivo/ontology/duke-extension#BookSeries',
                       'conferencePapers': 'http://vivoweb.org/ontology/core#ConferencePaper',
