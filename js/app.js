@@ -53,7 +53,7 @@ var get_data = function() {
                      'teachingLabel': [], 'teaching': [], 'grantsLabel': [], 'grants': [],'researchInterestsLabel': [], 
                      'awardsLabel': [], 'awards': [], 'presentationsLabel': [], 'presentations': [], 
                      'servicesToProfessionLabel': [], 'servicesToProfession': [], 'servicesToDukeLabel': [], 
-                     'servicesToDuke': [], 'outreachLabel': [], 'outreach': []
+                     'servicesToDuke': [], 'outreachLabel': [], 'outreach': [], 'researchInterests': []
       };   
 
       var first_name = data['attributes']['firstName'];
@@ -111,11 +111,12 @@ var get_data = function() {
       //research interests
       var overview = data['attributes']['overview'];
       if (typeof overview != 'undefined' && overview != null && overview.length > 0) {
-        var research_interests = overview.replace(stripHtml, "");
         results['researchInterestsLabel'] = "Research Interests:";  
+        var research_interests = overview.replace(stripHtml, "");
+        results['researchInterests'].push({'research_interests': research_interests});
       };
 
-      results['cv'].push({'first_name': first_name, 'last_name': last_name,'title': title, 'research_interests': research_interests });   
+      results['cv'].push({'first_name': first_name, 'last_name': last_name,'title': title });   
       var pubTypes = {
                       'academicArticles': 'http://purl.org/ontology/bibo/AcademicArticle',
                       'books': 'http://purl.org/ontology/bibo/Book', 
