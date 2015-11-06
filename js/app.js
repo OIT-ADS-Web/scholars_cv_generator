@@ -27,7 +27,6 @@ function getParameterByName(name) {
 var get_data = function() {
   var base_url = "https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.jsonp?"; 
   var uri = getParameterByName('uri');
-  console.log(uri);
   var person_uri = "uri=" + uri;
   var url = base_url + person_uri;
   $.ajax({
@@ -97,8 +96,9 @@ var get_data = function() {
         $.each(educations, function(index, value) {
           var institution = value.attributes['institution'];
           var year = value.attributes['endDate'].substr(0,4);
-          if (typeof degree != 'undefined') {
+          if (value.attributes['degree'] != null) {
             var degree = value.attributes['degree'];
+            console.log(degree);
             var allEducation = (degree + ", " + institution + " " + year);
           }
           else {
