@@ -42,7 +42,7 @@ var get_data = function(uri) {
       var stripClosingTag = /<\/a>/i;
 
       // encompassing hash
-      var results = {'cv': [], 'middleName': [], 'primaryPositionLabel': [], 'primaryPosition': [], 'secondaryPositionLabel': [], 'secondaryPosition': [], 'educationsLabel': [],
+      var results = {'cv': [], 'middle_name': [], 'primaryPositionLabel': [], 'primaryPosition': [], 'secondaryPositionLabel': [], 'secondaryPosition': [], 'educationsLabel': [],
                      'educations': [], 'publicationsLabel': [], 'academicArticlesLabel': [], 'booksLabel': [], 
                      'bookReviewsLabel': [], 'bookSectionsLabel': [], 'bookSeriesLabel': [], 'conferencePapersLabel': [],
                      'datasetsLabel': [], 'digitalPublicationsLabel': [], 'journalIssuesLabel': [], 'reportsLabel': [], 
@@ -57,10 +57,11 @@ var get_data = function(uri) {
 
       var firstName = data['attributes']['firstName'];
 
-      var middleName = data['attributes']['middleName'];
-      if (typeof middleName != 'undefined' && middleName != null && middleName.length > 0) {
-        results['middleName'].push({'middleName': middleName});
-        console.log(middleName);
+      var middle = data['attributes']['middleName'];
+      if (typeof middle != 'undefined') {
+        console.log(middle);
+        results['middle_name'][0] = middle;
+        // results['middleName'].push({'middle_name': middle_name});
       };
 
       var lastName = data['attributes']['lastName'];
@@ -102,8 +103,10 @@ var get_data = function(uri) {
         $.each(educations, function(index, value) {
           var institution = value.attributes['institution'];
           var year = value.attributes['endDate'].substr(0,4);
+          var degree = value.attributes['degree'];
           if (typeof degree != 'undefined') {
             var degree = value.attributes['degree'];
+            console.log(degree);
             var allEducation = (degree + ", " + institution + " " + year);
           }
           else {
@@ -122,7 +125,7 @@ var get_data = function(uri) {
         results['researchInterests'].push({'research_interests': research_interests});
       };
 
-      results['cv'].push({'firstName': firstName, 'lastName': lastName,'title': title });  
+      results['cv'].push({'firstName': firstName,'lastName': lastName,'title': title });  
 
       var pubTypes = {
                       'academicArticles': 'http://purl.org/ontology/bibo/AcademicArticle',
