@@ -24,25 +24,25 @@ function getParameterByName(name) {
   return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 };
 
-var get_data = function() {
+var get_data = function(uri) {
   var base_url = "https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.jsonp?"; 
   var uri = getParameterByName('uri');
   var person_uri = "uri=" + uri;
   var url = base_url + person_uri;
+  console.log(url);
   $.ajax({
     url: url,
     cache: false,
     dataType: "jsonp",
-    method: 'GET'
+    method: 'GET',
     }).done(function(data) {
-
       //gets ride of html tags
       var stripHtml = /(<([^>]+)>)/ig;
       var stripOpeningTag = /<a\b[^>]*>/i;
       var stripClosingTag = /<\/a>/i;
 
       // encompassing hash
-      var results = {'cv': [], 'primaryPositionLabel': [], 'primaryPosition': [], 'secondaryPositionLabel': [], 'secondaryPosition': [], 'educationsLabel': [],
+      var results = {'cv': [], 'middleName': [], 'primaryPositionLabel': [], 'primaryPosition': [], 'secondaryPositionLabel': [], 'secondaryPosition': [], 'educationsLabel': [],
                      'educations': [], 'publicationsLabel': [], 'academicArticlesLabel': [], 'booksLabel': [], 
                      'bookReviewsLabel': [], 'bookSectionsLabel': [], 'bookSeriesLabel': [], 'conferencePapersLabel': [],
                      'datasetsLabel': [], 'digitalPublicationsLabel': [], 'journalIssuesLabel': [], 'reportsLabel': [], 
@@ -55,9 +55,15 @@ var get_data = function() {
                      'servicesToDuke': [], 'outreachLabel': [], 'outreach': [], 'researchInterests': []
       };   
 
-      var first_name = data['attributes']['firstName'];
+      var firstName = data['attributes']['firstName'];
 
-      var last_name = data['attributes']['lastName'];
+      var middleName = data['attributes']['middleName'];
+      if (typeof middleName != 'undefined' && middleName != null && middleName.length > 0) {
+        results['middleName'].push({'middleName': middleName});
+        console.log(middleName);
+      };
+
+      var lastName = data['attributes']['lastName'];
 
       // primary & secondary positions
       var positions =  data['positions'];
@@ -96,15 +102,15 @@ var get_data = function() {
         $.each(educations, function(index, value) {
           var institution = value.attributes['institution'];
           var year = value.attributes['endDate'].substr(0,4);
-          if (value.attributes['degree'] != null) {
+          if (typeof degree != 'undefined') {
             var degree = value.attributes['degree'];
-            console.log(degree);
             var allEducation = (degree + ", " + institution + " " + year);
           }
           else {
             var allEducation = (institution + " " + year);
           }
           results['educations'].push({'allEducation': allEducation});
+          // console.log(allEducation.sort(function ( a, b ) { return b - a; }));    
 
         });
       };
@@ -116,7 +122,8 @@ var get_data = function() {
         results['researchInterests'].push({'research_interests': research_interests});
       };
 
-      results['cv'].push({'first_name': first_name, 'last_name': last_name,'title': title });   
+      results['cv'].push({'firstName': firstName, 'lastName': lastName,'title': title });  
+
       var pubTypes = {
                       'academicArticles': 'http://purl.org/ontology/bibo/AcademicArticle',
                       'books': 'http://purl.org/ontology/bibo/Book', 
@@ -271,7 +278,9 @@ var get_data = function() {
       });
     };
 
-
-    $(document).ready(function() {
+    $(document).ready(function(e){
+      e.preventDefault;
       get_data();
     });
+
+  
