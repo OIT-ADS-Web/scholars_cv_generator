@@ -46,9 +46,9 @@ var get_data = function(uri) {
                      'educations': [], 'publicationsLabel': [], 'academicArticlesLabel': [], 'booksLabel': [], 
                      'bookReviewsLabel': [], 'bookSectionsLabel': [], 'bookSeriesLabel': [], 'conferencePapersLabel': [],
                      'datasetsLabel': [], 'digitalPublicationsLabel': [], 'journalIssuesLabel': [], 'reportsLabel': [], 
-                     'scholarlyEditionsLabel': [], 'thesesLabel': [], 'academicArticles': [], 'books': [], 
+                     'scholarlyEditionsLabel': [], 'thesesLabel': [], 'otherArticlesLabel': [], 'academicArticles': [], 'books': [], 
                      'bookReviews': [], 'bookSections': [], 'bookSeries': [], 'conferencePapers': [], 'datasets': [], 
-                     'digitalPublications': [], 'journalIssues': [], 'reports': [], 'scholarlyEdition': [], 'theses': [],
+                     'digitalPublications': [], 'journalIssues': [], 'reports': [], 'scholarlyEdition': [], 'theses': [], 'otherArticles': [],
                      'teachingLabel': [], 'teaching': [], 'grantsLabel': [], 'grants': [],'researchInterestsLabel': [], 
                      'awardsLabel': [], 'awards': [], 'presentationsLabel': [], 'presentations': [], 
                      'servicesToProfessionLabel': [], 'servicesToProfession': [], 'servicesToDukeLabel': [], 
@@ -139,7 +139,8 @@ var get_data = function(uri) {
                       'journalIssues': 'http://vivo.duke.edu/vivo/ontology/duke-extension#JournalIssue',
                       'reports': 'http://purl.org/ontology/bibo/Report', 
                       'scholarlyEdition': 'http://purl.org/ontology/bibo/EditedBook', 
-                      'theses': 'http://purl.org/ontology/bibo/Thesis'               
+                      'theses': 'http://purl.org/ontology/bibo/Thesis',
+                      'otherArticles': 'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle'              
       };
 
       var pubs = data['publications'];
@@ -195,9 +196,14 @@ var get_data = function(uri) {
                 results['scholarlyEditionsLabel'][0] = "Scholarly Editions";
                 results['scholarlyEdition'].push({'citation': citation});
                 break;
-              default:
+              case pubTypes['theses']:
                 results['thesesLabel'][0] = "Theses and Dissertations";
-                results['theses'].push({'citation':citation});
+                results['theses'].push({'citation': citation});
+                break;
+              case pubTypes['otherArticles']:
+                results['otherArticlesLabel'][0] = "Other Articles";
+                results['otherArticles'].push({'citation': citation})
+                break;
             };
           };
         });
