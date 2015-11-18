@@ -71,7 +71,7 @@ var get_data = function(uri) {
       var positions =  data['positions'];
       var positionTypes = {
         'primaryPosition': 'http://vivoweb.org/ontology/core#PrimaryPosition',
-        'secondaryPosition': 'http://vivoweb.org/ontology/core#SecondaryPosition'
+        'secondaryPosition': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition'
       };
       if (typeof positions != 'undefined' && positions != null && positions.length > 0) {
         $.each(positions, function(index, value) { 
