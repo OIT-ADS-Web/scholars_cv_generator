@@ -106,12 +106,13 @@ var get_data = function(uri) {
           var institution = value.attributes['institution'];
           var year = [value.attributes['endDate'].substr(0,4)];
           var degree = value.attributes['degree'];
+          var label = value['label'];
           if (typeof degree != 'undefined') {
             var degree = value.attributes['degree'];
             var allEducation = (degree + ", " + institution + " " + year);
           }
           else {
-            var allEducation = (institution + " " + year);
+            var allEducation = (label + ", " + institution + " " + year);
           }
           results['educations'].push({'allEducation': allEducation});   
         });
