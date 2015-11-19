@@ -180,7 +180,7 @@ var get_data = function(uri) {
             if (vivoType === pubTypes['bookReviews']) {
               var bookReviews = "Book Reviews";
               results['bookReviewsLabel'] = bookReviews;
-              results['bookReviews'].push({'citation': citation}); 
+              results['bookReviews'].push({'citation':citation}); 
             };
             if (vivoType === pubTypes['bookSections']) {
               var bookSections = "Book Sections";
