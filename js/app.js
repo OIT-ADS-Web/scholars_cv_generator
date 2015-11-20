@@ -132,6 +132,8 @@ var get_data = function(uri) {
       if (typeof overview != 'undefined' && overview != null && overview.length > 0) {
         results['researchInterestsLabel'] = "Research Interests:";  
         var research_interests = overview.replace(stripHtml, "");
+        research_interests = research_interests.replace(/(&nbsp;)*/g,"");
+        console.log(research_interests);
         results['researchInterests'].push({'research_interests': research_interests});
       }
       else {
@@ -158,12 +160,6 @@ var get_data = function(uri) {
                       'otherArticles': 'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle',
                       'software': 'http://vivoweb.org/ontology/core#Software'              
       };
-
-       function test() {
-          console.log('hey');
-          // results['academicArticlesLabel'].push({'test': test});
-        };
-       test();
       var pubs = data['publications'];
       var test = "Academic Articles";
       if (typeof pubs != 'undefined' && pubs != null && pubs.length > 0) {
@@ -173,37 +169,16 @@ var get_data = function(uri) {
           var citation = citation.replace(stripHtml, "");
           var vivoType = value['vivoType'];
           if (vivoType != null) {
-
-
-
             if (vivoType === pubTypes['academicArticles']) {
-              // test();
-              var aLabel = "Academic Articles";
-              // if( Object.prototype.toString.call( results['academicArticlesLabel'] ) === '[object Array]' ) {
-              //   alert( 'Array!' );
-              // };
-              // console.log(results['academicArticlesLabel'][0]);
-              results['academicArticlesLabel'] = aLabel;
-              
+              var academicArticles = "Academic Articles";
+              results['academicArticlesLabel'] = academicArticles;
               results['academicArticles'].push({'citation':citation});
             };
-         
-
-
-
-
             if (vivoType === pubTypes['books']) {
               var books = "Books";
               results['booksLabel'] = books;
               results['books'].push({'citation': citation}); 
             };
-
-
-
-
-
-
-
             if (vivoType === pubTypes['bookReviews']) {
               var bookReviews = "Book Reviews";
               results['bookReviewsLabel'] = bookReviews;
