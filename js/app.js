@@ -294,9 +294,10 @@ var get_data = function(uri) {
           var label = value['label'] + ", awarded by "
           var awardedBy = value.attributes['awardedBy'] + ", ";
           var startDate = value.attributes['startDate'].substr(0,4) + " - ";
-          var endDate = value.attributes['endDate'].substr(0,4);
+          var endDate = value.attributes['endDate'].substr(0,4) + " ";
+          var role = value.attributes['roleName'];
           results['grants'].push({'label':label, 'awardedBy': awardedBy,
-                                  'startDate': startDate, 'endDate': endDate});
+                                  'startDate': startDate, 'endDate': endDate, 'role': role});
         });
       }
       else {
