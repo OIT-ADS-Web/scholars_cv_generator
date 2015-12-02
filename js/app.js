@@ -54,9 +54,9 @@ var get_data = function(uri) {
       var stripClosingTag = /<\/a>/i;
 
       // encompassing hash
-      var results = {'cv': [], 'academicArticlesLabel': [], 'booksLabel': [], 'name': [], 'primaryPositionLabel': [], 'primaryPosition': [], 'secondaryPositionLabel': [], 
-                     'secondaryPosition': [], 'educationsLabel': [], 'educations': [], 'publicationsLabel': [], 'bookReviewsLabel': [], 
-                     'bookSectionsLabel': [], 'bookSeriesLabel': [], 'conferencePapersLabel': [], 'datasetsLabel': [], 'digitalPublicationsLabel': [], 
+      var results = {'cv': [], 'academicArticlesLabel': [], 'booksLabel': [], 'name': [], 'primaryPositionLabel': [], 'primaryPosition': [], 
+                     'secondaryPositionLabel': [], 'secondaryPosition': [], 'educationsLabel': [], 'educations': [], 'publicationsLabel': [], 
+                     'bookReviewsLabel': [], 'bookSectionsLabel': [], 'bookSeriesLabel': [], 'conferencePapersLabel': [], 'datasetsLabel': [], 'digitalPublicationsLabel': [], 
                      'journalIssuesLabel': [], 'reportsLabel': [], 'scholarlyEditionsLabel': [], 'thesesLabel': [], 'otherArticlesLabel': [],
                      'academicArticles': [], 'books': [], 'bookReviews': [], 'bookSections': [], 'bookSeries': [], 
                      'conferencePapers': [], 'datasets': [], 'digitalPublications': [], 'journalIssues': [], 'reports': [], 'scholarlyEdition': [], 
@@ -92,8 +92,8 @@ var get_data = function(uri) {
           if (vivoType != null) {
             switch (vivoType) {
               case positionTypes['primaryPosition']:
-              results['primaryPosition'].push({'label': label});
-              results['primaryPositionLabel'][0] = "Primary Appointment:";
+                results['primaryPosition'].push({'label': label});
+                results['primaryPositionLabel'][0] = "Primary Appointment:";
               break;
               case positionTypes['secondaryPosition']:
                 results['secondaryPosition'].push({'label':label});
