@@ -182,22 +182,11 @@ var get_data = function(uri) {
           var citation = citation.replace(stripHtml, "");
           var vivoType = value['vivoType'];
           var date = value.attributes['datetime'];
-          var date = date.split(" ");
-          date.reverse(compare());
-          // console.log(date);
-          function compare(a,b) {
-            if (a < b )
-              return -1;
-            if (a > b)
-              return 1;
-            return 0;
-          };
           if (vivoType != null) {
             if (vivoType === pubTypes['academicArticles']) {
               var academicArticles = "Academic Articles";
               results['academicArticlesLabel'] = academicArticles;
               results['academicArticles'].push({'citation': citation});
-              results['academicArticles'].reverse(date);
             };
             if (vivoType === pubTypes['books']) {
               var books = "Books";
@@ -223,7 +212,6 @@ var get_data = function(uri) {
               var conferencePapers = "Conference Papers";
               results['conferencePapersLabel'] = conferencePapers;
               results['conferencePapers'].push({'citation': citation}); 
-              results['conferencePapers'].reverse(compare);
             };
             if (vivoType === pubTypes['datasets']) {
               var datasets = "Datasets";
@@ -267,6 +255,11 @@ var get_data = function(uri) {
             };
           };
         });
+        results['academicArticles'].reverse(), results['books'].reverse(), results['bookReviews'].reverse(), results['bookSections'].reverse(),
+        results['bookSeries'].reverse(), results['conferencePapers'].reverse(), results['datasets'].reverse(), results['digitalPublications'].reverse(),
+        results['journalIssues'].reverse(), results['reports'].reverse(), results['scholarlyEdition'].reverse(), results['theses'].reverse(),
+        results['otherArticles'].reverse(), results['software'].reverse();
+
       }
       else {
         pubs = false;
