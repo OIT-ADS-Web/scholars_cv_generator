@@ -32,6 +32,8 @@ for SERVER in "${SERVERS[@]}"; do
   # NOTE: do NOT compress 
   echo "rsyncing files to $SERVER..."
   rsync -av cv_template.docx tomcat@$SERVER:$deploy_dir/cv_template.docx
+  rsync -av cv_template.docx tomcat@$SERVER:$deploy_dir/cv_template_only_a.docx
+
 
   echo "creating css directory on $SERVER..."
   ssh tomcat@$SERVER "[ -d $deploy_dir/css ] || mkdir $deploy_dir/css"

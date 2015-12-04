@@ -118,31 +118,24 @@ var get_data = function(uri) {
         results['educationsLabel'] = "Education:";
         $.each(educations, function(index, value) {
           var institution = value.attributes['institution'];
-          var year = [value.attributes['endDate'].substr(0,4)];
+          var endYear = [value.attributes['endDate'].substr(0,4)];
           var degree = value.attributes['degree'];
           var label = value['label'];
           if (typeof degree != 'undefined') {
             var degree = value.attributes['degree'];
-            var allEducation = (degree + ", " + institution + " " + year);
+            var allEducation = (degree + ", " + institution + " " + endYear);
           }
           else {
-            var allEducation = (label + ", " + institution + " " + year);
+            allEducation = (label + ", " + institution + " " + endYear);
           }
           results['educations'].push({'allEducation': allEducation}); 
-          // results['educations'].reverse(compare(year));  
         });
-        function compare(a,b) {
-          if (a < b )
-            return -1;
-          if (a > b)
-            return 1;
-          return 0;
-        };
-        results['educations'].reverse();
       }
       else {
         educations = false;
       };
+      results['educations'].reverse();
+
       //research interests
       var overview = data['attributes']['overview'];
       if (typeof overview != 'undefined' && overview != null && overview.length > 0) {
