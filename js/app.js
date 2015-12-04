@@ -16,7 +16,7 @@ var run_template= function(data) {
   });
 };
 
-//template if person only has Academic Articles
+// template if person only has Academic Articles
 var run_template_a= function(data) {
   loadFile("cv_template_only_a.docx",function(err,content){
     if (err) { 
@@ -340,7 +340,7 @@ var get_data = function(uri) {
         };
       });
 
-      //different templates for different pub data 
+      // different templates for different pub data 
       if (results['academicArticles'].length >= 1 && results['books'].length === 0 && results['bookReviews'].length === 0 &&
           results['bookSections'].length === 0 && results['bookSeries'].length === 0 && results['conferencePapers'].length === 0 &&
           results['datasets'].length === 0 && results['digitalPublications'].length === 0 && results['journalIssues'].length === 0 &&
