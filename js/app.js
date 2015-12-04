@@ -17,7 +17,7 @@ var run_template= function(data) {
 };
 
 //template if person only has Academic Articles
-var run_template_a = function(data) {
+var run_template_a= function(data) {
   loadFile("cv_template_only_a.docx",function(err,content){
     if (err) { 
       //console.debug(err);
