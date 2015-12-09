@@ -48,7 +48,6 @@ var createXHR = window.ActiveXObject ?
     createStandardXHR;
 
 
-
 JSZipUtils.getBinaryContent = function(path, callback) {
     /*
      * Here is the tricky part : getting the data.
