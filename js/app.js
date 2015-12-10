@@ -5,55 +5,111 @@ var loadFile=function(url,callback){
 var run_template= function(data) {
   loadFile("cv_template.docx",function(err,content){
     if (err) { 
-      console.debug(err);
-      throw e
+      //console.debug(err);
+      throw err
     };
     doc=new Docxgen(content);
     doc.setData(data);    
     doc.render(); //apply them (replace all occurences of {first_name} by Hipp, ...)
     out=doc.getZip().generate({type:"blob"}) //Output the document using Data-URI
-    saveAs(out,"output.docx")
+    saveAs(out,"cv.docx")
   });
 };
-  
-var get_data = function() {
+
+// template if person only has Academic Articles
+var run_template_a= function(data) {
+  loadFile("cv_template_only_a.docx",function(err,content){
+    if (err) { 
+      //console.debug(err);
+      throw err
+    };
+    doc=new Docxgen(content);
+    doc.setData(data);    
+    doc.render(); //apply them (replace all occurences of {first_name} by Hipp, ...)
+    out=doc.getZip().generate({type:"blob"}) //Output the document using Data-URI
+    saveAs(out,"cv.docx")
+  });
+};
+
+// this returns query string (everything after =)
+function getParameterByName(name) {
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+  results = regex.exec(location.search);
+  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+};
+
+var get_data = function(uri) {
   var base_url = "https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.jsonp?"; 
-  var person_uri = "uri=https://scholars.duke.edu/individual/per3668152";
+  var uri = getParameterByName('uri');
+  var person_uri = "uri=" + uri;
   var url = base_url + person_uri;
   $.ajax({
     url: url,
     cache: false,
     dataType: "jsonp",
     method: 'GET',
-    }).done(function(data) { 
-
+    }).done(function(data) {
       //gets ride of html tags
       var stripHtml = /(<([^>]+)>)/ig;
       var stripOpeningTag = /<a\b[^>]*>/i;
       var stripClosingTag = /<\/a>/i;
 
       // encompassing hash
-      var results = {'cv': [], 'educationsLabel': [],'educations': [], 'publicationsLabel': [], 'academicArticlesLabel': [], 'booksLabel': [], 
-                     'bookReviewsLabel': [], 'bookSectionsLabel': [], 'bookSeriesLabel': [], 'conferencePapersLabel': [], 'datasetsLabel': [], 
-                     'digitalPublicationsLabel': [], 'journalIssuesLabel': [], 'reportsLabel': [], 'scholarlyEditionsLabel': [], 'thesesLabel': [], 
-                     'academicArticles': [], 'books': [], 'bookReviews': [], 'bookSections': [], 'bookSeries': [], 'conferencePapers': [], 'datasets': [], 
-                     'digitalPublications': [], 'journalIssues': [], 'reports': [], 'scholarlyEdition': [], 'theses': [], 'teachingLabel': [], 'teaching': [], 
-                     'grantsLabel': [], 'grants': [],'researchInterestsLabel': [], 'awardsLabel': [], 'awards': [], 'presentationsLabel': [], 'presentations': [], 
+      var results = {'cv': [], 'academicArticlesLabel': [], 'booksLabel': [], 'name': [], 'primaryPositionLabel': [], 'primaryPosition': [], 
+                     'secondaryPositionLabel': [], 'secondaryPosition': [], 'educationsLabel': [], 'educations': [], 'publicationsLabel': [], 
+                     'bookReviewsLabel': [], 'bookSectionsLabel': [], 'bookSeriesLabel': [], 'conferencePapersLabel': [], 'datasetsLabel': [], 'digitalPublicationsLabel': [], 
+                     'journalIssuesLabel': [], 'reportsLabel': [], 'scholarlyEditionsLabel': [], 'thesesLabel': [], 'otherArticlesLabel': [],
+                     'academicArticles': [], 'books': [], 'bookReviews': [], 'bookSections': [], 'bookSeries': [], 
+                     'conferencePapers': [], 'datasets': [], 'digitalPublications': [], 'journalIssues': [], 'reports': [], 'scholarlyEdition': [], 
+                     'theses': [], 'otherArticles': [], 'softwareLabel': [], 'software': [], 'teachingLabel': [], 'teaching': [], 'grantsLabel': [], 
+                     'grants': [], 'researchInterestsLabel': [], 'awardsLabel': [], 'awards': [], 'presentationsLabel': [], 'presentations': [], 
                      'servicesToProfessionLabel': [], 'servicesToProfession': [], 'servicesToDukeLabel': [], 'servicesToDuke': [], 'outreachLabel': [], 
-                     'outreach': []
+                     'outreach': [], 'researchInterests': []
       };   
-      var first_name = data['attributes']['firstName'];
 
-      var last_name = data['attributes']['lastName'];
+      //name
+      var firstName = data['attributes']['firstName'];
+      var middleName = data['attributes']['middleName'];
+      var lastName = data['attributes']['lastName'];
+      if (typeof middleName != 'undefined' && middleName != null && middleName.length > 0) {
+        var fullName = firstName + " " + middleName + " " + lastName;
+      }
+      else {
+        var fullName = firstName + " " + lastName;
+        middle = false;
+      };
+      results['name'].push({'fullName': fullName});
 
-      var primary_position = data['positions'][0]['label'];
-
+      // primary & secondary positions
       var positions =  data['positions'];
-      if (typeof positions[1] != 'undefined' && positions[1] != null && positions[1].length > 0) {
-        results['cv']['secondaryPositionLabel'] = "Secondary Appointment:";
-        var secondaryPosition = positions[1]['label'];
+      var positionTypes = {
+        'primaryPosition': 'http://vivoweb.org/ontology/core#PrimaryPosition',
+        'secondaryPosition': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition'
+      };
+      if (typeof positions != 'undefined' && positions != null && positions.length > 0) {
+        $.each(positions, function(index, value) { 
+          var vivoType = value['vivoType'];
+          var label = value['label'];
+          if (vivoType != null) {
+            switch (vivoType) {
+              case positionTypes['primaryPosition']:
+                results['primaryPosition'].push({'label': label});
+                results['primaryPositionLabel'][0] = "Primary Appointment:";
+              break;
+              case positionTypes['secondaryPosition']:
+                results['secondaryPosition'].push({'label':label});
+                results['secondaryPositionLabel'][0] = "Secondary Appointment:";
+              break;
+            };
+          };
+        });
+      }
+      else {
+        positions = false;
       };
 
+      // present academic rank and title
       var title = data['title'];
 
       //educations
@@ -62,30 +118,40 @@ var get_data = function() {
         results['educationsLabel'] = "Education:";
         $.each(educations, function(index, value) {
           var institution = value.attributes['institution'];
-          var year = value.attributes['endDate'].substr(0,4);
+          var endYear = [value.attributes['endDate'].substr(0,4)];
+          var degree = value.attributes['degree'];
+          var label = value['label'];
           if (typeof degree != 'undefined') {
             var degree = value.attributes['degree'];
-            var allEducation = (degree + ", " + institution + " " + year);
+            var allEducation = (degree + ", " + institution + " " + endYear);
           }
           else {
-            var allEducation = (institution + " " + year);
+            allEducation = (label + ", " + institution + " " + endYear);
           }
-          results['educations'].push({'allEducation': allEducation});
-
+          results['educations'].push({'allEducation': allEducation}); 
         });
+      }
+      else {
+        educations = false;
       };
+      results['educations'].reverse();
 
       //research interests
       var overview = data['attributes']['overview'];
       if (typeof overview != 'undefined' && overview != null && overview.length > 0) {
-        var research_interests = overview.replace(stripHtml, "");
         results['researchInterestsLabel'] = "Research Interests:";  
+        var research_interests = overview.replace(stripHtml, "");
+        research_interests = research_interests.replace(/(&nbsp;)*/g,"");
+        results['researchInterests'].push({'research_interests': research_interests});
+      }
+      else {
+        overview = false;
+        research_interests = false;
       };
 
-      results['cv'].push({'first_name': first_name, 'last_name': last_name, 'primary_position': primary_position, 'secondaryPositionLabel': [], 
-                          'secondaryPosition': [], 'title': title, 'research_interests': research_interests });
+      results['cv'].push({'title': title});  
 
-      //PUBLICATIONS
+
       var pubTypes = {
                       'academicArticles': 'http://purl.org/ontology/bibo/AcademicArticle',
                       'books': 'http://purl.org/ontology/bibo/Book', 
@@ -98,7 +164,9 @@ var get_data = function() {
                       'journalIssues': 'http://vivo.duke.edu/vivo/ontology/duke-extension#JournalIssue',
                       'reports': 'http://purl.org/ontology/bibo/Report', 
                       'scholarlyEdition': 'http://purl.org/ontology/bibo/EditedBook', 
-                      'theses': 'http://purl.org/ontology/bibo/Thesis',               
+                      'theses': 'http://purl.org/ontology/bibo/Thesis',
+                      'otherArticles': 'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle',
+                      'software': 'http://vivoweb.org/ontology/core#Software'              
       };
 
       var pubs = data['publications'];
@@ -106,60 +174,87 @@ var get_data = function() {
         results['publicationsLabel'][0] = "Publications:";
         $.each(pubs, function(index, value) {      
           var citation = value.attributes['mlaCitation'].replace(stripOpeningTag,"").replace(stripClosingTag, "");
-          var citation = citation.replace(stripHtml, "");
+          citation = citation.replace(stripHtml, "");
           var vivoType = value['vivoType'];
-          if (vivoType != null) {       
-            switch (vivoType) {
-              case pubTypes['academicArticles']:
-                results['academicArticlesLabel'][0] = "Academic Articles";
-                results['academicArticles'].push({'citation': citation});                    
-                break;
-              case pubTypes['books']:
-                results['booksLabel'][0] = "Books";
-                results['books'].push({'citation': citation});            
-                break;
-              case pubTypes['bookReviews']:
-                results['bookReviewsLabel'][0] = "Book Reviews";
-                results['bookReviews'].push({'citation': citation});          
-                break;
-              case pubTypes['bookSections']:
-                results['bookSectionsLabel'][0] = "Book Sections";
-                results['bookSections'].push({'citation': citation});          
-                break;            
-              case pubTypes['bookSeries']:
-                results['bookSeriesLabel'][0] = "Book Series";
-                results['bookSeries'].push({'citation': citation});             
-                break;
-              case pubTypes['conferencePapers']:
-                results['conferencePapersLabel'][0] = "Conference Papers";
-                results['conferencePapers'].push({'citation': citation});              
-                break;
-              case pubTypes['datasets']:
-                results['datasetsLabel'][0] = "Datasets";
-                results['datasets'].push({'citation': citation});
-                break;
-              case pubTypes['digitalPublications']:
-                results['digitalPublicationsLabel'][0] = "Digital Publications";
-                results['digitalPublications'].push({'citation': citation});              
-                break;
-              case pubTypes['journalIssues']:
-                results['journalIssuesLabel'][0] = "Journal Issues";
-                results['journalIssues'].push({'citation': citation});     
-                break;
-              case pubTypes['reports']:
-                results['reportsLabel'][0] = "Reports";
-                results['reports'].push({'citation': citation});
-                break;
-              case pubTypes['scholarlyEdition']:
-                results['scholarlyEditionsLabel'][0] = "Scholarly Editions";
-                results['scholarlyEdition'].push({'citation': citation});
-                break;
-              default:
-                results['thesesLabel'][0] = "Theses and Dissertations";
-                results['theses'].push({'citation':citation});
+          var date = value.attributes['datetime'];
+          if (vivoType != null) {
+            if (vivoType === pubTypes['academicArticles']) {
+              var academicArticles = "Academic Articles";
+              results['academicArticlesLabel'] = academicArticles;
+              results['academicArticles'].push({'citation': citation});
+            };
+            if (vivoType === pubTypes['books']) {
+              var books = "Books";
+              results['booksLabel'] = books;
+              results['books'].push({'citation': citation}); 
+            };
+            if (vivoType === pubTypes['bookReviews']) {
+              var bookReviews = "Book Reviews";
+              results['bookReviewsLabel'] = bookReviews;
+              results['bookReviews'].push({'citation':citation}); 
+            };
+            if (vivoType === pubTypes['bookSections']) {
+              var bookSections = "Book Sections";
+              results['bookSectionsLabel'] = bookSections;
+              results['bookSections'].push({'citation': citation});  
+            };
+            if (vivoType === pubTypes['bookSeries']) {
+              var bookSeries = "Book Series";
+              results['bookSeriesLabel'] = bookSeries;
+              results['bookSeries'].push({'citation': citation});   
+            };
+            if (vivoType === pubTypes['conferencePapers']) {
+              var conferencePapers = "Conference Papers";
+              results['conferencePapersLabel'] = conferencePapers;
+              results['conferencePapers'].push({'citation': citation}); 
+            };
+            if (vivoType === pubTypes['datasets']) {
+              var datasets = "Datasets";
+              results['datasetsLabel'] = datasets;
+              results['datasets'].push({'citation': citation});  
+            };
+            if (vivoType === pubTypes['digitalPublications']) {
+              var digitalPublications = "Digital Publications";
+              results['digitalPublicationsLabel'] = digitalPublications;
+              results['digitalPublications'].push({'citation': citation});   
+            };
+            if (vivoType === pubTypes['journalIssues']) {
+              var journalIssues = "Journal Issues";
+              results['journalIssuesLabel'] = journalIssues;
+              results['journalIssues'].push({'citation': citation}); 
+            };
+            if (vivoType === pubTypes['reports']) {
+              var reports = "Reports";
+              results['reportsLabel'] = reports;
+              results['reports'].push({'citation': citation});
+            };
+            if (vivoType === pubTypes['scholarlyEdition']) {
+              var scholarlyEdition = "Scholarly Editions";
+              results['scholarlyEditionsLabel'] = scholarlyEdition;
+              results['scholarlyEdition'].push({'citation': citation});
+            };
+            if (vivoType === pubTypes['theses']) {
+              var theses = "Theses and Dissertations";
+              results['thesesLabel'] = theses;
+              results['theses'].push({'citation': citation});
+            };
+            if (vivoType === pubTypes['otherArticles']) {
+              var otherArticles = "Other Articles";
+              results['otherArticlesLabel'] = otherArticles;
+              results['otherArticles'].push({'citation': citation});
+            };
+            if (vivoType === pubTypes['software']) {
+              var software = "Software";
+              results['softwareLabel'] = software;
+              results['software'].push({'citation': citation});
             };
           };
         });
+        results['academicArticles'].reverse(), results['books'].reverse(), results['bookReviews'].reverse(), results['bookSections'].reverse(),
+        results['bookSeries'].reverse(), results['conferencePapers'].reverse(), results['datasets'].reverse(), results['digitalPublications'].reverse(),
+        results['journalIssues'].reverse(), results['reports'].reverse(), results['scholarlyEdition'].reverse(), results['theses'].reverse(),
+        results['otherArticles'].reverse(), results['software'].reverse();
+
       };
 
       //TEACHING
@@ -170,6 +265,9 @@ var get_data = function() {
           var label = value['label'];
           results['teaching'].push({'label':label});
         });
+      }
+      else {
+        teaching = false;
       };
 
       //GRANTS
@@ -178,13 +276,16 @@ var get_data = function() {
         results['grantsLabel'][0] = "Grants:";
         $.each(grants, function(index, value) {
           var label = value['label'] + ", awarded by "
-          var awardedBy = value.attributes['awardedBy'] + ", administered by ";
-          var administeredBy = value.attributes['administeredBy'] + ", ";
+          var awardedBy = value.attributes['awardedBy'] + ", ";
           var startDate = value.attributes['startDate'].substr(0,4) + " - ";
-          var endDate = value.attributes['endDate'].substr(0,4);
-          results['grants'].push({'label':label, 'awardedBy': awardedBy, 'administeredBy': administeredBy,
-                                  'startDate': startDate, 'endDate': endDate});
+          var endDate = value.attributes['endDate'].substr(0,4) + " ";
+          var role = value.attributes['roleName'];
+          results['grants'].push({'label':label, 'awardedBy': awardedBy,
+                                  'startDate': startDate, 'endDate': endDate, 'role': role});
         });
+      }
+      else {
+        grants = false;
       };
 
       //AWARDS
@@ -197,7 +298,11 @@ var get_data = function() {
           var label = (label + " " + date);   
           results['awards'].push({'label':label});
         });
+      }
+      else {
+        awards = false;
       };
+    
 
       //PROFESSIONAL ACTIVITIES
       var professionalActivitiesTypes = {
@@ -229,23 +334,33 @@ var get_data = function() {
               results['outreachLabel'][0] = "Outreach and Engaged Scholarship:";
               results['outreach'].push({'label':label});        
           };
+        }
+        else {
+          professionalActivities = false;
         };
       });
 
-      run_template(results);
-
+      // different templates for different pub data 
+      if (results['academicArticles'].length >= 1 && results['books'].length === 0 && results['bookReviews'].length === 0 &&
+          results['bookSections'].length === 0 && results['bookSeries'].length === 0 && results['conferencePapers'].length === 0 &&
+          results['datasets'].length === 0 && results['digitalPublications'].length === 0 && results['journalIssues'].length === 0 &&
+          results['reports'].length === 0 && results['scholarlyEdition'].length === 0 && results['theses'].length === 0 && 
+          results['otherArticles'].length === 0 && results['software'].length === 0) 
+      {
+        run_template_a(results);
+      }
+      else {
+        run_template(results);
+      };
 
       }).fail(function(xhr, textStatus, err) {
-        console.log(textStatus);
+        //console.log(textStatus);
       });
     };
 
-
-    $(document).ready(function() {
-
-      $("#create_file").click(function(e) {
-        e.preventDefault();
-        get_data();
-
-      });
+    $(document).ready(function(e){
+      e.preventDefault;
+      get_data();
     });
+
+  
