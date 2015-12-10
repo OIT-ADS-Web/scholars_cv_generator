@@ -39,7 +39,6 @@ for SERVER in "${SERVERS[@]}"; do
 
 
   #echo "rsyncing asset files to $SERVER..."
-  rsync -avz css/*.css tomcat@$SERVER:$deploy_dir/css/
   rsync -avz js/*.js tomcat@$SERVER:$deploy_dir/js/
 
 done
