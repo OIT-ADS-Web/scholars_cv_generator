@@ -54,7 +54,6 @@ var get_data = function(uri) {
       var stripHtml = /(<([^>]+)>)/ig;
       var stripOpeningTag = /<a\b[^>]*>/i;
       var stripClosingTag = /<\/a>/i;
-      var stripBrackets = (/\{.*?\}/g,'');
 
       // encompassing hash
       var results = {'cv': [], 'academicArticlesLabel': [], 'booksLabel': [], 'name': [], 'primaryPositionLabel': [], 'primaryPosition': [], 
@@ -175,8 +174,7 @@ var get_data = function(uri) {
         results['publicationsLabel'][0] = "Publications:";
         $.each(pubs, function(index, value) {      
           var citation = value.attributes['mlaCitation'].replace(stripOpeningTag,"").replace(stripClosingTag, "");
-          var citation = citation.replace(stripHtml, "");
-          var citation = citation.replace(/[{}]/g,'');
+          citation = citation.replace(stripHtml, "");
           var vivoType = value['vivoType'];
           var date = value.attributes['datetime'];
           if (vivoType != null) {
