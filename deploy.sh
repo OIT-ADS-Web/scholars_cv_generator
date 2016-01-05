@@ -2,7 +2,7 @@
 set -o errexit
 
 ENVIRONMENT=${1:-"acceptance"}
-deploy_dir="/srv/web/apps/vivo_widgets_reporter/cv_generator"
+deploy_dir="/srv/web/apps/cv_generator"
 
 case "$ENVIRONMENT" in
   #development)
@@ -11,9 +11,9 @@ case "$ENVIRONMENT" in
   acceptance)
     SERVERS=("scholars-web-test-04.oit.duke.edu" "scholars-web-test-05.oit.duke.edu")
     ;;
-  #production)
-  #  SERVERS=("scholars-web-04.oit.duke.edu" "scholars-web-05.oit.duke.edu")
-  #  ;;
+  production)
+   SERVERS=("scholars-web-04.oit.duke.edu" "scholars-web-05.oit.duke.edu")
+   ;;
   *)
     echo "Usage: $0 {development|acceptance|production}"
     exit 1
