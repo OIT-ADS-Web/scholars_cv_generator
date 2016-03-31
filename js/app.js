@@ -176,6 +176,7 @@ var get_data = function(uri) {
           var citation = value.attributes['mlaCitation'].replace(stripOpeningTag,"").replace(stripClosingTag, "");
           citation = citation.replace(stripHtml, "");
           var pubmed = value.attributes['pmid'];
+          console.log(pubmed);
           var vivoType = value['vivoType'];
           var date = value.attributes['datetime'];
           if (vivoType != null) {
