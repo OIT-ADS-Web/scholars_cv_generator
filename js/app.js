@@ -175,15 +175,15 @@ var get_data = function(uri) {
         $.each(pubs, function(index, value) {      
           var citation = value.attributes['mlaCitation'].replace(stripOpeningTag,"").replace(stripClosingTag, "");
           citation = citation.replace(stripHtml, "");
-          var pubmed_id = value.attributes['pmid'];
+          var pubmed = value.attributes['pmid'];
           var vivoType = value['vivoType'];
           var date = value.attributes['datetime'];
           if (vivoType != null) {
             if (vivoType === pubTypes['academicArticles']) {
               var academicArticles = "Academic Articles";
               results['academicArticlesLabel'] = academicArticles;
-              results['academicArticles'].push({'citation': citation});
-              // results['academicArticles'].push({'pubmed_id': pubmed_id});
+              results['academicArticles'][0].push({'citation': citation});
+              results['academicArticles'][1].push({'pubmed': pubmed});
 
             };
             if (vivoType === pubTypes['books']) {
