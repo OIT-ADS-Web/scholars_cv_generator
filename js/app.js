@@ -183,7 +183,7 @@ var get_data = function(uri) {
               var academicArticles = "Academic Articles";
               results['academicArticlesLabel'] = academicArticles;
               results['academicArticles'].push({'citation': citation});
-              results['academicArticles'].push({'pubmed_id': pubmed_id});
+              // results['academicArticles'].push({'pubmed_id': pubmed_id});
 
             };
             if (vivoType === pubTypes['books']) {
