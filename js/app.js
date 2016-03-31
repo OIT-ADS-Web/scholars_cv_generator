@@ -185,7 +185,7 @@ var get_data = function(uri) {
               results['academicArticlesLabel'] = academicArticles;
               results['academicArticles'].push({'citation': citation});
               if (typeof pubmed != 'undefined' && pubmed != null && pubmed.length > 0) {
-                results['academicArticles'].push({'pubmed': pubmed});
+                results['academicArticles'][1].push({'pubmed': pubmed});
               };
             };
             if (vivoType === pubTypes['books']) {
