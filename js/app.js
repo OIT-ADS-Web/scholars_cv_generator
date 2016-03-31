@@ -175,6 +175,7 @@ var get_data = function(uri) {
         $.each(pubs, function(index, value) {      
           var citation = value.attributes['mlaCitation'].replace(stripOpeningTag,"").replace(stripClosingTag, "");
           citation = citation.replace(stripHtml, "");
+          var pubmed_id = value.attributes['pmid'];
           var vivoType = value['vivoType'];
           var date = value.attributes['datetime'];
           if (vivoType != null) {
