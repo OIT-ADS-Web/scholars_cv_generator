@@ -174,9 +174,7 @@ var get_data = function(uri) {
         results['publicationsLabel'][0] = "Publications:";
         $.each(pubs, function(index, value) {      
           var citation = value.attributes['mlaCitation'].replace(stripOpeningTag,"").replace(stripClosingTag, "");
-          citation = citation.replace(stripHtml, "");
-          var pubmed = value.attributes['pmid'];
-          console.log(pubmed);
+          citation = citation.replace(stripHtml, "");   
           var vivoType = value['vivoType'];
           var date = value.attributes['datetime'];
           if (vivoType != null) {
@@ -184,9 +182,6 @@ var get_data = function(uri) {
               var academicArticles = "Academic Articles";
               results['academicArticlesLabel'] = academicArticles;
               results['academicArticles'].push({'citation': citation});
-              if (typeof pubmed != 'undefined' && pubmed != null && pubmed.length > 0) {
-                results['academicArticles'].push({'pubmed': pubmed});
-              };
             };
             if (vivoType === pubTypes['books']) {
               var books = "Books";
