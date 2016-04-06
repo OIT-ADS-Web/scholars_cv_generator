@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -o errexit
 
-ENVIRONMENT=${1:-"production"}
+ENVIRONMENT=${1:-"acceptance"}
 deploy_dir="/srv/web/apps/cv_generator"
 
 case "$ENVIRONMENT" in
