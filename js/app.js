@@ -258,11 +258,6 @@ var get_data = function(uri) {
             };
           };
         });
-        results['academicArticles'].reverse(), results['books'].reverse(), results['bookReviews'].reverse(), results['bookSections'].reverse(),
-        results['bookSeries'].reverse(), results['conferencePapers'].reverse(), results['datasets'].reverse(), results['digitalPublications'].reverse(),
-        results['journalIssues'].reverse(), results['reports'].reverse(), results['scholarlyEdition'].reverse(), results['theses'].reverse(),
-        results['otherArticles'].reverse(), results['software'].reverse();
-
       };
 
       //TEACHING
