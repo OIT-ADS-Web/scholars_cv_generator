@@ -182,10 +182,10 @@ var get_data = function(uri) {
           if (vivoType != null) {
             if (vivoType === pubTypes['academicArticles']) {
               var academicArticles = "Academic Articles";
-              if (typeof pubmed != 'undefined' && typeof pubmedid != 'undefined') {
+              if (typeof pubmed !== 'undefined' && typeof pubmedid !== 'undefined') {
                 citation = citation + " PMID: " + pubmed + ". PMCID: " + pubmedid + ".";
               }
-              else if (typeof pubmed != 'undefined') {
+              else if (typeof pubmed !== 'undefined') {
                 citation = citation + " PMID: " + pubmed + ".";
               };  
               results['academicArticlesLabel'] = academicArticles;
