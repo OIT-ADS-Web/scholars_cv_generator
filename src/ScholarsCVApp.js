@@ -28,8 +28,10 @@ export class ScholarsCVApp extends Component {
     return (
 
       <div>
-        <h2>Hello World</h2>
+        <h1>Scholars CV Generator</h1>
+
         <button onClick={this.handleSubmitRequest}>Try It!</button>
+      
       </div>
     )
   }

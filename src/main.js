@@ -7,6 +7,8 @@ import 'babel-polyfill'
 
 require ('bootstrap')
 
+require('./styles/main.less');
+
 module.exports = function(targetNode) {
   unmountComponentAtNode(targetNode)
   render (
