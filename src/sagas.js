@@ -384,7 +384,7 @@ export function generateCV(results) {
   */
 
   try {
-    console.log(cvTemplate)
+    //console.log(cvTemplate)
 
     //var doc=new Docxgen(cvTemplate)
     
