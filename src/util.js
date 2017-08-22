@@ -74,6 +74,13 @@ expressions.filters.styleTwo = styleFilter("StyleTwo")
 expressions.filters.styleThree = styleFilter("StyleThree")
 
 
+expressions.filters.upper = function(input) {
+    // This condition should be used to make sure that if your input is undefined, your output will be undefined as well and will not throw an error
+    if(!input) return input;
+    return input.toUpperCase();
+}
+
+
 export default {
   angularParser
 } 

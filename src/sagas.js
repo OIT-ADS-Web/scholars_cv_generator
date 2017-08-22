@@ -32,7 +32,6 @@ export function fetchCVApi() {
 
 //import cvTemplate from './templates/cv_template.docx'
 import cvTemplate from './templates/cv_template_filtered.docx'
-
 import htmlTemplate from './templates/cv_template.html'
 
 import FileSaver from 'file-saver'
@@ -45,6 +44,105 @@ function loadFile(url,callback){
   JSZipUtils.getBinaryContent(url,callback)
 }
  
+function parseTeaching(data, results) {
+  //TEACHING
+  var teaching = data['courses'];
+  if (typeof teaching != 'undefined' && teaching != null && teaching.length > 0) {
+    results['teachingLabel'][0] = "Teaching Responsibilities:";
+    $.each(teaching, function(index, value) {
+      var label = value['label'];
+      results['teaching'].push({'label':label});
+    });
+  }
+  else {
+    teaching = false;
+  };
+
+  return teaching
+};
+
+
+function parseGrants(data, results) {
+  //GRANTS
+  var grants = data['grants'];
+  if (typeof grants != 'undefined' && grants != null && grants.length > 0) {
+    results['grantsLabel'][0] = "Grants:";
+    $.each(grants, function(index, value) {
+      var label = value['label'] + ", awarded by "
+      var awardedBy = value.attributes['awardedBy'] + ", ";
+      var startDate = value.attributes['startDate'].substr(0,4) + " - ";
+      var endDate = value.attributes['endDate'].substr(0,4) + " ";
+      var role = value.attributes['roleName'];
+      results['grants'].push({'label':label, 'awardedBy': awardedBy,
+                              'startDate': startDate, 'endDate': endDate, 'role': role});
+    });
+  }
+  else {
+    grants = false;
+  };
+
+  return grants;
+};
+
+function parseAwards(data, results) {
+
+  //AWARDS
+  var awards = data['awards'];
+  if (typeof awards != 'undefined' && awards != null && awards.length > 0) {
+    results['awardsLabel'][0] = "Awards and Honors:";
+    $.each(awards, function(index,value) {
+      var label = value['label'];
+      var date = value['attributes']['date'].substr(0,4);
+      var label = (label + " " + date);   
+      results['awards'].push({'label':label});
+    });
+  }
+  else {
+    awards = false;
+  };
+
+  return awards;
+};
+
+function parseProfessionalActivities(data, results) {
+  var professionalActivitiesTypes = {
+    'presentations': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation', 
+    'servicesToProfession': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession', 
+    'servicesToDuke': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity', 
+    'outreach': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach'
+  };
+
+  var professionalActivities = data['professionalActivities'];
+  $.each(professionalActivities, function(index,value) {
+    var label = value['label'];
+    var vivoType = value['vivoType'];
+    if (vivoType != null) {
+      switch (vivoType) {
+        case professionalActivitiesTypes['presentations']:
+          results['presentationsLabel'][0] = "Presentations and Appearances:";
+          results['presentations'].push({'label':label});
+          break;
+        case professionalActivitiesTypes['servicesToProfession']:
+          results['servicesToProfessionLabel'][0] = "Services to the Profession:";
+          results['servicesToProfession'].push({'label':label});
+          break;
+        case professionalActivitiesTypes['servicesToDuke']:
+          results['servicesToDukeLabel'][0] = "Services to Duke:";
+          results['servicesToDuke'].push({'label': label});
+          break;
+        default:
+          results['outreachLabel'][0] = "Outreach and Engaged Scholarship:";
+          results['outreach'].push({'label':label});        
+      };
+    }
+    else {
+      professionalActivities = false;
+    };
+  });
+
+  return professionalActivities;
+};
+
 function convertData(data) {
   var stripHtml = /(<([^>]+)>)/ig;
   var stripOpeningTag = /<a\b[^>]*>/i;
@@ -267,6 +365,9 @@ function convertData(data) {
     });
   };
 
+  var teaching = parseTeaching(data, results);
+
+  /*
   //TEACHING
   var teaching = data['courses'];
   if (typeof teaching != 'undefined' && teaching != null && teaching.length > 0) {
@@ -279,7 +380,11 @@ function convertData(data) {
   else {
     teaching = false;
   };
+  */
 
+  var grants = parseGrants(data, results);
+
+  /*
   //GRANTS
   var grants = data['grants'];
   if (typeof grants != 'undefined' && grants != null && grants.length > 0) {
@@ -297,7 +402,11 @@ function convertData(data) {
   else {
     grants = false;
   };
+  */
 
+  var awards = parseAwards(data, results);
+
+  /*
   //AWARDS
   var awards = data['awards'];
   if (typeof awards != 'undefined' && awards != null && awards.length > 0) {
@@ -312,8 +421,11 @@ function convertData(data) {
   else {
     awards = false;
   };
+  */
 
+  var professionalActivities = parseProfessionalActivities(data, results);
 
+  /*
   //PROFESSIONAL ACTIVITIES
   var professionalActivitiesTypes = {
     'presentations': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation', 
@@ -349,6 +461,8 @@ function convertData(data) {
       professionalActivities = false;
     };
   });
+  
+  */
 
   // different templates for different pub data 
   /*
@@ -403,8 +517,10 @@ export function generateCV(results) {
           mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         }
       ) //Output the document using Data-URI
-     
-      //console.log(blob)
+ 
+      
+      //FileSaver.saveAs(blob, "hello_world_doc.doc")
+
       var compiled = _.template(htmlTemplate,'imports': {'_': _})
 
       var template = compiled({ 'name': data['name'][0]['fullName'], 'pubs': data['pubs']});
@@ -412,8 +528,7 @@ export function generateCV(results) {
       var blob = new Blob([template], {type: "application/msword"})
 
       FileSaver.saveAs(blob, "hello_world_html.doc")
-
-      //saveAs(out,"cv.docx")
+      
     })
   
 
