@@ -1,14 +1,12 @@
-import { call, put, fork, take, cancel, cancelled  } from 'redux-saga/effects'
-
-import { all } from 'redux-saga/effects'
-
 import fetch from 'isomorphic-fetch'
+import _ from 'lodash'
+
+import { call, put, fork, take, cancel, cancelled, all  } from 'redux-saga/effects'
 
 import * as types from './types'
-
 import { receiveCV } from './actions'
  
-import _ from 'lodash'
+import { angularParser } from './util'
 
 function checkStatus(res) {
   console.log("sagas.checkStatus")
@@ -32,7 +30,10 @@ export function fetchCVApi() {
 }
 
 
-import cvTemplate from './templates/cv_template.docx'
+//import cvTemplate from './templates/cv_template.docx'
+import cvTemplate from './templates/cv_template_filtered.docx'
+
+import htmlTemplate from './templates/cv_template.html'
 
 import FileSaver from 'file-saver'
 import Docxtemplater from 'docxtemplater'
@@ -40,19 +41,10 @@ import Docxtemplater from 'docxtemplater'
 import JSZip from 'jszip'
 import JSZipUtils from 'jszip-utils'
 
-//var JSZip = require("jszip")
-
-//import fs from 'fs'
-
-//var Docxtemplater = require('docxtemplater');
-
-//var fileContent = require("binary-loader!./templates/cv_template.docx");
-
 function loadFile(url,callback){
   JSZipUtils.getBinaryContent(url,callback)
 }
  
-
 function convertData(data) {
   var stripHtml = /(<([^>]+)>)/ig;
   var stripOpeningTag = /<a\b[^>]*>/i;
@@ -77,7 +69,7 @@ function convertData(data) {
     'awards': [], 'presentationsLabel': [], 'presentations': [], 
     'servicesToProfessionLabel': [], 'servicesToProfession': [], 
     'servicesToDukeLabel': [], 'servicesToDuke': [], 'outreachLabel': [], 
-    'outreach': [], 'researchInterests': []
+    'outreach': [], 'researchInterests': [], 'pubs': null
   };   
 
   //name
@@ -184,6 +176,9 @@ function convertData(data) {
   var pubs = data['publications'];
   if (typeof pubs != 'undefined' && pubs != null && pubs.length > 0) {
     results['publicationsLabel'][0] = "Publications:";
+    results['pubs'] = pubs;
+    results['hasPubs'] = pubs.length > 0;
+
     $.each(pubs, function(index, value) {      
       var citation = value.attributes['mlaCitation'].replace(stripOpeningTag,"").replace(stripClosingTag, "");
       citation = citation.replace(stripHtml, "");
@@ -384,54 +379,42 @@ export function generateCV(results) {
   */
 
   try {
-    //console.log(cvTemplate)
 
-    //var doc=new Docxgen(cvTemplate)
-    
-   //var content = fs.readFileSync(cvTemplate, 'binary')
-
-    //var zip = new JSZip(fileContent)
-
-    //var doc=new Docxtemplater().loadZip(zip)
-
-    //var blob = new Blob(doc.getZip().generate({type:"blob"}), {type: "application/msword"})
-
-   // FileSaver.saveAs(blob, "hello world.doc")
-
- 
-    //var zip = new JSZip(cvTemplate)
-
-
-  loadFile(cvTemplate,function(err,content){
-  //loadFile("./templates/cv_template.docx",function(err,content){
-    if (err) { 
-      console.log(err)
-      //throw err
-    }
-    
-    console.log(content)
-
-    var zip = new JSZip(content)
-
-    //console.log(zip)
-
-    var doc=new Docxtemplater().loadZip(zip)
-    var data = convertData(results)
-    doc.setData(data)    
-    doc.render() 
-    var blob =doc.getZip().generate({
-       type:"blob",
-       mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    loadFile(cvTemplate,function(err,content){
+      if (err) { 
+        console.log(err)
       }
-    ) //Output the document using Data-URI
+    
+      console.log(content)
+
+      var zip = new JSZip(content)
+
+      var doc = new Docxtemplater().loadZip(zip).setOptions({parser:angularParser})
+      //var doc=new Docxtemplater().loadZip(zip)
+      var data = convertData(results)
+
+      console.log("****** tranformed data:******")
+      console.log(data)
+
+      doc.setData(data)    
+      doc.render() 
+      var blob =doc.getZip().generate({
+          type:"blob",
+          mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        }
+      ) //Output the document using Data-URI
      
-    //console.log(blob)
-    //var blob = new Blob(doc.getZip().generate({type:"blob"}), {type: "application/msword"})
+      //console.log(blob)
+      var compiled = _.template(htmlTemplate,'imports': {'_': _})
 
-    FileSaver.saveAs(blob, "hello_world.doc")
+      var template = compiled({ 'name': data['name'][0]['fullName'], 'pubs': data['pubs']});
+      //
+      var blob = new Blob([template], {type: "application/msword"})
 
-    //saveAs(out,"cv.docx")
-  })
+      FileSaver.saveAs(blob, "hello_world_html.doc")
+
+      //saveAs(out,"cv.docx")
+    })
   
 
   } catch (e) {

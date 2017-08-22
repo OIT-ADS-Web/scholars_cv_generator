@@ -1,5 +1,12 @@
 // https://github.com/open-xml-templating/docxtemplater/issues/203
-var expressions = require('angular-expressions');
+var expressions = require('angular-expressions')
+
+var angularParser = function(tag) {
+  return { 
+    get: tag === '.' ? function(s){ return s;} : expressions.compile(tag.replace(/’/g, "'"))
+  }
+}
+
 
 /**
  * Generate styled XML block, takes style name and paragraph content as params
@@ -30,7 +37,6 @@ function escape_xml(text){
   return text.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/'/g, '&apos;');
 }
 
-//.setOptions({parser:angularParser})
 /*
 
 Kicker is having to define the appropriate styles in your template document.
@@ -46,11 +52,6 @@ Within template can use these filters to apply different styles to table cell co
 
 /*
 expressions= require('angular-expressions');
-// define your filter functions here, eg:
-// expressions.filters.split = function(input, str) { return input.split(str); }
-angularParser= function (tag) {
-  return {
-    get: tag == '.' ?
     function(s){
       return s;} : expressions.compile(tag) };
     }
@@ -68,8 +69,12 @@ function escape_xml(text){
 /**
  *  Set custom angular expressions
  */
-expressions.filters.styleOne = styleFilter("StyleOne");
-expressions.filters.styleTwo = styleFilter("StyleTwo");
-expressions.filters.styleThree = styleFilter("StyleThree");
+expressions.filters.styleOne = styleFilter("StyleOne")
+expressions.filters.styleTwo = styleFilter("StyleTwo")
+expressions.filters.styleThree = styleFilter("StyleThree")
 
+
+export default {
+  angularParser
+} 
 
