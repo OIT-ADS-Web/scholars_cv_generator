@@ -1,13 +1,20 @@
 <html>
+  <head>
+   <title>CV: ${name[0]['fullName']}</title>
+   <style>
+     h1 { font-size: 125%; }
+     h2 { font-size: 115%; }
+     h3 { font-size: 100%; }
+  </head>
   <body>
-    <h1>${name}</h1>
+    <h1>${name[0]['fullName']}</h1>
 
     <h2>Publications</h2>
 
+    <h3>${academicArticlesLabel}</h3> 
     <div>
-    <% _.forEach(pubs, function(item) { %>
-      <p><%= item.label %></p>
-      <span><%= item.attributes['icmjeCitation'] %></span>
+    <% _.forEach(academicArticles, function(item) { %>
+      <p><%= item['citation'] %></p>
     <% }); %>
     </div>
 

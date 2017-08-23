@@ -21,9 +21,12 @@ function checkStatus(res) {
 
 // 1. actual function
 export function fetchCVApi() {
- console.log("sagas.fetchCVApi")
+  console.log("sagas.fetchCVApi")
  
- const widgetsUrl = "https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.json?uri=https://scholars.duke.edu/individual/per4284062"
+  let widgets_base_url = process.env.WIDGETS_URL
+  let uri = "https://scholars.duke.edu/individual/per4284062"
+  
+  const widgetsUrl = `${widgets_base_url}/api/v0.9/people/complete/all.json?uri=${uri}`
 
   let attempt = fetch(widgetsUrl)
   return attempt.then(res => checkStatus(res))
@@ -450,17 +453,19 @@ export function generateCV(results) {
       ) //Output the document using Data-URI
  
       
-      FileSaver.saveAs(blob, "hello_world_doc.doc")
+      //FileSaver.saveAs(blob, "hello_world_doc.doc")
        
-      /*
+      
       var compiled = _.template(htmlTemplate,'imports': {'_': _})
 
-      var template = compiled({ 'name': data['name'][0]['fullName'], 'pubs': data['pubs']});
+      //var template = compiled({ 'name': data['name'][0]['fullName'], 'pubs': data['pubs']});
+      var template = compiled(data);
+ 
       //
       var blob = new Blob([template], {type: "application/msword"})
 
       FileSaver.saveAs(blob, "hello_world_html.doc")
-      */
+      
 
     })
   

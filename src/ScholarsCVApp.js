@@ -3,11 +3,33 @@ import React, { Component, PropTypes } from 'react'
 import { requestCV } from './actions'
 
 
+import queryString from 'query-string'
+
+
 export class ScholarsCVApp extends Component {
 
   constructor(props) {
     super(props)
     this.handleSubmitRequest = this.handleSubmitRequest.bind(this)
+  
+
+  }
+
+  componentDidMount() {
+    //let query = location.query
+    const { dispatch } = this.props
+  
+    //console.log(query)
+    // initialze with request param?
+    // maybe call an APP_INIT action ??
+    const parsed = queryString.parse(location.search)
+    console.log(parsed)
+    
+    //if (parsed['uri'])
+    //dispatch(setURI(parsed['uri'])
+    // else
+    // error ....
+     
   }
 
   handleSubmitRequest(e) {
@@ -20,19 +42,18 @@ export class ScholarsCVApp extends Component {
 
   }
 
-//     Response.AddHeader("Content-Disposition", "inline;filename=" + fileName);
-//     return new FileStreamResult(WordStream(doc.DocumentBody), "application/msword");
- 
+
   render() {
  
     return (
 
-      <div>
-        <h1>Scholars CV Generator</h1>
-
-        <button onClick={this.handleSubmitRequest}>Try It!</button>
-      
+      <div className="jumbotron">
+        <div className="container">
+          <h1>Scholars CV Generator</h1>
+          <button className="btn btn-success btn-lg" onClick={this.handleSubmitRequest}>Generate CV!</button>
+        </div>
       </div>
+
     )
   }
 

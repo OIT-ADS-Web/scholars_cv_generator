@@ -2,6 +2,8 @@
 var expressions = require('angular-expressions')
 
 var angularParser = function(tag) {
+  //console.log("parser ${tag}")
+
   return { 
     get: tag === '.' ? function(s){ return s;} : expressions.compile(tag.replace(/’/g, "'"))
   }

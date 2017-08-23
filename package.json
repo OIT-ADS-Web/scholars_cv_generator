@@ -44,6 +44,7 @@
     "less": "^2.6.0",
     "less-loader": "^4.0.5",
     "lodash": "^4.1.0",
+    "query-string": "^5.0.0",
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.6.1",
