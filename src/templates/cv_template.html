@@ -1,23 +1,61 @@
 <html>
   <head>
-   <title>CV: ${name[0]['fullName']}</title>
-   <style>
-     h1 { font-size: 125%; }
-     h2 { font-size: 115%; }
-     h3 { font-size: 100%; }
+    <title>CV: ${name[0]['fullName']}</title>
+    
+    <style>
+     h1 { font-size: 150%; }
+     h2 { font-size: 135%; }
+     h3 { font-size: 115%; }
+     h4 { font-size: 100%; }
+
+     div.container { width: 100%; }
+     div.row { margin-bottom: 1em; padding-bottom: 1em;}
+     div.slight-indent { margin-left: 24pt; }
+    </style>
   </head>
   <body>
+  <div class="container">
     <h1>${name[0]['fullName']}</h1>
+
+    <h2>${primaryPositionLabel}</h2>
+    <div class="row">
+    <% _.forEach(primaryPosition, function(item) { %>
+       <div class="slight-indent"><%= item['label'] %></div>
+    <% }); %>
+    </div>
+
+
+    <% if (secondaryPosition.length > 0) { %>
+      <h2>${secondaryPositionLabel}</h2>
+      <div class="row">
+      <% _.forEach(secondaryPosition, function(item) { %>
+          <div class="slight-indent"><%= item['label'] %></div>
+      <% }); %>
+      </div>          
+    <% } %>
+
+    <h3>Present academic rank and titles:</h3>
+    <div class="row">
+      <div class="slight-indent">${cv[0]['title']}</div>
+    </div>
+
+    <h2>${educationsLabel}</h2>         
+    <div class="row">
+    <% _.forEach(educations, function(item) { %>
+       <div class="slight-indent"><%= item['allEducation'] %></div>
+    <% }); %>
+    </div>      
 
     <h2>Publications</h2>
 
     <h3>${academicArticlesLabel}</h3> 
-    <div>
     <% _.forEach(academicArticles, function(item) { %>
-      <p><%= item['citation'] %></p>
+      <div class="row">
+          <%= item['citation'] %>
+      </div>
     <% }); %>
-    </div>
 
+  </div>
   </body>
 </html>
 
