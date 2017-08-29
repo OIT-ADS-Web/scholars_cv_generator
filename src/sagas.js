@@ -34,7 +34,10 @@ export function fetchCVApi() {
 
 
 //import cvTemplate from './templates/cv_template.docx'
+//import cvTemplate from './templates/cv_template_filtered2.docx'
 import cvTemplate from './templates/cv_template_filtered.docx'
+import blankTemplate from './templates/BlankTemplate.docx'
+
 import htmlTemplate from './templates/cv_template.html'
 
 import FileSaver from 'file-saver'
@@ -427,8 +430,9 @@ export function generateCV(results) {
   */
 
   try {
-
-    loadFile(cvTemplate,function(err,content){
+    
+    loadFile(blankTemplate, function(err,content) {
+    //loadFile(cvTemplate,function(err,content){
       if (err) { 
         console.log(err)
       }
@@ -444,7 +448,25 @@ export function generateCV(results) {
       console.log("****** tranformed data:******")
       console.log(data)
 
+
+      var compiled = _.template(htmlTemplate,'imports': {'_': _})
+      //var template = compiled({ 'name': data['name'][0]['fullName'], 'pubs': data['pubs']});
+      var template = compiled(data)
+      //
+      var blob_html = new Blob([template], {type: "application/msword"})
+ 
+      // NOTE: don't actually need this data in word template     
       doc.setData(data)    
+      
+      //let files = doc.getTemplatedFiles()
+      //_.forEach(files,function(file) {
+      //   console.log(file)
+      //})
+ 
+      let zipDocs = doc.getZip()
+      
+      zipDocs.file("word/document.html", template);
+
       doc.render() 
       var blob =doc.getZip().generate({
           type:"blob",
@@ -453,19 +475,12 @@ export function generateCV(results) {
       ) //Output the document using Data-URI
  
       
-      //FileSaver.saveAs(blob, "hello_world_doc.doc")
+
+      FileSaver.saveAs(blob, "hello_world_docx.docx")
        
-      
-      var compiled = _.template(htmlTemplate,'imports': {'_': _})
-
-      //var template = compiled({ 'name': data['name'][0]['fullName'], 'pubs': data['pubs']});
-      var template = compiled(data);
- 
-      //
-      var blob = new Blob([template], {type: "application/msword"})
-
-      FileSaver.saveAs(blob, "hello_world_html.doc")
-      
+      //FileSaver.saveAs(blob_html, "hello_world_html.doc")
+      //FileSaver.saveAs(blob, "hello_world_html.htm")
+       
 
     })
   
