@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-import { requestCV } from './actions'
+import { setUri, requestCV } from './actions'
 
 
 import queryString from 'query-string'
@@ -15,21 +15,19 @@ export class ScholarsCVApp extends Component {
 
   }
 
+  // http://localhost:8334/?uri=https://scholars.duke.edu/individual/per4284062
+ 
   componentDidMount() {
-    //let query = location.query
     const { dispatch } = this.props
   
-    //console.log(query)
-    // initialze with request param?
-    // maybe call an APP_INIT action ??
     const parsed = queryString.parse(location.search)
     console.log(parsed)
     
-    //if (parsed['uri'])
-    //dispatch(setURI(parsed['uri'])
-    // else
-    // error ....
-     
+    if (parsed['uri']) {
+      dispatch(setUri(parsed['uri']))
+    }
+    // else?
+    // error....
   }
 
   handleSubmitRequest(e) {

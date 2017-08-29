@@ -22,8 +22,16 @@ export function receiveCV(json) {
   }
 }
 
+export function setUri(uri) {
+  return {
+   type: types.SET_URI,
+   uri: uri
+  }
+}
+
 export default {
   requestCV,
   receiveCV,
+  setUri
 } 
 

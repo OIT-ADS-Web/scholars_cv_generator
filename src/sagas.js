@@ -8,8 +8,6 @@ import { receiveCV } from './actions'
  
 import moment from 'moment'
 
-//import { angularParser } from './util'
-
 function checkStatus(res) {
   console.log("sagas.checkStatus")
 
@@ -34,10 +32,7 @@ export function fetchCVApi() {
   return attempt.then(res => checkStatus(res))
 }
 
-
 //import cvTemplate from './templates/cv_template.docx'
-//import cvTemplate from './templates/cv_template_filtered2.docx'
-//import cvTemplate from './templates/cv_template_filtered.docx'
 import blankTemplate from './templates/BlankTemplate.docx'
 import htmlTemplate from './templates/cv_template.html'
 
@@ -63,23 +58,18 @@ export function generateCV(results) {
         console.log(err)
       }
     
-      console.log(content)
-
       var zip = new JSZip(content)
-
-      //var doc = new Docxtemplater().loadZip(zip).setOptions({parser:angularParser})
       var doc=new Docxtemplater().loadZip(zip)
+      
       var data = convertData(results)
 
       console.log("****** tranformed data:******")
       console.log(data)
 
-
       var compiled = _.template(htmlTemplate,'imports': {'_': _})
-      //var template = compiled({ 'name': data['name'][0]['fullName'], 'pubs': data['pubs']});
       var template = compiled(data)
-      //
-      var blob_html = new Blob([template], {type: "application/msword"})
+      
+      //var blob_html = new Blob([template], {type: "application/msword"})
  
       // NOTE: don't actually need this data in word template     
       doc.setData(data)    
@@ -101,12 +91,11 @@ export function generateCV(results) {
       // e.g. scholars_cv_generator?uri=?
       let uri = "https://scholars.duke.edu/individual/per4284062"
       let index = uri.lastIndexOf("/")
-      let personNumber = uri.substr(index)
+      let personNumber = uri.substr(index+1)
       
       let now = moment().format()
-
-      FileSaver.saveAs(blob, `${personNumber}_${now}.docx`)
-       
+      let fileName = `${personNumber}_${now}.docx`
+      FileSaver.saveAs(blob, fileName)
 
     })
   

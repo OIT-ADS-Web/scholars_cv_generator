@@ -1,6 +1,6 @@
 import * as types from './types'
 
-function cvReducer(cv = { isFetching: false, results: {}}, action) {
+function cvReducer(cv = { isFetching: false, results: {}, uri: ""}, action) {
   console.log("****cvReducer*****")
 
   switch (action.type) {
@@ -18,6 +18,11 @@ function cvReducer(cv = { isFetching: false, results: {}}, action) {
       isFetching: false,
       results: action.results,
       lastUpdated: action.receivedAt
+  }
+  case types.SET_URI:
+    
+    return { ...cv,
+     uri: action.uri
   }
   default:
     return cv;
