@@ -108,7 +108,7 @@ export function generateCV(results) {
       let now = moment().format()
       let fileName = `${personNumber}_${now}.docx`
       
-      //FileSaver.saveAs(blob, fileName)
+      FileSaver.saveAs(blob, fileName)
 
     })
   
