@@ -1,9 +1,12 @@
 import * as types from './types'
 
-export function requestCV() {
+export function requestCV(uri) {
   console.log("actions.requestCV")
 
+  // NOTE: seems redundant to send in uri
+  // when it's already in state
   return {
+    uri: uri,
     type: types.REQUEST_CV,
     results: {},
     isFetching: true,

@@ -7,6 +7,7 @@ import * as types from './types'
 import { receiveCV } from './actions'
  
 import moment from 'moment'
+import * as widgets from './widgets_parser'
 
 function checkStatus(res) {
   console.log("sagas.checkStatus")
@@ -19,7 +20,19 @@ function checkStatus(res) {
   return res.json()
 }
 
+export function fetchWidgetsData(uri) {
+  console.log("sagas.fetchWidgetsData")
+ 
+  let widgets_base_url = process.env.WIDGETS_URL
+  
+  const widgetsUrl = `${widgets_base_url}/api/v0.9/people/complete/all.json?uri=${uri}`
+
+  let attempt = fetch(widgetsUrl)
+  return attempt.then(res => checkStatus(res))
+}
+
 // 1. actual function
+/*
 export function fetchCVApi() {
   console.log("sagas.fetchCVApi")
  
@@ -31,6 +44,7 @@ export function fetchCVApi() {
   let attempt = fetch(widgetsUrl)
   return attempt.then(res => checkStatus(res))
 }
+*/
 
 //import cvTemplate from './templates/cv_template.docx'
 import blankTemplate from './templates/BlankTemplate.docx'
@@ -46,8 +60,6 @@ function loadFile(url,callback){
   JSZipUtils.getBinaryContent(url,callback)
 }
  
-import convertData from './widgets_parser'
-
 export function generateCV(results) {
   console.log("sagas.generateCV")
 
@@ -61,7 +73,7 @@ export function generateCV(results) {
       var zip = new JSZip(content)
       var doc=new Docxtemplater().loadZip(zip)
       
-      var data = convertData(results)
+      var data = widgets.convertData(results)
 
       console.log("****** tranformed data:******")
       console.log(data)
@@ -95,7 +107,8 @@ export function generateCV(results) {
       
       let now = moment().format()
       let fileName = `${personNumber}_${now}.docx`
-      FileSaver.saveAs(blob, fileName)
+      
+      //FileSaver.saveAs(blob, fileName)
 
     })
   
@@ -106,11 +119,14 @@ export function generateCV(results) {
 
 }
 
-export function* fetchCV() {
+export function* fetchCV(action) {
   console.log("sagas.fetchCV")
-
+  const { uri } = action
+ 
   try {
-    const results = yield call(fetchCVApi)
+    const results = yield call(fetchWidgetsData, uri)
+
+    //const results = yield call(fetchCVApi)
     //console.log(results)
     yield put(receiveCV(results))
 
@@ -122,40 +138,14 @@ export function* fetchCV() {
   } 
 }
 
-//const score2 = yield* playLevelTwo()
-
-/*
-
-var loadFile=function(url,callback){
-  JSZipUtils.getBinaryContent(url,callback);
-};
- 
-var run_template= function(data) {
-  loadFile("cv_template.docx",function(err,content){
-    if (err) { 
-      //console.debug(err);
-      throw err
-    };
-    doc=new Docxgen(content);
-    doc.setData(data);    
-    doc.render(); //apply them (replace all occurences of {first_name} by Hipp, ...)
-    out=doc.getZip().generate({type:"blob"}) //Output the document using Data-URI
-    saveAs(out,"cv.docx")
-  });
-};
-
-
-function* mainSaga(getState) {
-  const results = yield all([call(task1), call(task2), ...])
-  yield put(showResults(results))
-}
-
-*/
-
-// 3. watcher
 function* watchForCV() {
   while(true) {
     const action = yield take(types.REQUEST_CV)
+    
+    // uri not in 'action'
+    console.log("watchForCV")
+    console.log(action)
+ 
     yield fork(fetchCV, action)
   }
 }

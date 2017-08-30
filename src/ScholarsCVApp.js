@@ -32,11 +32,14 @@ export class ScholarsCVApp extends Component {
 
   handleSubmitRequest(e) {
     e.preventDefault()
-    const { dispatch } = this.props
+    const { dispatch, cv } = this.props
  
     console.log("*****handleSubmitRequest*****")
+    let uri = cv['uri']
 
-    dispatch(requestCV())
+    //console.log(cv['uri'])
+    // send in URI? here?
+    dispatch(requestCV(uri))
 
   }
 

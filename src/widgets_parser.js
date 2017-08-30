@@ -299,7 +299,7 @@ function parsePositions(data, results) {
 
 
 
-function convertData(data) {
+export function convertData(data) {
   // encompassing hash
   var results = {'cv': [], 'academicArticlesLabel': [], 'booksLabel': [], 
     'name': [], 'primaryPositionLabel': [], 'primaryPosition': [], 
