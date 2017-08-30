@@ -51,7 +51,7 @@ import blankTemplate from './templates/BlankTemplate.docx'
 import htmlTemplate from './templates/cv_template.html'
 
 import FileSaver from 'file-saver'
-import Docxtemplater from 'docxtemplater'
+//import Docxtemplater from 'docxtemplater'
 
 import JSZip from 'jszip'
 import JSZipUtils from 'jszip-utils'
@@ -60,7 +60,7 @@ function loadFile(url,callback){
   JSZipUtils.getBinaryContent(url,callback)
 }
  
-export function generateCV(results) {
+export function generateCV(results, uri) {
   console.log("sagas.generateCV")
 
   try {
@@ -71,7 +71,7 @@ export function generateCV(results) {
       }
     
       var zip = new JSZip(content)
-      var doc=new Docxtemplater().loadZip(zip)
+      //var doc=new Docxtemplater().loadZip(zip)
       
       var data = widgets.convertData(results)
 
@@ -85,31 +85,40 @@ export function generateCV(results) {
  
       // NOTE: don't actually need this data in word template     
       // in fact, don't need xtemplator for a blank template
-      doc.setData(data)    
+      //doc.setData(data)    
       
-      let zipDocs = doc.getZip() 
+      //let zipDocs = doc.getZip() 
       // NOTE: this is how to add a new file.  BlankTemplate has a pointer
       // to "word/document.html" but the file does not actually exist (in the template)
       // this is what completes the file and makes it valid (and also gives it content)
-      zipDocs.file("word/document.html", template) 
+      
+      //zipDocs.file("word/document.html", template) 
+      zip.file("word/document.html", template) 
 
-      doc.render() 
-      var blob =doc.getZip().generate({
+
+      //doc.render() 
+      //var blob =doc.getZip().generate({
+      //    type:"blob",
+      //    mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      //  }
+      //) //Output the document using Data-URI
+
+      var blob = zip.generate({
           type:"blob",
           mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         }
       ) //Output the document using Data-URI
- 
+  
       // FIXME: needs to be global and sent in from query parameters
       // e.g. scholars_cv_generator?uri=?
-      let uri = "https://scholars.duke.edu/individual/per4284062"
+      //let uri = "https://scholars.duke.edu/individual/per4284062"
       let index = uri.lastIndexOf("/")
       let personNumber = uri.substr(index+1)
       
       let now = moment().format()
       let fileName = `${personNumber}_${now}.docx`
       
-      console.log(template)
+      //console.log(template)
       FileSaver.saveAs(blob, fileName)
 
     })
@@ -133,7 +142,7 @@ export function* fetchCV(action) {
     yield put(receiveCV(results))
 
     //yield put(downloadCV(results))
-    yield call(generateCV, results)
+    yield call(generateCV, results, uri)
 
   } catch(e) {
     //yield put(cvFailed(e.message))
