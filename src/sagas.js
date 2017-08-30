@@ -84,6 +84,7 @@ export function generateCV(results) {
       //var blob_html = new Blob([template], {type: "application/msword"})
  
       // NOTE: don't actually need this data in word template     
+      // in fact, don't need xtemplator for a blank template
       doc.setData(data)    
       
       let zipDocs = doc.getZip() 
@@ -108,6 +109,7 @@ export function generateCV(results) {
       let now = moment().format()
       let fileName = `${personNumber}_${now}.docx`
       
+      console.log(template)
       FileSaver.saveAs(blob, fileName)
 
     })
