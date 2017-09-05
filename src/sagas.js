@@ -31,27 +31,11 @@ export function fetchWidgetsData(uri) {
   return attempt.then(res => checkStatus(res))
 }
 
-// 1. actual function
-/*
-export function fetchCVApi() {
-  console.log("sagas.fetchCVApi")
- 
-  let widgets_base_url = process.env.WIDGETS_URL
-  let uri = "https://scholars.duke.edu/individual/per4284062"
-  
-  const widgetsUrl = `${widgets_base_url}/api/v0.9/people/complete/all.json?uri=${uri}`
 
-  let attempt = fetch(widgetsUrl)
-  return attempt.then(res => checkStatus(res))
-}
-*/
-
-//import cvTemplate from './templates/cv_template.docx'
 import blankTemplate from './templates/BlankTemplate.docx'
 import htmlTemplate from './templates/cv_template.html'
 
 import FileSaver from 'file-saver'
-//import Docxtemplater from 'docxtemplater'
 
 import JSZip from 'jszip'
 import JSZipUtils from 'jszip-utils'
@@ -71,9 +55,13 @@ export function generateCV(results, uri) {
       }
     
       var zip = new JSZip(content)
-      //var doc=new Docxtemplater().loadZip(zip)
       
-      var data = widgets.convertData(results)
+      //var data = widgets.convertData(results)
+      let widgetsParser = new widgets.WidgetsParser()
+
+      //widgetsParser.parsePublications(results)
+      var data = widgetsParser.convert(results)
+
 
       console.log("****** tranformed data:******")
       console.log(data)
@@ -81,27 +69,7 @@ export function generateCV(results, uri) {
       var compiled = _.template(htmlTemplate,'imports': {'_': _})
       var template = compiled(data)
       
-      //var blob_html = new Blob([template], {type: "application/msword"})
- 
-      // NOTE: don't actually need this data in word template     
-      // in fact, don't need xtemplator for a blank template
-      //doc.setData(data)    
-      
-      //let zipDocs = doc.getZip() 
-      // NOTE: this is how to add a new file.  BlankTemplate has a pointer
-      // to "word/document.html" but the file does not actually exist (in the template)
-      // this is what completes the file and makes it valid (and also gives it content)
-      
-      //zipDocs.file("word/document.html", template) 
       zip.file("word/document.html", template) 
-
-
-      //doc.render() 
-      //var blob =doc.getZip().generate({
-      //    type:"blob",
-      //    mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-      //  }
-      //) //Output the document using Data-URI
 
       var blob = zip.generate({
           type:"blob",
@@ -109,9 +77,6 @@ export function generateCV(results, uri) {
         }
       ) //Output the document using Data-URI
   
-      // FIXME: needs to be global and sent in from query parameters
-      // e.g. scholars_cv_generator?uri=?
-      //let uri = "https://scholars.duke.edu/individual/per4284062"
       let index = uri.lastIndexOf("/")
       let personNumber = uri.substr(index+1)
       
@@ -119,7 +84,7 @@ export function generateCV(results, uri) {
       let fileName = `${personNumber}_${now}.docx`
       
       //console.log(template)
-      FileSaver.saveAs(blob, fileName)
+      //FileSaver.saveAs(blob, fileName)
 
     })
   
@@ -137,11 +102,8 @@ export function* fetchCV(action) {
   try {
     const results = yield call(fetchWidgetsData, uri)
 
-    //const results = yield call(fetchCVApi)
-    //console.log(results)
     yield put(receiveCV(results))
 
-    //yield put(downloadCV(results))
     yield call(generateCV, results, uri)
 
   } catch(e) {
@@ -153,7 +115,6 @@ function* watchForCV() {
   while(true) {
     const action = yield take(types.REQUEST_CV)
     
-    // uri not in 'action'
     console.log("watchForCV")
     console.log(action)
  
@@ -166,6 +127,5 @@ export default function* root() {
   yield [
     fork(watchForCV)
   ]
-  //yield all([call(watchForCV)])
 }
 

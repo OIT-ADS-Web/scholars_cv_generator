@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>CV: ${name[0]['fullName']}</title>
+    <title>CV: ${name}</title>
     
     <style>
      h1 { font-size: 150%; }
@@ -15,40 +15,40 @@
   </head>
   <body>
   <div class="container">
-    <h1>${name[0]['fullName']}</h1>
+    <h1>${name}</h1>
 
-    <h2>${primaryPositionLabel}</h2>
+    <h2>Primary Appointment</h2>
     <div class="row">
-    <% _.forEach(primaryPosition, function(item) { %>
+    <% _.forEach(primaryPositions, function(item) { %>
        <div class="slight-indent"><%= item['label'] %></div>
     <% }); %>
     </div>
 
-    <% if (secondaryPosition.length > 0) { %>
-      <h2>${secondaryPositionLabel}</h2>
+    <% if (secondaryPositions.length > 0) { %>
+      <h3>Secondary Appointment</h3>
       <div class="row">
-      <% _.forEach(secondaryPosition, function(item) { %>
+      <% _.forEach(secondaryPositions, function(item) { %>
           <div class="slight-indent"><%= item['label'] %></div>
       <% }); %>
       </div>          
     <% } %>
 
-    <h3>Present academic rank and titles:</h3>
+    <h2>Present academic rank and titles:</h2>
     <div class="row">
-      <div class="slight-indent">${cv[0]['title']}</div>
+      <div class="slight-indent">${title}</div>
     </div>
 
-    <h2>${educationsLabel}</h2>         
+    <h2>Education</h2>         
     <div class="row">
     <% _.forEach(educations, function(item) { %>
        <div class="slight-indent"><%= item['allEducation'] %></div>
     <% }); %>
     </div>      
 
-    <h2>${publicationsLabel}</h2>
+    <h2>Publications</h2>
 
     <% if (academicArticles.length > 0) { %>
-    <h3>${academicArticlesLabel}</h3> 
+    <h3>Academic Articles</h3> 
     <ol>
     <% _.forEach(academicArticles, function(item) { %>
       <li>
@@ -59,7 +59,7 @@
     <% } %>
 
     <% if (books.length > 0) { %>
-    <h3>${booksLabel}</h3> 
+    <h3>Books</h3> 
     <ol>
     <% _.forEach(books, function(item) { %>
       <li>
@@ -70,7 +70,7 @@
     <% } %>
 
     <% if (bookReviews.length > 0) { %>
-    <h3>${bookReviewsLabel}</h3> 
+    <h3>Book Reviews</h3> 
     <ol>
     <% _.forEach(bookReviews, function(item) { %>
       <li>
@@ -81,7 +81,7 @@
     <% } %>
 
     <% if (bookSections.length > 0) { %>
-    <h3>${bookSectionsLabel}</h3> 
+    <h3>Book Sections</h3> 
     <ol>
     <% _.forEach(bookSections, function(item) { %>
       <li>
@@ -93,7 +93,7 @@
 
 
     <% if (bookSeries.length > 0) { %>
-    <h3>${bookSeriesLabel}</h3> 
+    <h3>Book Series</h3> 
     <ol>
     <% _.forEach(bookSeries, function(item) { %>
       <li>
@@ -105,7 +105,7 @@
 
 
     <% if (conferencePapers.length > 0) { %>
-    <h3>${conferencePapersLabel}</h3> 
+    <h3>Conference Papers</h3> 
     <ol>
     <% _.forEach(conferencePapers, function(item) { %>
       <li>
@@ -117,7 +117,7 @@
 
 
     <% if (datasets.length > 0) { %>
-    <h3>${datasetsLabel}</h3> 
+    <h3>Datasets</h3> 
     <ol>
     <% _.forEach(datasets, function(item) { %>
       <li>
@@ -129,7 +129,7 @@
 
 
     <% if (digitalPublications.length > 0) { %>
-    <h3>${digitalPublicationsLabel}</h3> 
+    <h3>Digital Publications</h3> 
     <ol>
     <% _.forEach(digitalPublications, function(item) { %>
       <li>
@@ -140,7 +140,7 @@
     <% } %>
 
     <% if (journalIssues.length > 0) { %>
-    <h3>${journalIssuesLabel}</h3>
+    <h3>Journal Issues</h3>
     <ol>
     <% _.forEach(journalIssues, function(item) { %>
       <li>
@@ -152,7 +152,7 @@
 
 
     <% if (reports.length > 0) { %>
-    <h3>${reportsLabel}</h3>
+    <h3>Reports</h3>
     <ol>
     <% _.forEach(reports, function(item) { %>
       <li>
@@ -163,10 +163,10 @@
     <% } %>
 
 
-    <% if (scholarlyEdition.length > 0) { %>
-    <h3>${scholarlyEditionsLabel}</h3>
+    <% if (scholarlyEditions.length > 0) { %>
+    <h3>Scholarly Editions</h3>
     <ol>
-    <% _.forEach(scholarlyEdition, function(item) { %>
+    <% _.forEach(scholarlyEditions, function(item) { %>
       <li>
           <%= item['citation'] %>
       </li>
@@ -176,7 +176,7 @@
 
  
     <% if (theses.length > 0) { %>
-    <h3>${thesesLabel}</h3>
+    <h3>Theses and Dissertations</h3>
     <ol>
     <% _.forEach(theses, function(item) { %>
       <li>
@@ -189,7 +189,7 @@
         
 
     <% if (otherArticles.length > 0) { %>
-    <h3>${otherArticlesLabel}</h3>
+    <h3>Other Articles</h3>
     <ol>
     <% _.forEach(otherArticles, function(item) { %>
       <li>
@@ -201,7 +201,7 @@
 
 
     <% if (software.length > 0) { %>
-    <h3>${softwareLabel}</h3>
+    <h3>Software</h3>
     <ol>
     <% _.forEach(software, function(item) { %>
       <li>
@@ -214,7 +214,7 @@
 
 
     <% if (teaching.length > 0) { %>
-    <h2>${teachingLabel}</h2>
+    <h2>Teaching Responsibilities</h2>
     <ol>
     <% _.forEach(teaching, function(item) { %>
       <div class="row">
@@ -225,7 +225,7 @@
     <% } %>
 
     <% if (grants.length > 0) { %>
-    <h2>${grantsLabel}</h2>
+    <h2>Grants</h2>
     <ul>
       <% _.forEach(grants, function(item) { %>
       <li>
@@ -240,18 +240,16 @@
     </ul>
     <% } %>
 
-    <% if (researchInterests.length > 0) { %>
-    <h2>${researchInterestsLabel}</h2>
-    <% _.forEach(researchInterests, function(item) { %>
+    <% if (researchInterests) { %>
+    <h2>Research Interests</h2>
      <div class="row">
-          <%= item['research_interests'] %>
+        ${research_interests}
      </div>
-    <% }); %>
     <% } %>
 
 
     <% if (awards.length > 0) { %>
-    <h2>${awardsLabel}</h2> 
+    <h2>Awards and Honors</h2> 
     <% _.forEach(awards, function(item) { %>
     <div class="row">
       <%= item['label'] %>
@@ -261,7 +259,7 @@
 
 
     <% if (presentations.length > 0) { %>
-    <h2>${presentationsLabel}</h2>
+    <h2>Presentations and Appearances</h2>
     <% _.forEach(presentations, function(item) { %>
     <div class="row">
           <%= item['label'] %>
@@ -271,7 +269,7 @@
 
      
     <% if (servicesToProfession.length > 0) { %>
-    <h2>${servicesToProfessionLabel}</h2>
+    <h2>Services to the Profession</h2>
     <% _.forEach(servicesToProfession, function(item) { %>
      <div class="row">
          <%= item['label'] %>
@@ -281,7 +279,7 @@
 
 
     <% if (servicesToDuke.length > 0) { %>
-    <h2>${servicesToDukeLabel}</h2> 
+    <h2>Services to Duke</h2> 
     <% _.forEach(servicesToDuke, function(item) { %>
     <div class="row">
       <%= item['label'] %>
@@ -291,7 +289,7 @@
 
 
     <% if (outreach.length > 0) { %>
-    <h2>${outreachLabel}</h2> 
+    <h2>Outreach and Engaged Scholarship</h2> 
     <% _.forEach(outreach, function(item) { %>
       <div class="row">
         <%= item['label'] %>

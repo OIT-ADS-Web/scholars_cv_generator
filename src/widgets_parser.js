@@ -2,356 +2,337 @@ var stripHtml = /(<([^>]+)>)/ig;
 var stripOpeningTag = /<a\b[^>]*>/i;
 var stripClosingTag = /<\/a>/i;
 
-function parseTeaching(data, results) {
-  //TEACHING
-  var teaching = data['courses'];
-  if (typeof teaching != 'undefined' && teaching != null && teaching.length > 0) {
-    results['teachingLabel'][0] = "Teaching Responsibilities:";
-    $.each(teaching, function(index, value) {
-      var label = value['label'];
-      results['teaching'].push({'label':label});
-    });
+import _ from 'lodash'
+
+// http://www.scottmessinger.com/2015/05/19/functional-programming-with-lodash/
+// https://stackoverflow.com/questions/35590543/how-do-you-chain-functions-using-lodash
+class WidgetsParser {
+  
+  /*
+  constructor(data) {
+    this.data = data
   }
-  else {
-    teaching = false;
+  */
+
+  parseName(data) {
+    var firstName = data['attributes']['firstName'];
+    var middleName = data['attributes']['middleName'];
+    var lastName = data['attributes']['lastName'];
+  
+    var fullName = "";
+
+    if (typeof middleName != 'undefined' && middleName != null && middleName.length > 0) {
+      fullName = firstName + " " + middleName + " " + lastName;
+    }
+    else {
+      fullName = firstName + " " + lastName;
+      middleName = false;
+    };
+    return {'name': fullName }
   };
 
-  return teaching
-};
+  parseTitle(data) {
+    var title = data['title'];
+    return {'title': title }
+  }
+
+  parsePositions(data) {
+    let positions = data['positions'] || [];
+    var primaryPositions = []
+    var secondaryPositions = []
+
+    let positionTypes = {
+      'primaryPosition': 'http://vivoweb.org/ontology/core#PrimaryPosition',
+      'secondaryPosition': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition'
+    };
+
+    // group by 'type'    
+    _.forEach(positions, function(value) {
+      var vivoType = value['vivoType'];
+      var label = value['label'];
+      switch(vivoType) {
+        case positionTypes['primaryPosition']: {
+          primaryPositions.push({'label': label})
+          break;
+        }
+        case positionTypes['secondaryPosition']: {
+          secondaryPositions.push({'label':label})
+          break;
+        }
+      }
+    });
+
+    let results = {
+      'primaryPositions': primaryPositions,
+      'secondaryPositions': secondaryPositions
+    }
+    return results
+  };
 
 
-function parseGrants(data, results) {
-  //GRANTS
-  var grants = data['grants'];
-  if (typeof grants != 'undefined' && grants != null && grants.length > 0) {
-    results['grantsLabel'][0] = "Grants:";
-    $.each(grants, function(index, value) {
+  parseEducations(data) {
+    var educations = data['educations'] || [];
+    var educationList = []
+
+    _.forEach(educations, function(value) {
+      let institution = value.attributes['institution'];
+      let endYear = [value.attributes['endDate'].substr(0,4)];
+      let label = value['label'];
+     
+      var degree = value.attributes['degree'];
+      var fullLabel = ""
+
+      if (typeof degree != 'undefined') {
+        var degree = value.attributes['degree'];
+        fullLabel = (degree + ", " + institution + " " + endYear);
+      }
+      else {
+        fullLabel = (label + ", " + institution + " " + endYear);
+      }
+      educationList.push({'fullLabel': fullLabel}) 
+    });
+  
+    let results = {'educations': educationList.reverse()}
+    return results
+  }
+  
+  
+  parseResearchInterests(data) {
+    let overview = data['attributes']['overview'] || null;
+    var researchInterests = null
+
+    if (overview != null) {
+      var research_interests = overview.replace(stripHtml, "");
+      research_interests = research_interests.replace(/(&nbsp;)*/g,"");
+    }
+    return {'researchInterests': researchInterests}
+  }
+
+
+  parsePublications(data) {
+    
+    var pubTypes = {
+      'http://purl.org/ontology/bibo/AcademicArticle': [],
+      'http://purl.org/ontology/bibo/Book': [], 
+      'http://vivoweb.org/ontology/core#Review': [], 
+      'http://purl.org/ontology/bibo/BookSection': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-extension#BookSeries': [],
+      'http://vivoweb.org/ontology/core#ConferencePaper': [],
+      'http://vivoweb.org/ontology/core#Dataset': [],
+      'http://vivo.duke.edu/vivo/ontology/dukeextension#DigitalPublication': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-extension#JournalIssue': [],
+      'http://purl.org/ontology/bibo/Report': [], 
+      'http://purl.org/ontology/bibo/EditedBook': [], 
+      'http://purl.org/ontology/bibo/Thesis': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle': [],
+      'http://vivoweb.org/ontology/core#Software': []              
+    };
+    
+    var publications = data['publications'] || [];
+
+    let figureCitation = function(value) {
+      var citation = value.attributes['mlaCitation']
+            .replace(stripOpeningTag,"")
+            .replace(stripClosingTag, "");
+
+      citation = citation.replace(stripHtml, "");
+      
+      var vivoType = value['vivoType'];
+  
+      if (vivoType === "http://purl.org/ontology/bibo/AcademicArticle") {
+        let pubmed = value.attributes['pmid'];
+        let pubmedid = value.attributes['pmcid'];    
+ 
+        if (typeof pubmed !== 'undefined' && typeof pubmedid !== 'undefined') {
+          citation = citation + " PMID: " + pubmed + ". PMCID: " + pubmedid + ".";
+        }
+        else if (typeof pubmed !== 'undefined') {
+          citation = citation + " PMID: " + pubmed + ".";
+        };  
+      }
+      return citation
+    };
+
+    _.forEach(publications, function(value) {
+      
+      let citation = figureCitation(value)
+      let vivoType = value['vivoType'];
+       
+      pubTypes[vivoType].push({'citation': citation})
+      
+    });
+
+    let pluralize = function(word) {
+      switch(word) {
+        case "thesis": {
+          return "theses"
+        }
+        case "review": {
+          return "bookReviews"
+        }
+        case "bookSeries": {
+          return "bookSeries"
+        }
+        case "editedBook": {
+          return "scholarlyEditions"
+        }
+        case "software": {
+          return "software"
+        }
+        
+        default:
+          return `${word}s`
+      }
+      
+    }
+
+    let shortName = function(uri) {
+      // NOTE: two types of URIs (at this point)
+      // 'http://purl.org/ontology/bibo/AcademicArticle': [],
+      // 'http://vivoweb.org/ontology/core#Review': [], 
+      var index = uri.lastIndexOf("#")
+      if (index < 0) {
+        index = uri.lastIndexOf("/")
+      }
+      // also pluralize
+      let name = _.camelCase(uri.substr(index + 1))
+      return pluralize(name)
+    };
+
+    let results = _.transform(pubTypes, function(result, value, key) {
+      let name = shortName(key)
+      result[name] = value
+      return result;
+    }, {});
+
+    return results
+  }
+
+
+  parseTeaching(data) {
+    let teaching = data['courses'];
+    var courses = []
+
+    _.forEach(teaching, function(value) {
+      var label = value['label'];
+      courses.push({'label':label});
+    });
+
+    return {'teaching': courses}
+  }
+
+  parseGrants(data) {
+    let grants = data['grants'];
+    var grantList = []
+    _.forEach(grants, function(value) {
       var label = value['label'] + ", awarded by "
       var awardedBy = value.attributes['awardedBy'] + ", ";
       var startDate = value.attributes['startDate'].substr(0,4) + " - ";
       var endDate = value.attributes['endDate'].substr(0,4) + " ";
       var role = value.attributes['roleName'];
-      results['grants'].push({'label':label, 'awardedBy': awardedBy,
+      grantList.push({'label':label, 'awardedBy': awardedBy,
                               'startDate': startDate, 'endDate': endDate, 'role': role});
     });
-  }
-  else {
-    grants = false;
+    return {'grants': grantList }
   };
 
-  return grants;
-};
-
-function parseAwards(data, results) {
-
-  //AWARDS
-  var awards = data['awards'];
-  if (typeof awards != 'undefined' && awards != null && awards.length > 0) {
-    results['awardsLabel'][0] = "Awards and Honors:";
-    $.each(awards, function(index,value) {
+  parseAwards(data) {
+    let awards = data['awards'];
+    var awardList = [];
+    _.forEach(awards, function(value) {
       var label = value['label'];
       var date = value['attributes']['date'].substr(0,4);
       var label = (label + " " + date);   
-      results['awards'].push({'label':label});
+      awardList.push({'label':label});
     });
-  }
-  else {
-    awards = false;
+    return {'awards': awardList}
   };
 
-  return awards;
-};
-
-function parseProfessionalActivities(data, results) {
-  var professionalActivitiesTypes = {
-    'presentations': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation', 
-    'servicesToProfession': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession', 
-    'servicesToDuke': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity', 
-    'outreach': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach'
-  };
-
-  var professionalActivities = data['professionalActivities'];
-  $.each(professionalActivities, function(index,value) {
-    var label = value['label'];
-    var vivoType = value['vivoType'];
-    if (vivoType != null) {
-      switch (vivoType) {
-        case professionalActivitiesTypes['presentations']:
-          results['presentationsLabel'][0] = "Presentations and Appearances:";
-          results['presentations'].push({'label':label});
-          break;
-        case professionalActivitiesTypes['servicesToProfession']:
-          results['servicesToProfessionLabel'][0] = "Services to the Profession:";
-          results['servicesToProfession'].push({'label':label});
-          break;
-        case professionalActivitiesTypes['servicesToDuke']:
-          results['servicesToDukeLabel'][0] = "Services to Duke:";
-          results['servicesToDuke'].push({'label': label});
-          break;
-        default:
-          results['outreachLabel'][0] = "Outreach and Engaged Scholarship:";
-          results['outreach'].push({'label':label});        
-      };
-    }
-    else {
-      professionalActivities = false;
+  parseProfessionalActivities(data) {
+    var professionalActivitiesTypes = {
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : []
     };
-  });
 
-  return professionalActivities;
-};
-
-
-function parseResearchInterests(data, results) {
-  //research interests
-  var overview = data['attributes']['overview'];
-  if (typeof overview != 'undefined' && overview != null && overview.length > 0) {
-    results['researchInterestsLabel'] = "Research Interests:";  
-    var research_interests = overview.replace(stripHtml, "");
-    research_interests = research_interests.replace(/(&nbsp;)*/g,"");
-    results['researchInterests'].push({'research_interests': research_interests});
-  }
-  else {
-    overview = false;
-    research_interests = false;
-  };
-
-  return research_interests
-};
-
-function parseEducations(data, results) {
-  //educations
-  var educations = data['educations'];
-  if (typeof educations != 'undefined' && educations != null && educations.length > 0) {
-    results['educationsLabel'] = "Education:";
-    $.each(educations, function(index, value) {
-      var institution = value.attributes['institution'];
-      var endYear = [value.attributes['endDate'].substr(0,4)];
-      var degree = value.attributes['degree'];
-      var label = value['label'];
-      if (typeof degree != 'undefined') {
-        var degree = value.attributes['degree'];
-        var allEducation = (degree + ", " + institution + " " + endYear);
-      }
-      else {
-        allEducation = (label + ", " + institution + " " + endYear);
-      }
-      results['educations'].push({'allEducation': allEducation}); 
+    var professionalActivities = data['professionalActivities'];
+    
+    _.forEach(professionalActivities, function(value) {
+      let label = value['label']
+      let vivoType = value['vivoType']
+      professionalActivitiesTypes[vivoType].push({'label': label})
     });
-  }
-  else {
-    educations = false;
-  };
-  results['educations'].reverse();
+
  
-  return educations;
+    let pluralize = function(word) {
+      switch(word) {
+        case "serviceToTheProfession": {
+          return "servicesToProfession"
+        }
+        case "serviceToTheUniversity": {
+          return "servicesToDuke"
+        }
+        case "outreach": {
+          return "outreach"
+        }
+        default:
+          return `${word}s`
+      }
+      
+    }
+
+ //   'servicesToProfession': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession', 
+ //   'servicesToDuke': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity', 
+ //   'outreach': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach'
+ 
+    let shortName = function(uri) {
+      // NOTE: two types of URIs (at this point)
+      // 'http://purl.org/ontology/bibo/AcademicArticle': [],
+      // 'http://vivoweb.org/ontology/core#Review': [], 
+      var index = uri.lastIndexOf("#")
+      if (index < 0) {
+        index = uri.lastIndexOf("/")
+      }
+      // also pluralize
+      let name = _.camelCase(uri.substr(index + 1))
+      return pluralize(name)
+    };
+
+    let results = _.transform(professionalActivitiesTypes, function(result, value, key) {
+      let name = shortName(key)
+      result[name] = value
+      return result;
+    }, {});
+
+    return results
+
+  };
+  // one way to do it:
+  convert(data) {
+    var results = {}
+
+    _.merge(results, this.parseName(data))
+    _.merge(results, this.parseTitle(data))
+    _.merge(results, this.parsePositions(data))
+    _.merge(results, this.parseEducations(data))
+    _.merge(results, this.parseResearchInterests(data))
+    _.merge(results, this.parsePublications(data))
+    _.merge(results, this.parseTeaching(data))
+    _.merge(results, this.parseGrants(data))
+    _.merge(results, this.parseAwards(data))
+    _.merge(results, this.parseProfessionalActivities(data))
+   
+    return results
+  }
+ 
+};
+
+
+export { 
+  WidgetsParser
 }
 
-function parsePublications(data, results) {
-  var pubTypes = {
-    'academicArticles': 'http://purl.org/ontology/bibo/AcademicArticle',
-    'books': 'http://purl.org/ontology/bibo/Book', 
-    'bookReviews': 'http://vivoweb.org/ontology/core#Review', 
-    'bookSections': 'http://purl.org/ontology/bibo/BookSection', 
-    'bookSeries': 'http://vivo.duke.edu/vivo/ontology/duke-extension#BookSeries',
-    'conferencePapers': 'http://vivoweb.org/ontology/core#ConferencePaper',
-    'datasets': 'http://vivoweb.org/ontology/core#Dataset',
-    'digitalPublications': 'http://vivo.duke.edu/vivo/ontology/dukeextension#DigitalPublication',
-    'journalIssues': 'http://vivo.duke.edu/vivo/ontology/duke-extension#JournalIssue',
-    'reports': 'http://purl.org/ontology/bibo/Report', 
-    'scholarlyEdition': 'http://purl.org/ontology/bibo/EditedBook', 
-    'theses': 'http://purl.org/ontology/bibo/Thesis',
-    'otherArticles': 'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle',
-    'software': 'http://vivoweb.org/ontology/core#Software'              
-  };
-
-  var pubs = data['publications'];
-  // NOTE: adding this to test angular parser
-  results['pubs'] = pubs;
-
-  if (typeof pubs != 'undefined' && pubs != null && pubs.length > 0) {
-    results['publicationsLabel'][0] = "Publications:";
-    results['hasPubs'] = pubs.length > 0;
-    
-    $.each(pubs, function(index, value) {      
-      var citation = value.attributes['mlaCitation'].replace(stripOpeningTag,"").replace(stripClosingTag, "");
-      citation = citation.replace(stripHtml, "");
-      var pubmed = value.attributes['pmid'];
-      var pubmedid = value.attributes['pmcid'];    
-      var vivoType = value['vivoType'];
-      var date = value.attributes['datetime'];
-      if (vivoType != null) {
-        if (vivoType === pubTypes['academicArticles']) {
-          var academicArticles = "Academic Articles";
-          if (typeof pubmed !== 'undefined' && typeof pubmedid !== 'undefined') {
-            citation = citation + " PMID: " + pubmed + ". PMCID: " + pubmedid + ".";
-          }
-          else if (typeof pubmed !== 'undefined') {
-            citation = citation + " PMID: " + pubmed + ".";
-          };  
-          results['academicArticlesLabel'] = academicArticles;
-          results['academicArticles'].push({'citation': citation});
-        };
-        if (vivoType === pubTypes['books']) {
-          var books = "Books";
-          results['booksLabel'] = books;
-          results['books'].push({'citation': citation}); 
-        };
-        if (vivoType === pubTypes['bookReviews']) {
-          var bookReviews = "Book Reviews";
-          results['bookReviewsLabel'] = bookReviews;
-          results['bookReviews'].push({'citation':citation}); 
-        };
-        if (vivoType === pubTypes['bookSections']) {
-          var bookSections = "Book Sections";
-          results['bookSectionsLabel'] = bookSections;
-          results['bookSections'].push({'citation': citation});  
-        };
-        if (vivoType === pubTypes['bookSeries']) {
-          var bookSeries = "Book Series";
-          results['bookSeriesLabel'] = bookSeries;
-          results['bookSeries'].push({'citation': citation});   
-        };
-        if (vivoType === pubTypes['conferencePapers']) {
-          var conferencePapers = "Conference Papers";
-          results['conferencePapersLabel'] = conferencePapers;
-          results['conferencePapers'].push({'citation': citation}); 
-        };
-        if (vivoType === pubTypes['datasets']) {
-          var datasets = "Datasets";
-          results['datasetsLabel'] = datasets;
-          results['datasets'].push({'citation': citation});  
-        };
-        if (vivoType === pubTypes['digitalPublications']) {
-          var digitalPublications = "Digital Publications";
-          results['digitalPublicationsLabel'] = digitalPublications;
-          results['digitalPublications'].push({'citation': citation});   
-        };
-        if (vivoType === pubTypes['journalIssues']) {
-          var journalIssues = "Journal Issues";
-          results['journalIssuesLabel'] = journalIssues;
-          results['journalIssues'].push({'citation': citation}); 
-        };
-        if (vivoType === pubTypes['reports']) {
-          var reports = "Reports";
-          results['reportsLabel'] = reports;
-          results['reports'].push({'citation': citation});
-        };
-        if (vivoType === pubTypes['scholarlyEdition']) {
-          var scholarlyEdition = "Scholarly Editions";
-          results['scholarlyEditionsLabel'] = scholarlyEdition;
-          results['scholarlyEdition'].push({'citation': citation});
-        };
-        if (vivoType === pubTypes['theses']) {
-          var theses = "Theses and Dissertations";
-          results['thesesLabel'] = theses;
-          results['theses'].push({'citation': citation});
-        };
-        if (vivoType === pubTypes['otherArticles']) {
-          var otherArticles = "Other Articles";
-          results['otherArticlesLabel'] = otherArticles;
-          results['otherArticles'].push({'citation': citation});
-        };
-        if (vivoType === pubTypes['software']) {
-          var software = "Software";
-          results['softwareLabel'] = software;
-          results['software'].push({'citation': citation});
-        };
-      }; // end if vivo_type != null
-    }); // end .each()
-  } else {
-    pubs = false;
-  }
-  
-  return pubs; 
-};
-
-function parsePositions(data, results) {
-  // primary & secondary positions
-  var positions =  data['positions'];
-  var positionTypes = {
-    'primaryPosition': 'http://vivoweb.org/ontology/core#PrimaryPosition',
-    'secondaryPosition': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition'
-  };
-  if (typeof positions != 'undefined' && positions != null && positions.length > 0) {
-    $.each(positions, function(index, value) { 
-      var vivoType = value['vivoType'];
-      var label = value['label'];
-      if (vivoType != null) {
-        switch (vivoType) {
-          case positionTypes['primaryPosition']:
-            results['primaryPosition'].push({'label': label});
-            results['primaryPositionLabel'][0] = "Primary Appointment:";
-          break;
-          case positionTypes['secondaryPosition']:
-            results['secondaryPosition'].push({'label':label});
-            results['secondaryPositionLabel'][0] = "Secondary Appointment:";
-          break;
-        };
-      };
-    });
-  }
-  else {
-    positions = false;
-  };
-  return positions;
-};
-
-
-
-export function convertData(data) {
-  // encompassing hash
-  var results = {'cv': [], 'academicArticlesLabel': [], 'booksLabel': [], 
-    'name': [], 'primaryPositionLabel': [], 'primaryPosition': [], 
-    'secondaryPositionLabel': [], 'secondaryPosition': [], 
-    'educationsLabel': [], 'educations': [], 'publicationsLabel': [], 
-    'bookReviewsLabel': [], 'bookSectionsLabel': [], 'bookSeriesLabel': [], 
-    'conferencePapersLabel': [], 'datasetsLabel': [], 'digitalPublicationsLabel': [], 
-    'journalIssuesLabel': [], 'reportsLabel': [], 'scholarlyEditionsLabel': [], 
-    'thesesLabel': [], 'otherArticlesLabel': [],
-    'academicArticles': [], 'books': [], 'bookReviews': [], 'bookSections': [], 
-    'bookSeries': [], 
-    'conferencePapers': [], 'datasets': [], 'digitalPublications': [], 
-    'journalIssues': [], 'reports': [], 'scholarlyEdition': [], 
-    'theses': [], 'otherArticles': [], 'softwareLabel': [], 'software': [], 
-    'teachingLabel': [], 'teaching': [], 'grantsLabel': [], 
-    'grants': [], 'researchInterestsLabel': [], 'awardsLabel': [], 
-    'awards': [], 'presentationsLabel': [], 'presentations': [], 
-    'servicesToProfessionLabel': [], 'servicesToProfession': [], 
-    'servicesToDukeLabel': [], 'servicesToDuke': [], 'outreachLabel': [], 
-    'outreach': [], 'researchInterests': []
-  };   
-
-  //name
-  var firstName = data['attributes']['firstName'];
-  var middleName = data['attributes']['middleName'];
-  var lastName = data['attributes']['lastName'];
-  if (typeof middleName != 'undefined' && middleName != null && middleName.length > 0) {
-    var fullName = firstName + " " + middleName + " " + lastName;
-  }
-  else {
-    var fullName = firstName + " " + lastName;
-    middleName = false;
-  };
-  results['name'].push({'fullName': fullName});
-
-  // present academic rank and title
-  var title = data['title'];
-  results['cv'].push({'title': title});  
-
-  var positions = parsePositions(data, results);
-  var educations = parseEducations(data, results);
-  var researchInterests = parseResearchInterests(data, results);
-  var pubs = parsePublications(data, results);
-  var teaching = parseTeaching(data, results);
-  var grants = parseGrants(data, results);
-  var awards = parseAwards(data, results);
-  var professionalActivities = parseProfessionalActivities(data, results);
-
-  return results
-};
-
-export default convertData
 
 
 
