@@ -209,46 +209,6 @@ class WidgetsParser {
       
     });
 
-    /*
-    let pluralize = function(word) {
-      switch(word) {
-        case "thesis": {
-          return "theses"
-        }
-        case "review": {
-          return "bookReviews"
-        }
-        case "bookSeries": {
-          return "bookSeries"
-        }
-        case "editedBook": {
-          return "scholarlyEditions"
-        }
-        case "software": {
-          return "software"
-        }
-        
-        default:
-          return `${word}s`
-      }
-      
-    } 
-    */
-    
-    /*
-    let shortName = function(uri) {
-      // NOTE: two types of URIs (at this point)
-      // 'http://purl.org/ontology/bibo/AcademicArticle': [],
-      // 'http://vivoweb.org/ontology/core#Review': [], 
-      var index = uri.lastIndexOf("#")
-      if (index < 0) {
-        index = uri.lastIndexOf("/")
-      }
-      // also pluralize
-      let name = _.camelCase(uri.substr(index + 1))
-      return pluralize(name)
-    };
-    */
 
     let results = _.transform(pubTypes, (result, value, key) => { 
       let name = this.shortName(key)
