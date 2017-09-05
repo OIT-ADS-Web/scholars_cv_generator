@@ -84,7 +84,7 @@ export function generateCV(results, uri) {
       let fileName = `${personNumber}_${now}.docx`
       
       //console.log(template)
-      //FileSaver.saveAs(blob, fileName)
+      FileSaver.saveAs(blob, fileName)
 
     })
   
