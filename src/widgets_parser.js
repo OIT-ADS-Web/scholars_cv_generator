@@ -14,6 +14,53 @@ class WidgetsParser {
   }
   */
 
+  pluralize(word) {
+      switch(word) {
+        case "thesis": {
+          return "theses"
+        }
+        case "review": {
+          return "bookReviews"
+        }
+        case "bookSeries": {
+          return "bookSeries"
+        }
+        case "editedBook": {
+          return "scholarlyEditions"
+        }
+        case "software": {
+          return "software"
+        }
+        case "serviceToTheProfession": {
+          return "servicesToProfession"
+        }
+        case "serviceToTheUniversity": {
+          return "servicesToDuke"
+        }
+        case "outreach": {
+          return "outreach"
+        }
+        default: {
+          return `${word}s`
+        }
+      }
+      
+  }
+
+  shortName(uri) {
+      // NOTE: two types of URIs (at this point)
+      // 'http://purl.org/ontology/bibo/AcademicArticle': [],
+      // 'http://vivoweb.org/ontology/core#Review': [], 
+      var index = uri.lastIndexOf("#")
+      if (index < 0) {
+        index = uri.lastIndexOf("/")
+      }
+      // also pluralize
+      let name = _.camelCase(uri.substr(index + 1))
+      return this.pluralize(name)
+  }
+
+
   parseName(data) {
     var firstName = data['attributes']['firstName'];
     var middleName = data['attributes']['middleName'];
@@ -162,6 +209,7 @@ class WidgetsParser {
       
     });
 
+    /*
     let pluralize = function(word) {
       switch(word) {
         case "thesis": {
@@ -184,8 +232,10 @@ class WidgetsParser {
           return `${word}s`
       }
       
-    }
-
+    } 
+    */
+    
+    /*
     let shortName = function(uri) {
       // NOTE: two types of URIs (at this point)
       // 'http://purl.org/ontology/bibo/AcademicArticle': [],
@@ -198,9 +248,10 @@ class WidgetsParser {
       let name = _.camelCase(uri.substr(index + 1))
       return pluralize(name)
     };
+    */
 
-    let results = _.transform(pubTypes, function(result, value, key) {
-      let name = shortName(key)
+    let results = _.transform(pubTypes, (result, value, key) => { 
+      let name = this.shortName(key)
       result[name] = value
       return result;
     }, {});
@@ -282,25 +333,8 @@ class WidgetsParser {
       
     }
 
- //   'servicesToProfession': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession', 
- //   'servicesToDuke': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity', 
- //   'outreach': 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach'
- 
-    let shortName = function(uri) {
-      // NOTE: two types of URIs (at this point)
-      // 'http://purl.org/ontology/bibo/AcademicArticle': [],
-      // 'http://vivoweb.org/ontology/core#Review': [], 
-      var index = uri.lastIndexOf("#")
-      if (index < 0) {
-        index = uri.lastIndexOf("/")
-      }
-      // also pluralize
-      let name = _.camelCase(uri.substr(index + 1))
-      return pluralize(name)
-    };
-
-    let results = _.transform(professionalActivitiesTypes, function(result, value, key) {
-      let name = shortName(key)
+    let results = _.transform(professionalActivitiesTypes, (result, value, key) => {
+      let name = this.shortName(key)
       result[name] = value
       return result;
     }, {});
