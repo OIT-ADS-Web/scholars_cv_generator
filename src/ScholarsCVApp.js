@@ -54,16 +54,16 @@ export class ScholarsCVApp extends Component {
     
     return (
 
-      <div className="jumbotron">
         <div className="container">
           <h1>Scholars CV Generator</h1>
-          <button className="btn btn-success btn-lg" onClick={this.handleSubmitRequest}>Generate CV!</button>
-        
-          <div>
-          </div>
-
+            <div className="row bottom">
+              <div className="col-md-12">
+              <button className="btn btn-success btn-lg" 
+                onClick={this.handleSubmitRequest}>Generate CV!
+              </button>
+              </div>
+            </div>
         </div>
-      </div>
 
     )
   }
