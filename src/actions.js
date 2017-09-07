@@ -32,9 +32,17 @@ export function setUri(uri) {
   }
 }
 
+export function setHtml(html) {
+  return {
+   type: types.SET_HTML,
+   html: html
+  }
+}
+
 export default {
   requestCV,
   receiveCV,
-  setUri
+  setUri,
+  setHtml
 } 
 

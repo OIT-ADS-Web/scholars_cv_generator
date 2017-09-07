@@ -23,6 +23,10 @@ function cvReducer(cv = { isFetching: false, results: {}, uri: ""}, action) {
     
     return { ...cv,
      uri: action.uri
+  } 
+  case types.SET_HTML:
+    return { ...cv,
+    html: action.html
   }
   default:
     return cv;
