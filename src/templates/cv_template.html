@@ -297,6 +297,31 @@
     <% }); %>
     <% } %>
 
+    <% if (licences.length > 0) { %>
+    <h2>Medical Licences</h2> 
+    <% _.forEach(licences, function(item) { %>
+    <div class="row">
+      <%= item['label'] %>
+    </div>
+    <% }); %>
+    <% } %>
+
+     <% if (clinical_activities) { %>
+    <h2>Clinical Activities</h2>
+     <div class="row">
+        ${clinical_activities}
+     </div>
+    <% } %>
+
+    <% if (pastappointments.length > 0) { %>
+    <h2>Appointments History</h2> 
+    <% _.forEach(pastappointments, function(item) { %>
+    <div class="row">
+      <%= item['label'] %>
+    </div>
+    <% }); %>
+    <% } %>
+
 
 </div>
   </body>

@@ -274,7 +274,6 @@ class WidgetsParser {
       let vivoType = value['vivoType']
       professionalActivitiesTypes[vivoType].push({'label': label})
     });
-
  
     let pluralize = function(word) {
       switch(word) {
@@ -303,6 +302,46 @@ class WidgetsParser {
 
   };
   // one way to do it:
+
+  parseMedicalLicences(data) {
+    //console.log("Hello in med licenses");
+    //console.log("Data " + JSON.stringify(data));
+    let licences = data['licenses'];
+    var licenceList = [];
+    _.forEach(licences, function(value) {
+      var label = value['label'];
+      //var date = value['attributes']['date'].substr(0,4);
+      //var label = (label + " " + date);   
+      licenceList.push({'label':label});
+    });
+    return {'licences': licenceList}
+  };
+
+   parseClinicalActivities(data) {
+    let activities = data['attributes']['clinicalOverview'] || null;
+    var clinical_activities = null
+
+    if (activities != null) {
+      var clinical_activities = activities.replace(stripHtml, "");
+      clinical_activities = clinical_activities.replace(/(&nbsp;)*/g,"");
+    }
+    return {'clinical_activities': clinical_activities}
+  };
+
+  parsepastAppointments(data) {
+    let pastappointments = data['pastAppointments'];
+    var passAppointmentsList = [];
+    _.forEach(pastappointments, function(value) {
+      var label = value['label'];
+      var org_label = value['attributes']['organizationLabel'];
+      var start_year = value['attributes']['startYear'].substr(0,4);
+      var end_year = value['attributes']['endYear'].substr(0,4);
+      var label = (label + ", " + org_label + " " + start_year + " - " + end_year);   
+      passAppointmentsList.push({'label':label});
+    });
+    return {'pastappointments': passAppointmentsList}
+  };
+
   convert(data) {
     var results = {}
 
@@ -316,7 +355,10 @@ class WidgetsParser {
     _.merge(results, this.parseGrants(data))
     _.merge(results, this.parseAwards(data))
     _.merge(results, this.parseProfessionalActivities(data))
-   
+    _.merge(results, this.parseMedicalLicences(data))
+    _.merge(results, this.parseClinicalActivities(data))
+    _.merge(results, this.parsepastAppointments(data))
+
     return results
   }
  
