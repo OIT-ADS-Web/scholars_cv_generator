@@ -136,7 +136,7 @@ class WidgetsParser {
       else {
         fullLabel = (label + ", " + institution + " " + endYear);
       }
-      educationList.push({'fullLabel': fullLabel}) 
+      educationList.push({'label': fullLabel}) 
     });
   
     let results = {'educations': educationList.reverse()}
