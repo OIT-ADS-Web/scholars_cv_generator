@@ -110,6 +110,10 @@ export class ScholarsCVApp extends Component {
               <button className="btn btn-success btn-lg" 
                 onClick={this.handleSubmitRequest}>Generate CV!
               </button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button className="btn btn-success btn-lg" 
+                onClick={this.handleSubmitRequest}>Generate Medicine CV!
+              </button>
               </div>
             </div>
           {html_section}
