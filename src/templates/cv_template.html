@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>CV: ${name}</title>
     
     <style>
@@ -7,7 +9,10 @@
      h2 { font-size: 135%; }
      h3 { font-size: 115%; }
      h4 { font-size: 100%; }
-
+     div.heading_12 { font-family:"Arial"; font-size:12px; font-weight:bold; text-align:center; }
+     div.heading_10_center { font-family: "Arial"; font-size: 10px; font-weight: bold; text-align: center; }
+     div.heading_10 { font-family: "Arial"; font-size: 10px; font-weight: bold; }
+     div.regular_10 { font-family: "Arial"; font-size: 10px; }
      div.container { width: 100%; }
      div.row { margin-bottom: 1em; padding-bottom: 1em;}
      div.slight-indent { margin-left: 24pt; }
@@ -15,315 +20,260 @@
   </head>
   <body>
   <div class="container">
-    <h1>${name}</h1>
+    <div class="heading_12">
+      CURRICULUM VITAE
+    </div>
+    <div class="heading_12">
+      ${name}
+    </div>
 
-    <h2>Primary Appointment</h2>
-    <div class="row">
+    <% var title = ""; %>
     <% _.forEach(primaryPositions, function(item) { %>
-       <div class="slight-indent"><%= item['label'] %></div>
+    <% title += item['label'] + ','; %>
+    <% title = title.slice(0,-1); %>
     <% }); %>
+
+     <div class="heading_10_center">
+      ${title}
     </div>
 
-    <% if (secondaryPositions.length > 0) { %>
-      <h3>Secondary Appointment</h3>
-      <div class="row">
-      <% _.forEach(secondaryPositions, function(item) { %>
-          <div class="slight-indent"><%= item['label'] %></div>
+     <% var dt = new Date(); %>
+     <% var today = "" %>
+     <% var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"]; %>
+     <% today = "Prepared: " +  monthNames[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear(); %>
+     
+     <div class="heading_10_center">
+        ${today}
+     </div>
+
+    <div class="heading_10">
+    <% if (locations.length > 0) { %>
+    <% _.forEach(locations, function(item) { %>
+       <%= item['address'] %>
+    <% }); %>
+    <% } %>
+
+    <br>
+    <% if (adds.length > 0) { %>
+    <% _.forEach(adds, function(item) { %>
+      <%= item['address'] %>
+    <% }); %>
+    <% } %>
+    <br>
+
+
+    ${phoneNumber}
+    </div>
+
+     <div class="row">
+      <div class="heading_10">${email}</div>
+    </div>
+    
+    <div class="row">
+      <div class="heading_10">CURRENT APPOINTMENTS AND AFFILIATIONS</div>
+      <div class="regular_10">
+      <% _.forEach(primaryPositions, function(item) { %>
+       <%= item['label'] %><br>
       <% }); %>
-      </div>          
-    <% } %>
-
-    <h2>Present academic rank and titles:</h2>
-    <div class="row">
-      <div class="slight-indent">${title}</div>
+      <% _.forEach(secondaryPositions, function(item) { %>
+          <%= item['label'] %><br>
+      <% }); %>
+    </div>
     </div>
 
-    <h2>Education</h2>         
     <div class="row">
-    <% _.forEach(educations, function(item) { %>
-       <div class="slight-indent"><%= item['label'] %></div>
-    <% }); %>
-    </div>      
+      <div class="heading_10">EDUCATION, TRAINING AND CERTIFICATIONS</div>
+      <div class="regular_10">
+      <% _.forEach(educations, function(item) { %>
+       <%= item['label'] %><br>
+      <% }); %>
+    </div>
+    </div>
 
-    <h2>Publications</h2>
-
-    <% if (academicArticles.length > 0) { %>
-    <h3>Academic Articles</h3> 
-    <ol>
-    <% _.forEach(academicArticles, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
+    <% if (pastappointments.length > 0) { %>
+     <div class="row">
+      <div class="heading_10">DUKE APPOINTMENT HISTORY</div>
+      <div class="regular_10">
+      <% _.forEach(pastappointments, function(item) { %>
+       <%= item['label'] %><br>
+      <% }); %>
+    </div>
+    </div>
     <% } %>
 
-    <% if (books.length > 0) { %>
-    <h3>Books</h3> 
-    <ol>
-    <% _.forEach(books, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
-    <% } %>
+    <div class="row">
+      <div class="heading_10">PUBLICATIONS</div>
+       <% if (academicArticles.length > 0) { %>
+         <div class="heading_10">Academic Articles</div>
+         <div class="regular_10">
+          <% _.forEach(academicArticles, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
-    <% if (bookReviews.length > 0) { %>
-    <h3>Book Reviews</h3> 
-    <ol>
-    <% _.forEach(bookReviews, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
-    <% } %>
+      <% if (books.length > 0) { %>
+         <div class="heading_10">Books</div>
+         <div class="regular_10">
+          <% _.forEach(books, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
-    <% if (bookSections.length > 0) { %>
-    <h3>Book Sections</h3> 
-    <ol>
-    <% _.forEach(bookSections, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
-    <% } %>
+      <% if (bookReviews.length > 0) { %>
+         <div class="heading_10">Book Reviews</div>
+         <div class="regular_10">
+          <% _.forEach(bookReviews, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
+      <% if (bookSections.length > 0) { %>
+         <div class="heading_10">Book Sections</div>
+         <div class="regular_10">
+          <% _.forEach(bookSections, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
-    <% if (bookSeries.length > 0) { %>
-    <h3>Book Series</h3> 
-    <ol>
-    <% _.forEach(bookSeries, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
-    <% } %>
+      <% if (bookSeries.length > 0) { %>
+         <div class="heading_10">Book Series</div>
+         <div class="regular_10">
+          <% _.forEach(bookSeries, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
+      <% if (conferencePapers.length > 0) { %>
+         <div class="heading_10">Conference Papers</div>
+         <div class="regular_10">
+          <% _.forEach(conferencePapers, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
-    <% if (conferencePapers.length > 0) { %>
-    <h3>Conference Papers</h3> 
-    <ol>
-    <% _.forEach(conferencePapers, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
-    <% } %>
+      <% if (datasets.length > 0) { %>
+         <div class="heading_10">Datasets</div>
+         <div class="regular_10">
+          <% _.forEach(datasets, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
+      <% if (digitalPublications.length > 0) { %>
+         <div class="heading_10">Digital Publications</div>
+         <div class="regular_10">
+          <% _.forEach(digitalPublications, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
-    <% if (datasets.length > 0) { %>
-    <h3>Datasets</h3> 
-    <ol>
-    <% _.forEach(datasets, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
-    <% } %>
+     
+      <% if (journalIssues.length > 0) { %>
+         <div class="heading_10">Journal Issues</div>
+         <div class="regular_10">
+          <% _.forEach(journalIssues, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
+      <% if (reports.length > 0) { %>
+         <div class="heading_10">Reports</div>
+         <div class="regular_10">
+          <% _.forEach(reports, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
-    <% if (digitalPublications.length > 0) { %>
-    <h3>Digital Publications</h3> 
-    <ol>
-    <% _.forEach(digitalPublications, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
-    <% } %>
+      <% if (scholarlyEditions.length > 0) { %>
+         <div class="heading_10">Scholarly Editions</div>
+         <div class="regular_10">
+          <% _.forEach(scholarlyEditions, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
-    <% if (journalIssues.length > 0) { %>
-    <h3>Journal Issues</h3>
-    <ol>
-    <% _.forEach(journalIssues, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
-    <% } %>
+      <% if (theses.length > 0) { %>
+         <div class="heading_10">Theses and Dissertations</div>
+         <div class="regular_10">
+          <% _.forEach(theses, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
+      <% if (otherArticles.length > 0) { %>
+         <div class="heading_10">Other Articles</div>
+         <div class="regular_10">
+          <% _.forEach(otherArticles, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
 
-    <% if (reports.length > 0) { %>
-    <h3>Reports</h3>
-    <ol>
-    <% _.forEach(reports, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
-    <% } %>
+      <% if (software.length > 0) { %>
+         <div class="heading_10">Software</div>
+         <div class="regular_10">
+          <% _.forEach(software, function(item) { %>
+            <%= item['citation'] %><br>
+          <% }); %>
+         </div>
+      <% } %>
+     </div> 
+    </div> 
 
-
-    <% if (scholarlyEditions.length > 0) { %>
-    <h3>Scholarly Editions</h3>
-    <ol>
-    <% _.forEach(scholarlyEditions, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
-    <% } %>
-
- 
-    <% if (theses.length > 0) { %>
-    <h3>Theses and Dissertations</h3>
-    <ol>
-    <% _.forEach(theses, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
-    <% } %>
-
-        
-
-    <% if (otherArticles.length > 0) { %>
-    <h3>Other Articles</h3>
-    <ol>
-    <% _.forEach(otherArticles, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
-    <% }); %>
-    </ol>
-    <% } %>
-
-
-    <% if (software.length > 0) { %>
-    <h3>Software</h3>
-    <ol>
-    <% _.forEach(software, function(item) { %>
-      <li>
-          <%= item['citation'] %>
-      </li>
- 
-    <% }); %>
-    </ol>
-    <% } %>
-
-
-    <% if (teaching.length > 0) { %>
-    <h2>Teaching Responsibilities</h2>
-    <ol>
-    <% _.forEach(teaching, function(item) { %>
-      <div class="row">
-          <%= item['label'] %>
-      </div>
-    <% }); %>
-    </ol>
+    <% if (awards.length > 0) { %>
+    <div class="heading_10">PROFESSIONAL AWARDS AND SPECIAL RECOGNITION</div>
+    <div class="regular_10">
+      <% _.forEach(awards, function(item) { %>
+      <%= item['label'] %><br>
+      <% }); %>
+    </div>
     <% } %>
 
     <% if (grants.length > 0) { %>
-    <h2>Grants</h2>
-    <ul>
+    <div class="heading_10">GRANTS, FELLOWSHIPS AND SUPPORTED RESEARCH</div>
+    <div class="regular_10">
       <% _.forEach(grants, function(item) { %>
-      <li>
           <%= item['label'] %>
           <%= item['awardedBy'] %>
           <%= item['startDate'] %>
           <%= item['endDate'] %>
-          (<%= item['role'] %>)
-
-      </li>
+          (<%= item['role'] %>)<br>
     <% }); %>
-    </ul>
-    <% } %>
-
-    <% if (researchInterests) { %>
-    <h2>Research Interests</h2>
-     <div class="row">
-        ${research_interests}
-     </div>
-    <% } %>
-
-
-    <% if (awards.length > 0) { %>
-    <h2>Awards and Honors</h2> 
-    <% _.forEach(awards, function(item) { %>
-    <div class="row">
-      <%= item['label'] %>
     </div>
-    <% }); %>
     <% } %>
 
+    <% if (teaching.length > 0) { %>
+    <div class="heading_10">COURSES TAUGHT</div>
+    <div class="regular_10">
+    <% _.forEach(teaching, function(item) { %>
+          <%= item['label'] %><br>
+    <% }); %>
+    </div>
+    <% } %>
 
     <% if (presentations.length > 0) { %>
-    <h2>Presentations and Appearances</h2>
+    <div class="heading_10">PRESENTATIONS AND APPEARANCES</div>
+    <div class="regular_10">
     <% _.forEach(presentations, function(item) { %>
-    <div class="row">
-          <%= item['label'] %>
+          <%= item['label'] %><br>
+    <% }); %>
     </div>
-    <% }); %>
     <% } %>
 
-     
-    <% if (servicesToProfession.length > 0) { %>
-    <h2>Services to the Profession</h2>
-    <% _.forEach(servicesToProfession, function(item) { %>
-     <div class="row">
-         <%= item['label'] %>
-     </div> 
-    <% }); %>
-    <% } %>
-
-
-    <% if (servicesToDuke.length > 0) { %>
-    <h2>Services to Duke</h2> 
-    <% _.forEach(servicesToDuke, function(item) { %>
-    <div class="row">
-      <%= item['label'] %>
-    </div>
-    <% }); %>
-    <% } %>
-
-
-    <% if (outreach.length > 0) { %>
-    <h2>Outreach and Engaged Scholarship</h2> 
-    <% _.forEach(outreach, function(item) { %>
-      <div class="row">
-        <%= item['label'] %>
-      </div>
-    <% }); %>
-    <% } %>
-
-    <% if (licences.length > 0) { %>
-    <h2>Medical Licences</h2> 
-    <% _.forEach(licences, function(item) { %>
-    <div class="row">
-      <%= item['label'] %>
-    </div>
-    <% }); %>
-    <% } %>
-
-     <% if (clinical_activities) { %>
-    <h2>Clinical Activities</h2>
-     <div class="row">
-        ${clinical_activities}
-     </div>
-    <% } %>
-
-    <% if (pastappointments.length > 0) { %>
-    <h2>Appointments History</h2> 
-    <% _.forEach(pastappointments, function(item) { %>
-    <div class="row">
-      <%= item['label'] %>
-    </div>
-    <% }); %>
-    <% } %>
-
-
-</div>
-  </body>
+ </div>
+</body>
 </html>
 

@@ -78,6 +78,40 @@ class WidgetsParser {
     return {'name': fullName }
   };
 
+  parsePhone(data) {
+    var phone = data['attributes']['phoneNumber'];
+    return {'phoneNumber': phone }
+  }
+
+  parseEmail(data) {
+    var email = data['attributes']['primaryEmail'];
+    return {'email': email }
+  }
+
+  parseLocations(data) {
+    let addresses = data['addresses'] || [];
+    var locations = [];
+    _.forEach(addresses, function(value) {
+      if(value['vivoType'] == 'http://www.w3.org/2006/vcard/ns#Location')
+      {
+          locations.push({'address':value['label']});
+      }
+    });
+    return {'locations':locations}
+  }
+
+  parseAddresses(data) {
+    let addresses = data['addresses'] || [];
+    var adds = [];
+    _.forEach(addresses, function(value) {
+      if(value['vivoType'] == 'http://www.w3.org/2006/vcard/ns#Address')
+      {
+          adds.push({'address':value['label']});
+      }
+    });
+    return {'adds':adds}
+  }
+
   parseTitle(data) {
     var title = data['title'];
     return {'title': title }
@@ -346,7 +380,11 @@ class WidgetsParser {
     var results = {}
 
     _.merge(results, this.parseName(data))
+    _.merge(results, this.parsePhone(data))
+    _.merge(results, this.parseEmail(data))
     _.merge(results, this.parseTitle(data))
+    _.merge(results, this.parseLocations(data))
+    _.merge(results, this.parseAddresses(data))
     _.merge(results, this.parsePositions(data))
     _.merge(results, this.parseEducations(data))
     _.merge(results, this.parseResearchInterests(data))
