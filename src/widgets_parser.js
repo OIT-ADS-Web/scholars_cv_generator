@@ -351,7 +351,7 @@ class WidgetsParser {
     return {'licences': licenceList}
   };
 
-   parseClinicalActivities(data) {
+  parseClinicalActivities(data) {
     let activities = data['attributes']['clinicalOverview'] || null;
     var clinical_activities = null
 
@@ -376,6 +376,40 @@ class WidgetsParser {
     return {'pastappointments': passAppointmentsList}
   };
 
+  parseteachingActivities(data) {
+    let activities = data['attributes']['teachingActivities'] || null;
+    var teaching_activities = null
+
+    if (activities != null) {
+      var teaching_activities = activities.replace(stripHtml, "");
+      teaching_activities = teaching_activities.replace(/(&nbsp;)*/g,"");
+    }
+    return {'teaching_activities': teaching_activities}
+  };
+
+  parsementorshipOverview(data) {
+    let overview = data['attributes']['mentorshipOverview'] || null;
+    var mentorship_activities = null
+
+    if (overview != null) {
+      var mentorship_activities = overview.replace(stripHtml, "");
+      mentorship_activities =  mentorship_activities.replace(/(&nbsp;)*/g,"");
+    }
+    return {'mentorship_activities': mentorship_activities}
+  };
+
+  parseacademicActivities(data) {
+    let activities = data['attributes']['academicActivities'] || null;
+    var academic_activities = null
+
+    if (activities != null) {
+      var academic_activities = activities.replace(stripHtml, "");
+      academic_activities =  academic_activities.replace(/(&nbsp;)*/g,"");
+    }
+    return {'academic_activities': academic_activities}
+  };
+
+
   convert(data) {
     var results = {}
 
@@ -396,6 +430,9 @@ class WidgetsParser {
     _.merge(results, this.parseMedicalLicences(data))
     _.merge(results, this.parseClinicalActivities(data))
     _.merge(results, this.parsepastAppointments(data))
+    _.merge(results, this.parseteachingActivities(data))
+    _.merge(results, this.parsementorshipOverview(data))
+    _.merge(results, this.parseacademicActivities(data))
 
     return results
   }

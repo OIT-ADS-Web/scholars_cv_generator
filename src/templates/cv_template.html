@@ -255,6 +255,13 @@
     </div>
     <% } %>
 
+    <% if (teaching_activities) { %>
+    <div class="heading_10">TEACHING ACTIVITIES</div>
+    <div class="regular_10">
+      ${teaching_activities}
+    </div>
+    <% } %>
+
     <% if (teaching.length > 0) { %>
     <div class="heading_10">COURSES TAUGHT</div>
     <div class="regular_10">
@@ -264,12 +271,26 @@
     </div>
     <% } %>
 
+    <% if (mentorship_activities) { %>
+    <div class="heading_10">MENTORING ACTIVITIES</div>
+    <div class="regular_10">
+      ${mentorship_activities}
+    </div>
+    <% } %>
+
     <% if (presentations.length > 0) { %>
     <div class="heading_10">PRESENTATIONS AND APPEARANCES</div>
     <div class="regular_10">
     <% _.forEach(presentations, function(item) { %>
           <%= item['label'] %><br>
     <% }); %>
+    </div>
+    <% } %>
+
+    <% if (academic_activities) { %>
+    <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES</div>
+    <div class="regular_10">
+      ${academic_activities}
     </div>
     <% } %>
 
