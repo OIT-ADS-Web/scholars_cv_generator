@@ -78,6 +78,40 @@ class WidgetsParser {
     return {'name': fullName }
   };
 
+  parsePhone(data) {
+    var phone = data['attributes']['phoneNumber'];
+    return {'phoneNumber': phone }
+  }
+
+  parseEmail(data) {
+    var email = data['attributes']['primaryEmail'];
+    return {'email': email }
+  }
+
+  parseLocations(data) {
+    let addresses = data['addresses'] || [];
+    var locations = [];
+    _.forEach(addresses, function(value) {
+      if(value['vivoType'] == 'http://www.w3.org/2006/vcard/ns#Location')
+      {
+          locations.push({'address':value['label']});
+      }
+    });
+    return {'locations':locations}
+  }
+
+  parseAddresses(data) {
+    let addresses = data['addresses'] || [];
+    var adds = [];
+    _.forEach(addresses, function(value) {
+      if(value['vivoType'] == 'http://www.w3.org/2006/vcard/ns#Address')
+      {
+          adds.push({'address':value['label']});
+      }
+    });
+    return {'adds':adds}
+  }
+
   parseTitle(data) {
     var title = data['title'];
     return {'title': title }
@@ -317,7 +351,7 @@ class WidgetsParser {
     return {'licences': licenceList}
   };
 
-   parseClinicalActivities(data) {
+  parseClinicalActivities(data) {
     let activities = data['attributes']['clinicalOverview'] || null;
     var clinical_activities = null
 
@@ -342,11 +376,49 @@ class WidgetsParser {
     return {'pastappointments': passAppointmentsList}
   };
 
+  parseteachingActivities(data) {
+    let activities = data['attributes']['teachingActivities'] || null;
+    var teaching_activities = null
+
+    if (activities != null) {
+      var teaching_activities = activities.replace(stripHtml, "");
+      teaching_activities = teaching_activities.replace(/(&nbsp;)*/g,"");
+    }
+    return {'teaching_activities': teaching_activities}
+  };
+
+  parsementorshipOverview(data) {
+    let overview = data['attributes']['mentorshipOverview'] || null;
+    var mentorship_activities = null
+
+    if (overview != null) {
+      var mentorship_activities = overview.replace(stripHtml, "");
+      mentorship_activities =  mentorship_activities.replace(/(&nbsp;)*/g,"");
+    }
+    return {'mentorship_activities': mentorship_activities}
+  };
+
+  parseacademicActivities(data) {
+    let activities = data['attributes']['academicActivities'] || null;
+    var academic_activities = null
+
+    if (activities != null) {
+      var academic_activities = activities.replace(stripHtml, "");
+      academic_activities =  academic_activities.replace(/(&nbsp;)*/g,"");
+    }
+    return {'academic_activities': academic_activities}
+  };
+
+
   convert(data) {
     var results = {}
 
     _.merge(results, this.parseName(data))
+    _.merge(results, this.parsePhone(data))
+    _.merge(results, this.parseEmail(data))
     _.merge(results, this.parseTitle(data))
+    _.merge(results, this.parseLocations(data))
+    _.merge(results, this.parseAddresses(data))
     _.merge(results, this.parsePositions(data))
     _.merge(results, this.parseEducations(data))
     _.merge(results, this.parseResearchInterests(data))
@@ -358,6 +430,9 @@ class WidgetsParser {
     _.merge(results, this.parseMedicalLicences(data))
     _.merge(results, this.parseClinicalActivities(data))
     _.merge(results, this.parsepastAppointments(data))
+    _.merge(results, this.parseteachingActivities(data))
+    _.merge(results, this.parsementorshipOverview(data))
+    _.merge(results, this.parseacademicActivities(data))
 
     return results
   }
