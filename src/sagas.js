@@ -34,6 +34,7 @@ export function fetchWidgetsData(uri) {
 
 import blankTemplate from './templates/BlankTemplate.docx'
 import htmlTemplate from './templates/cv_template.html'
+import htmlMedicineTemplate from './templates/cv_medicine_template.html'
 
 import FileSaver from 'file-saver'
 
@@ -50,6 +51,17 @@ export function generateTemplate(results) {
 
   var data = widgetsParser.convert(results)
   let compiled = _.template(htmlTemplate,'imports': {'_': _})
+  let template = compiled(data)
+ 
+  return template
+
+}
+
+export function generateMedicineTemplate(results) {
+  let widgetsParser = new widgets.WidgetsParser()
+
+  var data = widgetsParser.convert(results)
+  let compiled = _.template(htmlMedicineTemplate,'imports': {'_': _})
   let template = compiled(data)
  
   return template
@@ -140,6 +152,7 @@ export function generateCV(results, uri) {
 export function* fetchCV(action) {
   console.log("sagas.fetchCV")
   const { uri } = action
+  const { template } = action
  
   try {
     const results = yield call(fetchWidgetsData, uri)
@@ -147,12 +160,22 @@ export function* fetchCV(action) {
     yield put(receiveCV(results))
 
     //yield call(generateCV, results, uri)
-
-    const html = yield call(generateTemplate, results)
-    yield put(setHtml(html))
-
-    yield call(generateCVfromHtml, html, uri)
-
+    if(template == "basic"){
+      const html = yield call(generateTemplate, results)
+      yield put(setHtml(html))
+      yield call(generateCVfromHtml, html, uri)
+    }
+    else if(template == "medicine") {
+      const html = yield call(generateMedicineTemplate, results)
+      yield put(setHtml(html))
+      yield call(generateCVfromHtml, html, uri)
+    }
+    else{
+      const html = yield call(generateTemplate, results)
+      yield put(setHtml(html))
+      yield call(generateCVfromHtml, html, uri)
+    }
+    
     // FIXME: how to get html
     // yield put(setHtml(html))
 
