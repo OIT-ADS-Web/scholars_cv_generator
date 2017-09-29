@@ -2,103 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= htmlWebpackPlugin.options.title %></title>
 
    </head>
 
    <body> 
-    <header class="navbar clearfix">
-
-      <div id="header-navbar-inner">
-
-        <div class="container">
-          <a href="/">
-              <div class="navbar-header">
-                <span id="logo-image" class="navbar-brand" />
-              </div>
-          </a>
-
-          <nav id="header-pills" class="navbar-right">  
-            <ul class="nav nav-pills navbar-nav">  
-              <li class="hidden-xs"><a href="http://about.scholars.duke.edu/support-duke-faculty-delegates">Support</a></li> | 
-              <li class="hidden-xs"><a href="/browse">Index</a></li>  
-            </ul>  
-          </nav> 
-         </div>
-
-       </div>
-
-    </header>
-
-     <div id="tabs-navbar-inner" class="container clearfix">
-      <nav class="navbar navbar-default">
-
-          <!-- mobile only menu -->
-          <div id="mobile-header-nav">
-            <a href="/people">People</a> |
-            <a href="/organizations">Schools / Institutes</a> |
-            <a href="/research">Research</a> 
-          </div>
-        
-          <div id="nonmobile-header-nav">
-            <ul class="nav navbar-nav">
-              <li><a href="/">Home</a></li> 
-              <li><a href="/people">People</a></li>
-              <li><a href="/organizations">Schools / Institutes</a></li>
-              <li><a href="/research">Research</a></li>
-              <li><a href="http://about.scholars.duke.edu">About</a></li>
-              <li><a href="/scholars_search">Search</a></li>
-              <li><a class="selected" href=".">CV Generator</a></li>
-              </ul>
-          </div>
-
-      </nav>
-    </div>
-
     <div id="content"></div>
 
-      
     <script type="text/javascript">
     ScholarsCV(document.getElementById('content'))
     </script>
-
-
-    <div class="container">
-      <footer role="contentinfo">
-        <span id="footer-logo" align="left" class="navbar-brand"></span>
-        <div id="footcontent">
-          <nav role="navigation">
-            <ul role="list" id="footer-nav">
-              <li role="listitem"><a href="http://about.scholars.duke.edu/">About</a></li>
-              <li role="listitem"><a href="http://about.scholars.duke.edu/support-duke-faculty-delegates">Support</a></li>
-              <li role="listitem"><a href="http://scholars.duke.edu/browse">Index</a></li>
-              <li role="listitem"><a href="/vivo_admin/home">Manage Scholars Data</a></li>
-             </ul>
-          </nav>
-        </div>
-
-        <p class="copyright">
-          <small>©2016 Duke University | <a href="http://scholars.duke.edu/termsOfUse" class="terms">Terms of Use</a></small> | Powered by <a target="_blank" href="http://vivoweb.org" class="powered-by-vivo"><strong>VIVO</strong></a>
-        </p>
-      </footer>
-    </div>
-
-
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-38539532-1']);
-      _gaq.push(['_setDomainName', 'duke.edu']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-</script>
 
     </body>
 </html>

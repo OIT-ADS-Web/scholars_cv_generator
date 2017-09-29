@@ -1,12 +1,13 @@
 import * as types from './types'
 
-export function requestCV(uri) {
+export function requestCV(uri,template) {
   console.log("actions.requestCV")
 
   // NOTE: seems redundant to send in uri
   // when it's already in state
   return {
     uri: uri,
+    template: template,
     type: types.REQUEST_CV,
     results: {},
     isFetching: true,
@@ -32,6 +33,13 @@ export function setUri(uri) {
   }
 }
 
+export function setTemplate(template) {
+  return {
+   type: types.SET_TEMPLATE,
+   template: template
+  }
+}
+
 export function setHtml(html) {
   return {
    type: types.SET_HTML,
@@ -43,6 +51,7 @@ export default {
   requestCV,
   receiveCV,
   setUri,
+  setTemplate,
   setHtml
 } 
 

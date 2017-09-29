@@ -5,9 +5,9 @@ import ScholarsCV from './ScholarsCV'
 import 'jquery'
 import 'babel-polyfill'
 
-require ('bootstrap')
+//require ('bootstrap')
 
-require('./styles/main.less');
+//require('./styles/main.less');
 
 module.exports = function(targetNode) {
   unmountComponentAtNode(targetNode)
