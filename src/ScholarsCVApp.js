@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-import { setUri, requestCV } from './actions'
+import { setUri, setTemplate, requestCV } from './actions'
 
 import queryString from 'query-string'
 
@@ -24,19 +24,26 @@ export class ScholarsCVApp extends Component {
     
     if (parsed['uri']) {
       dispatch(setUri(parsed['uri']))
+      console.log("hello")
+      dispatch(setTemplate(parsed['template']))
+       console.log("how are u")
+      dispatch(requestCV(parsed['uri'],parsed['template']))
+       console.log("getting")
     }
     // else?
     // error....
   }
 
   handleSubmitRequest(e) {
+    console.log("In Submit ****** 1")
     e.preventDefault()
+    console.log("In Submit ****** 2")
     const { dispatch, cv } = this.props
  
     console.log("*****handleSubmitRequest*****")
     let uri = cv['uri']
-
-    dispatch(requestCV(uri))
+    let template = cv['template']
+    dispatch(requestCV(uri,template))
   }
    
   
@@ -85,42 +92,11 @@ export class ScholarsCVApp extends Component {
   
 
   render() {
- 
-    const { cv : {html} } = this.props
-    //console.log(html)
-    let htmlContent = (html) => {
-      if (html) {
-        // need to remove <html><body>
-        let html_content = this.tidy(html)
-        console.log(html_content)
-        return <div className="well" dangerouslySetInnerHTML={{__html: html_content}} />
-      } else {
-        return <div></div>
-     }
-   }
-
-    let html_section = htmlContent(html)
-
     return (
 
-        <div className="container">
-          <h1>Scholars CV Generator</h1>
-            <div className="row bottom">
-              <div className="col-md-12">
-              <button className="btn btn-success btn-lg" 
-                onClick={this.handleSubmitRequest}>Generate CV!
-              </button>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <button className="btn btn-success btn-lg" 
-                onClick={this.handleSubmitRequest}>Generate Medicine CV!
-              </button>
-              </div>
-            </div>
-          {html_section}
-        </div>
-
-    )
-  }
+        <div className="container"></div>
+         )
+ }
 
 }
 
