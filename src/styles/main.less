@@ -1,0 +1,214 @@
+/* */
+@import "~bootstrap/less/bootstrap"; 
+
+a {
+  color: #235f9c;
+}
+
+.btn-primary { background-color: #235f9c; }
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: #235f9c; 
+}
+
+
+a {
+  color: #235f9c;
+}
+
+.btn-primary { background-color: #235f9c; }
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: #235f9c; 
+}
+
+#mobile-header-nav {
+    display: none;
+}
+
+/********* > 768px ***********/
+@media only screen and (min-width: 769px) {
+  
+  #logo-image { 
+    background: url("../images/duke-logo.gif") no-repeat scroll 0 0 transparent;  
+    height: 105px;
+    width: 575px; 
+    padding: 27px 10px 10px 0;
+    border: none;
+  }
+
+
+  #tabs-navbar-inner li {
+    background: transparent url("../images/separator-main-nav.jpg") no-repeat scroll right -2px;
+    padding: 0 10px;
+  }
+
+  .navbar li a.selected {
+    background: transparent url("../images/selected-main-nav.jpg") no-repeat scroll 0 -4px;
+    color: #002b44;
+    padding-left: 13px;
+  }
+  
+  #footcontent {
+      float: right;
+      margin: 0;
+      padding: 0;
+      width: 50%;
+  }
+
+  footer p.copyright {
+    float: left;
+    margin: 10px 0 0 15px;
+    width: 40%;
+    clear: both;
+  }
+
+}
+/***************************/
+
+/********* < 768px ***********/
+@media only screen and (max-width: 768px) {
+  
+ #logo-image {
+    background: url(../images/title_mobile.png) no-repeat scroll 0 0 transparent;
+    padding: 0;
+    margin: 0px 0;
+    padding-right: 125px;
+    height: 80px;
+  }
+
+  #mobile-header-nav {
+      float: left;
+      display: block;
+      padding: 8px;
+  }
+
+  #nonmobile-header-nav {
+    display: none;
+  }
+
+  .navbar.navbar-default {
+    min-height: 0px;
+  }
+  
+  #footcontent {
+      margin: 0;
+      padding: 0;
+  }
+
+  footer p.copyright {
+    margin: 10px 0 0 15px;
+    clear: both;
+  }
+
+}
+/**************************/
+
+/****** ALL ***************/
+
+body {
+  background: rgba(0, 0, 0, 0) url("../images/header-background.png") no-repeat scroll center 0;
+}
+
+#footer-logo {
+  background: rgba(0,0,0,0) url("../images/duke-footer-logo.png") no-repeat scroll 0;  
+  width: 275px;
+  height: 45px; 
+  padding: 27px 10px 10px 0;
+} 
+
+.navbar {
+    margin: 0 auto;
+}
+
+#header-navbar-inner {
+    background-color: transparent;
+    background-image: none;
+    border: medium none;
+}
+
+#content {
+  margin-top: 4px;
+}
+
+nav#header-pills a, nav#header-pills p {
+    line-height: 9px;
+    margin: 0;
+    padding: 2px 10px;
+}
+#header-navbar-inner li a, #header-navbar-inner li p {
+    color: #ffffff;
+    font-size: 78%;
+    text-shadow: none;
+}
+
+
+.input-append .btn.btn-success {
+    border: 0 none;
+}
+
+header, hgroup, section, nav, article, aside, footer {
+    display: block;
+}
+
+footer {
+    background-color: #fff;
+    border-top: 1px solid #d5d2d2;
+    clear: both;
+    color: #4e5051;
+    font-size: .85em;
+    height: 88px;
+    margin: 0 auto;
+    padding-top: 1.5em;
+    width: 98%;
+    border-top: 1px solid #D5D2D2;
+} 
+
+ul#footer-nav {
+    list-style: outside none none;
+    margin: 0;
+    width: auto;
+}
+
+ul#footer-nav li {
+    border-right: 1px solid #c9c8c8;
+    display: inline;
+    float: left;
+    margin-top: 17px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+ul#footer-nav li:last-child {
+    border-right: medium none;
+}
+
+.navbar-right {
+  padding-top: 18px
+}
+
+.navbar-right li a {
+  border-radius: 0px;
+}
+
+
+.navbar-right li:first-child a {
+  border-right: 1px solid #cccccc;
+}
+
+.navbar-header {
+  margin-top: 15px;
+  margin-bottom: -15px;
+}
+
+
+input[type="radio"], input[type="checkbox"] {
+  line-height: normal;
+  margin: 0;
+  margin: 1px 0px 1px 0px;
+
+}
+
+.row.bottom {
+   margin-bottom: 25px;
+}
