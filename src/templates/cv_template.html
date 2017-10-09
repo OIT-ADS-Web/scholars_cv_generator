@@ -25,11 +25,24 @@
   </head>
   <body>
   <div class="container">
+    <% var degree = ""; %>
+    <% _.forEach(educations, function(item) { %>
+      <% if (item['label'].indexOf(",") > 0) { %>
+      <% var n = item['label'].indexOf(","); %>
+      <% degree = item['label'].substr(0,n); %>
+      <% } %>
+    <% }); %>
+
+
     <div class="heading_12">
       CURRICULUM VITAE
     </div>
     <div class="heading_12">
+      <% if (degree != undefined && degree != "") { %>
+      ${name}, ${degree}
+      <% } else { %>
       ${name}
+      <% } %>
     </div>
 
     <% var title = ""; %>
@@ -93,14 +106,14 @@
     </div>
     </div>
 
-    <div class="row">
+    <!--<div class="row">
       <div class="heading_10">MEDICAL LICENSURE</div>
       <div class="regular_10">
       <% _.forEach(licences, function(item) { %>
        <p><%= item['label'] %></p>
       <% }); %>
     </div>
-    </div>
+    </div>-->
 
     <% if (pastappointments.length > 0) { %>
      <div class="row">
@@ -265,6 +278,352 @@
     </div>
     </div>
     <% } %>
+
+    <div class="row">
+      <div class="heading_10">ARTISTIC WORKS & NON-PRINT MEDIA</div>
+       <% if (audioRecordings.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Audio Recordings</div>
+         <div class="regular_10">
+          <% _.forEach(audioRecordings, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+         </div>
+      <% } %>
+
+      <% if (ceramics.length > 0) { %>
+         <div class="row">
+         <div class="heading_10">Ceramics</div>
+         <div class="regular_10">
+          <% _.forEach(ceramics, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (choreographys.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Choreographys</div>
+         <div class="regular_10">
+          <% _.forEach(choreographys, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (compositions.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Compositions</div>
+         <div class="regular_10">
+          <% _.forEach(compositions, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (costumeDesigns.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Costume Designs</div>
+         <div class="regular_10">
+          <% _.forEach(costumeDesigns, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (danceProductions.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Dance Productions</div>
+         <div class="regular_10">
+          <% _.forEach(danceProductions, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (decorativeArts.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Decorative Arts</div>
+         <div class="regular_10">
+          <% _.forEach(decorativeArts, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (digitalMedias.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Digital Media</div>
+         <div class="regular_10">
+          <% _.forEach(digitalMedias, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+     
+      <% if (drawings.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Drawings</div>
+         <div class="regular_10">
+          <% _.forEach(drawings, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (exhibits.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Exhibits</div>
+         <div class="regular_10">
+          <% _.forEach(exhibits, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (films.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Films</div>
+         <div class="regular_10">
+          <% _.forEach(films, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (graphicDesigns.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Graphic Designs</div>
+         <div class="regular_10">
+          <% _.forEach(graphicDesigns, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (illustrations.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Illustrations</div>
+         <div class="regular_10">
+          <% _.forEach(illustrations, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (installations.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Installations</div>
+         <div class="regular_10">
+          <% _.forEach(installations, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+       <% if (lightingDesigns.length > 0) { %>
+       <div class="row">
+         <div class="heading_10">Lighting Designs</div>
+         <div class="regular_10">
+          <% _.forEach(lightingDesigns, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+       <% if (motionGraphicss.length > 0) { %>
+       <div class="row">
+         <div class="heading_10">Motion Graphics</div>
+         <div class="regular_10">
+          <% _.forEach(motionGraphicss, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+       <% if (multipleTypess.length > 0) { %>
+       <div class="row">
+         <div class="heading_10">Multiple Types</div>
+         <div class="regular_10">
+          <% _.forEach(multipleTypess, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+       <% if (museumCollections.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Museum Collections</div>
+         <div class="regular_10">
+          <% _.forEach(museumCollections, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (musicalCompositions.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Musical Compositions</div>
+         <div class="regular_10">
+          <% _.forEach(musicalCompositions, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (newMedias.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">New Media</div>
+         <div class="regular_10">
+          <% _.forEach(newMedias, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (paintings.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Paintings</div>
+         <div class="regular_10">
+          <% _.forEach(paintings, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (photographs.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Photographs</div>
+         <div class="regular_10">
+          <% _.forEach(photographs, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (prints.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Prints</div>
+         <div class="regular_10">
+          <% _.forEach(prints, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (radioTelevisionPrograms.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Radio Television Programs</div>
+         <div class="regular_10">
+          <% _.forEach(radioTelevisionPrograms, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (repertoirePortfolios.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Portfolios</div>
+         <div class="regular_10">
+          <% _.forEach(repertoirePortfolios, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (scripts.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Scripts</div>
+         <div class="regular_10">
+          <% _.forEach(scripts, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (sculptures.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Sculptures</div>
+         <div class="regular_10">
+          <% _.forEach(sculptures, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (setDesigns.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Set Designs</div>
+         <div class="regular_10">
+          <% _.forEach(setDesigns, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (soundDesigns.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Sound Designs</div>
+         <div class="regular_10">
+          <% _.forEach(soundDesigns, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (theatricalProductions.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Theatrical Productions</div>
+         <div class="regular_10">
+          <% _.forEach(theatricalProductions, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+      <% if (videoRecordings.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Video Recordings</div>
+         <div class="regular_10">
+          <% _.forEach(videoRecordings, function(item) { %>
+            <p><%= item['artisticWork'] %></p>
+          <% }); %>
+         </div>
+       </div>
+      <% } %>
+
+     </div> 
+    </div> 
 
     <% if (awards.length > 0) { %>
     <div class="row">

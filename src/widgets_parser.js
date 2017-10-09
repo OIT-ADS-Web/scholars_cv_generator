@@ -422,8 +422,6 @@ class WidgetsParser {
       return result;
     }, {});
 
-    console.log("EWERWEWREWRERWERWREWERW");
-    console.log(results);
     return results
 
   };
@@ -517,6 +515,74 @@ class WidgetsParser {
     return {'artisticEvents': artisticEventsList}
   };
 
+  parseArtisticWorks(data) {
+    var artisticWorkTypes = {
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#AudioRecording': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Ceramic': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Composition': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Choreography': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalComposition': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#CostumeDesign': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#DanceProduction': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#DecorativeArt': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#DigitalMedia': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Drawing': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Exhibit': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Film': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#GraphicDesign': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Illustration': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Installation': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#LightingDesign': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MotionGraphics': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MuseumCollection': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalPerformance': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#NewMedia': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Painting': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Photograph': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Print': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#RadioTelevisionProgram': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#RepertoirePortfolio': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Script': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Sculpture': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#SetDesign': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#SoundDesign': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#TheatricalProduction': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#VideoRecording': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MultipleTypes': []
+    };
+
+
+    var artisticWorks = data['artisticWorks'] || [];
+
+    let figureartisticWork = function(value) {
+      var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+      var date = new Date(value.attributes["date"]);
+      var artisticWork = value["label"] + " (" + value.attributes["role"] + "), " + monthNames[date.getMonth()] + " " + date.getFullYear() + ".";//value.attributes["date"].substr(0,4);    
+      var vivoType = value['vivoType'];
+      return artisticWork
+    };
+
+    _.forEach(artisticWorks, function(value) {
+      
+      let artisticWork = figureartisticWork(value)
+      let vivoType = value['vivoType'];
+       
+      artisticWorkTypes[vivoType].push({'artisticWork': artisticWork})
+      
+    });
+
+
+    let results = _.transform(artisticWorkTypes, (result, value, key) => { 
+      let name = this.shortName(key)
+      result[name] = value
+      return result;
+    }, {});
+
+    return results
+
+  };
+
   convert(data) {
     var results = {}
 
@@ -534,14 +600,15 @@ class WidgetsParser {
     _.merge(results, this.parseGrants(data))
     _.merge(results, this.parseAwards(data))
     _.merge(results, this.parseProfessionalActivities(data))
-    _.merge(results, this.parseMedicalLicences(data))
-    _.merge(results, this.parseClinicalActivities(data))
     _.merge(results, this.parsepastAppointments(data))
     _.merge(results, this.parseteachingActivities(data))
     _.merge(results, this.parsementorshipOverview(data))
     _.merge(results, this.parseacademicActivities(data))
     _.merge(results, this.parseOtherPositions(data))
     _.merge(results, this.parseArtisticEvents(data))
+    _.merge(results, this.parseArtisticWorks(data))
+    _.merge(results, this.parseMedicalLicences(data))
+    _.merge(results, this.parseClinicalActivities(data))
 
     return results
   }
