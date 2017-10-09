@@ -151,6 +151,19 @@ class WidgetsParser {
   };
 
 
+  parseOtherPositions(data) {
+    let otherPositions = data['academicPositions'] || [];
+    var other_positions = [];
+    _.forEach(otherPositions, function(value) {
+      if(value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-cv-extension#NonDukePosition')
+      {
+          other_positions.push({'label':value['label']});
+      }
+    });
+    return {'otherPositions':other_positions}
+  };
+
+
   parseEducations(data) {
     var educations = data['educations'] || [];
     var educationList = []
@@ -295,20 +308,97 @@ class WidgetsParser {
 
   parseProfessionalActivities(data) {
     var professionalActivitiesTypes = {
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': [], 
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': [], 
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : [], 
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : []
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': { 'cs': [], 'ea': [], 'pd': [] }, 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': { 'cs': [], 'ea': [], 'pd': [] }, 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : { 'cs': [], 'ea': [], 'pd': [] }, 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : { 'cs': [], 'ea': [], 'pd': [] }
+    };
+    
+    var professionalActivities = data['professionalActivities'];
+
+
+    let figureCS = function(value) {
+
+      var full_label = "";
+      var service = value.attributes['serviceOrEventName'];
+      var serviceType = value.attributes['serviceType'];
+      var startDate = value.attributes['startDate'];
+      var endDate = value.attributes['endDate'];
+      var role = value.attributes['role'];
+      var description = value.attributes['description'];
+      var org = value.attributes['hostOrganization'];
+      let vivoType = value['vivoType'];
+
+      if(serviceType == 'Community Service') {
+        if (typeof org !== 'undefined' && typeof service !== 'undefined') {
+          full_label = org + ", " + service + ", " + description + ", " + startDate + ", "  + endDate; 
+        }
+      }
+
+      return full_label;
     };
 
-    var professionalActivities = data['professionalActivities'];
-    
+    let figureEA = function(value) {
+
+      var full_label = "";
+      var service = value.attributes['serviceOrEventName'];
+      var serviceType = value.attributes['serviceType'];
+      var startDate = value.attributes['startDate'];
+      var endDate = value.attributes['endDate'];
+      var role = value.attributes['role'];
+      var description = value.attributes['description'];
+      var org = value.attributes['hostOrganization'];
+      let vivoType = value['vivoType'];
+
+      if(serviceType == 'Editorial Activities') {
+        if (typeof org !== 'undefined' && typeof service !== 'undefined') {
+          full_label = org + ", " + service + ", " + description + ", " + startDate + ", "  + endDate; 
+        }
+      }
+      
+      return full_label;
+    };
+
+    let figurePD = function(value) {
+
+      var full_label = "";
+      var service = value.attributes['serviceOrEventName'];
+      var serviceType = value.attributes['serviceType'];
+      var startDate = value.attributes['startDate'];
+      var endDate = value.attributes['endDate'];
+      var role = value.attributes['role'];
+      var description = value.attributes['description'];
+      var org = value.attributes['hostOrganization'];
+      let vivoType = value['vivoType'];
+
+      if(serviceType == 'Professional Development') {
+        if (typeof role !== 'undefined' && typeof service !== 'undefined') {
+          full_label = role + ", " + service + ", " + description + ", " + startDate + ", "  + endDate; 
+        }
+      }
+      
+      return full_label;
+    };
+
     _.forEach(professionalActivities, function(value) {
-      let label = value['label']
-      let vivoType = value['vivoType']
-      professionalActivitiesTypes[vivoType].push({'label': label})
+      
+      let community_service = figureCS(value)
+      let professional_development = figurePD(value)
+      let editorial_activities = figureEA(value)
+      let vivoType = value['vivoType'];
+
+      if(community_service != ""){
+        professionalActivitiesTypes[vivoType]['cs'].push(community_service);
+      }
+      if(editorial_activities != ""){
+      professionalActivitiesTypes[vivoType]['ea'].push(editorial_activities);
+      }
+      if(professional_development != ""){
+      professionalActivitiesTypes[vivoType]['pd'].push(professional_development);
+      }
+      
     });
- 
+
     let pluralize = function(word) {
       switch(word) {
         case "serviceToTheProfession": {
@@ -323,10 +413,10 @@ class WidgetsParser {
         default:
           return `${word}s`
       }
-      
     }
 
-    let results = _.transform(professionalActivitiesTypes, (result, value, key) => {
+
+    let results = _.transform(professionalActivitiesTypes, (result, value, key) => { 
       let name = this.shortName(key)
       result[name] = value
       return result;
@@ -344,8 +434,12 @@ class WidgetsParser {
     var licenceList = [];
     _.forEach(licences, function(value) {
       var label = value['label'];
+      var lic_date = label.substr(label.length - 4);
       //var date = value['attributes']['date'].substr(0,4);
       //var label = (label + " " + date);   
+      var number = value['attributes']['number'];
+      var state = value['attributes']['state'];
+      label = state + ", " + number + ", " + lic_date;
       licenceList.push({'label':label});
     });
     return {'licences': licenceList}
@@ -409,6 +503,85 @@ class WidgetsParser {
     return {'academic_activities': academic_activities}
   };
 
+  parseArtisticEvents(data) {
+    let artisticEvents = data['artisticEvents'];
+    var artisticEventsList = [];
+    _.forEach(artisticEvents, function(value) {
+      var description = value['attributes']['description'];
+      var venue = value['attributes']['venue'];
+      var label = (description + ", " + venue);   
+      artisticEventsList.push({'label':label});
+    });
+    return {'artisticEvents': artisticEventsList}
+  };
+
+  parseArtisticWorks(data) {
+    var artisticWorkTypes = {
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#AudioRecording': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Ceramic': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Composition': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Choreography': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalComposition': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#CostumeDesign': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#DanceProduction': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#DecorativeArt': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#DigitalMedia': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Drawing': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Exhibit': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Film': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#GraphicDesign': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Illustration': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Installation': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#LightingDesign': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MotionGraphics': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MuseumCollection': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalPerformance': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#NewMedia': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Painting': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Photograph': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Print': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#RadioTelevisionProgram': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#RepertoirePortfolio': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Script': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Sculpture': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#SetDesign': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#SoundDesign': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#TheatricalProduction': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#VideoRecording': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MultipleTypes': []
+    };
+
+
+    var artisticWorks = data['artisticWorks'] || [];
+
+    let figureartisticWork = function(value) {
+      var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+      var date = new Date(value.attributes["date"]);
+      var artisticWork = value["label"] + " (" + value.attributes["role"] + "), " + monthNames[date.getMonth()] + " " + date.getFullYear() + ".";//value.attributes["date"].substr(0,4);    
+      var vivoType = value['vivoType'];
+      return artisticWork
+    };
+
+    _.forEach(artisticWorks, function(value) {
+      
+      let artisticWork = figureartisticWork(value)
+      let vivoType = value['vivoType'];
+       
+      artisticWorkTypes[vivoType].push({'artisticWork': artisticWork})
+      
+    });
+
+
+    let results = _.transform(artisticWorkTypes, (result, value, key) => { 
+      let name = this.shortName(key)
+      result[name] = value
+      return result;
+    }, {});
+
+    return results
+
+  };
 
   convert(data) {
     var results = {}
@@ -427,12 +600,15 @@ class WidgetsParser {
     _.merge(results, this.parseGrants(data))
     _.merge(results, this.parseAwards(data))
     _.merge(results, this.parseProfessionalActivities(data))
-    _.merge(results, this.parseMedicalLicences(data))
-    _.merge(results, this.parseClinicalActivities(data))
     _.merge(results, this.parsepastAppointments(data))
     _.merge(results, this.parseteachingActivities(data))
     _.merge(results, this.parsementorshipOverview(data))
     _.merge(results, this.parseacademicActivities(data))
+    _.merge(results, this.parseOtherPositions(data))
+    _.merge(results, this.parseArtisticEvents(data))
+    _.merge(results, this.parseArtisticWorks(data))
+    _.merge(results, this.parseMedicalLicences(data))
+    _.merge(results, this.parseClinicalActivities(data))
 
     return results
   }
