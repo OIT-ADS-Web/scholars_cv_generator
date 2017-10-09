@@ -79,12 +79,21 @@
     <% }); %>
     <% } %>
 
-    <p>${phoneNumber}</p>
+    
+    <% if (phoneNumber) { %>
+    <div class="row">
+      ${phoneNumber}
+    </div>
+    <% } %>
     </div>
 
-   
+    <% if (email) { %>
+    <div class="row">
     <div class="heading_10">${email}</div>
-    
+    </div>
+    <% } %>
+
+    <% if (primaryPositions.length > 0) { %>
     <div class="row">
       <div class="heading_10">CURRENT APPOINTMENTS AND AFFILIATIONS</div>
       <div class="regular_10">
@@ -96,7 +105,9 @@
       <% }); %>
     </div>
     </div>
+    <% } %>
 
+    <% if (educations.length > 0) { %>
     <div class="row">
       <div class="heading_10">EDUCATION, TRAINING AND CERTIFICATIONS</div>
       <div class="regular_10">
@@ -105,15 +116,18 @@
       <% }); %>
     </div>
     </div>
+    <% } %>
 
-    <!--<div class="row">
+    <% if (licences.length > 0) { %>
+    <div class="row">
       <div class="heading_10">MEDICAL LICENSURE</div>
       <div class="regular_10">
       <% _.forEach(licences, function(item) { %>
        <p><%= item['label'] %></p>
       <% }); %>
     </div>
-    </div>-->
+    </div>
+    <% } %>
 
     <% if (pastappointments.length > 0) { %>
      <div class="row">
@@ -140,130 +154,158 @@
     <div class="row">
       <div class="heading_10">PUBLICATIONS</div>
        <% if (academicArticles.length > 0) { %>
+        <div class="row">
          <div class="heading_10">Academic Articles</div>
          <div class="regular_10">
           <% _.forEach(academicArticles, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+        </div>
       <% } %>
 
       <% if (books.length > 0) { %>
+        <div class="row">
          <div class="heading_10">Books</div>
          <div class="regular_10">
           <% _.forEach(books, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+        </div>
       <% } %>
 
       <% if (bookReviews.length > 0) { %>
+        <div class="row">
          <div class="heading_10">Book Reviews</div>
          <div class="regular_10">
           <% _.forEach(bookReviews, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+       </div>
       <% } %>
 
       <% if (bookSections.length > 0) { %>
+        <div class="row">
          <div class="heading_10">Book Sections</div>
          <div class="regular_10">
           <% _.forEach(bookSections, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+       </div>
       <% } %>
 
       <% if (bookSeries.length > 0) { %>
+        <div class="row">
          <div class="heading_10">Book Series</div>
          <div class="regular_10">
           <% _.forEach(bookSeries, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+       </div>
       <% } %>
 
       <% if (conferencePapers.length > 0) { %>
+        <div class="row">
          <div class="heading_10">Conference Papers</div>
          <div class="regular_10">
           <% _.forEach(conferencePapers, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+       </div>
       <% } %>
 
       <% if (datasets.length > 0) { %>
+        <div class="row">
          <div class="heading_10">Datasets</div>
          <div class="regular_10">
           <% _.forEach(datasets, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+       </div>
       <% } %>
 
       <% if (digitalPublications.length > 0) { %>
+        <div class="row">
          <div class="heading_10">Digital Publications</div>
          <div class="regular_10">
           <% _.forEach(digitalPublications, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+       </div>
       <% } %>
 
      
       <% if (journalIssues.length > 0) { %>
+        <div class="row">
          <div class="heading_10">Journal Issues</div>
          <div class="regular_10">
           <% _.forEach(journalIssues, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+       </div>
       <% } %>
 
       <% if (reports.length > 0) { %>
+       <div class="row">
          <div class="heading_10">Reports</div>
          <div class="regular_10">
           <% _.forEach(reports, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+       </div>
       <% } %>
 
       <% if (scholarlyEditions.length > 0) { %>
+       <div class="row">
          <div class="heading_10">Scholarly Editions</div>
          <div class="regular_10">
           <% _.forEach(scholarlyEditions, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+       </div>
       <% } %>
 
       <% if (theses.length > 0) { %>
+       <div class="row">
          <div class="heading_10">Theses and Dissertations</div>
          <div class="regular_10">
           <% _.forEach(theses, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+       </div>
       <% } %>
 
       <% if (otherArticles.length > 0) { %>
+       <div class="row">
          <div class="heading_10">Other Articles</div>
          <div class="regular_10">
           <% _.forEach(otherArticles, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+       </div>
       <% } %>
 
       <% if (software.length > 0) { %>
+       <div class="row">
          <div class="heading_10">Software</div>
          <div class="regular_10">
           <% _.forEach(software, function(item) { %>
             <p><%= item['citation'] %></p>
           <% }); %>
          </div>
+       </div>
       <% } %>
      </div> 
     </div> 
@@ -279,6 +321,9 @@
     </div>
     <% } %>
 
+     <% if ((audioRecordings.length > 0) || (ceramics.length > 0) || (choreographys.length > 0) || (compositions.length > 0) || (costumeDesigns.length > 0) || (danceProductions.length > 0) || (decorativeArts.length > 0) || (digitalMedias.length > 0) || 
+     (drawings.length > 0) || (exhibits.length > 0) || (films.length > 0) || (graphicDesigns.length > 0) || (illustrations.length > 0) || (installations.length > 0) || (lightingDesigns.length > 0) || (motionGraphicss.length > 0) || (multipleTypess.length > 0) || (museumCollections.length > 0) || (musicalCompositions.length > 0) || (newMedias.length > 0) || (paintings.length > 0) || (photographs.length > 0) || (prints.length > 0) || (radioTelevisionPrograms.length > 0) || (repertoirePortfolios.length > 0) || 
+     (scripts.length > 0) || (sculptures.length > 0) || (setDesigns.length > 0) || (soundDesigns.length > 0) || (theatricalProductions.length > 0) || (videoRecordings.length > 0)) { %>
     <div class="row">
       <div class="heading_10">ARTISTIC WORKS & NON-PRINT MEDIA</div>
        <% if (audioRecordings.length > 0) { %>
@@ -459,7 +504,7 @@
 
        <% if (multipleTypess.length > 0) { %>
        <div class="row">
-         <div class="heading_10">Multiple Types</div>
+         <div class="heading_10">Mixed Media</div>
          <div class="regular_10">
           <% _.forEach(multipleTypess, function(item) { %>
             <p><%= item['artisticWork'] %></p>
@@ -624,6 +669,7 @@
 
      </div> 
     </div> 
+    <% } %>
 
     <% if (awards.length > 0) { %>
     <div class="row">
@@ -636,11 +682,11 @@
     </div>
     <% } %>
 
-    <% if (researchInterests) { %>
+    <% if (currentResearchInterests) { %>
     <div class="row">
     <div class="heading_10">CURRENT RESEARCH INTERESTS</div>
     <div class="regular_10">
-      ${researchInterests}
+      ${currentResearchInterests}
     </div>
     </div>
     <% } %>
@@ -700,22 +746,51 @@
     </div>
     <% } %>
 
-    <% if (servicesToDuke.length > 0) { %>
+    <% if ((servicesToDuke['cs'].length > 0) || (servicesToDuke['ea'].length > 0) || (servicesToDuke['pd'].length > 0)) { %>
     <div class="row">
     <div class="heading_10">SERVICE TO DUKE</div>
+     <% if (servicesToDuke['cs'].length > 0) { %>
+    <div class="heading_10">Community Outreach</div>
     <div class="regular_10">
-    <% _.forEach(servicesToDuke, function(item) { %>
+    <% _.forEach(servicesToDuke['cs'], function(item) { %>
+          
+                    <%= item %>
+              
+              <% }); %>
+               </div>
+         <% } %>      
 
-    <% }); %>
-    </div>
+     <% if (servicesToDuke['ea'].length > 0) { %>
+    <div class="heading_10">Editorial Activities</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToDuke['ea'], function(item) { %>
+         
+                    <%= item %>
+              
+              <% }); %>
+               </div>
+            <% } %>     
+
+     <% if (servicesToDuke['pd'].length > 0) { %>
+    <div class="heading_10">Professional Development</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToDuke['pd'], function(item) { %>
+         
+                    <%= item %>
+              
+              <% }); %>
+               </div>
+               <% } %>
+
     </div>
     <% } %>
 
-    <% if (servicesToProfession) { %>
+
+    <% if ((servicesToProfession['cs'].length > 0) || (servicesToProfession['ea'].length > 0) || (servicesToProfession['pd'].length > 0)) { %>
     <div class="row">
     <div class="heading_10">SERVICE TO PROFESSION</div>
     <% if (servicesToProfession['cs'].length > 0) { %>
-    <div class="heading_10">COMMUNITY SERVICE</div>
+    <div class="heading_10">Community Outreach</div>
     <div class="regular_10">
     <% _.forEach(servicesToProfession['cs'], function(item) { %>
           
@@ -726,7 +801,7 @@
          <% } %>      
 
      <% if (servicesToProfession['ea'].length > 0) { %>
-    <div class="heading_10">EDITORIAL ACTIVITIES</div>
+    <div class="heading_10">Editorial Activities</div>
     <div class="regular_10">
     <% _.forEach(servicesToProfession['ea'], function(item) { %>
          
@@ -737,7 +812,7 @@
             <% } %>     
 
      <% if (servicesToProfession['pd'].length > 0) { %>
-    <div class="heading_10">PROFESSIONAL DEVELOPMENT</div>
+    <div class="heading_10">Professional Development</div>
     <div class="regular_10">
     <% _.forEach(servicesToProfession['pd'], function(item) { %>
          
@@ -750,23 +825,68 @@
     </div>
     <% } %>
 
-
-    <% if (outreach.length > 0) { %>
+    <% if ((outreach['cs'].length > 0) || (outreach['ea'].length > 0) || (outreach['pd'].length > 0)) { %>
     <div class="row">
     <div class="heading_10">OUTREACH & ENGAGED SCHOLARSHIP</div>
+    <% if (outreach['cs'].length > 0) { %>
+    <div class="heading_10">Community Outreach</div>
     <div class="regular_10">
-    <% _.forEach(outreach, function(item) { %>
+    <% _.forEach(outreach['cs'], function(item) { %>
+          
+                    <%= item %>
+              
+              <% }); %>
+               </div>
+         <% } %>      
+
+     <% if (outreach['ea'].length > 0) { %>
+    <div class="heading_10">Editorial Activities</div>
+    <div class="regular_10">
+    <% _.forEach(outreach['ea'], function(item) { %>
          
-    <% }); %>
-    </div>
+                    <%= item %>
+              
+              <% }); %>
+               </div>
+            <% } %>     
+
+     <% if (outreach['pd'].length > 0) { %>
+    <div class="heading_10">Professional Development</div>
+    <div class="regular_10">
+    <% _.forEach(outreach['pd'], function(item) { %>
+         
+                    <%= item %>
+              
+              <% }); %>
+               </div>
+               <% } %>
+                
     </div>
     <% } %>
 
     <% if (academic_activities) { %>
     <div class="row">
-    <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES</div>
+    <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER</div>
     <div class="regular_10">
       ${academic_activities}
+    </div>
+    </div>
+    <% } %>
+
+    <% if (leadership_positions) { %>
+    <div class="row">
+    <div class="heading_10">LEADERSHIP AND CLINICAL POSITIONS AT DUKE</div>
+    <div class="regular_10">
+      ${leadership_positions}
+    </div>
+    </div>
+    <% } %>
+
+    <% if (clinical_activities) { %>
+    <div class="row">
+    <div class="heading_10">CLINICAL ACTIVITIES</div>
+    <div class="regular_10">
+      ${clinical_activities}
     </div>
     </div>
     <% } %>

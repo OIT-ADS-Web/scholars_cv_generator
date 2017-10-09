@@ -191,6 +191,17 @@ class WidgetsParser {
   }
   
   
+  parsecurrentResearchInterests(data) {
+    let overview = data['interestsOverview'] || null;
+    var currentResearchInterests = null
+
+    if (overview != null) {
+      var current_research_interests = overview.replace(stripHtml, "");
+      current_research_interests = current_research_interests.replace(/(&nbsp;)*/g,"");
+    }
+    return {'currentResearchInterests': currentResearchInterests}
+  }
+
   parseResearchInterests(data) {
     let overview = data['attributes']['overview'] || null;
     var researchInterests = null
@@ -456,6 +467,17 @@ class WidgetsParser {
     return {'clinical_activities': clinical_activities}
   };
 
+  parseLeadershipPositions(data) {
+    let positions = data['leadershipPositions'] || null;
+    var leadership_positions = null
+
+    if (positions != null) {
+      var leadership_positions = positions.replace(stripHtml, "");
+      leadership_positions = leadership_positions.replace(/(&nbsp;)*/g,"");
+    }
+    return {'leadership_positions': leadership_positions}
+  };
+
   parsepastAppointments(data) {
     let pastappointments = data['pastAppointments'];
     var passAppointmentsList = [];
@@ -609,6 +631,8 @@ class WidgetsParser {
     _.merge(results, this.parseArtisticWorks(data))
     _.merge(results, this.parseMedicalLicences(data))
     _.merge(results, this.parseClinicalActivities(data))
+    _.merge(results, this.parsecurrentResearchInterests(data))
+    _.merge(results, this.parseLeadershipPositions(data))
 
     return results
   }
