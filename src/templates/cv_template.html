@@ -47,9 +47,9 @@
 
     <% var title = ""; %>
     <% _.forEach(primaryPositions, function(item) { %>
-    <% title += item['label'] + ','; %>
-    <% title = title.slice(0,-1); %>
+    <% title += item['label'] + ', '; %>
     <% }); %>
+    <% title = title.slice(0,-2); %>
 
      <div class="heading_10_center">
       ${title}
