@@ -186,7 +186,7 @@ class WidgetsParser {
       educationList.push({'label': fullLabel, 'endYear': endYear}) 
     });
   
-    let results = {'educations': educationList}
+    let results = {'educations': educationList.reverse()}
     return results
   }
   
