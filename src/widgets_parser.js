@@ -183,10 +183,10 @@ class WidgetsParser {
       else {
         fullLabel = (label + ", " + institution + " " + endYear);
       }
-      educationList.push({'label': fullLabel}) 
+      educationList.push({'label': fullLabel, 'endYear': endYear}) 
     });
   
-    let results = {'educations': educationList.reverse()}
+    let results = {'educations': educationList}
     return results
   }
   
@@ -480,16 +480,18 @@ class WidgetsParser {
 
   parsepastAppointments(data) {
     let pastappointments = data['pastAppointments'];
-    var passAppointmentsList = [];
+    var pastAppointmentsList = [];
     _.forEach(pastappointments, function(value) {
       var label = value['label'];
       var org_label = value['attributes']['organizationLabel'];
       var start_year = value['attributes']['startYear'].substr(0,4);
       var end_year = value['attributes']['endYear'].substr(0,4);
-      var label = (label + ", " + org_label + " " + start_year + " - " + end_year);   
-      passAppointmentsList.push({'label':label});
+      var full_label = (label + ", " + org_label + " " + start_year + " - " + end_year);   
+      pastAppointmentsList.push({'label':full_label, 'orig_label':label, 'org_label':org_label, 'startYear':start_year, 'endYear':end_year});
     });
-    return {'pastappointments': passAppointmentsList}
+
+    pastAppointmentsList.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} );
+    return {'pastappointments': pastAppointmentsList}
   };
 
   parseteachingActivities(data) {
