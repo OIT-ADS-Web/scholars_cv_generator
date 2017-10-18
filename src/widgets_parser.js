@@ -333,19 +333,9 @@ class WidgetsParser {
 
     let figureCS = function(value) {
 
-      var full_label = "", new_start_date = "", new_end_date = "";
-      var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
+      var full_label = "";
       var label = value['label'];                  
       var serviceType = value.attributes['serviceType'];
-      var startDate = value.attributes['startDate'];
-      var d = new Date(startDate);
-      new_start_date = monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
-      var endDate = value.attributes['endDate'];
-      var d = new Date(endDate);
-      new_end_date = monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
-      var role = value.attributes['role'];
-      var org = value.attributes['locationOrVenue'];
       let vivoType = value['vivoType'];
       
       if(serviceType == 'Community Outreach') {
@@ -357,15 +347,9 @@ class WidgetsParser {
 
     let figureEA = function(value) {
 
-      var full_label = "", new_start_date = "";
-      var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
+      var full_label = "";
       var label = value['label'];     
       var serviceType = value.attributes['serviceType'];
-      var startDate = value.attributes['startDate'];
-      var d = new Date(startDate);
-      new_start_date = monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
-      var role = value.attributes['role'];
       let vivoType = value['vivoType'];
 
       if(serviceType == 'Editorial Activities') {
@@ -377,16 +361,9 @@ class WidgetsParser {
 
     let figurePD = function(value) {
 
-      var full_label = "", new_start_date = "";
-      var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
+      var full_label = "";
       var label = value['label'];     
-      var service = value.attributes['serviceOrEventName'];
       var serviceType = value.attributes['serviceType'];
-      var startDate = value.attributes['startDate'];
-      var d = new Date(startDate);
-      new_start_date = monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
-      var role = value.attributes['role'];
       let vivoType = value['vivoType'];
   
       if(serviceType == 'Professional Development') {
@@ -398,14 +375,9 @@ class WidgetsParser {
 
      let figureLec = function(value) {
 
-      var full_label = "", new_start_date = "";
-      var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
+      var full_label = "";
       var label = value['label'];     
       var serviceType = value.attributes['serviceType'];
-      var startDate = value.attributes['startDate'];
-      var d = new Date(startDate);
-      new_start_date = monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
       let vivoType = value['vivoType'];
 
       if(serviceType == 'Lecture') {
@@ -418,14 +390,8 @@ class WidgetsParser {
     let figureOther = function(value) {
 
       var full_label = "", new_start_date = "";
-      var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
       var label = value['label'];     
       var serviceType = value.attributes['serviceType'];
-      var startDate = value.attributes['startDate'];
-      var d = new Date(startDate);
-      new_start_date = monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
-      var role = value.attributes['role'];
       let vivoType = value['vivoType'];
       
       if(serviceType == 'Other') {
