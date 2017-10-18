@@ -161,7 +161,12 @@ class WidgetsParser {
     _.forEach(otherPositions, function(value) {
       if(value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-cv-extension#NonDukePosition')
       {
-          other_positions.push({'label':value['label']});
+          var full_label = "";
+          var label = value['label'];
+          var startYear = value['attributes']['startDate'].substr(0,4);
+          var endYear = value['attributes']['endDate'].substr(0,4);
+          var full_label = label + ". " + startYear + " - " + endYear;   
+          other_positions.push({'label':full_label});
       }
     });
     return {'otherPositions':other_positions}
