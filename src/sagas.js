@@ -7,7 +7,10 @@ import * as types from './types'
 import { receiveCV, setHtml } from './actions'
  
 import moment from 'moment'
+
 import * as widgets from './widgets_parser'
+
+import * as med_widgets from './widgets_som_parser'
 
 function checkStatus(res) {
   console.log("sagas.checkStatus")
@@ -58,7 +61,7 @@ export function generateTemplate(results) {
 }
 
 export function generateMedicineTemplate(results) {
-  let widgetsParser = new widgets.WidgetsParser()
+  let widgetsParser = new med_widgets.WidgetsSOMParser()
 
   var data = widgetsParser.convert(results)
   let compiled = _.template(htmlMedicineTemplate,'imports': {'_': _})

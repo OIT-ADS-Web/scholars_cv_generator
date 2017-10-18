@@ -3,5 +3,126 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>CV: ${name}</title>
-   </head>
+    
+    <style>
+     h1 { font-size: 150%; }
+     h2 { font-size: 135%; }
+     h3 { font-size: 115%; }
+     h4 { font-size: 100%; }
+     /*.heading_12 { line-height:12pt; margin-top: 0pt; margin-bottom: 0pt; font-size: 12pt; font-family: Arial; font-weight: bold; text-align: center; }
+     .heading_10_center { line-height:10pt; margin-top: 0pt; margin-bottom: 0pt; font-size: 10pt; font-family: Arial; font-weight: bold; text-align: center; }
+     .heading_10 { line-height:10pt; margin-top: 0pt; margin-bottom: 0pt; font-size: 10pt; font-family: Arial; font-weight: bold; }
+     .regular_10 { line-height:10pt; margin-top: 0pt; margin-bottom: 0pt; font-size: 10pt; font-family: Arial; }*/
+     p { line-height: 9pt; margin-top: 0pt; margin-bottom: 0pt; }
+     div.heading_12 { font-size: 12pt; font-family: Arial; font-weight: bold; text-align: center; }
+     div.heading_10_center { font-size: 10pt; font-family: Arial; text-align: center; }
+     div.heading_10 { font-size: 10pt; font-family: Arial; }
+     div.regular_10 { font-size: 10pt; font-family: Arial; }
+     div.container { width: 100%; }
+     div.row { margin-bottom: 1em; padding-bottom: 1em;}
+     div.slight-indent { margin-left: 24pt; }
+    </style>
+  </head>
+  <body>
+  <div class="container">
+    <% var degree = ""; %>
+    <% _.forEach(educations, function(item) { %>
+      <% if (item['label'].indexOf(",") > 0) { %>
+      <% var n = item['label'].indexOf(","); %>
+      <% degree += item['label'].substr(0,n) + ", "; %>
+      <% } %>
+    <% }); %>
+    <% degree = degree.slice(0, -2); %>
+
+    <div class="heading_12">
+      DUKE UNIVERSITY MEDICAL CENTER
+      <br/>
+      CURRICULUM VITAE
+      <br/>
+      for 
+      <br/>
+      Permanent Record
+      <br/>
+     and the Appointments and Promotions Committee 
+    </div>
+
+     <% var dt = new Date(); %>
+     <% var today = "" %>
+     <% var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"]; %>
+     <% today = "Prepared: " +  monthNames[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear(); %>
+     
+    <div class="heading_12">
+      <% if (degree != undefined && degree != "") { %>
+      ${name}, ${degree}
+      <% } else { %>
+      ${name}
+      <% } %>
+    </div>
+
+    <div class="heading_10_center">
+        ${today}
+    </div>
+
+    <% if(primaryPositions.length > 0) { %>
+    	<% var title = ""; %>
+    	<% _.forEach(primaryPositions, function(item) { %>
+   	 	<% title += item['label'] + ', '; %>
+    	<% }); %>
+    	<% title = title.slice(0,-2); %>
+
+    	<div class="heading_10">
+      	<b>PRIMARY ACADEMIC APPOINTMENT:</b> ${title}
+    	</div>
+    <% } %>
+
+    <% if(secondaryPositions.length > 0) { %>
+    	<% var title = ""; %>
+    	<% _.forEach(secondaryPositions, function(item) { %>
+    	<% title += item['label'] + ', '; %>
+    	<% }); %>
+    	<% title = title.slice(0,-2); %>
+
+    	<div class="heading_10">
+      	<b>SECONDARY ACADEMIC APPOINTMENT:</b> ${title}
+    	</div>
+    <% } %>
+
+    <% if (pastappointments.length > 0) { %>
+    	<% var title = ""; %>
+    	<% _.forEach(pastappointments, function(item) { %>
+    	<% title = item['startYear'] + ', ' + item['orig_label'] + ', '; %>
+    	<% }); %>
+
+    	<div class="heading_10">
+      	<b>DATE / RANK OF FIRST DUKE FACULTY APPOINTMENT:</b> ${title}
+    	</div>
+    <% } %>
+
+    <% if (licences.length > 0) { %>
+ 		<% var lic = ""; %>
+    	<% _.forEach(licences, function(item) { %>
+    	<% lic = item['label']; %>
+    	<% }); %>
+
+    	<div class="heading_10">
+      	<b>MEDICAL LICENSE NUMBER AND DATE:</b> ${lic}
+    	</div>
+	<% } %>
+
+	<% if (educations.length > 0) { %>
+    <% educations.sort(function(a,b) {return (a.endYear > b.endYear) ? 1 : ((b.endYear > a.endYear) ? -1 : 0);} ); %>
+    <div class="row">
+      <div class="heading_10"><b>EDUCATION</b></div>
+      <div class="regular_10">
+      <% _.forEach(educations, function(item) { %>
+       <p><%= item['label'] %></p>
+      <% }); %>
+    </div>
+    </div>
+    <% } %>
+
+ </div>
+</body>
 </html>
+
