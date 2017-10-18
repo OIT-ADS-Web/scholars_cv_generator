@@ -9,12 +9,7 @@
      h2 { font-size: 135%; }
      h3 { font-size: 115%; }
      h4 { font-size: 100%; }
-     /*.heading_12 { line-height:12pt; margin-top: 0pt; margin-bottom: 0pt; font-size: 12pt; font-family: Arial; font-weight: bold; text-align: center; }
-     .heading_10_center { line-height:10pt; margin-top: 0pt; margin-bottom: 0pt; font-size: 10pt; font-family: Arial; font-weight: bold; text-align: center; }
-     .heading_10 { line-height:10pt; margin-top: 0pt; margin-bottom: 0pt; font-size: 10pt; font-family: Arial; font-weight: bold; }
-     .regular_10 { line-height:10pt; margin-top: 0pt; margin-bottom: 0pt; font-size: 10pt; font-family: Arial; }*/
-     p { line-height: 6pt; margin-top: 0pt; margin-bottom: 0pt; }
-     p.pub { line-height: 6pt; margin-top: 3pt; margin-bottom: 0pt; }
+     p { line-height: 6pt; margin-top: 3pt; margin-bottom: 0pt; }
      div.heading_12 { font-size: 12pt; font-family: Arial; font-weight: bold; text-align: center; line-height:12pt; }
      div.heading_10_center { font-size: 10pt; font-family: "Times New Roman"; text-align: center; line-height: 12pt; }
      div.heading_10 { font-size: 10pt; font-family: Arial; font-weight: bold; line-height:12pt; }
@@ -53,7 +48,7 @@
     <% title = title.slice(0,-1); %>
     <% }); %>
 
-     <div class="heading_10_center">
+     <div class="heading_12">
       ${title}
     </div>
 
@@ -160,7 +155,7 @@
          <div class="heading_10">Academic Articles</div>
          <div class="regular_10">
           <% _.forEach(academicArticles, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
         </div>
@@ -171,7 +166,7 @@
          <div class="heading_10">Books</div>
          <div class="regular_10">
           <% _.forEach(books, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
         </div>
@@ -182,7 +177,7 @@
          <div class="heading_10">Book Reviews</div>
          <div class="regular_10">
           <% _.forEach(bookReviews, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -193,7 +188,7 @@
          <div class="heading_10">Book Sections</div>
          <div class="regular_10">
           <% _.forEach(bookSections, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -204,7 +199,7 @@
          <div class="heading_10">Book Series</div>
          <div class="regular_10">
           <% _.forEach(bookSeries, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -215,7 +210,7 @@
          <div class="heading_10">Conference Papers</div>
          <div class="regular_10">
           <% _.forEach(conferencePapers, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -226,7 +221,7 @@
          <div class="heading_10">Datasets</div>
          <div class="regular_10">
           <% _.forEach(datasets, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -237,7 +232,7 @@
          <div class="heading_10">Digital Publications</div>
          <div class="regular_10">
           <% _.forEach(digitalPublications, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -249,7 +244,7 @@
          <div class="heading_10">Journal Issues</div>
          <div class="regular_10">
           <% _.forEach(journalIssues, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -260,7 +255,7 @@
          <div class="heading_10">Reports</div>
          <div class="regular_10">
           <% _.forEach(reports, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -271,7 +266,7 @@
          <div class="heading_10">Scholarly Editions</div>
          <div class="regular_10">
           <% _.forEach(scholarlyEditions, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -282,7 +277,7 @@
          <div class="heading_10">Theses and Dissertations</div>
          <div class="regular_10">
           <% _.forEach(theses, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -293,7 +288,7 @@
          <div class="heading_10">Other Articles</div>
          <div class="regular_10">
           <% _.forEach(otherArticles, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -304,7 +299,7 @@
          <div class="heading_10">Software</div>
          <div class="regular_10">
           <% _.forEach(software, function(item) { %>
-            <p class="pub"><%= item['citation'] %></p>
+            <p><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -736,33 +731,52 @@
     <% if ((presentations['cs'].length > 0) || (presentations['ea'].length > 0) || (presentations['pd'].length > 0) || (presentations['lec'].length > 0) || (presentations['other'].length > 0)) { %>
     <div class="row">
     <div class="heading_10">PRESENTATIONS AND APPEARANCES</div>
-    <div class="regular_10">
+
     <% if (presentations['cs'].length > 0) { %>
+    <div class="heading_10_sub">Community Outreach</div>
+    <div class="regular_10">
     <% _.forEach(presentations['cs'], function(item) { %>
           <p><%= item %></p>
     <% }); %>
+    </div>
     <% } %>
+
     <% if (presentations['ea'].length > 0) { %>
+    <div class="heading_10_sub">Editorial Activities</div>
+    <div class="regular_10">
     <% _.forEach(presentations['ea'], function(item) { %>
           <p><%= item %></p>
     <% }); %>
+    </div>
     <% } %>
+
     <% if (presentations['pd'].length > 0) { %>
+    <div class="heading_10_sub">Professional Development</div>
+    <div class="regular_10">
     <% _.forEach(presentations['pd'], function(item) { %>
           <p><%= item %></p>
     <% }); %>
+    </div>
     <% } %>
+
     <% if (presentations['lec'].length > 0) { %>
+    <div class="heading_10_sub">Lecture</div>
+    <div class="regular_10">
     <% _.forEach(presentations['lec'], function(item) { %>
           <p><%= item %></p>
     <% }); %>
+    </div>
     <% } %>
+
     <% if (presentations['other'].length > 0) { %>
+    <div class="heading_10_sub">Other</div>
+    <div class="regular_10">
     <% _.forEach(presentations['other'], function(item) { %>
           <p><%= item %></p>
     <% }); %>
-    <% } %>
     </div>
+    <% } %>
+
     </div>
     <% } %>
 
@@ -924,21 +938,21 @@
     <% if (academic_activities) { %>
     <div class="row">
     <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER</div>
-     <p> ${academic_activities} </p>
+     <div class="regular_10"><p>${academic_activities}</p></div>
     </div>
     <% } %>
 
     <% if (leadership_positions) { %>
     <div class="row">
     <div class="heading_10">LEADERSHIP AND CLINICAL POSITIONS AT DUKE</div>
-      <p>${leadership_positions}</p>
+      <div class="regular_10"><p>${leadership_positions}</p></div>
     </div>
     <% } %>
 
     <% if (clinical_activities) { %>
     <div class="row">
     <div class="heading_10">CLINICAL ACTIVITIES</div>
-      <p>${clinical_activities}</p>
+      <div class="regular_10"><p>${clinical_activities}</p></div>
     </div>
     <% } %>
 
