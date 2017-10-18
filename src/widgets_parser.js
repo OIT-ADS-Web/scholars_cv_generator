@@ -140,6 +140,10 @@ class WidgetsParser {
           secondaryPositions.push({'label':label})
           break;
         }
+        default: {
+          secondaryPositions.push({'label':label})
+          break;
+        }
       }
     });
 
@@ -319,31 +323,23 @@ class WidgetsParser {
 
   parseProfessionalActivities(data) {
     var professionalActivitiesTypes = {
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': { 'cs': [], 'ea': [], 'pd': [] }, 
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': { 'cs': [], 'ea': [], 'pd': [] }, 
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : { 'cs': [], 'ea': [], 'pd': [] }, 
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : { 'cs': [], 'ea': [], 'pd': [] }
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': { 'cs': [], 'ea': [], 'pd': [], 'lec': [], 'other':[] }, 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': { 'cs': [], 'ea': [], 'pd': [], 'lec': [], 'other':[] }, 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : { 'cs': [], 'ea': [], 'pd': [], 'lec': [], 'other':[] }, 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : { 'cs': [], 'ea': [], 'pd': [], 'lec':[], 'other':[] }
     };
     
     var professionalActivities = data['professionalActivities'];
 
-
     let figureCS = function(value) {
 
       var full_label = "";
-      var service = value.attributes['serviceOrEventName'];
+      var label = value['label'];                  
       var serviceType = value.attributes['serviceType'];
-      var startDate = value.attributes['startDate'];
-      var endDate = value.attributes['endDate'];
-      var role = value.attributes['role'];
-      var description = value.attributes['description'];
-      var org = value.attributes['hostOrganization'];
       let vivoType = value['vivoType'];
-
-      if(serviceType == 'Community Service') {
-        if (typeof org !== 'undefined' && typeof service !== 'undefined') {
-          full_label = org + ", " + service + ", " + description + ", " + startDate + ", "  + endDate; 
-        }
+      
+      if(serviceType == 'Community Outreach') {
+          full_label = label; 
       }
 
       return full_label;
@@ -352,19 +348,12 @@ class WidgetsParser {
     let figureEA = function(value) {
 
       var full_label = "";
-      var service = value.attributes['serviceOrEventName'];
+      var label = value['label'];     
       var serviceType = value.attributes['serviceType'];
-      var startDate = value.attributes['startDate'];
-      var endDate = value.attributes['endDate'];
-      var role = value.attributes['role'];
-      var description = value.attributes['description'];
-      var org = value.attributes['hostOrganization'];
       let vivoType = value['vivoType'];
 
       if(serviceType == 'Editorial Activities') {
-        if (typeof org !== 'undefined' && typeof service !== 'undefined') {
-          full_label = org + ", " + service + ", " + description + ", " + startDate + ", "  + endDate; 
-        }
+          full_label = label;
       }
       
       return full_label;
@@ -373,31 +362,56 @@ class WidgetsParser {
     let figurePD = function(value) {
 
       var full_label = "";
-      var service = value.attributes['serviceOrEventName'];
+      var label = value['label'];     
       var serviceType = value.attributes['serviceType'];
-      var startDate = value.attributes['startDate'];
-      var endDate = value.attributes['endDate'];
-      var role = value.attributes['role'];
-      var description = value.attributes['description'];
-      var org = value.attributes['hostOrganization'];
+      let vivoType = value['vivoType'];
+  
+      if(serviceType == 'Professional Development') {
+          full_label = label; 
+      }
+      
+      return full_label;
+    };
+
+     let figureLec = function(value) {
+
+      var full_label = "";
+      var label = value['label'];     
+      var serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
 
-      if(serviceType == 'Professional Development') {
-        if (typeof role !== 'undefined' && typeof service !== 'undefined') {
-          full_label = role + ", " + service + ", " + description + ", " + startDate + ", "  + endDate; 
-        }
+      if(serviceType == 'Lecture') {
+          full_label = label; 
+      }
+      
+      return full_label;
+    };
+
+    let figureOther = function(value) {
+
+      var full_label = "", new_start_date = "";
+      var label = value['label'];     
+      var serviceType = value.attributes['serviceType'];
+      let vivoType = value['vivoType'];
+      
+      if(serviceType == 'Other') {
+          full_label = label; 
       }
       
       return full_label;
     };
 
     _.forEach(professionalActivities, function(value) {
-      
+    
       let community_service = figureCS(value)
       let professional_development = figurePD(value)
       let editorial_activities = figureEA(value)
+      let lectures = figureLec(value)
+      let others = figureOther(value)
+
       let vivoType = value['vivoType'];
 
+      
       if(community_service != ""){
         professionalActivitiesTypes[vivoType]['cs'].push(community_service);
       }
@@ -406,6 +420,12 @@ class WidgetsParser {
       }
       if(professional_development != ""){
       professionalActivitiesTypes[vivoType]['pd'].push(professional_development);
+      }
+      if(lectures != ""){
+      professionalActivitiesTypes[vivoType]['lec'].push(lectures);
+      }
+      if(others != ""){
+      professionalActivitiesTypes[vivoType]['other'].push(others);
       }
       
     });
@@ -421,6 +441,9 @@ class WidgetsParser {
         case "outreach": {
           return "outreach"
         }
+        case "presentation": {
+          return "Presentation"
+        }
         default:
           return `${word}s`
       }
@@ -433,6 +456,8 @@ class WidgetsParser {
       return result;
     }, {});
 
+    console.log("EWEWEWRREWREWREWREWREWREWREWREW");
+    console.log(results);
     return results
 
   };
@@ -531,9 +556,8 @@ class WidgetsParser {
     let artisticEvents = data['artisticEvents'];
     var artisticEventsList = [];
     _.forEach(artisticEvents, function(value) {
-      var description = value['attributes']['description'];
+      var label = value['label'];
       var venue = value['attributes']['venue'];
-      var label = (description + ", " + venue);   
       artisticEventsList.push({'label':label});
     });
     return {'artisticEvents': artisticEventsList}
