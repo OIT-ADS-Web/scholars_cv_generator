@@ -30,7 +30,6 @@
       <% } %>
     <% }); %>
 
-
     <div class="heading_12">
       CURRICULUM VITAE
     </div>
@@ -42,15 +41,16 @@
       <% } %>
     </div>
 
-    <% var title = ""; %>
-    <% _.forEach(primaryPositions, function(item) { %>
-    <% title += item['label'] + ','; %>
-    <% title = title.slice(0,-1); %>
-    <% }); %>
-
-     <div class="heading_12">
-      ${title}
-    </div>
+     <% if (title) { %>
+      <div class="heading_12">${title}</div>
+     <% } else { %>
+      <% var title_text = ""; %>
+      <% _.forEach(primaryPositions, function(item) { %>
+        <% title_text += item['label'] + ','; %>
+        <% title_text = title_text.slice(0,-1); %>
+      <% }); %>
+      <div class="heading_12">${title_text}</div>
+     <% } %>
 
      <% var dt = new Date(); %>
      <% var today = "" %>
@@ -706,7 +706,7 @@
     <% if (teaching_activities) { %>
     <div class="row">
     <div class="heading_10">TEACHING ACTIVITIES</div>
-      <p>${teaching_activities}</p>
+       <div class="regular_10"><p>${teaching_activities}</p></div>
     </div>
     <% } %>
 
