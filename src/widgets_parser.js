@@ -461,8 +461,6 @@ class WidgetsParser {
       return result;
     }, {});
 
-    console.log("EWEWEWRREWREWREWREWREWREWREWREW");
-    console.log(results);
     return results
 
   };
