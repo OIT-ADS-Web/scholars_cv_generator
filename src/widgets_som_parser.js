@@ -84,19 +84,16 @@ class WidgetsSOMParser {
   }
 
   parseEmail(data) {
-    console.log("HOWDY1****");
     var email = data['attributes']['primaryEmail'];
     return {'email': email }
   }
 
   parseTitle(data) {
-    console.log("HOWDY2****");
     var title = data['title'];
     return {'title': title }
   }
 
   parsePositions(data) {
-    console.log("HOWDY3****");
     let positions = data['positions'] || [];
     var primaryPositions = []
     var secondaryPositions = []
@@ -134,7 +131,6 @@ class WidgetsSOMParser {
   };
 
   parseEducations(data) {
-    console.log("HOWDY_ED****");
     var educations = data['educations'] || [];
     var educationList = []
     var profexpList = []
@@ -161,7 +157,6 @@ class WidgetsSOMParser {
   }
 
   parseOtherPositions(data) {
-    console.log("HOWDY_other****");
     let otherPositions = data['academicPositions'] || [];
     var other_positions = [];
     _.forEach(otherPositions, function(value) {
@@ -175,13 +170,10 @@ class WidgetsSOMParser {
           other_positions.push({'label':fullLabel, 'startYear': startYear, 'endYear': endYear});
       }
     });
-    console.log("sdDFSFDSDFSDFSDFSDFSDFS");
-    console.log(other_positions);
     return {'otherPositions':other_positions}
   };
 
   parsepastAppointments(data) {
-    console.log("HOWDY5****");
     let pastappointments = data['pastAppointments'];
     var pastAppointmentsList = [];
     _.forEach(pastappointments, function(value) {
@@ -198,16 +190,11 @@ class WidgetsSOMParser {
   };
 
   parseMedicalLicences(data) {
-    console.log("HOWDY6****");
-    //console.log("Hello in med licenses");
-    //console.log("Data " + JSON.stringify(data));
     let licences = data['licenses'];
     var licenceList = [];
     _.forEach(licences, function(value) {
       var label = value['label'];
-      var lic_date = label.substr(label.length - 4);
-      //var date = value['attributes']['date'].substr(0,4);
-      //var label = (label + " " + date);   
+      var lic_date = label.substr(label.length - 4); 
       var number = value['attributes']['number'];
       var state = value['attributes']['state'];
       label = state + ", " + number + ", " + lic_date;
