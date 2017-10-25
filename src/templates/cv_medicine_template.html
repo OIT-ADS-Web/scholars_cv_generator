@@ -153,7 +153,7 @@
 
        <% if (manuscripts.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Study-related manuscriptson multicenter clinical trials</div>
+         <div class="heading_10">Study-related manuscripts on multicenter clinical trials</div>
          <div class="regular_10">
           <% _.forEach(manuscripts, function(item) { %>
               <p><%= item['citation'].replace(" " + lastName," <b>" + lastName + "</b>") %></p>
@@ -197,7 +197,7 @@
 
        <% if (booksections.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Book sections</div>
+         <div class="heading_10">Book Sections</div>
          <div class="regular_10">
           <% _.forEach(booksections, function(item) { %>
               <p><%= item['citation'].replace(" " + lastName," <b>" + lastName + "</b>") %></p>
@@ -362,27 +362,27 @@
       <% } %>
     </div>
 
-    <% if (mentorship_activities) { %>
+    <% if (mentorship_Activities) { %>
     <div class="row">
     <div class="heading_10">MENTORING ACTIVITIES</div>
     <div class="regular_10">
-      ${mentorship_activities}
+      ${mentorship_Activities}
     </div>
     </div>
     <% } %>    
 
-    <% if (teaching_activities) { %>
+    <% if (teaching_Activities) { %>
     <div class="row">
     <div class="heading_10">EDUCATION / TEACHING ACTIVITIES</div>
     <div class="regular_10">
-      ${teaching_activities}
+      ${teaching_Activities}
     </div>
     </div>
     <% } %>    
 
     <% if (presentations.length > 0) { %>
     <div class="row">
-    <div class="heading_10">INVITED LECTURES ANDPRESENTATIONS</div>
+    <div class="heading_10">INVITED LECTURES AND PRESENTATIONS</div>
     <div class="regular_10">
     <% _.forEach(presentations, function(item) { %>
                     <p><%= item['label'] %></p>
@@ -391,20 +391,20 @@
     </div>
     <% } %>  
 
-    <% if (clinical_activities) { %>
+    <% if (clinical_Activities) { %>
     <div class="row">
     <div class="heading_10">CLINICAL ACTIVITIES</div>
     <div class="regular_10">
-      ${clinical_activities}
+      ${clinical_Activities}
     </div>
     </div>
     <% } %>
 
-    <% if (academic_activities) { %>
+    <% if (academic_Activities) { %>
     <div class="row">
     <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER</div>
     <div class="regular_10">
-      ${academic_activities}
+      ${academic_Activities}
     </div>
     </div>
     <% } %>
