@@ -482,7 +482,7 @@ class WidgetsSOMParser {
       var mentorship_activities = overview.replace(stripHtml, "");
       mentorship_activities =  mentorship_activities.replace(/(&nbsp;)*/g,"");
     }
-    return {'mentorship_Activities': mentorship_activities}
+    return {'mentorship_activities': mentorship_activities}
   };
 
   parseteachingActivities(data) {
@@ -493,7 +493,7 @@ class WidgetsSOMParser {
       var teaching_activities = activities.replace(stripHtml, "");
       teaching_activities =  teaching_activities.replace(/(&nbsp;)*/g,"");
     }
-    return {'teaching_Activities': teaching_activities}
+    return {'teaching_activities': teaching_activities}
   };
 
   parsePresentations(data) {
@@ -520,7 +520,7 @@ class WidgetsSOMParser {
       var clinical_activities = activities.replace(stripHtml, "");
       clinical_activities = clinical_activities.replace(/(&nbsp;)*/g,"");
     }
-    return {'clinical_Activities': clinical_activities}
+    return {'clinical_activities': clinical_activities}
   };
 
   parseacademicActivities(data) {
@@ -531,7 +531,7 @@ class WidgetsSOMParser {
       var academic_activities = activities.replace(stripHtml, "");
       academic_activities =  academic_activities.replace(/(&nbsp;)*/g,"");
     }
-    return {'academic_Activities': academic_activities}
+    return {'academic_activities': academic_activities}
   };
 
 
