@@ -310,7 +310,6 @@ class WidgetsSOMParser {
     return results
   }
 
-
   parseConsultantAppointments(data) {
     var professionalActivitiesTypes = {
       'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': { 'consulting': [], 'ea': [], 'cs': [] }
@@ -320,9 +319,13 @@ class WidgetsSOMParser {
 
     let figureConsulting = function(value) {
 
-      var full_label = "";
-      var label = value['label'];                  
-      var serviceType = value.attributes['serviceType'];
+      var full_label = "", serviceType = "";
+      var label = value['label'];     
+
+      if(value.attributes != null && value.attributes.length > 0){          
+        serviceType = value.attributes['serviceType'];
+      }
+
       let vivoType = value['vivoType'];
       
       if(serviceType == 'Consulting') {
@@ -334,9 +337,13 @@ class WidgetsSOMParser {
 
     let figureCS = function(value) {
 
-      var full_label = "";
-      var label = value['label'];                  
-      var serviceType = value.attributes['serviceType'];
+      var full_label = "", serviceType = "";
+      var label = value['label'];     
+
+      if(value.attributes != null && value.attributes.length > 0){          
+        serviceType = value.attributes['serviceType'];
+      }
+
       let vivoType = value['vivoType'];
       
       if(serviceType == 'Community Service') {
@@ -348,9 +355,13 @@ class WidgetsSOMParser {
 
     let figureEA = function(value) {
 
-      var full_label = "";
+      var full_label = "", serviceType = "";
       var label = value['label'];     
-      var serviceType = value.attributes['serviceType'];
+      
+      if(value.attributes != null && value.attributes.length > 0){          
+        serviceType = value.attributes['serviceType'];
+      }
+
       let vivoType = value['vivoType'];
 
       if(serviceType == 'Editorial Activities') {
@@ -360,13 +371,14 @@ class WidgetsSOMParser {
       return full_label;
     };
 
-
      _.forEach(professionalActivities, function(value) {
     
       let consulting = figureConsulting(value)
+    
       let community_service = figureCS(value)
+    
       let editorial_activities = figureEA(value)
-     
+    
       let vivoType = value['vivoType'];
 
       if(consulting != ""){
@@ -376,7 +388,7 @@ class WidgetsSOMParser {
         professionalActivitiesTypes[vivoType]['cs'].push(community_service);
       }
       if(editorial_activities != ""){
-      professionalActivitiesTypes[vivoType]['ea'].push(editorial_activities);
+        professionalActivitiesTypes[vivoType]['ea'].push(editorial_activities);
       }
       
     });
@@ -408,7 +420,6 @@ class WidgetsSOMParser {
     }, {});
 
     return results
-
   }
 
   parseScholarlySocieties(data) {
@@ -535,7 +546,6 @@ class WidgetsSOMParser {
   };
 
 
-
   convert(data) {
     var results = {}
 
@@ -558,7 +568,7 @@ class WidgetsSOMParser {
     _.merge(results, this.parsePresentations(data))
     _.merge(results, this.parseClinicalActivities(data))
     _.merge(results, this.parseacademicActivities(data))
-
+    
     return results
   }
  
