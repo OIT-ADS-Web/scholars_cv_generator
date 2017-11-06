@@ -308,6 +308,7 @@
     </div>
     <% } %>  
 
+    <% if (currentGrants.length > 0 || completedGrants.length > 0 || pendingGrants.length > 0) { %>
     <div class="row">
       <div class="heading_10">EXTERNAL SUPPORT</div>
        <% if (currentGrants.length > 0) { %>
@@ -361,6 +362,7 @@
         </div>
       <% } %>
     </div>
+    <% } %>
   
     <% if (mentorship_activities) { %>
     <div class="row">
