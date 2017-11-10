@@ -106,7 +106,7 @@
     <% educations.sort(function(a,b) {return (a.endYear > b.endYear) ? 1 : ((b.endYear > a.endYear) ? -1 : 0);} ); %>
     <div class="row">
       <div class="heading_10">EDUCATION <br>
-      <span class="regular_10_italic">List degree, institution, location and year for high school, college, and graduate/professionalschool degreesin chronological order.</span></div>
+      <span class="regular_10_italic">List degree, institution, location and year for high school, college, and graduate/professionalschool degrees in chronological order.</span></div>
       <div class="regular_10">
       <% _.forEach(educations, function(item) { %>
        <p><%= item['label'] %></p>
@@ -116,7 +116,7 @@
     <% } else { %>
     <div class="row">
       <div class="heading_10">EDUCATION <br>
-      <span class="regular_10_italic">List degree, institution, location and year for high school, college, and graduate/professionalschool degreesin chronological order.</span></div>
+      <span class="regular_10_italic">List degree, institution, location and year for high school, college, and graduate/professionalschool degrees in chronological order.</span></div>
       <div class="regular_10">
         <p>&nbsp;</p>
       </div>
@@ -177,12 +177,12 @@
 
     <div class="row">
       <div class="heading_10">PUBLICATIONS <br>
-        <span class="regular_10_italic">Do not include submitted papers or papers in preparation. List separately those papers in press.Publications should be numbered sequentionallywith the oldest listedfirst. Includethe PubMedID.List all authors in the publicationand do not use “et al.”Date of the journal is required.</span></div>
+        <span class="regular_10_italic">Do not include submitted papers or papers in preparation. List separately those papers in press. Publications should be numbered sequentionally with the oldest listed first. Include the PubMedID. List all authors in the publication and do not use “et al.”Date of the journal is required.</span></div>
        
         <% if (journals.length > 0) { %>
         <div class="row">
          <div class="heading_10">Refereed journal articles <br>
-          <span class="regular_10_italic">List articles in scientific journals withactive editorial boards and a system of critical review of all submissions for publication.</span></div>
+          <span class="regular_10_italic">List articles in scientific journals with active editorial boards and a system of critical review of all submissions for publication.</span></div>
          <div class="regular_10">
           <ol>
           <% _.forEach(journals, function(item) { %>              
@@ -194,7 +194,7 @@
         <% } else { %>
         <div class="row">
          <div class="heading_10">Refereed journal articles <br>
-          <span class="regular_10_italic">List articles in scientific journals withactive editorial boards and a system of critical review of all submissions for publication.</span></div>
+          <span class="regular_10_italic">List articles in scientific journals with active editorial boards and a system of critical review of all submissions for publication.</span></div>
           <div class="regular_10">
             <p>&nbsp;</p>
           </div>
@@ -407,7 +407,7 @@
     <% if (scholarlySocieties.length > 0) { %>
     <div class="row">
     <div class="heading_10">SCHOLARLY SOCIETIES <br>
-      <span class="regular_10_italic">List memberships inscholarly societies such as Alpha Omega Alpha,Sigma Xi, and Phi Beta Kappa.</span></div>
+      <span class="regular_10_italic">List memberships in scholarly societies such as Alpha Omega Alpha,Sigma Xi, and Phi Beta Kappa.</span></div>
     <div class="regular_10">
     <% _.forEach(scholarlySocieties, function(item) { %>
                     <p><%= item['label'] %></p>
@@ -417,7 +417,7 @@
     <% } else { %>
     <div class="row">
      <div class="heading_10">SCHOLARLY SOCIETIES <br>
-      <span class="regular_10_italic">List memberships inscholarly societies such as Alpha Omega Alpha,Sigma Xi, and Phi Beta Kappa.</span></div>
+      <span class="regular_10_italic">List memberships in scholarly societies such as Alpha Omega Alpha,Sigma Xi, and Phi Beta Kappa.</span></div>
      <div class="regular_10">
       <p>&nbsp;</p>
      </div>
@@ -563,7 +563,7 @@
     <% if (mentorship_activities) { %>
     <div class="row">
     <div class="heading_10">MENTORING ACTIVITIES <br>
-      <span class="regular_10_italic">Describe experiencementoring colleagues. List mentoring activities separately for the following groups:Faculty, Fellows/doctoral students/ post docs and Medical students.</span></div>
+      <span class="regular_10_italic">Describe experience mentoring colleagues. List mentoring activities separately for the following groups:Faculty, Fellows/doctoral students/ post docs and Medical students.</span></div>
     <div class="regular_10">
       <p>${mentorship_activities}</p>
     </div>
@@ -571,7 +571,7 @@
     <% } else { %>
     <div class="row">
      <div class="heading_10">MENTORING ACTIVITIES <br>
-      <span class="regular_10_italic">Describe experiencementoring colleagues. List mentoring activities separately for the following groups:Faculty, Fellows/doctoral students/ post docs and Medical students.</span></div>
+      <span class="regular_10_italic">Describe experience mentoring colleagues. List mentoring activities separately for the following groups:Faculty, Fellows/doctoral students/ post docs and Medical students.</span></div>
      <div class="regular_10">
       <p>&nbsp;</p>
      </div>
@@ -581,7 +581,7 @@
     <% if (teaching_activities) { %>
     <div class="row">
     <div class="heading_10">EDUCATION / TEACHING ACTIVITIES <br>
-      <span class="regular_10_italic">Describe activitesteaching and providing educational support for residents, medical students, and continuing medical education. List activites by:<br> 
+      <span class="regular_10_italic">Describe activities teaching and providing educational support for residents, medical students, and continuing medical education. List activities by:<br> 
         <ul>
           <li>Teaching and supporting learners</li>
           <li>Development of courses/educational programs</li>
@@ -596,7 +596,7 @@
     <% } else { %>
     <div class="row">
     <div class="heading_10">EDUCATION / TEACHING ACTIVITIES <br>
-      <span class="regular_10_italic">Describe activitesteaching and providing educational support for residents, medical students, and continuing medical education. List activites by:<br> 
+      <span class="regular_10_italic">Describe activities teaching and providing educational support for residents, medical students, and continuing medical education. List activities by:<br> 
         <ul>
           <li>Teaching and supporting learners</li>
           <li>Development of courses/educational programs</li>
@@ -653,7 +653,7 @@
     <% if (clinical_activities) { %>
     <div class="row">
     <div class="heading_10">CLINICAL ACTIVITIES <br>
-      <span class="regular_10_italic">Describe typesof clinical practice and estimate your time commitment.</span></div>
+      <span class="regular_10_italic">Describe types of clinical practice and estimate your time commitment.</span></div>
     <div class="regular_10">
       <p>${clinical_activities}</p>
     </div>
@@ -661,7 +661,7 @@
     <% } else { %>
     <div class="row">
      <div class="heading_10">CLINICAL ACTIVITIES <br>
-      <span class="regular_10_italic">Describe typesof clinical practice and estimate your time commitment.</span></div>
+      <span class="regular_10_italic">Describe types of clinical practice and estimate your time commitment.</span></div>
      <div class="regular_10">
       <p>&nbsp;</p>
      </div>
