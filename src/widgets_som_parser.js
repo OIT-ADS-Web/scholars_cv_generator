@@ -97,6 +97,7 @@ class WidgetsSOMParser {
     let positions = data['positions'] || [];
     var primaryPositions = []
     var secondaryPositions = []
+    var variousPositions = []
 
     let positionTypes = {
       'primaryPosition': 'http://vivoweb.org/ontology/core#PrimaryPosition',
@@ -117,7 +118,7 @@ class WidgetsSOMParser {
           break;
         }
         default: {
-          secondaryPositions.push({'label':label})
+          variousPositions.push({'label':label})
           break;
         }
       }
@@ -125,7 +126,8 @@ class WidgetsSOMParser {
 
     let results = {
       'primaryPositions': primaryPositions,
-      'secondaryPositions': secondaryPositions
+      'secondaryPositions': secondaryPositions,
+      'variousPositions': variousPositions
     }
     return results
   };
@@ -142,7 +144,7 @@ class WidgetsSOMParser {
       var fullLabel = "";
       if (typeof degree != 'undefined') {
         var degree = value.attributes['degree'];
-        fullLabel = (degree + ", " + institution + " " + endYear);
+        fullLabel = (degree + ", " + institution + ", " + endYear);
         educationList.push({'label': fullLabel, 'endYear': endYear}) 
       } 
       else {
@@ -508,19 +510,58 @@ class WidgetsSOMParser {
   };
 
   parsePresentations(data) {
-    var presentationList = [];  
+
+    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'posters': [], 'internationalmeetings': [] };
     let professionalActivities = data['professionalActivities'];
 
      _.forEach(professionalActivities, function(value) {
+        
         if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation' ) {
+             
              var label = value['label'];     
              var serviceType = value.attributes['serviceType'];
              let vivoType = value['vivoType'];
+             
+             switch(serviceType) {
+
+                case "Other": {
+                    presentationList['posters'].push({'label':label});
+                }
+
+                case "Instructional Course, Workshop, or Symposium": {
+                    presentationList['courses'].push({'label':label});
+                }
+
+                case "National Scientific Meeting": {
+                    presentationList['nationalmeetings'].push({'label':label});
+                }
+
+                case "Keynote/Named Lecture": {
+                    presentationList['lectures'].push({'label':label});
+                }
+
+                case "International Meeting or Conference": {
+                    presentationList['internationalmeetings'].push({'label':label});
+                }
+
+                case "Visiting Professorship Lecture": {
+                     presentationList['professorships'].push({'label':label});
+                }
+
+                default:
+                  break;
+              }
          }
-        presentationList.push({'label':label});
 
       });
-     return {'presentations': presentationList}
+
+    let results = _.transform(presentationList, (result, value, key) => { 
+      let name = key
+      result[name] = value
+      return result;
+    }, {});
+
+    return results
   }
 
   parseClinicalActivities(data) {
