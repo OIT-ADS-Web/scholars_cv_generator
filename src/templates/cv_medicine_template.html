@@ -9,6 +9,8 @@
      h2 { font-size: 135%; }
      h3 { font-size: 115%; }
      h4 { font-size: 100%; }
+     ol { margin-left:0pt; }
+     ul { margin-left:0pt; padding-top:0pt;}
      p { line-height: 6pt; margin-top: 3pt; margin-bottom: 0pt; }
      div.heading_12 { font-size: 12pt; font-family: Arial; font-weight: bold; text-align: center; line-height:12pt; }
      div.heading_10_center { font-size: 10pt; font-family: "Times New Roman"; text-align: center; line-height: 12pt; }
@@ -19,7 +21,7 @@
      div.slight-indent { margin-left: 24pt; }
      .regular_10 { font-size: 10pt; font-family: "Times New Roman"; }
      .heading_10 { font-size: 10pt; font-family: Arial; font-weight: bold; line-height:12pt; }
-     .regular_10_italic { font-size: 10pt; font-family: "Times New Roman"; font-style: italic; font-weight: normal;}
+     .regular_10_italic { font-size: 10pt; font-family: "Times New Roman"; font-style: italic; font-weight: normal; }
     </style>
   </head>
   <body>
@@ -60,7 +62,7 @@
     </div>
 
     <div class="heading_10_center">
-        ${today}
+        <p>${today}</p>
     </div>
 
     <% if(primaryPositions.length > 0) { %>
@@ -445,7 +447,7 @@
     <% if (servicesToProfession['ea'].length > 0) { %>
     <div class="row">
     <div class="heading_10">EDITORIAL EXPERIENCE <br>
-      <span class="regular_10_italic">List positions on editorial boardsand withad hoc scientific review journals.</span></div>
+      <span class="regular_10_italic">List positions on editorial boards and with ad hoc scientific review journals.</span></div>
     <div class="regular_10">
     <% _.forEach(servicesToProfession['ea'], function(item) { %>
                     <p><%= item %></p>
@@ -455,7 +457,7 @@
     <% } else { %>
     <div class="row">
      <div class="heading_10">EDITORIAL EXPERIENCE <br>
-      <span class="regular_10_italic">List positions on editorial boardsand withad hoc scientific review journals.</span></div>
+      <span class="regular_10_italic">List positions on editorial boardsand with ad hoc scientific review journals.</span></div>
      <div class="regular_10">
       <p>&nbsp;</p>
      </div>
@@ -465,7 +467,7 @@
     <% if (servicesToProfession['cs'].length > 0) { %>
     <div class="row">
     <div class="heading_10">ORGANIZATIONS AND PARTICIPATION <br>
-      <span class="regular_10_italic">Include offices held, committee assignments, societymembership and participation in society meetings.</span></div>
+      <span class="regular_10_italic">Include offices held, committee assignments, society membership and participation in society meetings.</span></div>
     <div class="regular_10">
     <% _.forEach(servicesToProfession['cs'], function(item) { %>
                     <p><%= item %></p>
@@ -505,7 +507,13 @@
        <div class="row">
          <div class="heading_10">Current Research Support</div>
          <div class="regular_10">
-          <p>&nbsp;</p>
+              <p>PI: </p>
+              <p>Period: </p>
+              <p>Title: </p>
+              <p>Direct cost: </p>
+              <p>Percent effort: </p>
+              <p>Role: </p>
+              <br/><br/>
          </div>
        </div>
        <% } %> 
@@ -529,7 +537,13 @@
        <div class="row">
          <div class="heading_10">Completed Research Support</div>
          <div class="regular_10">
-          <p>&nbsp;</p>
+              <p>PI: </p>
+              <p>Period: </p>
+              <p>Title: </p>
+              <p>Direct cost: </p>
+              <p>Percent effort: </p>
+              <p>Role: </p>
+              <br/><br/>
          </div>
        </div>
        <% } %> 
@@ -553,7 +567,13 @@
        <div class="row">
          <div class="heading_10">Pending Research Support</div>
          <div class="regular_10">
-          <p>&nbsp;</p>
+              <p>PI: </p>
+              <p>Period: </p>
+              <p>Title: </p>
+              <p>Direct cost: </p>
+              <p>Percent effort: </p>
+              <p>Role: </p>
+              <br/><br/>
          </div>
        </div>
        <% } %>
@@ -581,14 +601,13 @@
     <% if (teaching_activities) { %>
     <div class="row">
     <div class="heading_10">EDUCATION / TEACHING ACTIVITIES <br>
-      <span class="regular_10_italic">Describe activities teaching and providing educational support for residents, medical students, and continuing medical education. List activities by:<br> 
-        <ul>
-          <li>Teaching and supporting learners</li>
-          <li>Development of courses/educational programs</li>
-          <li>Development of assessment tools and methods</li>
-          <li>Education management/ leadership</li>
-        </ul>  
-        </span></div>
+      <span class="regular_10_italic">Describe activities teaching and providing educational support for residents, medical students, and continuing medical education. List activities by:
+          <ul>
+          <li><p>Teaching and supporting learners</p></li>
+          <li><p>Development of courses/educational programs</p></li>
+          <li><p>Development of assessment tools and methods</p></li>
+          <li><p>Education management/ leadership</p></li>
+        </ul></span></div>
     <div class="regular_10">
       <p>${teaching_activities}</p>
     </div>
@@ -596,59 +615,133 @@
     <% } else { %>
     <div class="row">
     <div class="heading_10">EDUCATION / TEACHING ACTIVITIES <br>
-      <span class="regular_10_italic">Describe activities teaching and providing educational support for residents, medical students, and continuing medical education. List activities by:<br> 
-        <ul>
-          <li>Teaching and supporting learners</li>
-          <li>Development of courses/educational programs</li>
-          <li>Development of assessment tools and methods</li>
-          <li>Education management/ leadership</li>
-        </ul>  
-        </span></div>
+      <span class="regular_10_italic">Describe activities teaching and providing educational support for residents, medical students, and continuing medical education. List activities by:
+          <ul>
+          <li><p>Teaching and supporting learners</p></li>
+          <li><p>Development of courses/educational programs</p></li>
+          <li><p>Development of assessment tools and methods</p></li>
+          <li><p>Education management/ leadership</p></li>
+        </ul></span></div>
      <div class="regular_10">
       <p>&nbsp;</p>
      </div>
     </div>
     <% } %> 
 
-    <% if (presentations.length > 0) { %>
     <div class="row">
-    <div class="heading_10">INVITED LECTURES AND PRESENTATIONS <br>
-      <span class="regular_10_italic">List significant presentations and lectures, including the following types.<br>
-        <ul>
-          <li>Named Lectures</li>
-          <li>Visiting Professorships</li>
-          <li>International Meetings</li>
-          <li>National Scientific Meetings (invited)</li>
-          <li>Instructional Courses, workshops, symposiums (national)</li>
-          <li>Posters  (for national meetings)</li>
-          <li>Regional presentations and posters</li>
-        </ul>  
-      </span></div>
-    <div class="regular_10">
-    <% _.forEach(presentations, function(item) { %>
-                    <p><%= item['label'] %></p>
-              <% }); %>
-    </div>
-    </div> 
-    <% } else { %>
-     <div class="row">
-    <div class="heading_10">INVITED LECTURES AND PRESENTATIONS <br>
-      <span class="regular_10_italic">List significant presentations and lectures, including the following types.<br>
-        <ul>
-          <li>Named Lectures</li>
-          <li>Visiting Professorships</li>
-          <li>International Meetings</li>
-          <li>National Scientific Meetings (invited)</li>
-          <li>Instructional Courses, workshops, symposiums (national)</li>
-          <li>Posters  (for national meetings)</li>
-          <li>Regional presentations and posters</li>
-        </ul>  
-      </span></div>
-     <div class="regular_10">
-      <p>&nbsp;</p>
+     <div class="heading_10">INVITED LECTURES AND PRESENTATIONS <br>
+      <span class="regular_10_italic">List significant presentations and lectures, including the following types.
+      </span>
      </div>
+     
+     <% if (lectures.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Named Lectures</div>
+         <div class="regular_10">
+          <% _.forEach(lectures, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Named Lectures</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+       <% if (professorships.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Visiting Professorships</div>
+         <div class="regular_10">
+          <% _.forEach(professorships, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Visiting Professorships</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+       <% if (internationalmeetings.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">International Meetings</div>
+         <div class="regular_10">
+          <% _.forEach(internationalmeetings, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">International Meetings</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+       <% if (nationalmeetings.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">National Scientific Meetings (invited)</div>
+         <div class="regular_10">
+          <% _.forEach(nationalmeetings, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">National Scientific Meetings (invited)</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (courses.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Instructional Courses, workshops, symposiums (national)</div>
+         <div class="regular_10">
+          <% _.forEach(courses, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Instructional Courses, workshops, symposiums (national)</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+       <% if (posters.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Posters (for national meetings)</div>
+         <div class="regular_10">
+          <% _.forEach(posters, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Posters (for national meetings)</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
     </div>
-    <% } %> 
 
     <% if (clinical_activities) { %>
     <div class="row">
@@ -671,11 +764,11 @@
     <% if (academic_activities) { %>
     <div class="row">
     <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER <br> 
-      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels.List separately:<br>
+      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels. List separately:
         <ul>
-          <li>Administrative positions</li>
-          <li>Committees</li>
-          <li>Leadership positions</li>
+          <li><p>Administrative positions</p></li>
+          <li><p>Committees</p></li>
+          <li><p>Leadership positions</p></li>
         </ul>  
       </span></div>
     <div class="regular_10">
@@ -685,11 +778,11 @@
     <% } else { %>
     <div class="row">
      <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER <br> 
-      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels.List separately:<br>
+      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels. List separately:
         <ul>
-          <li>Administrative positions</li>
-          <li>Committees</li>
-          <li>Leadership positions</li>
+          <li><p>Administrative positions</p></li>
+          <li><p>Committees</p></li>
+          <li><p>Leadership positions</p></li>
         </ul>  
       </span></div>
      <div class="regular_10">
@@ -708,7 +801,7 @@
     </div>
 
     <div class="row">
-    <div class="heading_10">EMAIL:</div>
+    <div class="heading_10">EMAIL: ${email}</div>
     </div>
 
  </div>
