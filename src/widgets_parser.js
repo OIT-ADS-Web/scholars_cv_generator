@@ -556,12 +556,22 @@ class WidgetsParser {
   };
 
   parseArtisticEvents(data) {
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
     let artisticEvents = data['artisticEvents'];
     var artisticEventsList = [];
     _.forEach(artisticEvents, function(value) {
       var label = value['label'];
+      label = label.replace(" |", ",");
+      var startDate = new Date(value.attributes['startYear']);
+      var endDate = new Date(value.attributes['endYear']);
+      var start_date = monthNames[startDate.getMonth()] + " " + startDate.getDate() + ", " + startDate.getFullYear();
+      var end_date = monthNames[endDate.getMonth()] + " " + endDate.getDate() + ", " + endDate.getFullYear();
+      var start_year = value['attributes']['startYear'].substr(0,4);
+      var end_year = value['attributes']['endYear'].substr(0,4);
       var venue = value['attributes']['venue'];
-      artisticEventsList.push({'label':label});
+      label = label + ", " + start_date + " - " + end_date;
+      artisticEventsList.push({'label':label, 'endYear': end_year, 'startYear':start_year, 'startDate': start_date, 'endDate': end_date});
     });
     return {'artisticEvents': artisticEventsList}
   };
