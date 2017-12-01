@@ -24,23 +24,20 @@ export class ScholarsCVApp extends Component {
     
     if (parsed['uri']) {
       dispatch(setUri(parsed['uri']))
-      console.log("hello")
+      
       dispatch(setTemplate(parsed['template']))
-       console.log("how are u")
+       
       dispatch(requestCV(parsed['uri'],parsed['template']))
-       console.log("getting")
     }
     // else?
     // error....
   }
 
   handleSubmitRequest(e) {
-    console.log("In Submit ****** 1")
     e.preventDefault()
-    console.log("In Submit ****** 2")
+    
     const { dispatch, cv } = this.props
  
-    console.log("*****handleSubmitRequest*****")
     let uri = cv['uri']
     let template = cv['template']
     dispatch(requestCV(uri,template))
