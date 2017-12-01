@@ -563,15 +563,28 @@ class WidgetsParser {
     _.forEach(artisticEvents, function(value) {
       var label = value['label'];
       label = label.replace(" |", ",");
+
       var startDate = new Date(value.attributes['startYear']);
-      var endDate = new Date(value.attributes['endYear']);
       var start_date = monthNames[startDate.getMonth()] + " " + startDate.getDate() + ", " + startDate.getFullYear();
-      var end_date = monthNames[endDate.getMonth()] + " " + endDate.getDate() + ", " + endDate.getFullYear();
       var start_year = value['attributes']['startYear'].substr(0,4);
-      var end_year = value['attributes']['endYear'].substr(0,4);
+      
+      var endDate = "", end_date = "", end_year = "";
+      if(value['attributes']['endYear']){
+      endDate = new Date(value.attributes['endYear']);
+      end_date = monthNames[endDate.getMonth()] + " " + endDate.getDate() + ", " + endDate.getFullYear();
+      end_year = value['attributes']['endYear'].substr(0,4);
+      }
+      
       var venue = value['attributes']['venue'];
-      label = label + ", " + start_date + " - " + end_date;
-      artisticEventsList.push({'label':label, 'endYear': end_year, 'startYear':start_year, 'startDate': start_date, 'endDate': end_date});
+
+      if(end_date != ""){
+        label = label + ", " + start_date + " - " + end_date;
+      }
+      else{
+        label = label + ", " + start_date;
+      }
+      
+      artisticEventsList.push({'label':label, 'startYear':start_year, 'startDate': start_date });
     });
     return {'artisticEvents': artisticEventsList}
   };
