@@ -9,8 +9,8 @@
      h2 { font-size: 135%; }
      h3 { font-size: 115%; }
      h4 { font-size: 100%; }
-     ol { margin-left:0pt; }
-     ul { margin-left:0pt; padding-top:0pt;}
+     ol { margin-left: 25px; text-indent: -25px; }
+     ul { margin-left: 25px; text-indent: -25px; }
      p { line-height: 6pt; margin-top: 3pt; margin-bottom: 0pt; }
      div.heading_12 { font-size: 12pt; font-family: Arial; font-weight: bold; text-align: center; line-height:12pt; }
      div.heading_10_center { font-size: 10pt; font-family: "Times New Roman"; text-align: center; line-height: 12pt; }
@@ -62,7 +62,7 @@
     </div>
 
     <div class="heading_10_center">
-        <p>${today}</p>
+        <p style="margin-bottom: 6pt;">${today}</p>
     </div>
 
     <% if(primaryPositions.length > 0) { %>
@@ -188,7 +188,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(journals, function(item) { %>              
-              <li><p><%= item['citation'].replace(" " + lastName," <b>" + lastName + "</b>") %></p></li>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -209,7 +209,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(manuscripts, function(item) { %>
-              <li><p><%= item['citation'].replace(" " + lastName," <b>" + lastName + "</b>") %></p></li>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -229,7 +229,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(letters, function(item) { %>
-              <li><p><%= item['citation'].replace(" " + lastName," <b>" + lastName + "</b>") %></p></li>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -249,7 +249,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(editorials, function(item) { %>
-              <li><p><%= item['citation'].replace(" " + lastName," <b>" + lastName + "</b>") %></p></li>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
          </ol>
          </div>
@@ -269,7 +269,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(books, function(item) { %>
-              <li><p><%= item['citation'].replace(" " + lastName," <b>" + lastName + "</b>") %></p></li>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -289,7 +289,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(booksections, function(item) { %>
-              <li><p><%= item['citation'].replace(" " + lastName," <b>" + lastName + "</b>") %></p></li>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -309,7 +309,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(abstracts, function(item) { %>
-              <li><p><%= item['citation'].replace(" " + lastName," <b>" + lastName + "</b>") %></p></li>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -329,7 +329,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(reviews, function(item) { %>
-              <li><p><%= item['citation'].replace(" " + lastName," <b>" + lastName + "</b>") %></p></li>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -349,7 +349,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(nonauthored, function(item) { %>
-              <li><p><%= item['citation'].replace(" " + lastName," <b>" + lastName + "</b>") %></p></li>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -369,7 +369,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(others, function(item) { %>
-              <li><p><%= item['citation'].replace(" " + lastName," <b>" + lastName + "</b>") %></p></li>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -386,13 +386,14 @@
     </div>
     </div>
 
-    <% if (servicesToProfession['consulting'].length > 0) { %>
+   <% if (prof_consulting.length > 0) { %>
+   <% prof_consulting.sort(function(a,b) {return (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0);} ); %>
     <div class="row">
     <div class="heading_10">CONSULTANT APPOINTMENTS <br>
       <span class="regular_10_italic">Include US government, state, and private organizations</span></div>
     <div class="regular_10">
-    <% _.forEach(servicesToProfession['consulting'], function(item) { %>
-                    <p><%= item %></p>
+    <% _.forEach(prof_consulting, function(item) { %>
+                    <p><%= item['label'] %></p>
               <% }); %>
     </div>
     </div>
@@ -404,9 +405,10 @@
       <p>&nbsp;</p>
      </div>
     </div>
-    <% } %> 
+    <% } %>
 
     <% if (scholarlySocieties.length > 0) { %>
+    <% scholarlySocieties.sort(function(a,b) {return (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0);} ); %>
     <div class="row">
     <div class="heading_10">SCHOLARLY SOCIETIES <br>
       <span class="regular_10_italic">List memberships in scholarly societies such as Alpha Omega Alpha,Sigma Xi, and Phi Beta Kappa.</span></div>
@@ -444,13 +446,14 @@
     </div>
     <% } %> 
 
-    <% if (servicesToProfession['ea'].length > 0) { %>
+    <% if (prof_editorial_activities.length > 0) { %>
+    <% prof_editorial_activities.sort(function(a,b) {return (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0);} ); %>
     <div class="row">
     <div class="heading_10">EDITORIAL EXPERIENCE <br>
       <span class="regular_10_italic">List positions on editorial boards and with ad hoc scientific review journals.</span></div>
     <div class="regular_10">
-    <% _.forEach(servicesToProfession['ea'], function(item) { %>
-                    <p><%= item %></p>
+    <% _.forEach(prof_editorial_activities, function(item) { %>
+                    <p><%= item['label'] %></p>
               <% }); %>
     </div>
     </div>
@@ -463,15 +466,17 @@
      </div>
     </div>
     <% } %> 
-
-    <% if (servicesToProfession['cs'].length > 0) { %>
+   
+   <% var mergeExpPos = Object.assign(community_service, editorial_activities, professional_development, lectures, consulting, other_activities, event_admin, committee_service) %>
+   <% mergeExpPos.sort(function(a,b) {return (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0);} ); %>
+   <% if (mergeExpPos.length > 0) { %>
     <div class="row">
     <div class="heading_10">ORGANIZATIONS AND PARTICIPATION <br>
       <span class="regular_10_italic">Include offices held, committee assignments, society membership and participation in society meetings.</span></div>
     <div class="regular_10">
-    <% _.forEach(servicesToProfession['cs'], function(item) { %>
-                    <p><%= item %></p>
-              <% }); %>
+        <% _.forEach(mergeExpPos, function(item) { %>
+                   <p><%= item['label'] %></p>
+        <% }); %>
     </div>
     </div>
     <% } else { %>
@@ -601,13 +606,12 @@
     <% if (teaching_activities) { %>
     <div class="row">
     <div class="heading_10">EDUCATION / TEACHING ACTIVITIES <br>
-      <span class="regular_10_italic">Describe activities teaching and providing educational support for residents, medical students, and continuing medical education. List activities by:
-          <ul>
-          <li><p>Teaching and supporting learners</p></li>
-          <li><p>Development of courses / educational programs</p></li>
-          <li><p>Development of assessment tools and methods</p></li>
-          <li><p>Education management / leadership</p></li>
-        </ul></span></div>
+      <span class="regular_10_italic">Describe activities teaching and providing educational support for residents, medical students, and continuing medical education. List activities by:<br/>
+          &bull;&nbsp;&nbsp;Teaching and supporting learners<br/>
+          &bull;&nbsp;&nbsp;Development of courses / educational programs<br/>
+          &bull;&nbsp;&nbsp;Development of assessment tools and methods<br/> 
+          &bull;&nbsp;&nbsp;Education management / leadership
+       </span></div>
     <div class="regular_10">
       <p>${teaching_activities}</p>
     </div>
@@ -615,13 +619,12 @@
     <% } else { %>
     <div class="row">
     <div class="heading_10">EDUCATION / TEACHING ACTIVITIES <br>
-      <span class="regular_10_italic">Describe activities teaching and providing educational support for residents, medical students, and continuing medical education. List activities by:
-          <ul>
-          <li><p>Teaching and supporting learners</p></li>
-          <li><p>Development of courses / educational programs</p></li>
-          <li><p>Development of assessment tools and methods</p></li>
-          <li><p>Education management / leadership</p></li>
-        </ul></span></div>
+          <span class="regular_10_italic">Describe activities teaching and providing educational support for residents, medical students, and continuing medical education. List activities by:<br/>
+          &bull;&nbsp;&nbsp;Teaching and supporting learners<br/>
+          &bull;&nbsp;&nbsp;Development of courses / educational programs<br/>
+          &bull;&nbsp;&nbsp;Development of assessment tools and methods<br/> 
+          &bull;&nbsp;&nbsp;Education management / leadership
+       </span></div>
      <div class="regular_10">
       <p>&nbsp;</p>
      </div>
@@ -753,7 +756,7 @@
     </div>
     <% } else { %>
     <div class="row">
-     <div class="heading_10">CLINICAL ACTIVITIES <br>
+     <div class="heading_10">CLINICAL ACTIVITIES 
       <span class="regular_10_italic">Describe types of clinical practice and estimate your time commitment.</span></div>
      <div class="regular_10">
       <p>&nbsp;</p>
@@ -763,13 +766,11 @@
 
     <% if (academic_activities) { %>
     <div class="row">
-    <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER <br> 
-      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels. List separately:
-        <ul>
-          <li><p>Administrative positions</p></li>
-          <li><p>Committees</p></li>
-          <li><p>Leadership positions</p></li>
-        </ul>  
+    <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER <br>
+      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels. List separately:<br/>
+           &bull;&nbsp;&nbsp;Administrative positions<br/>
+           &bull;&nbsp;&nbsp;Committees<br/>
+           &bull;&nbsp;&nbsp;Leadership positions
       </span></div>
     <div class="regular_10">
       <p>${academic_activities}</p>
@@ -777,19 +778,18 @@
     </div>
     <% } else { %>
     <div class="row">
-     <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER <br> 
-      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels. List separately:
-        <ul>
-          <li><p>Administrative positions</p></li>
-          <li><p>Committees</p></li>
-          <li><p>Leadership positions</p></li>
-        </ul>  
+     <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER <br>
+      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels. List separately:<br/>
+           &bull;&nbsp;&nbsp;Administrative positions<br/>
+           &bull;&nbsp;&nbsp;Committees<br/>
+           &bull;&nbsp;&nbsp;Leadership positions
       </span></div>
      <div class="regular_10">
       <p>&nbsp;</p>
      </div>
     </div>
     <% } %>
+    
 
     <div class="row"><div class="regular_12"><p>Signature of Chair _____________________________________________ </p></div></div>
     <div class="row"><div class="regular_12"><p>Date _____________________________________________ </p></div></div>
