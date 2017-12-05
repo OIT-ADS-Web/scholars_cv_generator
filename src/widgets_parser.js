@@ -613,7 +613,6 @@ class WidgetsParser {
       return result;
     }, {});
 
-    console.log(results);
     return results
   }
 
@@ -721,9 +720,8 @@ class WidgetsParser {
 
   convert(data) {
     var results = {}
-    console.log("STEP 1");
+
     _.merge(results, this.parseName(data))
-    console.log("STEP 1");
     _.merge(results, this.parsePhone(data))
     _.merge(results, this.parseEmail(data))
     _.merge(results, this.parseTitle(data))
@@ -736,11 +734,8 @@ class WidgetsParser {
     _.merge(results, this.parseTeaching(data))
     _.merge(results, this.parseGrants(data))
     _.merge(results, this.parseAwards(data))
-    console.log("STEP 1");
     _.merge(results, this.parseProfessionalActivities(data))
-    console.log("STEP 2");
     _.merge(results, this.parsePresentations(data))
-    console.log("STEP 3");
     _.merge(results, this.parsepastAppointments(data))
     _.merge(results, this.parseteachingActivities(data))
     _.merge(results, this.parsementorshipOverview(data))
