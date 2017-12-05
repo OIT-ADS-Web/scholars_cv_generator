@@ -555,6 +555,67 @@ class WidgetsParser {
     return {'academic_activities': academic_activities}
   };
 
+  parsePresentations(data) {
+
+    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'posters': [], 'internationalmeetings': [] };
+    let professionalActivities = data['professionalActivities'];
+
+     _.forEach(professionalActivities, function(value) {
+        
+        if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation' ) {
+             
+             var label = value['label'];     
+             var serviceType = value.attributes['serviceType'];
+             let vivoType = value['vivoType'];
+             
+             switch(serviceType) {
+
+                case "Other": {
+                    presentationList['posters'].push({'label':label});
+                    break;
+                }
+
+                case "Instructional Course, Workshop, or Symposium": {
+                    presentationList['courses'].push({'label':label});
+                    break;
+                }
+
+                case "National Scientific Meeting": {
+                    presentationList['nationalmeetings'].push({'label':label});
+                    break;
+                }
+
+                case "Keynote/Named Lecture": {
+                    presentationList['lectures'].push({'label':label});
+                    break;
+                }
+
+                case "International Meeting or Conference": {
+                    presentationList['internationalmeetings'].push({'label':label});
+                    break;
+                }
+
+                case "Visiting Professorship Lecture": {
+                     presentationList['professorships'].push({'label':label});
+                     break;
+                }
+
+                default:
+                  break;
+              }
+         }
+
+      });
+
+    let results = _.transform(presentationList, (result, value, key) => { 
+      let name = key
+      result[name] = value
+      return result;
+    }, {});
+
+    return results
+  }
+
   parseArtisticEvents(data) {
     var monthNames = ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"];
@@ -674,6 +735,7 @@ class WidgetsParser {
     _.merge(results, this.parseGrants(data))
     _.merge(results, this.parseAwards(data))
     _.merge(results, this.parseProfessionalActivities(data))
+    _.merge(results, this.parsePresentations(data))
     _.merge(results, this.parsepastAppointments(data))
     _.merge(results, this.parseteachingActivities(data))
     _.merge(results, this.parsementorshipOverview(data))
