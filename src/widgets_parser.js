@@ -555,13 +555,97 @@ class WidgetsParser {
     return {'academic_activities': academic_activities}
   };
 
+  parsePresentations(data) {
+
+    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'posters': [], 'internationalmeetings': [] };
+    let professionalActivities = data['professionalActivities'];
+
+     _.forEach(professionalActivities, function(value) {
+        
+        if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation' ) {
+             
+             var label = value['label'];     
+             var serviceType = value.attributes['serviceType'];
+             let vivoType = value['vivoType'];
+             
+             switch(serviceType) {
+
+                case "Other": {
+                    presentationList['posters'].push({'label':label});
+                    break;
+                }
+
+                case "Instructional Course, Workshop, or Symposium": {
+                    presentationList['courses'].push({'label':label});
+                    break;
+                }
+
+                case "National Scientific Meeting": {
+                    presentationList['nationalmeetings'].push({'label':label});
+                    break;
+                }
+
+                case "Keynote/Named Lecture": {
+                    presentationList['lectures'].push({'label':label});
+                    break;
+                }
+
+                case "International Meeting or Conference": {
+                    presentationList['internationalmeetings'].push({'label':label});
+                    break;
+                }
+
+                case "Visiting Professorship Lecture": {
+                     presentationList['professorships'].push({'label':label});
+                     break;
+                }
+
+                default:
+                  break;
+              }
+         }
+
+      });
+
+    let results = _.transform(presentationList, (result, value, key) => { 
+      let name = key
+      result[name] = value
+      return result;
+    }, {});
+
+    return results
+  }
+
   parseArtisticEvents(data) {
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
     let artisticEvents = data['artisticEvents'];
     var artisticEventsList = [];
     _.forEach(artisticEvents, function(value) {
       var label = value['label'];
+      label = label.replace(" |", ",");
+
+      var startDate = new Date(value.attributes['startYear']);
+      var start_date = monthNames[startDate.getMonth()] + " " + startDate.getDate() + ", " + startDate.getFullYear();
+      var start_year = value['attributes']['startYear'].substr(0,4);
+      
+      var endDate = "", end_date = "", end_year = "";
+      if(value['attributes']['endYear']){
+      endDate = new Date(value.attributes['endYear']);
+      end_date = monthNames[endDate.getMonth()] + " " + endDate.getDate() + ", " + endDate.getFullYear();
+      end_year = value['attributes']['endYear'].substr(0,4);
+      }
+      
       var venue = value['attributes']['venue'];
-      artisticEventsList.push({'label':label});
+
+      if(end_date != ""){
+        label = label + ", " + start_date + " - " + end_date;
+      }
+      else{
+        label = label + ", " + start_date;
+      }
+      
+      artisticEventsList.push({'label':label, 'startYear':start_year, 'startDate': start_date });
     });
     return {'artisticEvents': artisticEventsList}
   };
@@ -651,6 +735,7 @@ class WidgetsParser {
     _.merge(results, this.parseGrants(data))
     _.merge(results, this.parseAwards(data))
     _.merge(results, this.parseProfessionalActivities(data))
+    _.merge(results, this.parsePresentations(data))
     _.merge(results, this.parsepastAppointments(data))
     _.merge(results, this.parseteachingActivities(data))
     _.merge(results, this.parsementorshipOverview(data))
