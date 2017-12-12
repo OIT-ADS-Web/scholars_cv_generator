@@ -312,7 +312,7 @@
      </div> 
     </div> 
 
-    <% artisticEvents.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
+    <% artisticEvents.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
     <% if (artisticEvents.length > 0) { %>
     <div class="row">
     <div class="heading_10">EXHIBITIONS, SCREENINGS & PERFORMANCES</div>
