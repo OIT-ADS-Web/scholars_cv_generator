@@ -312,7 +312,7 @@
      </div> 
     </div> 
 
-    <% artisticEvents.sort(function(a,b) {return (a.endYear > b.endYear) ? 1 : ((b.endYear > a.endYear) ? -1 : 0);} ); %>
+    <% artisticEvents.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
     <% if (artisticEvents.length > 0) { %>
     <div class="row">
     <div class="heading_10">EXHIBITIONS, SCREENINGS & PERFORMANCES</div>
@@ -747,9 +747,6 @@
     <% _.forEach(presentations['lec'], function(item) { %>
           <p><%= item %></p>
     <% }); %>
-    <% _.forEach(lectures, function(item) { %>
-            <p><%= item['label'] %></p>
-    <% }); %>
     </div>
     </div>
     <% } %>
@@ -814,6 +811,39 @@
      <div class="heading_10">Posters (for national meetings)</div>
       <div class="regular_10">
        <% _.forEach(posters, function(item) { %>
+          <p><%= item['label'] %></p>
+       <% }); %>
+      </div>
+     </div>
+    <% } %>
+
+    <% if (broadcasts.length > 0) { %>
+     <div class="row">
+     <div class="heading_10">Broadcast Appearances</div>
+      <div class="regular_10">
+       <% _.forEach(broadcasts, function(item) { %>
+          <p><%= item['label'] %></p>
+       <% }); %>
+      </div>
+     </div>
+    <% } %>
+
+    <% if (interviews.length > 0) { %>
+     <div class="row">
+     <div class="heading_10">Interviews</div>
+      <div class="regular_10">
+       <% _.forEach(interviews, function(item) { %>
+          <p><%= item['label'] %></p>
+       <% }); %>
+      </div>
+     </div>
+    <% } %>
+
+    <% if (invitedtalks.length > 0) { %>
+     <div class="row">
+     <div class="heading_10">Invited Talks</div>
+      <div class="regular_10">
+       <% _.forEach(invitedtalks, function(item) { %>
           <p><%= item['label'] %></p>
        <% }); %>
       </div>
