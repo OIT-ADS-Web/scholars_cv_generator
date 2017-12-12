@@ -312,7 +312,7 @@
      </div> 
     </div> 
 
-    <% artisticEvents.sort(function(a,b) {return (a.endYear > b.endYear) ? 1 : ((b.endYear > a.endYear) ? -1 : 0);} ); %>
+    <% artisticEvents.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
     <% if (artisticEvents.length > 0) { %>
     <div class="row">
     <div class="heading_10">EXHIBITIONS, SCREENINGS & PERFORMANCES</div>
@@ -740,15 +740,89 @@
     <div class="row">
     <div class="heading_10">PRESENTATIONS AND APPEARANCES</div>
 
+    <% if (broadcasts.length > 0) { %>
+     <div class="row">
+     <div class="heading_10">Broadcast Appearances</div>
+      <div class="regular_10">
+       <% _.forEach(broadcasts, function(item) { %>
+          <p><%= item['label'] %></p>
+       <% }); %>
+      </div>
+     </div>
+    <% } %>
+
+    <% if (presentations['cs'].length > 0) { %>
+    <div class="row">
+    <div class="heading_10_sub">Community Outreach</div>
+    <div class="regular_10">
+    <% _.forEach(presentations['cs'], function(item) { %>
+          <p><%= item %></p>
+    <% }); %>
+    </div>
+    </div>
+    <% } %>
+
+    <% if (presentations['ea'].length > 0) { %>
+    <div class="row">
+    <div class="heading_10_sub">Editorial Activities</div>
+    <div class="regular_10">
+    <% _.forEach(presentations['ea'], function(item) { %>
+          <p><%= item %></p>
+    <% }); %>
+    </div>
+    </div>
+    <% } %>
+
+    <% if (courses.length > 0) { %>
+     <div class="row">
+      <div class="heading_10">Instructional Courses, Workshops, Symposiums (national)</div>
+       <div class="regular_10">
+        <% _.forEach(courses, function(item) { %>
+             <p><%= item['label'] %></p>
+         <% }); %>
+       </div>
+      </div>
+    <% } %>
+
+    <% if (internationalmeetings.length > 0) { %>
+      <div class="row">
+        <div class="heading_10">International Meetings</div>
+        <div class="regular_10">
+        <% _.forEach(internationalmeetings, function(item) { %>
+             <p><%= item['label'] %></p>
+        <% }); %>
+        </div>
+      </div>
+    <% } %>
+
+    <% if (interviews.length > 0) { %>
+     <div class="row">
+     <div class="heading_10">Interviews</div>
+      <div class="regular_10">
+       <% _.forEach(interviews, function(item) { %>
+          <p><%= item['label'] %></p>
+       <% }); %>
+      </div>
+     </div>
+    <% } %>
+
+    <% if (invitedtalks.length > 0) { %>
+     <div class="row">
+     <div class="heading_10">Invited Talks</div>
+      <div class="regular_10">
+       <% _.forEach(invitedtalks, function(item) { %>
+          <p><%= item['label'] %></p>
+       <% }); %>
+      </div>
+     </div>
+    <% } %>
+
     <% if (presentations['lec'].length > 0) { %>
     <div class="row">
     <div class="heading_10_sub">Lectures</div>
     <div class="regular_10">
     <% _.forEach(presentations['lec'], function(item) { %>
           <p><%= item %></p>
-    <% }); %>
-    <% _.forEach(lectures, function(item) { %>
-            <p><%= item['label'] %></p>
     <% }); %>
     </div>
     </div>
@@ -765,28 +839,6 @@
       </div>
     <% } %>
 
-    <% if (professorships.length > 0) { %>
-     <div class="row">
-       <div class="heading_10">Visiting Professorships</div>
-       <div class="regular_10">
-        <% _.forEach(professorships, function(item) { %>
-             <p><%= item['label'] %></p>
-        <% }); %>
-       </div>
-     </div>
-    <% } %>
-
-    <% if (internationalmeetings.length > 0) { %>
-      <div class="row">
-        <div class="heading_10">International Meetings</div>
-        <div class="regular_10">
-        <% _.forEach(internationalmeetings, function(item) { %>
-             <p><%= item['label'] %></p>
-        <% }); %>
-        </div>
-      </div>
-    <% } %>
-
     <% if (nationalmeetings.length > 0) { %>
       <div class="row">
        <div class="heading_10">National Scientific Meetings (invited)</div>
@@ -798,64 +850,39 @@
       </div>
     <% } %>
 
-    <% if (courses.length > 0) { %>
-     <div class="row">
-      <div class="heading_10">Instructional Courses, workshops, symposiums (national)</div>
-       <div class="regular_10">
-        <% _.forEach(courses, function(item) { %>
-             <p><%= item['label'] %></p>
-         <% }); %>
-       </div>
-      </div>
-    <% } %>
-
-    <% if (posters.length > 0) { %>
-     <div class="row">
-     <div class="heading_10">Posters (for national meetings)</div>
-      <div class="regular_10">
-       <% _.forEach(posters, function(item) { %>
-          <p><%= item['label'] %></p>
-       <% }); %>
-      </div>
-     </div>
-    <% } %>
-
-    <% if (presentations['cs'].length > 0) { %>
-    <div class="heading_10_sub">Community Outreach</div>
-    <div class="regular_10">
-    <% _.forEach(presentations['cs'], function(item) { %>
-          <p><%= item %></p>
-    <% }); %>
-    </div>
-    <% } %>
-
-    <% if (presentations['ea'].length > 0) { %>
-    <div class="heading_10_sub">Editorial Activities</div>
-    <div class="regular_10">
-    <% _.forEach(presentations['ea'], function(item) { %>
-          <p><%= item %></p>
-    <% }); %>
-    </div>
-    <% } %>
-
-    <% if (presentations['pd'].length > 0) { %>
-    <div class="heading_10_sub">Professional Development</div>
-    <div class="regular_10">
-    <% _.forEach(presentations['pd'], function(item) { %>
-          <p><%= item %></p>
-    <% }); %>
-    </div>
-    <% } %>
-
     <% if (presentations['other'].length > 0) { %>
+    <div class="row">
     <div class="heading_10_sub">Other</div>
     <div class="regular_10">
     <% _.forEach(presentations['other'], function(item) { %>
           <p><%= item %></p>
     <% }); %>
     </div>
+    </div>
     <% } %>
 
+    <% if (presentations['pd'].length > 0) { %>
+    <div class="row">
+    <div class="heading_10_sub">Professional Development</div>
+    <div class="regular_10">
+    <% _.forEach(presentations['pd'], function(item) { %>
+          <p><%= item %></p>
+    <% }); %>
+    </div>
+    </div>
+    <% } %>
+
+    <% if (professorships.length > 0) { %>
+     <div class="row">
+       <div class="heading_10">Visiting Professorships</div>
+       <div class="regular_10">
+        <% _.forEach(professorships, function(item) { %>
+             <p><%= item['label'] %></p>
+        <% }); %>
+       </div>
+     </div>
+    <% } %>
+ 
     </div>
     <% } %>
 
