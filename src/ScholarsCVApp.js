@@ -91,13 +91,34 @@ export class ScholarsCVApp extends Component {
   }
   
 
-  render() {
-    return (
-
-        <div className="container"></div>
-         )
- }
-
+  render() {        
+         const { dispatch, cv } = this.props
+         let template = cv['template']
+         
+         if(template != "" && template != undefined){
+            return (
+              <div className="container"></div>
+            )
+          }else {
+             const { cv : {html} } = this.props
+             
+             //console.log(html)
+             let htmlContent = (html) => {
+              if (html) {
+                // need to remove <html><body>
+                let html_content = this.tidy(html)
+                //console.log(html_content)
+                return <div className="well" dangerouslySetInnerHTML={{__html: html_content}} />
+              } else {
+                return <div></div>
+              }
+             }
+             let html_section = htmlContent(html)
+             return (
+                <div className="container">{html_section}</div>
+             )
+        }
+  }
 }
 
 

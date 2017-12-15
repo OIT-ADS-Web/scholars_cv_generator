@@ -184,7 +184,7 @@ export function* fetchCV(action) {
     else{
       const html = yield call(generateTemplate, results)
       yield put(setHtml(html))
-      yield call(generateCVfromHtml, html, uri, "basic")
+    //  yield call(generateCVfromHtml, html, uri, "basic")
     }
     
     // FIXME: how to get html
