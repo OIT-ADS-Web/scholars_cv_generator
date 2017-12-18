@@ -393,7 +393,7 @@
       <span class="regular_10_italic">Include US government, state, and private organizations</span></div>
     <div class="regular_10">
     <% _.forEach(prof_consulting, function(item) { %>
-                    <p><%= item['label'] %></p>
+                    <p><%= item['label'].replace(".", ","); %></p>
               <% }); %>
     </div>
     </div>
