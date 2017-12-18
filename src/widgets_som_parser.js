@@ -293,7 +293,12 @@ class WidgetsSOMParser {
       if(value['attributes']['subtypes'] == 'Review') {
           pubTypes['reviews'].push({'citation': citation})
       }
-      if(value['attributes']['subtypes'] == 'Other') {
+      if(value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle' || value['attributes']['subtypes'] == 'Addendum' || value['attributes']['subtypes'] == 'Blog' ||
+        value['attributes']['subtypes'] == 'Corrigendum' || value['attributes']['subtypes'] == 'Essay' ||
+        value['attributes']['subtypes'] == 'Fictional Work' || value['attributes']['subtypes'] == 'Interview' ||
+        value['attributes']['subtypes'] == 'Occasional Writing' || value['attributes']['subtypes'] == 'Poetry' || 
+        value['attributes']['subtypes'] == 'Rapid Communication' || value['attributes']['subtypes'] == 'Scholarly Commentary' ||
+        value['attributes']['subtypes'] == 'Working Paper') {
           pubTypes['others'].push({'citation': citation})
       }
       if(value['attributes']['subtypes'] != 'Clinical Trial Manuscript' && role == "contributor") {
