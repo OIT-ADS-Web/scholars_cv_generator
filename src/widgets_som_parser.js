@@ -364,6 +364,7 @@ class WidgetsSOMParser {
                 case "Consulting": {
                     consultAppointmentsList['consulting'].push({'label':label, 'date':startDate});
                     if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession'){
+                        label = label.replace(/\./g,',');
                         consultAppointmentsList['prof_consulting'].push({'label':label, 'date':startDate});
                     }
                     break;
@@ -474,7 +475,7 @@ class WidgetsSOMParser {
     var mentorship_activities = null
 
     if (overview != null) {
-      var mentorship_activities = overview.replace(stripHtml, "");
+      var mentorship_activities = overview;
       mentorship_activities =  mentorship_activities.replace(/(&nbsp;)*/g,"");
     }
     return {'mentorship_activities': mentorship_activities}
@@ -558,7 +559,7 @@ class WidgetsSOMParser {
     var clinical_activities = null
 
     if (activities != null) {
-      var clinical_activities = activities.replace(stripHtml, "");
+      var clinical_activities = activities;
       clinical_activities = clinical_activities.replace(/(&nbsp;)*/g,"");
     }
     return {'clinical_activities': clinical_activities}
@@ -569,7 +570,7 @@ class WidgetsSOMParser {
     var academic_activities = null
 
     if (activities != null) {
-      var academic_activities = activities.replace(stripHtml, "");
+      var academic_activities = activities;
       academic_activities =  academic_activities.replace(/(&nbsp;)*/g,"");
     }
     return {'academic_activities': academic_activities}
