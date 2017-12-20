@@ -22,6 +22,7 @@
      .regular_10 { font-size: 10pt; font-family: "Times New Roman"; }
      .heading_10 { font-size: 10pt; font-family: Arial; font-weight: bold; line-height:12pt; }
      .regular_10_italic { font-size: 10pt; font-family: "Times New Roman"; font-style: italic; font-weight: normal; }
+     #pasted { font-size: 10pt; font-family:'Times New Roman'; }
     </style>
   </head>
   <body>
@@ -392,9 +393,9 @@
     <div class="heading_10">CONSULTANT APPOINTMENTS <br>
       <span class="regular_10_italic">Include US government, state, and private organizations</span></div>
     <div class="regular_10">
-    <% _.forEach(prof_consulting, function(item) { %>
-                    <p><%= item['label'].replace(".", ","); %></p>
-              <% }); %>
+     <% _.forEach(prof_consulting, function(item) { %>
+      <p><%= item['label'] %></p>
+     <% }); %>
     </div>
     </div>
     <% } else { %>
@@ -589,7 +590,7 @@
     <div class="row">
     <div class="heading_10">MENTORING ACTIVITIES <br>
       <span class="regular_10_italic">Describe experience mentoring colleagues. List mentoring activities separately for the following groups:Faculty, Fellows/doctoral students/ post docs and Medical students.</span></div>
-    <div class="regular_10">
+    <div style="font-size:10pt; font-family:TimesNewRoman;">
       <p>${mentorship_activities}</p>
     </div>
     </div>
@@ -597,7 +598,7 @@
     <div class="row">
      <div class="heading_10">MENTORING ACTIVITIES <br>
       <span class="regular_10_italic">Describe experience mentoring colleagues. List mentoring activities separately for the following groups:Faculty, Fellows/doctoral students/ post docs and Medical students.</span></div>
-     <div class="regular_10">
+     <div style="font-size:10pt; font-family:TimesNewRoman;">
       <p>&nbsp;</p>
      </div>
     </div>
@@ -750,15 +751,15 @@
     <div class="row">
     <div class="heading_10">CLINICAL ACTIVITIES <br>
       <span class="regular_10_italic">Describe types of clinical practice and estimate your time commitment.</span></div>
-    <div class="regular_10">
-      <p>${clinical_activities}</p>
-    </div>
+      <div style="font-size:10pt; font-family:TimesNewRoman;">
+        <p>${clinical_activities}</p>
+      </div>
     </div>
     <% } else { %>
     <div class="row">
      <div class="heading_10">CLINICAL ACTIVITIES 
       <span class="regular_10_italic">Describe types of clinical practice and estimate your time commitment.</span></div>
-     <div class="regular_10">
+     <div style="font-size:10pt; font-family:TimesNewRoman;">
       <p>&nbsp;</p>
      </div>
     </div>
@@ -772,7 +773,7 @@
            &bull;&nbsp;&nbsp;Committees<br/>
            &bull;&nbsp;&nbsp;Leadership positions
       </span></div>
-    <div class="regular_10">
+    <div style="font-size:10pt; font-family:TimesNewRoman;">
       <p>${academic_activities}</p>
     </div>
     </div>
@@ -784,7 +785,7 @@
            &bull;&nbsp;&nbsp;Committees<br/>
            &bull;&nbsp;&nbsp;Leadership positions
       </span></div>
-     <div class="regular_10">
+     <div style="font-size:10pt; font-family:TimesNewRoman;">
       <p>&nbsp;</p>
      </div>
     </div>
