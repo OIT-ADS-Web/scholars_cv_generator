@@ -200,7 +200,8 @@ class WidgetsParser {
     var currentResearchInterests = null
 
     if (overview != null) {
-      var current_research_interests = overview.replace(stripHtml, "");
+      //var current_research_interests = overview.replace(stripHtml, "");
+      var current_research_interests = overview;
       current_research_interests = current_research_interests.replace(/(&nbsp;)*/g,"");
     }
     return {'currentResearchInterests': currentResearchInterests}
@@ -211,7 +212,8 @@ class WidgetsParser {
     var researchInterests = null
 
     if (overview != null) {
-      var research_interests = overview.replace(stripHtml, "");
+      //var research_interests = overview.replace(stripHtml, "");
+      var research_interests = overview;
       research_interests = research_interests.replace(/(&nbsp;)*/g,"");
     }
     return {'researchInterests': researchInterests}
@@ -486,7 +488,8 @@ class WidgetsParser {
     var clinical_activities = null
 
     if (activities != null) {
-      var clinical_activities = activities.replace(stripHtml, "");
+      //var clinical_activities = activities.replace(stripHtml, "");
+      var clinical_activities = activities;
       clinical_activities = clinical_activities.replace(/(&nbsp;)*/g,"");
     }
     return {'clinical_activities': clinical_activities}
@@ -524,7 +527,8 @@ class WidgetsParser {
     var teaching_activities = null
 
     if (activities != null) {
-      var teaching_activities = activities.replace(stripHtml, "");
+      //var teaching_activities = activities.replace(stripHtml, "");
+      var teaching_activities = activities;
       teaching_activities = teaching_activities.replace(/(&nbsp;)*/g,"");
     }
     return {'teaching_activities': teaching_activities}
@@ -535,7 +539,8 @@ class WidgetsParser {
     var mentorship_activities = null
 
     if (overview != null) {
-      var mentorship_activities = overview.replace(stripHtml, "");
+      //var mentorship_activities = overview.replace(stripHtml, "");
+      var mentorship_activities = overview;
       mentorship_activities =  mentorship_activities.replace(/(&nbsp;)*/g,"");
     }
     return {'mentorship_activities': mentorship_activities}
@@ -546,7 +551,8 @@ class WidgetsParser {
     var academic_activities = null
 
     if (activities != null) {
-      var academic_activities = activities.replace(stripHtml, "");
+      //var academic_activities = activities.replace(stripHtml, "");
+      var academic_activities = activities;
       academic_activities =  academic_activities.replace(/(&nbsp;)*/g,"");
     }
     return {'academic_activities': academic_activities}
