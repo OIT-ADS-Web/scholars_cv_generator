@@ -298,7 +298,7 @@ class WidgetsSOMParser {
         value['attributes']['subtypes'] == 'Fictional Work' || value['attributes']['subtypes'] == 'Interview' ||
         value['attributes']['subtypes'] == 'Occasional Writing' || value['attributes']['subtypes'] == 'Poetry' || 
         value['attributes']['subtypes'] == 'Rapid Communication' || value['attributes']['subtypes'] == 'Scholarly Commentary' ||
-        value['attributes']['subtypes'] == 'Working Paper') {
+        value['attributes']['subtypes'] == 'Working paper') {
           pubTypes['others'].push({'citation': citation})
       }
       if(value['attributes']['subtypes'] != 'Clinical Trial Manuscript' && role == "contributor") {
