@@ -274,34 +274,41 @@ class WidgetsSOMParser {
             role = ""
             break;
       }
+
+      var subtype = value['attributes']['subtypes'];
+      // If subtypes have multiple of them, pick first one
+      if(subtype != ''){
+         if(subtype.indexOf(',') > -1){
+            var index = subtype.indexOf(',');
+            subtype = subtype.substr(0,index);
+         }
+      }
       
-      if(value['attributes']['subtypes'] == '' || value['attributes']['subtypes'] == 'academic article') {
+      if(subtype == '' || subtype == 'academic article') {
           pubTypes['journals'].push({'citation': citation})
       }
-      if(value['attributes']['subtypes'] == 'Clinical Trial Manuscript' && role == "contributor") {
+      if(subtype == 'Clinical Trial Manuscript' && role == "contributor") {
           pubTypes['manuscripts'].push({'citation': citation})
       }
-      if(value['attributes']['subtypes'] == 'Letter') {
+      if(subtype == 'Letter') {
           pubTypes['letters'].push({'citation': citation})
       }
-      if(value['attributes']['subtypes'] == 'Editorial' || value['attributes']['subtypes'] == 'Editorial Comment') {
+      if(subtype == 'Editorial' || subtype == 'Editorial Comment') {
           pubTypes['editorials'].push({'citation': citation})
       }
-      if(value['attributes']['subtypes'] == 'Abstract') {
+      if(subtype == 'Abstract') {
           pubTypes['abstracts'].push({'citation': citation})
       }
-      if(value['attributes']['subtypes'] == 'Review') {
+      if(subtype == 'Review') {
           pubTypes['reviews'].push({'citation': citation})
       }
-      if(value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle' || value['attributes']['subtypes'] == 'Addendum' || value['attributes']['subtypes'] == 'Blog' ||
-        value['attributes']['subtypes'] == 'Corrigendum' || value['attributes']['subtypes'] == 'Essay' ||
-        value['attributes']['subtypes'] == 'Fictional Work' || value['attributes']['subtypes'] == 'Interview' ||
-        value['attributes']['subtypes'] == 'Occasional Writing' || value['attributes']['subtypes'] == 'Poetry' || 
-        value['attributes']['subtypes'] == 'Rapid Communication' || value['attributes']['subtypes'] == 'Scholarly Commentary' ||
-        value['attributes']['subtypes'] == 'Working paper') {
+      if(value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle' || subtype == 'Addendum' || subtype == 'Blog' ||
+        subtype == 'Corrigendum' || subtype == 'Essay' || subtype == 'Fictional Work' || subtype == 'Interview' ||
+        subtype == 'Occasional writing' || subtype == 'Poetry' || subtype == 'Rapid Communication' || subtype == 'Scholarly Commentary' ||
+        subtype == 'Working paper') {
           pubTypes['others'].push({'citation': citation})
       }
-      if(value['attributes']['subtypes'] != 'Clinical Trial Manuscript' && role == "contributor") {
+      if(subtype != 'Clinical Trial Manuscript' && role == "contributor") {
           pubTypes['nonauthored'].push({'citation': citation})
       }
       if(value['vivoType'] == 'http://purl.org/ontology/bibo/Book') {
