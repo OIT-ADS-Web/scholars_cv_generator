@@ -497,7 +497,7 @@ class WidgetsParser {
   };
 
   parseLeadershipPositions(data) {
-    let positions = data['leadershipPositions'] || null;
+    let positions = data['attributes']['leadershipPositions'] || null;
     var leadership_positions = null
 
     if (positions != null) {
