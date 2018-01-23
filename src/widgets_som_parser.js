@@ -258,6 +258,10 @@ class WidgetsSOMParser {
             role = "contributor"
             break;
 
+          case 'http://vivoweb.org/ontology/core#Contribution':
+            role = "contributor"
+            break;
+            
           case 'http://vivoweb.org/ontology/core#Translatorship':
             role = "translator"
             break;
