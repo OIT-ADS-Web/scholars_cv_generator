@@ -206,7 +206,6 @@ class WidgetsParser {
 
     if (overview != null) {
       var current_research_interests = overview.replace(stripHtml, "");
-      current_research_interests = current_research_interests.replace(/(&nbsp;)*/g,"");
     }
     return {'currentResearchInterests': currentResearchInterests}
   }
@@ -217,7 +216,6 @@ class WidgetsParser {
 
     if (overview != null) {
       var research_interests = overview.replace(stripHtml, "");
-      research_interests = research_interests.replace(/(&nbsp;)*/g,"");
     }
     return {'researchInterests': researchInterests}
   }
@@ -490,8 +488,6 @@ class WidgetsParser {
 
     if (activities != null) {
       var clinical_activities = activities;
-      clinical_activities = clinical_activities.replace(/(&nbsp;)*/g,"");
-      clinical_activities = clinical_activities.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'clinical_activities': clinical_activities}
   };
@@ -502,8 +498,6 @@ class WidgetsParser {
 
     if (positions != null) {
       var leadership_positions = positions;
-      leadership_positions = leadership_positions.replace(/(&nbsp;)*/g,"");
-      leadership_positions = leadership_positions.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'leadership_positions': leadership_positions}
   };
@@ -530,8 +524,6 @@ class WidgetsParser {
 
     if (activities != null) {
       var teaching_activities = activities;
-      teaching_activities = teaching_activities.replace(/(&nbsp;)*/g,"");
-      teaching_activities = teaching_activities.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'teaching_activities': teaching_activities}
   };
@@ -542,8 +534,6 @@ class WidgetsParser {
 
     if (overview != null) {
       var mentorship_activities = overview;
-      mentorship_activities =  mentorship_activities.replace(/(&nbsp;)*/g,"");
-      mentorship_activities =  mentorship_activities.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'mentorship_activities': mentorship_activities}
   };
@@ -554,8 +544,6 @@ class WidgetsParser {
 
     if (activities != null) {
       var academic_activities = activities;
-      academic_activities =  academic_activities.replace(/(&nbsp;)*/g,"");
-      academic_activities =  academic_activities.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'academic_activities': academic_activities}
   };
