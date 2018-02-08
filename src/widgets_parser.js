@@ -206,7 +206,6 @@ class WidgetsParser {
 
     if (overview != null) {
       var current_research_interests = overview.replace(stripHtml, "");
-      //current_research_interests = current_research_interests.replace(/(&nbsp;)*/g,"");
     }
     return {'currentResearchInterests': currentResearchInterests}
   }
@@ -217,7 +216,6 @@ class WidgetsParser {
 
     if (overview != null) {
       var research_interests = overview.replace(stripHtml, "");
-      //research_interests = research_interests.replace(/(&nbsp;)*/g,"");
     }
     return {'researchInterests': researchInterests}
   }
