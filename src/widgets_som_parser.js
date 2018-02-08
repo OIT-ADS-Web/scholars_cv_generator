@@ -487,8 +487,8 @@ class WidgetsSOMParser {
 
     if (overview != null) {
       var mentorship_activities = overview;
-      mentorship_activities =  mentorship_activities.replace(/(&nbsp;)*/g,"");
-      mentorship_activities =  mentorship_activities.replace(/[<]br[^>]*[>]/gi,"");
+      //mentorship_activities =  mentorship_activities.replace(/(&nbsp;)*/g,"");
+      //mentorship_activities =  mentorship_activities.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'mentorship_activities': mentorship_activities}
   };
@@ -498,9 +498,10 @@ class WidgetsSOMParser {
     var teaching_activities = null
 
     if (activities != null) {
-      var teaching_activities = activities.replace(stripHtml, "");
-      teaching_activities =  teaching_activities.replace(/(&nbsp;)*/g,"");
-      teaching_activities =  teaching_activities.replace(/[<]br[^>]*[>]/gi,"");
+      var teaching_activities = activities;
+      //var teaching_activities = activities.replace(stripHtml, "");
+      //teaching_activities =  teaching_activities.replace(/(&nbsp;)*/g,"");
+      //teaching_activities =  teaching_activities.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'teaching_activities': teaching_activities}
   };
@@ -573,8 +574,8 @@ class WidgetsSOMParser {
 
     if (activities != null) {
       var clinical_activities = activities;
-      clinical_activities = clinical_activities.replace(/(&nbsp;)*/g,"");
-      clinical_activities =  clinical_activities.replace(/[<]br[^>]*[>]/gi,"");
+      //clinical_activities = clinical_activities.replace(/(&nbsp;)*/g,"");
+      //clinical_activities =  clinical_activities.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'clinical_activities': clinical_activities}
   };
@@ -585,8 +586,8 @@ class WidgetsSOMParser {
 
     if (activities != null) {
       var academic_activities = activities;
-      academic_activities = academic_activities.replace(/(&nbsp;)*/g,"");
-      academic_activities =  academic_activities.replace(/[<]br[^>]*[>]/gi,"");
+      //academic_activities = academic_activities.replace(/(&nbsp;)*/g,"");
+      //academic_activities =  academic_activities.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'academic_activities': academic_activities}
   };
