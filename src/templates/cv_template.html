@@ -886,9 +886,27 @@
     </div>
     <% } %>
 
-    <% if ((servicesToDuke['cs'].length > 0) || (servicesToDuke['ea'].length > 0) || (servicesToDuke['pd'].length > 0) || (servicesToDuke['lec'].length > 0) || (servicesToDuke['other'].length > 0)) { %>
+    <% if ((servicesToDuke['cs'].length > 0) || (servicesToDuke['consulting'].length > 0) || (servicesToDuke['cmts'].length > 0) || (servicesToDuke['eoa'].length > 0) || (servicesToDuke['eva'].length > 0) || (servicesToDuke['ea'].length > 0) || (servicesToDuke['pd'].length > 0) || (servicesToDuke['lec'].length > 0) || (servicesToDuke['other'].length > 0)) { %>
     <div class="row">
     <div class="heading_10">SERVICE TO DUKE</div>
+     <% if (servicesToDuke['consulting'].length > 0) { %>
+    <div class="heading_10_sub">Consulting</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToDuke['consulting'], function(item) { %>
+                    <p><%= item %></p>
+              <% }); %>
+               </div>
+         <% } %> 
+
+     <% if (servicesToDuke['cmts'].length > 0) { %>
+    <div class="heading_10_sub">Committee Service</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToDuke['cmts'], function(item) { %>
+                    <p><%= item %></p>
+              <% }); %>
+               </div>
+         <% } %>
+
      <% if (servicesToDuke['cs'].length > 0) { %>
     <div class="heading_10_sub">Community Outreach</div>
     <div class="regular_10">
@@ -905,21 +923,39 @@
                    <p><%= item %></p>
               <% }); %>
                </div>
-            <% } %>     
+            <% } %>  
+
+      <% if (servicesToDuke['eoa'].length > 0) { %>
+    <div class="heading_10_sub">Event/Org Administration</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToDuke['eoa'], function(item) { %>
+                   <p><%= item %></p>
+              <% }); %>
+               </div>
+            <% } %>    
+
+      <% if (servicesToDuke['eva'].length > 0) { %>
+    <div class="heading_10_sub">Event Attendance</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToDuke['eva'], function(item) { %>
+                   <p><%= item %></p>
+              <% }); %>
+               </div>
+            <% } %>   
+
+     <% if (servicesToDuke['lec'].length > 0) { %>
+    <div class="heading_10_sub">Lectures</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToDuke['lec'], function(item) { %>
+                    <p><%= item %></p>
+              <% }); %>
+               </div>
+    <% } %> 
 
      <% if (servicesToDuke['pd'].length > 0) { %>
     <div class="heading_10_sub">Professional Development</div>
     <div class="regular_10">
     <% _.forEach(servicesToDuke['pd'], function(item) { %>
-                    <p><%= item %></p>
-              <% }); %>
-               </div>
-    <% } %>
-
-    <% if (servicesToDuke['lec'].length > 0) { %>
-    <div class="heading_10_sub">Lectures</div>
-    <div class="regular_10">
-    <% _.forEach(servicesToDuke['lec'], function(item) { %>
                     <p><%= item %></p>
               <% }); %>
                </div>
@@ -938,9 +974,30 @@
     <% } %>
 
 
-    <% if ((servicesToProfession['cs'].length > 0) || (servicesToProfession['ea'].length > 0) || (servicesToProfession['pd'].length > 0) || (servicesToProfession['lec'].length > 0) || (servicesToProfession['other'].length > 0)) { %>
+    <% if ((servicesToProfession['cs'].length > 0) || (servicesToProfession['consulting'].length > 0) || (servicesToProfession['cmts'].length > 0) || (servicesToProfession['ea'].length > 0) || (servicesToProfession['eoa'].length > 0) || (servicesToProfession['eva'].length > 0) || (servicesToProfession['pd'].length > 0) || (servicesToProfession['lec'].length > 0) || (servicesToProfession['other'].length > 0)) { %>
     <div class="row">
     <div class="heading_10">SERVICE TO PROFESSION</div>
+
+     <% if (servicesToProfession['consulting'].length > 0) { %>
+    <div class="heading_10_sub">Consulting</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToProfession['consulting'], function(item) { %>
+                    <p><%= item %></p>
+              <% }); %>
+               </div>
+         <% } %>  
+
+
+    <% if (servicesToProfession['cmts'].length > 0) { %>
+    <div class="heading_10_sub">Committee Service</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToProfession['cmts'], function(item) { %>
+                    <p><%= item %></p>
+              <% }); %>
+               </div>
+         <% } %>      
+
+
     <% if (servicesToProfession['cs'].length > 0) { %>
     <div class="heading_10_sub">Community Outreach</div>
     <div class="regular_10">
@@ -959,6 +1016,33 @@
                </div>
             <% } %>     
 
+     <% if (servicesToProfession['eoa'].length > 0) { %>
+    <div class="heading_10_sub">Event/Org Administration</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToProfession['eoa'], function(item) { %>
+                    <p><%= item %></p>
+              <% }); %>
+               </div>
+            <% } %>   
+
+    <% if (servicesToProfession['eva'].length > 0) { %>
+    <div class="heading_10_sub">Event Attendance </div>
+    <div class="regular_10">
+    <% _.forEach(servicesToProfession['eva'], function(item) { %>
+                    <p><%= item %></p>
+              <% }); %>
+               </div>
+            <% } %>  
+
+     <% if (servicesToProfession['lec'].length > 0) { %>
+    <div class="heading_10_sub">Lectures</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToProfession['lec'], function(item) { %>
+                    <p><%= item %></p>
+              <% }); %>
+               </div>
+               <% } %>
+ 
      <% if (servicesToProfession['pd'].length > 0) { %>
     <div class="heading_10_sub">Professional Development</div>
     <div class="regular_10">
@@ -967,16 +1051,6 @@
               <% }); %>
                </div>
                <% } %>
-
-    <% if (servicesToProfession['lec'].length > 0) { %>
-    <div class="heading_10_sub">Lectures</div>
-    <div class="regular_10">
-    <% _.forEach(servicesToProfession['lec'], function(item) { %>
-                    <p><%= item %></p>
-              <% }); %>
-               </div>
-               <% } %>
-
 
     <% if (servicesToProfession['other'].length > 0) { %>
     <div class="heading_10_sub">Other</div>
@@ -1011,19 +1085,19 @@
                </div>
             <% } %>     
 
-     <% if (outreach['pd'].length > 0) { %>
-    <div class="heading_10_sub">Professional Development</div>
+     <% if (outreach['lec'].length > 0) { %>
+    <div class="heading_10_sub">Lectures</div>
     <div class="regular_10">
-    <% _.forEach(outreach['pd'], function(item) { %>
+    <% _.forEach(outreach['lec'], function(item) { %>
                    <p><%= item %></p>
               <% }); %>
                </div>
                <% } %>
 
-    <% if (outreach['lec'].length > 0) { %>
-    <div class="heading_10_sub">Lectures</div>
+     <% if (outreach['pd'].length > 0) { %>
+    <div class="heading_10_sub">Professional Development</div>
     <div class="regular_10">
-    <% _.forEach(outreach['lec'], function(item) { %>
+    <% _.forEach(outreach['pd'], function(item) { %>
                    <p><%= item %></p>
               <% }); %>
                </div>
