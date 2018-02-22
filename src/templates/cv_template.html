@@ -886,7 +886,7 @@
     </div>
     <% } %>
 
-    <% if ((servicesToDuke['cs'].length > 0) || (servicesToDuke['consulting'].length > 0) || (servicesToDuke['cmts'].length > 0) || (servicesToDuke['eoa'].length > 0) || (servicesToDuke['eva'].length > 0) || (servicesToDuke['ea'].length > 0) || (servicesToDuke['pd'].length > 0) || (servicesToDuke['lec'].length > 0) || (servicesToDuke['other'].length > 0)) { %>
+    <% if ((servicesToDuke['cs'].length > 0) || (servicesToDuke['consulting'].length > 0) || (servicesToDuke['cmts'].length > 0) || (servicesToDuke['ci'].length > 0) || (servicesToDuke['eoa'].length > 0) || (servicesToDuke['eva'].length > 0) || (servicesToDuke['ea'].length > 0) || (servicesToDuke['pd'].length > 0) || (servicesToDuke['lec'].length > 0) || (servicesToDuke['other'].length > 0)) { %>
     <div class="row">
     <div class="heading_10">SERVICE TO DUKE</div>
      <% if (servicesToDuke['consulting'].length > 0) { %>
@@ -914,7 +914,16 @@
                     <p><%= item %></p>
               <% }); %>
                </div>
-         <% } %>      
+         <% } %>   
+
+     <% if (servicesToDuke['ci'].length > 0) { %>
+    <div class="heading_10_sub">Curriculum Innovations</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToDuke['ci'], function(item) { %>
+                    <p><%= item %></p>
+              <% }); %>
+               </div>
+         <% } %>     
 
      <% if (servicesToDuke['ea'].length > 0) { %>
     <div class="heading_10_sub">Editorial Activities</div>
@@ -974,7 +983,7 @@
     <% } %>
 
 
-    <% if ((servicesToProfession['cs'].length > 0) || (servicesToProfession['consulting'].length > 0) || (servicesToProfession['cmts'].length > 0) || (servicesToProfession['ea'].length > 0) || (servicesToProfession['eoa'].length > 0) || (servicesToProfession['eva'].length > 0) || (servicesToProfession['pd'].length > 0) || (servicesToProfession['lec'].length > 0) || (servicesToProfession['other'].length > 0)) { %>
+    <% if ((servicesToProfession['cs'].length > 0) || (servicesToProfession['consulting'].length > 0) || (servicesToProfession['cmts'].length > 0) || (servicesToProfession['ci'].length > 0) || (servicesToProfession['ea'].length > 0) || (servicesToProfession['eoa'].length > 0) || (servicesToProfession['eva'].length > 0) || (servicesToProfession['pd'].length > 0) || (servicesToProfession['lec'].length > 0) || (servicesToProfession['other'].length > 0)) { %>
     <div class="row">
     <div class="heading_10">SERVICE TO PROFESSION</div>
 
@@ -1005,7 +1014,17 @@
                     <p><%= item %></p>
               <% }); %>
                </div>
-         <% } %>      
+         <% } %>    
+
+     <% if (servicesToProfession['ci'].length > 0) { %>
+    <div class="heading_10_sub">Curriculum Innovations</div>
+    <div class="regular_10">
+    <% _.forEach(servicesToProfession['ci'], function(item) { %>
+                    <p><%= item %></p>
+              <% }); %>
+               </div>
+         <% } %>    
+
 
      <% if (servicesToProfession['ea'].length > 0) { %>
     <div class="heading_10_sub">Editorial Activities</div>
