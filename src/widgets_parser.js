@@ -326,10 +326,10 @@ class WidgetsParser {
 
   parseProfessionalActivities(data) {
     var professionalActivitiesTypes = {
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': { 'cs': [], 'ea': [], 'pd': [], 'lec': [], 'other':[] }, 
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': { 'cs': [], 'ea': [], 'pd': [], 'lec': [], 'other':[] }, 
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : { 'cs': [], 'ea': [], 'pd': [], 'lec': [], 'other':[] }, 
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : { 'cs': [], 'ea': [], 'pd': [], 'lec':[], 'other':[] }
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] }, 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] }, 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] }, 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec':[], 'other':[] }
     };
     
     var professionalActivities = data['professionalActivities'];
@@ -342,6 +342,77 @@ class WidgetsParser {
       let vivoType = value['vivoType'];
       
       if(serviceType == 'Community Outreach') {
+          full_label = label; 
+      }
+
+      return full_label;
+    };
+
+    let figureConsulting = function(value) {
+
+      var full_label = "";
+      var label = value['label'];                  
+      var serviceType = value.attributes['serviceType'];
+      let vivoType = value['vivoType'];
+      
+      if(serviceType == 'Consulting') {
+          full_label = label; 
+      }
+
+      return full_label;
+    };
+
+
+    let figureCmts = function(value) {
+
+      var full_label = "";
+      var label = value['label'];                  
+      var serviceType = value.attributes['serviceType'];
+      let vivoType = value['vivoType'];
+      
+      if(serviceType == 'Committee Service') {
+          full_label = label; 
+      }
+
+      return full_label;
+    };
+
+    let figureCi = function(value) {
+
+      var full_label = "";
+      var label = value['label'];                  
+      var serviceType = value.attributes['serviceType'];
+      let vivoType = value['vivoType'];
+      
+      if(serviceType == 'Curriculum Innovations') {
+          full_label = label; 
+      }
+
+      return full_label;
+    };
+
+    let figureEoa = function(value) {
+
+      var full_label = "";
+      var label = value['label'];                  
+      var serviceType = value.attributes['serviceType'];
+      let vivoType = value['vivoType'];
+      
+      if(serviceType == 'Event/Organization Administration') {
+          full_label = label; 
+      }
+
+      return full_label;
+    };
+
+    let figureEva = function(value) {
+
+      var full_label = "";
+      var label = value['label'];                  
+      var serviceType = value.attributes['serviceType'];
+      let vivoType = value['vivoType'];
+      
+      if(serviceType == 'Event Attendance') {
           full_label = label; 
       }
 
@@ -407,28 +478,47 @@ class WidgetsParser {
     _.forEach(professionalActivities, function(value) {
     
       let community_service = figureCS(value)
+      let consulting = figureConsulting(value)
+      let committee_service = figureCmts(value)
+      let curriculum_inovation = figureCi(value)
+      let event_org_administration = figureEoa(value)
+      let event_attendance = figureEva(value)
       let professional_development = figurePD(value)
       let editorial_activities = figureEA(value)
       let lectures = figureLec(value)
       let others = figureOther(value)
 
       let vivoType = value['vivoType'];
-
       
       if(community_service != ""){
         professionalActivitiesTypes[vivoType]['cs'].push(community_service);
       }
+      if(consulting != ""){
+        professionalActivitiesTypes[vivoType]['consulting'].push(consulting);
+      }
+      if(committee_service != ""){
+        professionalActivitiesTypes[vivoType]['cmts'].push(committee_service);
+      }
+      if(curriculum_inovation != ""){
+        professionalActivitiesTypes[vivoType]['ci'].push(curriculum_inovation);
+      }
       if(editorial_activities != ""){
-      professionalActivitiesTypes[vivoType]['ea'].push(editorial_activities);
+        professionalActivitiesTypes[vivoType]['ea'].push(editorial_activities);
+      }
+      if(event_org_administration != ""){
+        professionalActivitiesTypes[vivoType]['eoa'].push(event_org_administration);
+      }
+      if(event_attendance != ""){
+        professionalActivitiesTypes[vivoType]['eva'].push(event_attendance);
       }
       if(professional_development != ""){
-      professionalActivitiesTypes[vivoType]['pd'].push(professional_development);
+        professionalActivitiesTypes[vivoType]['pd'].push(professional_development);
       }
       if(lectures != ""){
-      professionalActivitiesTypes[vivoType]['lec'].push(lectures);
+        professionalActivitiesTypes[vivoType]['lec'].push(lectures);
       }
       if(others != ""){
-      professionalActivitiesTypes[vivoType]['other'].push(others);
+        professionalActivitiesTypes[vivoType]['other'].push(others);
       }
       
     });
