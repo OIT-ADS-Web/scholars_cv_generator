@@ -98,6 +98,7 @@ class WidgetsSOMParser {
     var primaryPositions = []
     var secondaryPositions = []
     var variousPositions = []
+    var allPositions = []
 
     let positionTypes = {
       'primaryPosition': 'http://vivoweb.org/ontology/core#PrimaryPosition',
@@ -108,6 +109,7 @@ class WidgetsSOMParser {
     _.forEach(positions, function(value) {
       var vivoType = value['vivoType'];
       var label = value['label'];
+      var year = value['attributes']['startYear'].substr(0,4);
       switch(vivoType) {
         case positionTypes['primaryPosition']: {
           primaryPositions.push({'label': label})
@@ -122,12 +124,14 @@ class WidgetsSOMParser {
           break;
         }
       }
+      allPositions.push({'orig_label':label, 'startYear': year})
     });
 
     let results = {
       'primaryPositions': primaryPositions,
       'secondaryPositions': secondaryPositions,
-      'variousPositions': variousPositions
+      'variousPositions': variousPositions,
+      'allPositions': allPositions
     }
     return results
   };
@@ -223,7 +227,7 @@ class WidgetsSOMParser {
     var publications = data['publications'] || [];
 
     let figureCitation = function(value) {
-      var citation = value.attributes['mlaCitation']
+      var citation = value.attributes['icmjeCitation']
             .replace(stripOpeningTag,"")
             .replace(stripClosingTag, "");
 
@@ -287,39 +291,45 @@ class WidgetsSOMParser {
             subtype = subtype.substr(0,index);
          }
       }
+
+      var year = value['attributes']['year'];
+       // substring year for first 4 digits
+      if(year != ''){
+         year = year;
+      }
       
       if(subtype == '' || subtype == 'academic article') {
-          pubTypes['journals'].push({'citation': citation})
+          pubTypes['journals'].push({'citation': citation, 'year': year})
       }
       if(subtype == 'Clinical Trial Manuscript' && role == "contributor") {
-          pubTypes['manuscripts'].push({'citation': citation})
+          pubTypes['manuscripts'].push({'citation': citation, 'year': year})
       }
       if(subtype == 'Letter') {
-          pubTypes['letters'].push({'citation': citation})
+          pubTypes['letters'].push({'citation': citation, 'year': year})
       }
       if(subtype == 'Editorial' || subtype == 'Editorial Comment') {
-          pubTypes['editorials'].push({'citation': citation})
+          pubTypes['editorials'].push({'citation': citation, 'year': year})
       }
       if(subtype == 'Abstract') {
-          pubTypes['abstracts'].push({'citation': citation})
+          pubTypes['abstracts'].push({'citation': citation,'year': year})
       }
       if(subtype == 'Review') {
-          pubTypes['reviews'].push({'citation': citation})
+          pubTypes['reviews'].push({'citation': citation, 'year': year})
       }
       if(value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle' || subtype == 'Addendum' || subtype == 'Blog' ||
         subtype == 'Corrigendum' || subtype == 'Essay' || subtype == 'Fictional Work' || subtype == 'Interview' ||
         subtype == 'Occasional writing' || subtype == 'Poetry' || subtype == 'Rapid Communication' || subtype == 'Scholarly Commentary' ||
         subtype == 'Working paper') {
-          pubTypes['others'].push({'citation': citation})
+          pubTypes['others'].push({'citation': citation, 'year': year})
       }
       if(subtype != 'Clinical Trial Manuscript' && role == "contributor") {
-          pubTypes['nonauthored'].push({'citation': citation})
+          pubTypes['nonauthored'].push({'citation': citation, 'year': year})
       }
       if(value['vivoType'] == 'http://purl.org/ontology/bibo/Book') {
-         pubTypes['books'].push({'citation': citation})
+         pubTypes['books'].push({'citation': citation, 'year': year})
       }
       if (value['vivoType'] == 'http://purl.org/ontology/bibo/BookSection') {
-         pubTypes['booksections'].push({'citation': citation})
+         pubTypes['booksections'].push({'citation': citation, 'year': year})
       }
     });
 
