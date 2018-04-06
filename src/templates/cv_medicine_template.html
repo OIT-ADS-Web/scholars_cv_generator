@@ -160,13 +160,20 @@
       </div>
     </div>
     
-    <% if (pastappointments.length > 0) { %>
+    <% var mergeExpPos = Object.assign(allPositions, pastappointments) %>
+  
+    <% if (mergeExpPos.length > 0) { %>
+    <% mergeExpPos.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
      <div class="row">
       <div class="heading_10">DUKE UNIVERSITY FACULTY APPOINTMENTS</div>
       <div class="regular_10">
-      <% _.forEach(pastappointments, function(item) { %>
-       <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['orig_label'] %></p>
-      <% }); %>
+        <% _.forEach(mergeExpPos, function(item) { %>
+          <% if(item['endYear'] != null)  { %>
+            <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['orig_label'] %></p>
+          <% } else { %>    
+            <p><%= item['startYear'] + ", " + item['orig_label'] %></p>
+        <% } %>
+       <% }); %>
     </div>
     </div>
     <% } else { %>
@@ -182,6 +189,8 @@
       <div class="heading_10">PUBLICATIONS <br>
         <span class="regular_10_italic">Do not include submitted papers or papers in preparation. List separately those papers in press. Publications should be numbered sequentionally with the oldest listed first. Include the PubMedID. List all authors in the publication and do not use “et al.”Date of the journal is required.</span></div>
        
+        <% journals.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+
         <% if (journals.length > 0) { %>
         <div class="row">
          <div class="heading_10">Refereed journal articles <br>
@@ -204,6 +213,7 @@
         </div>
         <% } %>
 
+         <% manuscripts.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (manuscripts.length > 0) { %>
         <div class="row">
          <div class="heading_10">Study-related manuscripts on multicenter clinical trials</div>
@@ -224,6 +234,7 @@
         </div>
         <% } %>
 
+        <% letters.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (letters.length > 0) { %>
         <div class="row">
          <div class="heading_10">Letters</div>
@@ -244,6 +255,7 @@
         </div>
         <% } %>
 
+        <% editorials.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (editorials.length > 0) { %>
         <div class="row">
          <div class="heading_10">Editorials</div>
@@ -264,6 +276,7 @@
         </div>
         <% } %>
 
+        <% books.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (books.length > 0) { %>
         <div class="row">
          <div class="heading_10">Books</div>
@@ -284,6 +297,7 @@
         </div>
         <% } %>
 
+        <% booksections.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (booksections.length > 0) { %>
         <div class="row">
          <div class="heading_10">Chapters</div>
@@ -304,6 +318,7 @@
         </div>
         <% } %>
 
+        <% abstracts.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (abstracts.length > 0) { %>
         <div class="row">
          <div class="heading_10">Selected Abstracts</div>
@@ -324,6 +339,7 @@
         </div>
         <% } %>
 
+        <% reviews.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (reviews.length > 0) { %>
         <div class="row">
          <div class="heading_10">Scientific reviews</div>
@@ -344,6 +360,7 @@
         </div>
         <% } %>
 
+        <% nonauthored.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (nonauthored.length > 0) { %>
         <div class="row">
          <div class="heading_10">Non-authored publications</div>
@@ -364,6 +381,7 @@
         </div>
         <% } %>
 
+        <% others.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (others.length > 0) { %>
         <div class="row">
          <div class="heading_10">Other publications</div>
