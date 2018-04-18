@@ -72,7 +72,7 @@ export function generateMedicineTemplate(results) {
 }
 
 
-export function generateCVfromHtml(html, uri) {
+export function generateCVfromHtml(html, uri, template) {
   console.log("sagas.generateCVfromHtml")
 
   try {
@@ -89,13 +89,21 @@ export function generateCVfromHtml(html, uri) {
           mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         }
       ) //Output the document using Data-URI
-  
+
       let index = uri.lastIndexOf("/")
       let personNumber = uri.substr(index+1)
       
       let now = moment().format()
-      let fileName = `${personNumber}_${now}.docx`
-      
+      //let fileName = `${personNumber}_${now}.docx`
+      let fileName = ''
+
+      if(template == "basic"){
+        fileName = 'Scholars CV.docx'
+      }
+      else{
+        fileName = 'APT CV.docx'
+      } 
+
       FileSaver.saveAs(blob, fileName)
     })
 
@@ -166,17 +174,17 @@ export function* fetchCV(action) {
     if(template == "basic"){
       const html = yield call(generateTemplate, results)
       yield put(setHtml(html))
-      yield call(generateCVfromHtml, html, uri)
+      yield call(generateCVfromHtml, html, uri, "basic")
     }
     else if(template == "medicine") {
       const html = yield call(generateMedicineTemplate, results)
       yield put(setHtml(html))
-      yield call(generateCVfromHtml, html, uri)
+      yield call(generateCVfromHtml, html, uri, "medicine")
     }
     else{
       const html = yield call(generateTemplate, results)
       yield put(setHtml(html))
-      yield call(generateCVfromHtml, html, uri)
+    //  yield call(generateCVfromHtml, html, uri, "basic")
     }
     
     // FIXME: how to get html
