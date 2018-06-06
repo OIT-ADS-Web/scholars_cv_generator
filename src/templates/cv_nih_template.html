@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>CV: ${name}</title>
+    
+    <style>
+     h1 { font-size: 150%; }
+     h2 { font-size: 135%; }
+     h3 { font-size: 115%; }
+     h4 { font-size: 100%; }
+     ol { margin-left: 25px; text-indent: -25px; }
+     ul { margin-left: 25px; text-indent: -25px; }
+     p { line-height: 6pt; margin-top: 3pt; margin-bottom: 0pt; }
+     div.heading_12 { font-size: 12pt; font-family: Arial; font-weight: bold; text-align: center; line-height:12pt; }
+     div.heading_10_center { font-size: 10pt; font-family: "Times New Roman"; text-align: center; line-height: 12pt; }
+     div.heading_10_sub { font-size: 10pt; font-family: Arial; font-weight: bold; line-height:12pt; margin-top: 6pt;}
+     div.regular_12 { font-size: 12pt; font-family: "Times New Roman"; }
+     div.container { width: 100%; }
+     div.row { margin-bottom: 1em; padding-bottom: 1em;}
+     div.slight-indent { margin-left: 24pt; }
+     .regular_10 { font-size: 10pt; font-family: "Times New Roman"; }
+     .heading_10 { font-size: 10pt; font-family: Arial; font-weight: bold; line-height:12pt; }
+     .regular_10_italic { font-size: 10pt; font-family: "Times New Roman"; font-style: italic; font-weight: normal; }
+     #pasted { font-size: 10pt; font-family:'Times New Roman'; }
+    </style>
+  </head>
+  <body>
+  <div class="container">
+    <% var degree = ""; %>
+    <% _.forEach(educations, function(item) { %>
+      <% if (item['label'].indexOf(",") > 0) { %>
+      <% var n = item['label'].indexOf(","); %>
+      <% degree += item['label'].substr(0,n) + ", "; %>
+      <% } %>
+    <% }); %>
+    <% degree = degree.slice(0, -2); %>
+
+    <div class="heading_12">
+      DUKE UNIVERSITY MEDICAL CENTER
+      <br/>
+      NIH CURRICULUM VITAE
+      <br/>
+      for 
+      <br/>
+      Permanent Record
+      <br/>
+     and the Appointments and Promotions Committee 
+    </div>
+
+     <% var dt = new Date(); %>
+     <% var today = "" %>
+     <% var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"]; %>
+     <% today = "Prepared: " +  monthNames[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear(); %>
+     
+    <div class="heading_12">
+      <% if (degree != undefined && degree != "") { %>
+      ${name}, ${degree}
+      <% } else { %>
+      ${name}
+      <% } %>
+    </div>
+
+    <div class="heading_10_center">
+        <p style="margin-bottom: 6pt;">${today}</p>
+    </div>
+
+    <% if(primaryPositions.length > 0) { %>
+    	<% var title = ""; %>
+    	<% _.forEach(primaryPositions, function(item) { %>
+   	 	<% title += item['label'] + ', '; %>
+    	<% }); %>
+    	<% title = title.slice(0,-2); %>
+
+    	 <div class="row"><span class="heading_10">PRIMARY ACADEMIC APPOINTMENT: </span> <span class="regular_10">${title}</span></div>
+    <% } %>
+
+    <% if(secondaryPositions.length > 0) { %>
+    	<% var title = ""; %>
+    	<% _.forEach(secondaryPositions, function(item) { %>
+    	<% title += item['label'] + ', '; %>
+    	<% }); %>
+    	<% title = title.slice(0,-2); %>
+
+    	<div class="row"><span class="heading_10">SECONDARY ACADEMIC APPOINTMENT: </span> <span class="regular_10">${title}</span></div>
+    <% } %>
+
+    <% if (pastappointments.length > 0) { %>
+    	<% var title = ""; %>
+    	<% _.forEach(pastappointments, function(item) { %>
+    	<% title = item['startYear'] + ', ' + item['orig_label'] + ', '; %>
+    	<% }); %>
+      <% title = title.replace(/,\s*$/, ""); %>
+      <div class="row"><span class="heading_10">DATE / RANK OF FIRST DUKE FACULTY APPOINTMENT: </span> <span class="regular_10">${title}</span></div>
+    	
+    <% } %>
+
+    <% if (licences.length > 0) { %>
+ 		<% var lic = ""; %>
+    	<% _.forEach(licences, function(item) { %>
+    	<% lic = item['label']; %>
+    	<% }); %>
+
+    	<div class="row"><span class="heading_10">MEDICAL LICENSE NUMBER AND DATE: </span> <span class="regular_10">${lic}</span></div>
+	 <% } %>
+
+	  <% if (educations.length > 0) { %>
+    <% educations.sort(function(a,b) {return (a.endYear > b.endYear) ? 1 : ((b.endYear > a.endYear) ? -1 : 0);} ); %>
+    <div class="row">
+      <div class="heading_10">EDUCATION <br>
+      <span class="regular_10_italic">List degree, institution, location and year for high school, college, and graduate/professional school degrees in chronological order.</span></div>
+      <div class="regular_10">
+      <% _.forEach(educations, function(item) { %>
+       <p><%= item['label'] %></p>
+      <% }); %>
+    </div>
+    </div>
+    <% } else { %>
+    <div class="row">
+      <div class="heading_10">EDUCATION <br>
+      <span class="regular_10_italic">List degree, institution, location and year for high school, college, and graduate/professional school degrees in chronological order.</span></div>
+      <div class="regular_10">
+        <p>&nbsp;</p>
+      </div>
+    </div>  
+    <% } %>
+    
+
+    <% var mergeExpPos = Object.assign(profExperiences, otherPositions) %>
+  
+    <% if (mergeExpPos.length > 0) { %>
+    <% mergeExpPos.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
+    <div class="row">
+      <div class="heading_10">PROFESSIONAL TRAINING AND ACADEMIC CAREER <br>
+      <span class="regular_10_italic">Beginning with first postgraduate position, list institution, position/title and dates in chronological order.</span>
+      </div>
+      <div class="regular_10">
+      <% _.forEach(mergeExpPos, function(item) { %>
+       <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['label'] %></p>
+      <% }); %>
+    </div>
+    </div>
+    <% } else { %>
+    <div class="row">
+      <div class="heading_10">PROFESSIONAL TRAINING AND ACADEMIC CAREER <br>
+      <span class="regular_10_italic">Beginning with first postgraduate position, list institution, position/title and dates in chronological order.</span>
+      </div>
+      <div class="regular_10">
+        <p>&nbsp;</p>
+      </div>
+    </div>
+    <% } %>
+    
+    <div class="row">
+      <div class="heading_10">SPECIALTY CERTIFICATIONS AND DATES  <br>
+      <span class="regular_10_italic">Include full dates of certification (month, day and year).</span></div>
+      <div class="regular_10">
+        <p>&nbsp;</p>
+      </div>
+    </div>
+    
+    <% var mergeExpPos = Object.assign(allPositions, pastappointments) %>
+  
+    <% if (mergeExpPos.length > 0) { %>
+    <% mergeExpPos.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
+     <div class="row">
+      <div class="heading_10">DUKE UNIVERSITY FACULTY APPOINTMENTS</div>
+      <div class="regular_10">
+        <% _.forEach(mergeExpPos, function(item) { %>
+          <% if(item['endYear'] != null)  { %>
+            <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['orig_label'] %></p>
+          <% } else { %>    
+            <p><%= item['startYear'] + " - " + "present" + ", " + item['orig_label'] %></p>
+        <% } %>
+       <% }); %>
+    </div>
+    </div>
+    <% } else { %>
+     <div class="row">
+      <div class="heading_10">DUKE UNIVERSITY FACULTY APPOINTMENTS</div>
+      <div class="regular_10">
+        <p>&nbsp;</p>
+      </div>
+     </div>
+    <% } %>
+
+    <div class="row">
+      <div class="heading_10">PUBLICATIONS <br>
+        <span class="regular_10_italic">Do not include submitted papers or papers in preparation. List separately those papers in press. Publications should be numbered sequentionally with the oldest listed first. Include the PubMedID. List all authors in the publication and do not use “et al.”Date of the journal is required.</span></div>
+       
+        <% journals.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+
+        <% if (journals.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Refereed journal articles <br>
+          <span class="regular_10_italic">List articles in scientific journals with active editorial boards and a system of critical review of all submissions for publication.</span></div>
+         <div class="regular_10">
+          <ol>
+          <% _.forEach(journals, function(item) { %>              
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+          <% }); %>
+          </ol>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Refereed journal articles <br>
+          <span class="regular_10_italic">List articles in scientific journals with active editorial boards and a system of critical review of all submissions for publication.</span></div>
+          <div class="regular_10">
+            <p>&nbsp;</p>
+          </div>
+        </div>
+        <% } %>
+
+         <% manuscripts.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <% if (manuscripts.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Study-related manuscripts on multicenter clinical trials</div>
+         <div class="regular_10">
+          <ol>
+          <% _.forEach(manuscripts, function(item) { %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+          <% }); %>
+          </ol>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Study-related manuscripts on multicenter clinical trials</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+        <% } %>
+
+        <% letters.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <% if (letters.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Letters</div>
+         <div class="regular_10">
+          <ol>
+          <% _.forEach(letters, function(item) { %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+          <% }); %>
+          </ol>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Letters</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+        <% } %>
+
+        <% editorials.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <% if (editorials.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Editorials</div>
+         <div class="regular_10">
+          <ol>
+          <% _.forEach(editorials, function(item) { %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+          <% }); %>
+         </ol>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Editorials</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+        <% } %>
+
+        <% books.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <% if (books.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Books</div>
+         <div class="regular_10">
+          <ol>
+          <% _.forEach(books, function(item) { %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+          <% }); %>
+          </ol>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Books</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+        <% } %>
+
+        <% booksections.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <% if (booksections.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Chapters</div>
+         <div class="regular_10">
+          <ol>
+          <% _.forEach(booksections, function(item) { %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+          <% }); %>
+          </ol>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Chapters</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+        <% } %>
+
+        <% abstracts.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <% if (abstracts.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Selected Abstracts</div>
+         <div class="regular_10">
+          <ol>
+          <% _.forEach(abstracts, function(item) { %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+          <% }); %>
+          </ol>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Selected Abstracts</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+        <% } %>
+
+        <% reviews.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <% if (reviews.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Scientific reviews</div>
+         <div class="regular_10">
+          <ol>
+          <% _.forEach(reviews, function(item) { %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+          <% }); %>
+          </ol>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Scientific reviews</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+        <% } %>
+
+        <% nonauthored.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <% if (nonauthored.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Non-authored publications</div>
+         <div class="regular_10">
+          <ol>
+          <% _.forEach(nonauthored, function(item) { %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+          <% }); %>
+          </ol>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Non-authored publications</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+        <% } %>
+
+        <% others.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <% if (others.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Other publications</div>
+         <div class="regular_10">
+          <ol>
+          <% _.forEach(others, function(item) { %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+          <% }); %>
+          </ol>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Other publications</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+        <% } %>
+
+    </div>
+    </div>
+
+   <% if (prof_consulting.length > 0) { %>
+   <% prof_consulting.sort(function(a,b) {return (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0);} ); %>
+    <div class="row">
+    <div class="heading_10">CONSULTANT APPOINTMENTS <br>
+      <span class="regular_10_italic">Include US government, state, and private organizations</span></div>
+    <div class="regular_10">
+     <% _.forEach(prof_consulting, function(item) { %>
+      <p><%= item['label'] %></p>
+     <% }); %>
+    </div>
+    </div>
+    <% } else { %>
+    <div class="row">
+     <div class="heading_10">CONSULTANT APPOINTMENTS <br>
+      <span class="regular_10_italic">Include US government, state, and private organizations</span></div>
+     <div class="regular_10">
+      <p>&nbsp;</p>
+     </div>
+    </div>
+    <% } %>
+
+    <% if (scholarlySocieties.length > 0) { %>
+    <% scholarlySocieties.sort(function(a,b) {return (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0);} ); %>
+    <div class="row">
+    <div class="heading_10">SCHOLARLY SOCIETIES <br>
+      <span class="regular_10_italic">List memberships in scholarly societies such as Alpha Omega Alpha,Sigma Xi, and Phi Beta Kappa.</span></div>
+    <div class="regular_10">
+    <% _.forEach(scholarlySocieties, function(item) { %>
+                    <p><%= item['label'] %></p>
+              <% }); %>
+    </div>
+    </div>
+    <% } else { %>
+    <div class="row">
+     <div class="heading_10">SCHOLARLY SOCIETIES <br>
+      <span class="regular_10_italic">List memberships in scholarly societies such as Alpha Omega Alpha,Sigma Xi, and Phi Beta Kappa.</span></div>
+     <div class="regular_10">
+      <p>&nbsp;</p>
+     </div>
+    </div>
+    <% } %> 
+
+    <% if (awards.length > 0) { %>
+    <div class="row">
+    <div class="heading_10">PROFESSIONAL AWARDS AND SPECIAL RECOGNITIONS</div>
+    <div class="regular_10">
+    <% _.forEach(awards, function(item) { %>
+                    <p><%= item['label'] %></p>
+              <% }); %>
+    </div>
+    </div>
+    <% } else { %>
+    <div class="row">
+     <div class="heading_10">PROFESSIONAL AWARDS AND SPECIAL RECOGNITIONS</div>
+     <div class="regular_10">
+      <p>&nbsp;</p>
+     </div>
+    </div>
+    <% } %> 
+
+    <% if (prof_editorial_activities.length > 0) { %>
+    <% prof_editorial_activities.sort(function(a,b) {return (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0);} ); %>
+    <div class="row">
+    <div class="heading_10">EDITORIAL EXPERIENCE <br>
+      <span class="regular_10_italic">List positions on editorial boards and with ad hoc scientific review journals.</span></div>
+    <div class="regular_10">
+    <% _.forEach(prof_editorial_activities, function(item) { %>
+                    <p><%= item['label'] %></p>
+              <% }); %>
+    </div>
+    </div>
+    <% } else { %>
+    <div class="row">
+     <div class="heading_10">EDITORIAL EXPERIENCE <br>
+      <span class="regular_10_italic">List positions on editorial boards and with ad hoc scientific review journals.</span></div>
+     <div class="regular_10">
+      <p>&nbsp;</p>
+     </div>
+    </div>
+    <% } %> 
+   
+   <% var mergeExpPos = Object.assign(community_service, editorial_activities, professional_development, lectures, consulting, other_activities, event_admin, committee_service) %>
+   <% mergeExpPos.sort(function(a,b) {return (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0);} ); %>
+   <% if (mergeExpPos.length > 0) { %>
+    <div class="row">
+    <div class="heading_10">ORGANIZATIONS AND PARTICIPATION <br>
+      <span class="regular_10_italic">Include offices held, committee assignments, society membership and participation in society meetings.</span></div>
+    <div class="regular_10">
+        <% _.forEach(mergeExpPos, function(item) { %>
+                   <p><%= item['label'] %></p>
+        <% }); %>
+    </div>
+    </div>
+    <% } else { %>
+    <div class="row">
+     <div class="heading_10">ORGANIZATIONS AND PARTICIPATION <br>
+      <span class="regular_10_italic">Include offices held, committee assignments, societymembership and participation in society meetings.</span></div>
+     <div class="regular_10">
+      <p>&nbsp;</p>
+     </div>
+    </div>
+    <% } %> 
+
+    <div class="row">
+      <div class="heading_10">EXTERNAL SUPPORT <br>
+        <span class="regular_10_italic">Complete the following sections for all external support including gifts, grants, and contract:</span></div>
+      
+        <% if (currentGrants.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Current Research Support</div>
+         <div class="regular_10">
+          <% _.forEach(currentGrants, function(item) { %>
+              <p>PI: <%= item['pi'] %></p>
+              <p>Period: <%= item['period'] %></p>
+              <p>Title: <%= item['title'] %></p>
+              <p>Direct cost: </p>
+              <p>Percent effort: </p>
+              <p>Role: <%= item['role'] %></p>
+              <br/><br/>
+          <% }); %>
+         </div>
+        </div>
+       <% } else { %>
+       <div class="row">
+         <div class="heading_10">Current Research Support</div>
+         <div class="regular_10">
+              <p>PI: </p>
+              <p>Period: </p>
+              <p>Title: </p>
+              <p>Direct cost: </p>
+              <p>Percent effort: </p>
+              <p>Role: </p>
+              <br/><br/>
+         </div>
+       </div>
+       <% } %> 
+
+       <% if (completedGrants.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Completed Research Support</div>
+         <div class="regular_10">
+          <% _.forEach(completedGrants, function(item) { %>
+              <p>PI: <%= item['pi'] %></p>
+              <p>Period: <%= item['period'] %></p>
+              <p>Title: <%= item['title'] %></p>
+              <p>Direct cost: </p>
+              <p>Percent effort: </p>
+              <p>Role: <%= item['role'] %></p>
+              <br/><br/>
+          <% }); %>
+         </div>
+        </div>
+       <% } else { %>
+       <div class="row">
+         <div class="heading_10">Completed Research Support</div>
+         <div class="regular_10">
+              <p>PI: </p>
+              <p>Period: </p>
+              <p>Title: </p>
+              <p>Direct cost: </p>
+              <p>Percent effort: </p>
+              <p>Role: </p>
+              <br/><br/>
+         </div>
+       </div>
+       <% } %> 
+     
+       <% if (pendingGrants.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Pending Research Support</div>
+         <div class="regular_10">
+          <% _.forEach(pendingGrants, function(item) { %>
+              <p>PI: <%= item['pi'] %></p>
+              <p>Period: <%= item['period'] %></p>
+              <p>Title: <%= item['title'] %></p>
+              <p>Direct cost: </p>
+              <p>Percent effort: </p>
+              <p>Role: <%= item['role'] %></p>
+              <br/><br/>
+          <% }); %>
+         </div>
+        </div>
+      <% } else { %>
+       <div class="row">
+         <div class="heading_10">Pending Research Support</div>
+         <div class="regular_10">
+              <p>PI: </p>
+              <p>Period: </p>
+              <p>Title: </p>
+              <p>Direct cost: </p>
+              <p>Percent effort: </p>
+              <p>Role: </p>
+              <br/><br/>
+         </div>
+       </div>
+       <% } %>
+
+    </div>
+  
+    <% if (mentorship_activities) { %>
+    <div class="row">
+    <div class="heading_10">MENTORING ACTIVITIES <br>
+      <span class="regular_10_italic">Describe experience mentoring colleagues. List mentoring activities separately for the following groups:Faculty, Fellows/doctoral students/ post docs and Medical students.</span></div>
+    <div style="font-size:10pt; font-family:TimesNewRoman;">
+      <p>${mentorship_activities}</p>
+    </div>
+    </div>
+    <% } else { %>
+    <div class="row">
+     <div class="heading_10">MENTORING ACTIVITIES <br>
+      <span class="regular_10_italic">Describe experience mentoring colleagues. List mentoring activities separately for the following groups:Faculty, Fellows/doctoral students/ post docs and Medical students.</span></div>
+     <div style="font-size:10pt; font-family:TimesNewRoman;">
+      <p>&nbsp;</p>
+     </div>
+    </div>
+    <% } %>
+
+    <% if (teaching_activities) { %>
+    <div class="row">
+    <div class="heading_10">EDUCATION / TEACHING ACTIVITIES <br>
+      <span class="regular_10_italic">Describe activities teaching and providing educational support for residents, medical students, and continuing medical education. List activities by:<br/>
+          &bull;&nbsp;&nbsp;Teaching and supporting learners<br/>
+          &bull;&nbsp;&nbsp;Development of courses / educational programs<br/>
+          &bull;&nbsp;&nbsp;Development of assessment tools and methods<br/> 
+          &bull;&nbsp;&nbsp;Education management / leadership
+       </span></div>
+    <div class="regular_10">
+      <p>${teaching_activities}</p>
+    </div>
+    </div> 
+    <% } else { %>
+    <div class="row">
+    <div class="heading_10">EDUCATION / TEACHING ACTIVITIES <br>
+          <span class="regular_10_italic">Describe activities teaching and providing educational support for residents, medical students, and continuing medical education. List activities by:<br/>
+          &bull;&nbsp;&nbsp;Teaching and supporting learners<br/>
+          &bull;&nbsp;&nbsp;Development of courses / educational programs<br/>
+          &bull;&nbsp;&nbsp;Development of assessment tools and methods<br/> 
+          &bull;&nbsp;&nbsp;Education management / leadership
+       </span></div>
+     <div class="regular_10">
+      <p>&nbsp;</p>
+     </div>
+    </div>
+    <% } %> 
+
+    <div class="row">
+     <div class="heading_10">INVITED LECTURES AND PRESENTATIONS <br>
+      <span class="regular_10_italic">List significant presentations and lectures, including the following types.
+      </span>
+     </div>
+     
+     <% if (lectures.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Named Lectures</div>
+         <div class="regular_10">
+          <% _.forEach(lectures, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Named Lectures</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+       <% if (professorships.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Visiting Professorships</div>
+         <div class="regular_10">
+          <% _.forEach(professorships, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Visiting Professorships</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+       <% if (internationalmeetings.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">International Meetings</div>
+         <div class="regular_10">
+          <% _.forEach(internationalmeetings, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">International Meetings</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+       <% if (nationalmeetings.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">National Scientific Meetings (invited)</div>
+         <div class="regular_10">
+          <% _.forEach(nationalmeetings, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">National Scientific Meetings (invited)</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (courses.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Instructional Courses, workshops, symposiums (national)</div>
+         <div class="regular_10">
+          <% _.forEach(courses, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Instructional Courses, workshops, symposiums (national)</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+       <% if (posters.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Posters (for national meetings)</div>
+         <div class="regular_10">
+          <% _.forEach(posters, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Posters (for national meetings)</div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+    </div>
+
+    <% if (clinical_activities) { %>
+    <div class="row">
+    <div class="heading_10">CLINICAL ACTIVITIES <br>
+      <span class="regular_10_italic">Describe types of clinical practice and estimate your time commitment.</span></div>
+      <div style="font-size:10pt; font-family:TimesNewRoman;">
+        <p>${clinical_activities}</p>
+      </div>
+    </div>
+    <% } else { %>
+    <div class="row">
+     <div class="heading_10">CLINICAL ACTIVITIES 
+      <span class="regular_10_italic">Describe types of clinical practice and estimate your time commitment.</span></div>
+     <div style="font-size:10pt; font-family:TimesNewRoman;">
+      <p>&nbsp;</p>
+     </div>
+    </div>
+    <% } %>
+
+    <% if (academic_activities) { %>
+    <div class="row">
+    <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER <br>
+      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels. List separately:<br/>
+           &bull;&nbsp;&nbsp;Administrative positions<br/>
+           &bull;&nbsp;&nbsp;Committees<br/>
+           &bull;&nbsp;&nbsp;Leadership positions
+      </span></div>
+    <div style="font-size:10pt; font-family:TimesNewRoman;">
+      <p>${academic_activities}</p>
+    </div>
+    </div>
+    <% } else { %>
+    <div class="row">
+     <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER <br>
+      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels. List separately:<br/>
+           &bull;&nbsp;&nbsp;Administrative positions<br/>
+           &bull;&nbsp;&nbsp;Committees<br/>
+           &bull;&nbsp;&nbsp;Leadership positions
+      </span></div>
+     <div style="font-size:10pt; font-family:TimesNewRoman;">
+      <p>&nbsp;</p>
+     </div>
+    </div>
+    <% } %>
+    
+
+    <div class="row"><div class="regular_12"><p>Signature of Chair _____________________________________________ </p></div></div>
+    <div class="row"><div class="regular_12"><p>Date _____________________________________________ </p></div></div>
+    
+    <br/><br/>
+
+    <div class="row">
+    <div class="heading_10">PREFERRED OR FAMILIAR NAME:</div>
+    </div>
+
+    <div class="row">
+    <div class="heading_10">EMAIL: ${email}</div>
+    </div>
+
+ </div>
+</body>
+</html>
+
