@@ -23,9 +23,12 @@
      .heading_10 { font-size: 10pt; font-family: Arial; font-weight: bold; line-height:12pt; }
      .regular_10_italic { font-size: 10pt; font-family: "Times New Roman"; font-style: italic; font-weight: normal; }
      #pasted { font-size: 10pt; font-family:'Times New Roman'; }
+     .break { page-break-before: always; }
     </style>
   </head>
   <body>
+  <div id="content">
+  
   <div class="container">
     <% var degree = ""; %>
     <% _.forEach(educations, function(item) { %>
@@ -52,7 +55,7 @@
      <% var today = "" %>
      <% var monthNames = ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"]; %>
-     <% today = "Prepared: " +  monthNames[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear(); %>
+     <% today = "Date: " +  monthNames[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear(); %>
      
     <div class="heading_12">
       <% if (degree != undefined && degree != "") { %>
@@ -187,7 +190,7 @@
 
     <div class="row">
       <div class="heading_10">PUBLICATIONS <br>
-        <span class="regular_10_italic">Do not include submitted papers or papers in preparation. List separately those papers in press. Publications should be numbered sequentionally with the oldest listed first. Include the PubMedID. List all authors in the publication and do not use “et al.”Date of the journal is required.</span></div>
+        <span class="regular_10_italic">Do not include submitted papers or papers in preparation. List separately those papers in press. Publications should be numbered sequentially with the oldest listed first. Include the PubMedID. List all authors in the publication and do not use “et al.”Date of the journal is required.</span></div>
        
         <% journals.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
 
@@ -510,11 +513,11 @@
 
     <div class="row">
       <div class="heading_10">EXTERNAL SUPPORT <br>
-        <span class="regular_10_italic">Complete the following sections for all external support including gifts, grants, and contract:</span></div>
+        <span class="regular_10_italic">Complete the following sections for all external present, past, and pending support including gifts, grants, and contract:</span></div>
       
         <% if (currentGrants.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Current Research Support</div>
+         <div class="heading_10">Present Research Support</div>
          <div class="regular_10">
           <% _.forEach(currentGrants, function(item) { %>
               <p>PI: <%= item['pi'] %></p>
@@ -529,7 +532,7 @@
         </div>
        <% } else { %>
        <div class="row">
-         <div class="heading_10">Current Research Support</div>
+         <div class="heading_10">Present Research Support</div>
          <div class="regular_10">
               <p>PI: </p>
               <p>Period: </p>
@@ -544,7 +547,7 @@
 
        <% if (completedGrants.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Completed Research Support</div>
+         <div class="heading_10">Past Research Support</div>
          <div class="regular_10">
           <% _.forEach(completedGrants, function(item) { %>
               <p>PI: <%= item['pi'] %></p>
@@ -559,7 +562,7 @@
         </div>
        <% } else { %>
        <div class="row">
-         <div class="heading_10">Completed Research Support</div>
+         <div class="heading_10">Past Research Support</div>
          <div class="regular_10">
               <p>PI: </p>
               <p>Period: </p>
@@ -765,6 +768,32 @@
       <% } %>
     </div>
 
+    <% if (academic_activities) { %>
+    <div class="row">
+    <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER <br>
+      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels. List separately:<br/>
+           &bull;&nbsp;&nbsp;Administrative positions<br/>
+           &bull;&nbsp;&nbsp;Committees<br/>
+           &bull;&nbsp;&nbsp;Leadership positions
+      </span></div>
+    <div style="font-size:10pt; font-family:TimesNewRoman;">
+      <p style="margin-top: 6pt;">${academic_activities}</p>
+    </div>
+    </div>
+    <% } else { %>
+    <div class="row">
+     <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER <br>
+      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels. List separately:<br/>
+           &bull;&nbsp;&nbsp;Administrative positions<br/>
+           &bull;&nbsp;&nbsp;Committees<br/>
+           &bull;&nbsp;&nbsp;Leadership positions
+      </span></div>
+     <div style="font-size:10pt; font-family:TimesNewRoman;">
+      <p>&nbsp;</p>
+     </div>
+    </div>
+    <% } %>
+    
     <% if (clinical_activities) { %>
     <div class="row">
     <div class="heading_10">CLINICAL ACTIVITIES <br>
@@ -783,46 +812,9 @@
     </div>
     <% } %>
 
-    <% if (academic_activities) { %>
-    <div class="row">
-    <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER <br>
-      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels. List separately:<br/>
-           &bull;&nbsp;&nbsp;Administrative positions<br/>
-           &bull;&nbsp;&nbsp;Committees<br/>
-           &bull;&nbsp;&nbsp;Leadership positions
-      </span></div>
-    <div style="font-size:10pt; font-family:TimesNewRoman;">
-      <p>${academic_activities}</p>
-    </div>
-    </div>
-    <% } else { %>
-    <div class="row">
-     <div class="heading_10">ACADEMIC AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER <br>
-      <span class="regular_10_italic">Describe your participation in administrative positions, leadership roles, and on committees at the University and Medical Center levels. List separately:<br/>
-           &bull;&nbsp;&nbsp;Administrative positions<br/>
-           &bull;&nbsp;&nbsp;Committees<br/>
-           &bull;&nbsp;&nbsp;Leadership positions
-      </span></div>
-     <div style="font-size:10pt; font-family:TimesNewRoman;">
-      <p>&nbsp;</p>
-     </div>
-    </div>
-    <% } %>
-    
-
     <div class="row"><div class="regular_12"><p>Signature of Chair _____________________________________________ </p></div></div>
     <div class="row"><div class="regular_12"><p>Date _____________________________________________ </p></div></div>
     
-    <br/><br/>
-
-    <div class="row">
-    <div class="heading_10">PREFERRED OR FAMILIAR NAME:</div>
-    </div>
-
-    <div class="row">
-    <div class="heading_10">EMAIL: ${email}</div>
-    </div>
-
  </div>
 </body>
 </html>
