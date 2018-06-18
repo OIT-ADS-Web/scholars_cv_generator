@@ -94,6 +94,7 @@ class WidgetsNIHParser {
   }
 
   parsePositions(data) {
+    console.log("Hello 1");
     let positions = data['positions'] || [];
     var primaryPositions = []
     var secondaryPositions = []
@@ -105,6 +106,7 @@ class WidgetsNIHParser {
       'secondaryPosition': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition'
     };
 
+    console.log("Hello 2");
     // group by 'type'    
     _.forEach(positions, function(value) {
       var vivoType = value['vivoType'];
@@ -133,10 +135,13 @@ class WidgetsNIHParser {
       'variousPositions': variousPositions,
       'allPositions': allPositions
     }
+
+    console.log("Hello 3");
     return results
   };
 
   parseEducations(data) {
+    console.log("Hello 4");
     var educations = data['educations'] || [];
     var educationList = []
     var profexpList = []
@@ -144,12 +149,13 @@ class WidgetsNIHParser {
       let institution = value.attributes['institution'];
       let endYear = value.attributes['endDate'].substr(0,4);
       let label = value['label'];
+      let endDate = value.attributes['endDate'];
       var degree = value.attributes['degree'];
       var fullLabel = "";
       if (typeof degree != 'undefined') {
         var degree = value.attributes['degree'];
         fullLabel = (degree + ", " + institution + ", " + endYear);
-        educationList.push({'label': fullLabel, 'endYear': endYear}) 
+        educationList.push({'label': fullLabel, 'endYear': endYear, 'institution': institution, 'degree': degree, 'education': label, 'endDate': endDate}) 
       } 
       else {
         let startYear = value.attributes['startDate'].substr(0,4);
@@ -159,6 +165,7 @@ class WidgetsNIHParser {
     });
 
     let results = {'educations': educationList, 'profExperiences': profexpList}
+    console.log(educationList);
     return results
   }
 
@@ -503,6 +510,17 @@ class WidgetsNIHParser {
     return {'mentorship_activities': mentorship_activities}
   };
 
+  parseOverview(data) {
+    let overview = data['attributes']['overview'] || null;
+    var general_overview = null
+
+    if (overview != null) {
+      var general_overview = overview;
+    }
+    return {'overview': general_overview}
+  };
+
+
   parseteachingActivities(data) {
     let activities = data['attributes']['teachingActivities'] || null;
     var teaching_activities = null
@@ -625,7 +643,7 @@ class WidgetsNIHParser {
     _.merge(results, this.parsePresentations(data))
     _.merge(results, this.parseClinicalActivities(data))
     _.merge(results, this.parseacademicActivities(data))
-    
+    _.merge(results, this.parseOverview(data))
     return results
   }
  

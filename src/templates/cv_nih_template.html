@@ -2,14 +2,17 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>CV: ${name}</title>
+    <title>NIH CV: ${name}</title>
     
     <style>
+     div.row { margin-bottom: 1em; padding-bottom: 1em;}
      div.heading_12_center { font-size: 12pt; font-family: Arial; font-weight: bold; text-align: center; }
+     div.heading_14 { font-size: 14pt; font-family: Arial; font-weight: bold; }
      div.heading_12 { font-size: 12pt; font-family: Arial; font-weight: bold; }
      div.heading_8_center { font-size: 8pt; font-family: Arial; font-weight: bold; text-align: center; margin-top:0;}
      div.heading_8_right { font-size: 8pt; font-family: Arial; text-align: right; margin-top:0;}
      div.heading_11 { font-size: 11pt; font-family: Arial; }
+     div.regular_10 { font-size: 10pt; font-family: "TimesNewRoman"; }
      p.border{ border-top-style: solid; border-top-width: thin; }
      p { line-height: 6pt; margin-top: 3pt; margin-bottom: 0pt; }
      #education_table td 
@@ -17,26 +20,41 @@
         text-align: center; 
         vertical-align: middle;
       }
-      table {
-          border-collapse: collapse;
+      #education_table {
+          border:none;
+          border-collapse: collapse; 
       }
-      table {
-          border-top: 1px solid black;
-          border-bottom: none;
-          border-left: none;
-          border-right: none;
-      }
-      th {
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
-        border-left: none;
-        border-right: none;
-      }
-      td {
+      #education_table th {
         border-top: 1px solid black;
         border-bottom: 1px solid black;
         border-left: 1px solid black;
         border-right: 1px solid black;
+      }
+      #education_table th:first-child {
+        border-left: none;
+      }
+      #education_table th:last-child {
+        border-right: none;
+      }
+      #education_table td {
+        border-top: none;
+        border-bottom: none;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+      }
+      #education_table td:first-child {
+        border-left: none;
+      }
+      #education_table td:last-child {
+        border-right: none;
+      }
+      .regular_10 { font-size: 10pt; font-family: "Times New Roman"; }
+
+      #grants_table th, td {
+        border-top: none;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
       }
     </style>
   </head>
@@ -47,7 +65,7 @@
       <p>OMB No. 0925-0001 and 0925-0002 (Rev. 09/17 Approved Through 03/31/2020)</p>
     </div>
 
-    <div class="heading_12_center">
+   <div class="heading_12_center">
       <p class="border">BIOGRAPHICAL SKETCH</p>
     </div>
     
@@ -60,33 +78,200 @@
     </div>
 
     <div class="heading_11">
-      <p class="border">NAME:</p>
+      <p class="border">NAME: ${name}</p>
     </div>
 
-    <div class="heading_11">
+     <div class="heading_11">
       <p class="border">eRA COMMONS USER NAME (credentials, e.g. agency login):</p>
     </div>
-
-    <div class="heading_11">
-      <p class="border">POSITION TITLE:</p>
-    </div>
+    
+    <% if(primaryPositions.length > 0) { %>
+      <% var title = ""; %>
+      <% _.forEach(primaryPositions, function(item) { %>
+      <% title += item['label'] + ', '; %>
+      <% }); %>
+      <% title = title.slice(0,-2); %>
+      <div class="heading_11">
+        <p class="border">POSITION TITLE: ${title}</p>
+      </div>
+    <% } else { %>
+      <div class="heading_11">
+        <p class="border">POSITION TITLE:</p>
+      </div>
+    <% } %>
 
     <div class="heading_11">
       <p class="border">EDUCATION/TRAINING (Begin with baccalaureate or other initial professional education, such as nursing, include postdoctoral training and residency training if applicable. Add/delete rows as necessary.)</p>
     </div>
 
-    <table border="1" id="education_table">
+      <table border="1" id="education_table">
       <tr>
         <th width="40%">INSTITUTION AND LOCATION</th>
         <th width="20%">DEGREE <br/><i>(if <br/> applicable)</i></th>
         <th width="20%">Completion <br/> Date <br/> MM/YYYY</th>
         <th width="20%">FIELD OF STUDY</th>
       </tr>
+      <% if (educations.length > 0) { %>
+      <% _.forEach(educations, function(item) { %>
+      <tr>
+        <td><p><%= item['institution'] %></p></td>
+        <td><p><%= item['degree'] %></p></td>
+        <td><p><%= item['endDate'] %></p></td>
+        <td><p><%= item['label'] %></p></td>
+      </tr>
+      <% }); %>
+      <% } %>
     </table>
 
-    <div class="heading_12">
-      <p>A. Personal Statement</p>
+    <div class="row">
+     <div class="heading_14">
+       <p>A. Personal Statement</p>
+     </div>
+     <div class="regular_10">
+        <p>${overview}</p>
+     </div>
+     <div class="row"></div>
+      <% journals.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+
+      <% if (journals.length > 0) { %>
+      <div class="regular_10">
+          <ol>
+          <% var i = 1; %>  
+          <% _.forEach(journals, function(item) { %>   
+            <% if (i <= 4) { %>            
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+            <% } %>
+            <% i = i + 1 %>
+          <% }); %>
+          </ol>
+      </div>
+      <% } %>
     </div>
+
+    <div class="row">
+      <div class="heading_14">B. Positions and Honors </div>
+      <div class="heading_12">
+        <p>Positions and Employment</p>
+      </div>
+      <% var mergeExpPos = Object.assign(profExperiences, otherPositions, pastappointments) %>
+  
+      <% if (mergeExpPos.length > 0) { %>
+      <% mergeExpPos.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
+        <div class="regular_10">
+        <% _.forEach(mergeExpPos, function(item) { %>
+        <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['label'] %></p>
+        <% }); %>
+        </div>
+        <% } %>
+
+      <!--<% if (pastappointments.length > 0) { %>
+      <% pastappointments.sort(function(a,b) {return (a.startYear > b.startYear)  ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
+        <div class="regular_10">
+        <% _.forEach(pastappointments, function(item) { %>
+        <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['label'] %></p>
+        <% }); %>
+        </div>
+        <% } %>-->
+    
+        <div class="row">&nbsp;</div> 
+       <div class="heading_12">
+        <p>Honors</p>
+      </div>
+      <% if (awards.length > 0) { %>
+        <% _.forEach(awards, function(item) { %>
+        <div class="regular_10"><%= item['label'] %></div>
+        <% }); %>
+      <% } %>
+
+      <% if (licences.length > 0) { %>
+      <% var lic = ""; %>
+      <% _.forEach(licences, function(item) { %>
+      <% lic = item['label']; %>
+      <% }); %>
+      <div class="regular_10"><p>${lic}</p></div>
+      <% } %>
+      </div>
+    
+    <div class="row">
+    <div class="heading_14">
+      <p>C. Contribution to Science</p>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="heading_14">
+      <p>D. Additional Information: Research Support</p>
+    </div>
+   
+   <% if (currentGrants.length > 0) { %>
+     <div class="row">&nbsp;</div> 
+       <div class="heading_12">
+        <p>Ongoing Research Support</p>
+      </div>
+    </div>
+    <table border="0" id="grants_table">
+    <% _.forEach(currentGrants, function(item) { %>
+     <div class="regular_10">
+          <tr>
+          <td>
+            <p><%= item['period'] %></p>
+          </td>
+          <td>
+             <p>Title: <%= item['title'] %></p>
+          </td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          </td>
+          <td>
+            <p>Role: <%= item['role'] %></p>
+          </td>
+          <td>
+            <p>Sponsor/Donor: </p>
+          </td>
+        </tr>      
+        </div>
+          <% }); %>
+        </table>
+    <% } %>
+
+   <% if (completedGrants.length > 0) { %>
+      <div class="row">&nbsp;</div> 
+       <div class="heading_12">
+        <p>Completed Research Support</p>
+      </div>
+   </div>
+  
+ <table border="0" id="grants_table">
+    <% _.forEach(completedGrants, function(item) { %>
+     <div class="regular_10">
+        <tr>
+          <td width="15%">
+            <p><%= item['period'] %></p>
+          </td>
+          <td width="45%">
+             <p>Title: <%= item['title'] %></p>
+          </td>
+          <td width="40%">
+          </td>
+        </tr>
+        <tr>
+          <td width="15%">
+          </td>
+          <td width="45%">
+            <p>Role: <%= item['role'] %></p>
+          </td>
+          <td width="40%">
+            <p>Sponsor/Donor: </p>
+          </td>
+        </tr>       
+        </div>
+          <% }); %>
+      </table>
+    <% } %>
+
 
  </div>
 </body>
