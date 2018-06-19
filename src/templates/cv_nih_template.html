@@ -7,49 +7,44 @@
     <style>
      div.row { margin-bottom: 1em; padding-bottom: 1em;}
      div.heading_12_center { font-size: 12pt; font-family: Arial; font-weight: bold; text-align: center; }
+     div.heading_13_center { font-size: 13.5pt; font-family: Arial; font-weight: bold; text-align: center; }
      div.heading_14 { font-size: 14pt; font-family: Arial; font-weight: bold; }
      div.heading_12 { font-size: 12pt; font-family: Arial; font-weight: bold; }
      div.heading_8_center { font-size: 8pt; font-family: Arial; font-weight: bold; text-align: center; margin-top:0;}
      div.heading_8_right { font-size: 8pt; font-family: Arial; text-align: right; margin-top:0;}
      div.heading_11 { font-size: 11pt; font-family: Arial; }
-     div.regular_10 { font-size: 10pt; font-family: "TimesNewRoman"; }
+     div.regular_10 { font-size: 10pt; font-family: Arial; }
      p.border{ border-top-style: solid; border-top-width: thin; }
      p { line-height: 6pt; margin-top: 3pt; margin-bottom: 0pt; }
-     #education_table td 
+      #education_table td 
       {
         text-align: center; 
         vertical-align: middle;
+        font-size: 11pt; 
+        font-family: Arial; 
+        font-weight: normal;
       }
+
+      #border-column{
+          border-left: 0.5px solid black;
+          border-right: 0.5px solid black;
+        }
+
       #education_table {
           border:none;
           border-collapse: collapse; 
       }
       #education_table th {
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
-        border-left: 1px solid black;
-        border-right: 1px solid black;
+        border-top: 0.5px solid black;
+        border-bottom: 0.5px solid black;
+        border-top-width: thin;
+        border-bottom-width: thin;
+        font-size: 11pt; 
+        font-family: Arial;
+        font-weight: normal;
+        /*border-left: 1px solid black;
+        border-right: 1px solid black;*/
       }
-      #education_table th:first-child {
-        border-left: none;
-      }
-      #education_table th:last-child {
-        border-right: none;
-      }
-      #education_table td {
-        border-top: none;
-        border-bottom: none;
-        border-left: 1px solid black;
-        border-right: 1px solid black;
-      }
-      #education_table td:first-child {
-        border-left: none;
-      }
-      #education_table td:last-child {
-        border-right: none;
-      }
-      .regular_10 { font-size: 10pt; font-family: "Times New Roman"; }
-
       #grants_table th, td {
         border-top: none;
         border-bottom: none;
@@ -65,24 +60,29 @@
       <p>OMB No. 0925-0001 and 0925-0002 (Rev. 09/17 Approved Through 03/31/2020)</p>
     </div>
 
-   <div class="heading_12_center">
+
+    <div class="heading_13_center">
       <p class="border">BIOGRAPHICAL SKETCH</p>
     </div>
     
+    <div class="row">
     <div class="heading_8_center">
       <p>Provide the following information for the Senior/key personnel and other significant contributors.</p>
-    </div>
-
-    <div class="heading_8_center">
       <p>Follow this format for each person. DO NOT EXCEED FIVE PAGES.</p>
     </div>
+   </div>
 
+
+     <div class="row">
     <div class="heading_11">
       <p class="border">NAME: ${name}</p>
     </div>
+    </div>
 
+    <div class="row">
      <div class="heading_11">
       <p class="border">eRA COMMONS USER NAME (credentials, e.g. agency login):</p>
+    </div>
     </div>
     
     <% if(primaryPositions.length > 0) { %>
@@ -91,38 +91,43 @@
       <% title += item['label'] + ', '; %>
       <% }); %>
       <% title = title.slice(0,-2); %>
+      <div class="row">
       <div class="heading_11">
         <p class="border">POSITION TITLE: ${title}</p>
       </div>
+    </div>
     <% } else { %>
+      <div class="row">
       <div class="heading_11">
         <p class="border">POSITION TITLE:</p>
       </div>
+    </div>
     <% } %>
 
     <div class="heading_11">
-      <p class="border">EDUCATION/TRAINING (Begin with baccalaureate or other initial professional education, such as nursing, include postdoctoral training and residency training if applicable. Add/delete rows as necessary.)</p>
+      <p class="border">EDUCATION/TRAINING <i>(Begin with baccalaureate or other initial professional education, such as nursing, include postdoctoral training and residency training if applicable. Add/delete rows as necessary.)</i></p>
     </div>
 
-      <table border="1" id="education_table">
+      <table id="education_table">
       <tr>
-        <th width="40%">INSTITUTION AND LOCATION</th>
-        <th width="20%">DEGREE <br/><i>(if <br/> applicable)</i></th>
-        <th width="20%">Completion <br/> Date <br/> MM/YYYY</th>
-        <th width="20%">FIELD OF STUDY</th>
+        <th width="40%"><p>INSTITUTION AND LOCATION</p></th>
+        <th width="20%" id="border-column"><p>DEGREE <br/><i>(if <br/> applicable)</i></p></th>
+        <th width="20%" id="border-column"><p>Completion <br/> Date <br/> MM/YYYY</p></th>
+        <th width="20%"><p>FIELD OF STUDY</p></th>
       </tr>
       <% if (educations.length > 0) { %>
       <% _.forEach(educations, function(item) { %>
       <tr>
         <td><p><%= item['institution'] %></p></td>
-        <td><p><%= item['degree'] %></p></td>
-        <td><p><%= item['endDate'] %></p></td>
-        <td><p><%= item['label'] %></p></td>
+        <td id="border-column"><p><%= item['degree'] %></p></td>
+        <td id="border-column"><p><%= item['endYear'] %></p></td>
+        <td><p></p></td>
       </tr>
       <% }); %>
       <% } %>
     </table>
-
+    
+    <br/>
     <div class="row">
      <div class="heading_14">
        <p>A. Personal Statement</p>
@@ -153,11 +158,13 @@
       <div class="heading_12">
         <p>Positions and Employment</p>
       </div>
-      <% var mergeExpPos = Object.assign(profExperiences, otherPositions, pastappointments) %>
+      
+      <% var mergeExpPos = Object.assign(profExperiences, otherPositions) %>
   
       <% if (mergeExpPos.length > 0) { %>
       <% mergeExpPos.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
-        <div class="regular_10">
+        <br/>
+        <div class="heading_11">
         <% _.forEach(mergeExpPos, function(item) { %>
         <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['label'] %></p>
         <% }); %>
@@ -173,13 +180,14 @@
         </div>
         <% } %>-->
     
-        <div class="row">&nbsp;</div> 
+        <br/>
        <div class="heading_12">
         <p>Honors</p>
       </div>
       <% if (awards.length > 0) { %>
+        <br/>
         <% _.forEach(awards, function(item) { %>
-        <div class="regular_10"><%= item['label'] %></div>
+        <div class="heading_11"><%= item['label'] %></div>
         <% }); %>
       <% } %>
 
@@ -188,7 +196,7 @@
       <% _.forEach(licences, function(item) { %>
       <% lic = item['label']; %>
       <% }); %>
-      <div class="regular_10"><p>${lic}</p></div>
+      <div class="heading_11"><p>${lic}</p></div>
       <% } %>
       </div>
     
@@ -211,7 +219,7 @@
     </div>
     <table border="0" id="grants_table">
     <% _.forEach(currentGrants, function(item) { %>
-     <div class="regular_10">
+     <div class="heading_11">
           <tr>
           <td>
             <p><%= item['period'] %></p>
@@ -246,7 +254,7 @@
   
  <table border="0" id="grants_table">
     <% _.forEach(completedGrants, function(item) { %>
-     <div class="regular_10">
+     <div class="heading_11">
         <tr>
           <td width="15%">
             <p><%= item['period'] %></p>

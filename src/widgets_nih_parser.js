@@ -239,7 +239,7 @@ class WidgetsNIHParser {
             .replace(stripClosingTag, "");
 
       citation = citation.replace(stripHtml, "");
-      
+
       var vivoType = value['vivoType'];
   
       if (vivoType === "http://purl.org/ontology/bibo/AcademicArticle") {
