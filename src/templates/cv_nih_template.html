@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>NIH CV: ${name}</title>
+    
+    <style>
+     div.row { margin-bottom: 1em; padding-bottom: 1em;}
+     div.heading_12_center { font-size: 12pt; font-family: Arial; font-weight: bold; text-align: center; }
+     div.heading_13_center { font-size: 13.5pt; font-family: Arial; font-weight: bold; text-align: center; }
+     div.heading_14 { font-size: 14pt; font-family: Arial; font-weight: bold; }
+     div.heading_12 { font-size: 12pt; font-family: Arial; font-weight: bold; }
+     div.heading_8_center { font-size: 8pt; font-family: Arial; font-weight: bold; text-align: center; margin-top:0;}
+     div.heading_8_right { font-size: 8pt; font-family: Arial; text-align: right; margin-top:0;}
+     div.heading_11 { font-size: 11pt; font-family: Arial; }
+     div.regular_10 { font-size: 10pt; font-family: Arial; }
+     p.border{ border-top-style: solid; border-top-width: thin; }
+     p { line-height: 6pt; margin-top: 3pt; margin-bottom: 0pt; }
+      #education_table td 
+      {
+        text-align: center; 
+        vertical-align: middle;
+        font-size: 11pt; 
+        font-family: Arial; 
+        font-weight: normal;
+      }
+
+      #border-column{
+          border-left: 0.5px solid black;
+          border-right: 0.5px solid black;
+        }
+
+      #education_table {
+          border:none;
+          border-collapse: collapse; 
+      }
+      #education_table th {
+        border-top: 0.5px solid black;
+        border-bottom: 0.5px solid black;
+        border-top-width: thin;
+        border-bottom-width: thin;
+        font-size: 11pt; 
+        font-family: Arial;
+        font-weight: normal;
+        /*border-left: 1px solid black;
+        border-right: 1px solid black;*/
+      }
+      #grants_table th, td {
+        border-top: none;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+      }
+    </style>
+  </head>
+  <body>
+  <div class="container">
+    
+    <div class="heading_8_right">
+      <p>OMB No. 0925-0001 and 0925-0002 (Rev. 09/17 Approved Through 03/31/2020)</p>
+    </div>
+
+
+    <div class="heading_13_center">
+      <p class="border">BIOGRAPHICAL SKETCH</p>
+    </div>
+    
+    <div class="row">
+    <div class="heading_8_center">
+      <p>Provide the following information for the Senior/key personnel and other significant contributors.</p>
+      <p>Follow this format for each person. DO NOT EXCEED FIVE PAGES.</p>
+    </div>
+   </div>
+
+
+     <div class="row">
+    <div class="heading_11">
+      <p class="border">NAME: ${name}</p>
+    </div>
+    </div>
+
+    <div class="row">
+     <div class="heading_11">
+      <p class="border">eRA COMMONS USER NAME (credentials, e.g. agency login):</p>
+    </div>
+    </div>
+    
+    <% if(primaryPositions.length > 0) { %>
+      <% var title = ""; %>
+      <% _.forEach(primaryPositions, function(item) { %>
+      <% title += item['label'] + ', '; %>
+      <% }); %>
+      <% title = title.slice(0,-2); %>
+      <div class="row">
+      <div class="heading_11">
+        <p class="border">POSITION TITLE: ${title}</p>
+      </div>
+    </div>
+    <% } else { %>
+      <div class="row">
+      <div class="heading_11">
+        <p class="border">POSITION TITLE:</p>
+      </div>
+    </div>
+    <% } %>
+
+    <div class="heading_11">
+      <p class="border">EDUCATION/TRAINING <i>(Begin with baccalaureate or other initial professional education, such as nursing, include postdoctoral training and residency training if applicable. Add/delete rows as necessary.)</i></p>
+    </div>
+
+      <table id="education_table">
+      <tr>
+        <th width="40%"><p>INSTITUTION AND LOCATION</p></th>
+        <th width="20%" id="border-column"><p>DEGREE <br/><i>(if <br/> applicable)</i></p></th>
+        <th width="20%" id="border-column"><p>Completion <br/> Date <br/> MM/YYYY</p></th>
+        <th width="20%"><p>FIELD OF STUDY</p></th>
+      </tr>
+      <% if (educations.length > 0) { %>
+      <% _.forEach(educations, function(item) { %>
+      <tr>
+        <td><p><%= item['institution'] %></p></td>
+        <td id="border-column"><p><%= item['degree'] %></p></td>
+        <td id="border-column"><p><%= item['endYear'] %></p></td>
+        <td><p></p></td>
+      </tr>
+      <% }); %>
+      <% } %>
+    </table>
+    
+    <br/>
+    <div class="row">
+     <div class="heading_14">
+       <p>A. Personal Statement</p>
+     </div>
+     <div class="regular_10">
+        <p>${overview}</p>
+     </div>
+     <div class="row"></div>
+      <% journals.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+
+      <% if (journals.length > 0) { %>
+      <div class="regular_10">
+          <ol>
+          <% var i = 1; %>  
+          <% _.forEach(journals, function(item) { %>   
+            <% if (i <= 4) { %>            
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+            <% } %>
+            <% i = i + 1 %>
+          <% }); %>
+          </ol>
+      </div>
+      <% } %>
+    </div>
+
+    <div class="row">
+      <div class="heading_14">B. Positions and Honors </div>
+      <div class="heading_12">
+        <p>Positions and Employment</p>
+      </div>
+      
+      <% var mergeExpPos = Object.assign(profExperiences, otherPositions) %>
+  
+      <% if (mergeExpPos.length > 0) { %>
+      <% mergeExpPos.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
+        <br/>
+        <div class="heading_11">
+        <% _.forEach(mergeExpPos, function(item) { %>
+        <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['label'] %></p>
+        <% }); %>
+        </div>
+        <% } %>
+
+      <!--<% if (pastappointments.length > 0) { %>
+      <% pastappointments.sort(function(a,b) {return (a.startYear > b.startYear)  ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
+        <div class="regular_10">
+        <% _.forEach(pastappointments, function(item) { %>
+        <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['label'] %></p>
+        <% }); %>
+        </div>
+        <% } %>-->
+    
+        <br/>
+       <div class="heading_12">
+        <p>Honors</p>
+      </div>
+      <% if (awards.length > 0) { %>
+        <br/>
+        <% _.forEach(awards, function(item) { %>
+        <div class="heading_11"><%= item['label'] %></div>
+        <% }); %>
+      <% } %>
+
+      <% if (licences.length > 0) { %>
+      <% var lic = ""; %>
+      <% _.forEach(licences, function(item) { %>
+      <% lic = item['label']; %>
+      <% }); %>
+      <div class="heading_11"><p>${lic}</p></div>
+      <% } %>
+      </div>
+    
+    <div class="row">
+    <div class="heading_14">
+      <p>C. Contribution to Science</p>
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="heading_14">
+      <p>D. Additional Information: Research Support</p>
+    </div>
+   
+   <% if (currentGrants.length > 0) { %>
+     <div class="row">&nbsp;</div> 
+       <div class="heading_12">
+        <p>Ongoing Research Support</p>
+      </div>
+    </div>
+    <table border="0" id="grants_table">
+    <% _.forEach(currentGrants, function(item) { %>
+     <div class="heading_11">
+          <tr>
+          <td>
+            <p><%= item['period'] %></p>
+          </td>
+          <td>
+             <p>Title: <%= item['title'] %></p>
+          </td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          </td>
+          <td>
+            <p>Role: <%= item['role'] %></p>
+          </td>
+          <td>
+            <p>Sponsor/Donor: </p>
+          </td>
+        </tr>      
+        </div>
+          <% }); %>
+        </table>
+    <% } %>
+
+   <% if (completedGrants.length > 0) { %>
+      <div class="row">&nbsp;</div> 
+       <div class="heading_12">
+        <p>Completed Research Support</p>
+      </div>
+   </div>
+  
+ <table border="0" id="grants_table">
+    <% _.forEach(completedGrants, function(item) { %>
+     <div class="heading_11">
+        <tr>
+          <td width="15%">
+            <p><%= item['period'] %></p>
+          </td>
+          <td width="45%">
+             <p>Title: <%= item['title'] %></p>
+          </td>
+          <td width="40%">
+          </td>
+        </tr>
+        <tr>
+          <td width="15%">
+          </td>
+          <td width="45%">
+            <p>Role: <%= item['role'] %></p>
+          </td>
+          <td width="40%">
+            <p>Sponsor/Donor: </p>
+          </td>
+        </tr>       
+        </div>
+          <% }); %>
+      </table>
+    <% } %>
+
+
+ </div>
+</body>
+</html>
+

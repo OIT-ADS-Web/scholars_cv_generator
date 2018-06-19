@@ -12,6 +12,8 @@ import * as widgets from './widgets_parser'
 
 import * as medWidgets from './widgets_som_parser'
 
+import * as nihWidgets from './widgets_nih_parser'
+
 function checkStatus(res) {
   console.log("sagas.checkStatus")
 
@@ -38,6 +40,7 @@ export function fetchWidgetsData(uri) {
 import blankTemplate from './templates/BlankTemplate.docx'
 import htmlTemplate from './templates/cv_template.html'
 import htmlMedicineTemplate from './templates/cv_medicine_template.html'
+import htmlNihTemplate from './templates/cv_nih_template.html'
 
 import FileSaver from 'file-saver'
 
@@ -60,6 +63,17 @@ export function generateTemplate(results) {
 
 }
 
+export function generateNihTemplate(results) {
+  let widgetsParser = new nihWidgets.WidgetsNIHParser()
+
+  var data = widgetsParser.convert(results)
+  let compiled = _.template(htmlNihTemplate,'imports': {'_': _})
+  let template = compiled(data)
+ 
+  return template
+
+}
+
 export function generateMedicineTemplate(results) {
   let widgetsParser = new medWidgets.WidgetsSOMParser()
 
@@ -70,7 +84,6 @@ export function generateMedicineTemplate(results) {
   return template
 
 }
-
 
 export function generateCVfromHtml(html, uri, template) {
   console.log("sagas.generateCVfromHtml")
@@ -100,9 +113,12 @@ export function generateCVfromHtml(html, uri, template) {
       if(template == "basic"){
         fileName = 'Scholars CV.docx'
       }
-      else{
+      else if(template == "medicine"){
         fileName = 'APT CV.docx'
       } 
+      else{
+        fileName = 'NIH CV.docx'
+      }
 
       FileSaver.saveAs(blob, fileName)
     })
@@ -180,6 +196,11 @@ export function* fetchCV(action) {
       const html = yield call(generateMedicineTemplate, results)
       yield put(setHtml(html))
       yield call(generateCVfromHtml, html, uri, "medicine")
+    }
+    else if(template == "nih") {
+      const html = yield call(generateNihTemplate, results)
+      yield put(setHtml(html))
+      yield call(generateCVfromHtml, html, uri, "nih")
     }
     else{
       const html = yield call(generateTemplate, results)
