@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-import { setUri, setTemplate, requestCV } from './actions'
+import { setUri, setTemplate, setFormat, requestCV } from './actions'
 
 import queryString from 'query-string'
 
@@ -11,8 +11,6 @@ export class ScholarsCVApp extends Component {
   constructor(props) {
     super(props)
     this.handleSubmitRequest = this.handleSubmitRequest.bind(this)
-  
-
   }
 
   // http://localhost:8334/?uri=https://scholars.duke.edu/individual/per4284062
@@ -20,14 +18,15 @@ export class ScholarsCVApp extends Component {
     const { dispatch } = this.props
   
     const parsed = queryString.parse(location.search)
-    console.log(parsed)
     
     if (parsed['uri']) {
       dispatch(setUri(parsed['uri']))
       
       dispatch(setTemplate(parsed['template']))
+
+      dispatch(setFormat(parsed['format']))
        
-      dispatch(requestCV(parsed['uri'],parsed['template']))
+      dispatch(requestCV(parsed['uri'],parsed['template'],parsed['format']))
     }
     // else?
     // error....
@@ -40,7 +39,8 @@ export class ScholarsCVApp extends Component {
  
     let uri = cv['uri']
     let template = cv['template']
-    dispatch(requestCV(uri,template))
+    let format = cv['format']
+    dispatch(requestCV(uri,template,format))
   }
    
   
@@ -91,15 +91,15 @@ export class ScholarsCVApp extends Component {
   render() {        
          const { dispatch, cv } = this.props
          let template = cv['template']
-         
-         if(template != "" && template != undefined){
+         let format = cv['format']
+
+         if(template != "" && template != undefined && format == "word"){
             return (
               <div className="container"></div>
             )
-          }else {
+          }else { 
              const { cv : {html} } = this.props
              
-             //console.log(html)
              let htmlContent = (html) => {
               if (html) {
                 // need to remove <html><body>

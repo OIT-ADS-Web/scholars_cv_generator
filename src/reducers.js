@@ -1,6 +1,6 @@
 import * as types from './types'
 
-function cvReducer(cv = { isFetching: false, results: {}, uri: "", template: ""}, action) {
+function cvReducer(cv = { isFetching: false, results: {}, uri: "", template: "", format: ""}, action) {
   console.log("****cvReducer*****")
 
   switch (action.type) {
@@ -28,6 +28,11 @@ function cvReducer(cv = { isFetching: false, results: {}, uri: "", template: ""}
 
     return { ...cv,
       template: action.template
+  }
+  case types.SET_FORMAT:
+
+    return { ...cv,
+      format: action.format
   }
   case types.SET_HTML:
     return { ...cv,
