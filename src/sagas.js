@@ -116,7 +116,7 @@ export function generateCVfromHtml(html, uri, template) {
       else if(template == "medicine"){
         fileName = 'APT CV.docx'
       } 
-      else{
+      else if(template == "nih"){
         fileName = 'NIH CV.docx'
       }
 
@@ -180,7 +180,8 @@ export function* fetchCV(action) {
   console.log("sagas.fetchCV")
   const { uri } = action
   const { template } = action
- 
+  const { format } = action
+
   try {
     const results = yield call(fetchWidgetsData, uri)
 
@@ -188,29 +189,46 @@ export function* fetchCV(action) {
 
     //yield call(generateCV, results, uri)
     if(template == "basic"){
-      const html = yield call(generateTemplate, results)
-      yield put(setHtml(html))
-      yield call(generateCVfromHtml, html, uri, "basic")
+      if (format == "word") {
+        const html = yield call(generateTemplate, results)
+        yield put(setHtml(html))
+        yield call(generateCVfromHtml, html, uri, "basic")
+      }
+      else if(format == "html"){
+        const html = yield call(generateTemplate, results)
+        yield put(setHtml(html))
+      }
     }
     else if(template == "medicine") {
-      const html = yield call(generateMedicineTemplate, results)
-      yield put(setHtml(html))
-      yield call(generateCVfromHtml, html, uri, "medicine")
+      if (format == "word") {
+        const html = yield call(generateMedicineTemplate, results)
+        yield put(setHtml(html))
+        yield call(generateCVfromHtml, html, uri, "medicine")
+      }
+      else if(format == "html"){
+        const html = yield call(generateMedicineTemplate, results)
+        yield put(setHtml(html))
+      }
     }
     else if(template == "nih") {
-      const html = yield call(generateNihTemplate, results)
-      yield put(setHtml(html))
-      yield call(generateCVfromHtml, html, uri, "nih")
+      if (format == "word") {
+        const html = yield call(generateNihTemplate, results)
+        yield put(setHtml(html))
+        yield call(generateCVfromHtml, html, uri, "nih")
+      }
+      else if(format == "html"){
+        const html = yield call(generateNihTemplate, results)
+        yield put(setHtml(html))
+      }
     }
     else{
-      const html = yield call(generateTemplate, results)
-      yield put(setHtml(html))
+      //const html = yield call(generateTemplate, results)
+      //yield put(setHtml(html))
     //  yield call(generateCVfromHtml, html, uri, "basic")
     }
     
     // FIXME: how to get html
     // yield put(setHtml(html))
-
   } catch(e) {
     //yield put(cvFailed(e.message))
   } 
