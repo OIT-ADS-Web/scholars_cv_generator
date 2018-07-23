@@ -94,7 +94,7 @@ class WidgetsNIHParser {
   }
 
   parsePositions(data) {
-    console.log("Hello 1");
+    //console.log("Hello 1");
     let positions = data['positions'] || [];
     var primaryPositions = []
     var secondaryPositions = []
@@ -126,7 +126,7 @@ class WidgetsNIHParser {
           break;
         }
       }
-      allPositions.push({'orig_label':label, 'startYear': year})
+      allPositions.push({'label':label, 'startYear': year})
     });
 
     let results = {
@@ -474,23 +474,25 @@ class WidgetsNIHParser {
       var startDate = new Date(value.attributes['startDate']);
       var endDate = new Date(value.attributes['endDate']);
       var today = new Date();
+      var startYear = value.attributes['startDate'].substr(0,4);
 
       var pi = value.attributes['piName'];
       var period = startDate.getFullYear() + " - " + endDate.getFullYear();
       var title = value['label'] + ", awarded by " + value.attributes['awardedBy'];
       var role = value.attributes['roleName'];
 
+
       if(startDate < today && endDate > today)
       {
-         currentGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
+         currentGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear})
       }
       if(endDate < today)
       {
-         completedGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
+         completedGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear})
       }
       if(startDate > today)
       {
-         pendingGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
+         pendingGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear})
       }
     });
 
@@ -520,6 +522,43 @@ class WidgetsNIHParser {
     return {'overview': general_overview}
   };
 
+  parseGifts(data){
+    
+    var gifts = data['gifts'] || [];
+    var currentGiftList = []
+    var completedGiftList = []
+    var pendingGiftList = []
+
+    _.forEach(gifts, function(value) {
+      if(value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift')
+      {
+        var startDate = new Date(value.attributes['startDate']);
+        var endDate = new Date(value.attributes['endDate']);
+        var startYear = value.attributes['dateTimeStartYear'];
+        var today = new Date();
+
+        var pi = '';
+        var period = startDate.getFullYear() + " - " + endDate.getFullYear();
+        var title = value['label'] + ", awarded by " + value.attributes['donor'];
+        var role = value.attributes['roleName'];
+
+        if(startDate < today && endDate > today)
+        {
+           currentGiftList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear})
+        }
+        if(endDate < today)
+        {
+           completedGiftList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear})
+        }
+        if(startDate > today)
+        {
+           pendingGiftList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear})
+        }       
+      }
+    });
+    let results = {'currentGifts': currentGiftList, 'completedGifts': completedGiftList, 'pendingGifts': pendingGiftList }
+    return results
+  }
 
   parseteachingActivities(data) {
     let activities = data['attributes']['teachingActivities'] || null;
@@ -638,6 +677,7 @@ class WidgetsNIHParser {
     _.merge(results, this.parseScholarlySocieties(data))
     _.merge(results, this.parseAwards(data))
     _.merge(results, this.parseGrants(data))
+    _.merge(results, this.parseGifts(data))
     _.merge(results, this.parsementorshipOverview(data))
     _.merge(results, this.parseteachingActivities(data))
     _.merge(results, this.parsePresentations(data))
