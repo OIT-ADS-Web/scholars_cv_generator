@@ -135,8 +135,11 @@
      <div class="regular_10">
         <p>${overview}</p>
      </div>
+     
+     <br/>
+
      <div class="row"></div>
-      <% journals.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+      <% journals.sort(function(a,b) {return (a.year < b.year) ? 1 : ((b.year < a.year) ? -1 : 0);} ); %>
 
       <% if (journals.length > 0) { %>
       <div class="regular_10">
@@ -159,14 +162,18 @@
         <p>Positions and Employment</p>
       </div>
       
-      <% var mergeExpPos = Object.assign(profExperiences, otherPositions) %>
+      <% var mergeExpPos = Object.assign(allPositions,pastappointments,otherPositions) %>
   
       <% if (mergeExpPos.length > 0) { %>
       <% mergeExpPos.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
         <br/>
         <div class="heading_11">
         <% _.forEach(mergeExpPos, function(item) { %>
-        <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['label'] %></p>
+        <% if (item['endYear']) { %>
+          <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['label'] %></p>
+        <% } else { %>
+          <p><%= item['startYear'] + " - " + item['startYear'] + ", " + item['label'] %></p>
+        <% } %>
         <% }); %>
         </div>
         <% } %>
@@ -211,14 +218,17 @@
       <p>D. Additional Information: Research Support</p>
     </div>
    
-   <% if (currentGrants.length > 0) { %>
+   <% var mergeExpPos = Object.assign(currentGrants,currentGifts) %>
+     
+   <% if (mergeExpPos.length > 0) { %>
+    <% mergeExpPos.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
      <div class="row">&nbsp;</div> 
        <div class="heading_12">
         <p>Ongoing Research Support</p>
       </div>
     </div>
     <table border="0" id="grants_table">
-    <% _.forEach(currentGrants, function(item) { %>
+    <% _.forEach(mergeExpPos, function(item) { %>
      <div class="heading_11">
           <tr>
           <td>
@@ -245,7 +255,9 @@
         </table>
     <% } %>
 
-   <% if (completedGrants.length > 0) { %>
+   <% var mergeExpPos = Object.assign(completedGrants,completedGifts) %>
+   <% if (mergeExpPos.length > 0) { %>
+   <% mergeExpPos.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
       <div class="row">&nbsp;</div> 
        <div class="heading_12">
         <p>Completed Research Support</p>
@@ -253,7 +265,7 @@
    </div>
   
  <table border="0" id="grants_table">
-    <% _.forEach(completedGrants, function(item) { %>
+    <% _.forEach(mergeExpPos, function(item) { %>
      <div class="heading_11">
         <tr>
           <td width="15%">
