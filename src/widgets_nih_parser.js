@@ -7,7 +7,7 @@ import _ from 'lodash'
 // http://www.scottmessinger.com/2015/05/19/functional-programming-with-lodash/
 // https://stackoverflow.com/questions/35590543/how-do-you-chain-functions-using-lodash
 class WidgetsNIHParser {
-  
+
   /*
   constructor(data) {
     this.data = data
@@ -44,13 +44,13 @@ class WidgetsNIHParser {
           return `${word}s`
         }
       }
-      
+
   }
 
   shortName(uri) {
       // NOTE: two types of URIs (at this point)
       // 'http://purl.org/ontology/bibo/AcademicArticle': [],
-      // 'http://vivoweb.org/ontology/core#Review': [], 
+      // 'http://vivoweb.org/ontology/core#Review': [],
       var index = uri.lastIndexOf("#")
       if (index < 0) {
         index = uri.lastIndexOf("/")
@@ -64,7 +64,7 @@ class WidgetsNIHParser {
     var firstName = data['attributes']['firstName'];
     var middleName = data['attributes']['middleName'];
     var lastName = data['attributes']['lastName'];
-  
+
     var fullName = "";
 
     if (typeof middleName != 'undefined' && middleName != null && middleName.length > 0) {
@@ -74,7 +74,7 @@ class WidgetsNIHParser {
       fullName = firstName + " " + lastName;
       middleName = false;
     };
-    
+
     return {'name': fullName, 'lastName': lastName }
   };
 
@@ -93,6 +93,13 @@ class WidgetsNIHParser {
     return {'title': title }
   }
 
+  parsepreferredTitle(data){
+    console.log("Hello preferredTitle");
+    var preferred_title = data['attributes']['preferredTitle'];
+    console.log(">>>>> Title: "+ preferred_title);
+    return {'preferredTitle': preferred_title }
+  }
+
   parsePositions(data) {
     //console.log("Hello 1");
     let positions = data['positions'] || [];
@@ -107,7 +114,7 @@ class WidgetsNIHParser {
     };
 
     console.log("Hello 2");
-    // group by 'type'    
+    // group by 'type'
     _.forEach(positions, function(value) {
       var vivoType = value['vivoType'];
       var label = value['label'];
@@ -155,12 +162,12 @@ class WidgetsNIHParser {
       if (typeof degree != 'undefined') {
         var degree = value.attributes['degree'];
         fullLabel = (degree + ", " + institution + ", " + endYear);
-        educationList.push({'label': fullLabel, 'endYear': endYear, 'institution': institution, 'degree': degree, 'education': label, 'endDate': endDate}) 
-      } 
+        educationList.push({'label': fullLabel, 'endYear': endYear, 'institution': institution, 'degree': degree, 'education': label, 'endDate': endDate})
+      }
       else {
         let startYear = value.attributes['startDate'].substr(0,4);
         fullLabel = (label + ", " + institution);
-        profexpList.push({'label': fullLabel, 'startYear': startYear, 'endYear': endYear}) 
+        profexpList.push({'label': fullLabel, 'startYear': startYear, 'endYear': endYear})
       }
     });
 
@@ -194,9 +201,10 @@ class WidgetsNIHParser {
       var org_label = value['attributes']['organizationLabel'];
       var start_year = value['attributes']['startYear'].substr(0,4);
       var end_year = value['attributes']['endYear'].substr(0,4);
-      var full_label = (label + ", " + org_label + " " + start_year + " - " + end_year);   
-      pastAppointmentsList.push({'label':full_label, 'orig_label':label, 'org_label':org_label, 'startYear':start_year, 'endYear':end_year});
+      var full_label = (label + ", " + org_label + " " + start_year + " - " + end_year);
+      pastAppointmentsList.push({'label':label, 'orig_label':label, 'org_label':org_label, 'startYear':start_year, 'endYear':end_year});
     });
+
 
     pastAppointmentsList.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} );
     return {'pastappointments': pastAppointmentsList}
@@ -207,7 +215,7 @@ class WidgetsNIHParser {
     var licenceList = [];
     _.forEach(licences, function(value) {
       var label = value['label'];
-      var lic_date = label.substr(label.length - 4); 
+      var lic_date = label.substr(label.length - 4);
       var number = value['attributes']['number'];
       var state = value['attributes']['state'];
       label = state + ", " + number + ", " + lic_date;
@@ -220,7 +228,7 @@ class WidgetsNIHParser {
 
     var pubTypes = {
       'journals': [],
-      'manuscripts': [],    
+      'manuscripts': [],
       'letters':[],
       'editorials':[],
       'abstracts':[],
@@ -228,9 +236,9 @@ class WidgetsNIHParser {
       'others':[],
       'nonauthored':[],
       'books':[],
-      'booksections':[]       
+      'booksections':[]
     };
-    
+
     var publications = data['publications'] || [];
 
     let figureCitation = function(value) {
@@ -241,29 +249,29 @@ class WidgetsNIHParser {
       citation = citation.replace(stripHtml, "");
 
       var vivoType = value['vivoType'];
-  
+
       if (vivoType === "http://purl.org/ontology/bibo/AcademicArticle") {
         let pubmed = value.attributes['pmid'];
-        let pubmedid = value.attributes['pmcid'];    
- 
+        let pubmedid = value.attributes['pmcid'];
+
         if (typeof pubmed !== 'undefined' && typeof pubmedid !== 'undefined') {
           citation = citation + " PMID: " + pubmed + ". PMCID: " + pubmedid + ".";
         }
         else if (typeof pubmed !== 'undefined') {
           citation = citation + " PMID: " + pubmed + ".";
-        };  
+        };
       }
       return citation
     };
 
 
     _.forEach(publications, function(value) {
-      
+
       let vivoType = value['vivoType'];
       let citation = figureCitation(value)
 
       var role = "";
-      switch(value['attributes']['authorshipType']) 
+      switch(value['attributes']['authorshipType'])
       {
          case 'http://vivoweb.org/ontology/core#Contributorship':
             role = "contributor"
@@ -272,7 +280,7 @@ class WidgetsNIHParser {
           case 'http://vivoweb.org/ontology/core#Contribution':
             role = "contributor"
             break;
-            
+
           case 'http://vivoweb.org/ontology/core#Translatorship':
             role = "translator"
             break;
@@ -304,7 +312,7 @@ class WidgetsNIHParser {
       if(year != ''){
          year = year;
       }
-      
+
       if(subtype == '' || subtype == 'academic article') {
           pubTypes['journals'].push({'citation': citation, 'year': year})
       }
@@ -340,7 +348,7 @@ class WidgetsNIHParser {
       }
     });
 
-    let results = _.transform(pubTypes, (result, value, key) => { 
+    let results = _.transform(pubTypes, (result, value, key) => {
       let name = key
       result[name] = value
       return result;
@@ -355,15 +363,15 @@ class WidgetsNIHParser {
     let professionalActivities = data['professionalActivities'];
 
      _.forEach(professionalActivities, function(value) {
-        
+
         if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession' || value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity') {
-             
-             var label = value['label'];     
+
+             var label = value['label'];
              var serviceType = value.attributes['serviceType'];
              var startDate = new Date(value.attributes['startDate']);
              var endDate = new Date(value.attributes['endDate']);
              let vivoType = value['vivoType'];
-             
+
              switch(serviceType) {
 
                 case "Community Service": {
@@ -425,13 +433,13 @@ class WidgetsNIHParser {
 
       });
 
-    let results = _.transform(consultAppointmentsList, (result, value, key) => { 
+    let results = _.transform(consultAppointmentsList, (result, value, key) => {
       let name = key
       result[name] = value
       return result;
     }, {});
 
-    return results 
+    return results
   }
 
   parseScholarlySocieties(data) {
@@ -442,7 +450,7 @@ class WidgetsNIHParser {
         var label = value['label'];
         var date = value['attributes']['date'].substr(0,4);
         var ssDate = new Date(value['attributes']['date']);
-        var label = (label + " " + date);   
+        var label = (date + " " + label);
         scholarlySocietiesList.push({'label':label, 'date':ssDate});
       }
     });
@@ -456,7 +464,7 @@ class WidgetsNIHParser {
       //if(value['attributes']['serviceType']  != 'Scholarly Societies') {
         var label = value['label'];
         var date = value['attributes']['date'].substr(0,4);
-        var label = (label + " " + date);   
+        var label = (label + " " + date);
         awardList.push({'label':label});
       //}
     });
@@ -464,12 +472,12 @@ class WidgetsNIHParser {
   };
 
   parseGrants(data) {
-    
+
     var grants = data['grants'] || [];
     var currentGrantList = []
     var completedGrantList = []
     var pendingGrantList = []
-    
+
     _.forEach(grants, function(value) {
       var startDate = new Date(value.attributes['startDate']);
       var endDate = new Date(value.attributes['endDate']);
@@ -478,21 +486,22 @@ class WidgetsNIHParser {
 
       var pi = value.attributes['piName'];
       var period = startDate.getFullYear() + " - " + endDate.getFullYear();
-      var title = value['label'] + ", awarded by " + value.attributes['awardedBy'];
+      var title = value['label'];
       var role = value.attributes['roleName'];
+      var donor = value.attributes['awardedBy'];
 
 
       if(startDate < today && endDate > today)
       {
-         currentGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear})
+         currentGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear, 'donor': donor})
       }
       if(endDate < today)
       {
-         completedGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear})
+         completedGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear, 'donor': donor})
       }
       if(startDate > today)
       {
-         pendingGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear})
+         pendingGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear, 'donor': donor})
       }
     });
 
@@ -523,7 +532,7 @@ class WidgetsNIHParser {
   };
 
   parseGifts(data){
-    
+
     var gifts = data['gifts'] || [];
     var currentGiftList = []
     var completedGiftList = []
@@ -532,28 +541,29 @@ class WidgetsNIHParser {
     _.forEach(gifts, function(value) {
       if(value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift')
       {
-        var startDate = new Date(value.attributes['startDate']);
-        var endDate = new Date(value.attributes['endDate']);
+        var startDate = new Date(value.attributes['dateTimeStart']);
+        var endDate = new Date(value.attributes['dateTimeEnd']);
         var startYear = value.attributes['dateTimeStartYear'];
         var today = new Date();
 
         var pi = '';
         var period = startDate.getFullYear() + " - " + endDate.getFullYear();
-        var title = value['label'] + ", awarded by " + value.attributes['donor'];
-        var role = value.attributes['roleName'];
+        var title = value['label'];
+        var role = value.attributes['role'];
+        var donor = value.attributes['donor'];
 
         if(startDate < today && endDate > today)
         {
-           currentGiftList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear})
+           currentGiftList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear, 'donor': donor})
         }
         if(endDate < today)
         {
-           completedGiftList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear})
+           completedGiftList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear, 'donor': donor})
         }
         if(startDate > today)
         {
-           pendingGiftList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear})
-        }       
+           pendingGiftList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear, 'donor': donor})
+        }
       }
     });
     let results = {'currentGifts': currentGiftList, 'completedGifts': completedGiftList, 'pendingGifts': pendingGiftList }
@@ -579,13 +589,13 @@ class WidgetsNIHParser {
     let professionalActivities = data['professionalActivities'];
 
      _.forEach(professionalActivities, function(value) {
-        
+
         if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation' ) {
-             
-             var label = value['label'];     
+
+             var label = value['label'];
              var serviceType = value.attributes['serviceType'];
              let vivoType = value['vivoType'];
-             
+
              switch(serviceType) {
 
                 case "Other": {
@@ -625,7 +635,7 @@ class WidgetsNIHParser {
 
       });
 
-    let results = _.transform(presentationList, (result, value, key) => { 
+    let results = _.transform(presentationList, (result, value, key) => {
       let name = key
       result[name] = value
       return result;
@@ -667,6 +677,7 @@ class WidgetsNIHParser {
     _.merge(results, this.parsePhone(data))
     _.merge(results, this.parseEmail(data))
     _.merge(results, this.parseTitle(data))
+    _.merge(results, this.parsepreferredTitle(data))
     _.merge(results, this.parsePositions(data))
     _.merge(results, this.parseEducations(data))
     _.merge(results, this.parseOtherPositions(data))
@@ -686,11 +697,11 @@ class WidgetsNIHParser {
     _.merge(results, this.parseOverview(data))
     return results
   }
- 
+
 };
 
 
-export { 
+export {
   WidgetsNIHParser
 }
 
