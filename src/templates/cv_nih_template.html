@@ -14,6 +14,8 @@
      div.heading_8_right { font-size: 8pt; font-family: Arial; text-align: right; margin-top:0;}
      div.heading_11 { font-size: 11pt; font-family: Arial; }
      div.regular_10 { font-size: 10pt; font-family: Arial; }
+     .break { page-break-before: always; }
+     .br.nospace { display: none; }
      p.border{ border-top-style: solid; border-top-width: thin; }
      p { line-height: 6pt; margin-top: 3pt; margin-bottom: 0pt; }
       #education_table td
@@ -56,6 +58,91 @@
   <body>
   <div class="container">
 
+     <!-- Cover Sheet -->
+      <div class="heading_8_right">
+      <p>OMB No. 0925-0001 and 0925-0002 (Rev. 09/17 Approved Through 03/31/2020)</p>
+      </div>
+
+      <div class="heading_13_center">
+      <p class="border">BIOGRAPHICAL SKETCH</p>
+      </div>
+
+      <div class="row">
+      <div class="heading_8_center">
+      <p>Provide the following information for the Senior/key personnel and other significant contributors.</p>
+      <p>Follow this format for each person. DO NOT EXCEED FIVE PAGES.</p>
+      </div>
+      </div>
+
+       <div class="row">
+    <div class="heading_11">
+      <p class="border">NAME: </p>
+    </div>
+    </div>
+
+    <div class="row">
+     <div class="heading_11">
+      <p class="border">eRA COMMONS USER NAME (credentials, e.g. agency login):</p>
+    </div>
+    </div>
+
+      <div class="row">
+      <div class="heading_11">
+        <p class="border">POSITION TITLE: </p>
+      </div>
+    </div>
+
+     <div class="heading_11">
+      <p class="border">EDUCATION/TRAINING <i>(Begin with baccalaureate or other initial professional education, such as nursing, include postdoctoral training and residency training if applicable. Add/delete rows as necessary.)</i></p>
+    </div>
+
+      <table id="education_table">
+      <tr>
+        <th width="40%"><p style="text-align: left;">INSTITUTION AND LOCATION</p></th>
+        <th width="20%" id="border-column"><p>DEGREE <br/><i>(if <br/> applicable)</i></p></th>
+        <th width="20%" id="border-column"><p>Completion <br/> Date <br/> MM/YYYY</p></th>
+        <th width="20%"><p>FIELD OF STUDY</p></th>
+      </tr>
+      <tr>
+        <td><p style="text-align: left;"></td>
+        <td id="border-column"></td>
+        <td id="border-column"</td>
+        <td><p></p></td>
+      </tr>
+    </table>
+
+
+    <div class="row">
+     <div class="heading_14">
+       <p>A. Personal Statement</p>
+     </div>
+     </div>
+
+
+    <div class="row">
+      <div class="heading_14">
+        <p>B. Positions and Honors</p> </div>
+     </div>
+    </div>
+
+
+    <div class="row">
+      <div class="heading_14">
+        <p>C. Contributions to Science</p> </div>
+     </div>
+    </div>
+
+
+    <div class="row">
+      <div class="heading_14">
+        <p>D. Additional Information: Research Support and/or Scholastic Performance</p> </div>
+     </div>
+    </div>
+
+    <!-- Page Break -->
+    <div class="break"><br class="no-space"/></div>
+
+    <!-- Main CV -->
     <div class="heading_8_right">
       <p>OMB No. 0925-0001 and 0925-0002 (Rev. 09/17 Approved Through 03/31/2020)</p>
     </div>
@@ -173,7 +260,7 @@
       <% allPositions.sort(function(a,b) {return (a.startYear < b.startYear)  ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
         <div class="heading_11">
         <% _.forEach(allPositions, function(item) { %>
-        <p><%= item['startYear'] + ", " + item['label'] %></p>
+        <p><%= item['startYear'] + " " + item['label'] %></p>
         <% }); %>
         </div>
         <% } %>
@@ -184,9 +271,9 @@
         <div class="heading_11">
         <% _.forEach(mergeExpPos, function(item) { %>
         <% if (item['endYear']) { %>
-          <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['label'] %></p>
+          <p><%= item['startYear'] + " - " + item['endYear'] + " " + item['label'] %></p>
         <% } else { %>
-          <p><%= item['startYear'] + " - " + item['startYear'] + ", " + item['label'] %></p>
+          <p><%= item['startYear'] + " - " + item['startYear'] + " " + item['label'] %></p>
         <% } %>
         <% }); %>
         </div>
@@ -245,22 +332,22 @@
     <% _.forEach(mergeExpPos, function(item) { %>
      <div class="heading_11">
           <tr>
-          <td>
+          <td width="15%">
             <p><%= item['period'] %></p>
           </td>
-          <td>
+          <td width="45%">
              <p>Title: <%= item['title'] %></p>
           </td>
-          <td>
+          <td width="40%">
           </td>
         </tr>
         <tr>
-          <td>
+          <td width="15%">
           </td>
-          <td>
+          <td width="45%">
             <p>Role: <%= item['role'] %></p>
           </td>
-          <td>
+          <td width="40%">
             <p>Sponsor/Donor: <%= item['donor'] %></p>
           </td>
         </tr>
