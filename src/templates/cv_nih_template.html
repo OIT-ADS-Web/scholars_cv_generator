@@ -260,7 +260,7 @@
       <% allPositions.sort(function(a,b) {return (a.startYear < b.startYear)  ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
         <div class="heading_11">
         <% _.forEach(allPositions, function(item) { %>
-        <p><%= item['startYear'] + ", " + item['label'] %></p>
+        <p><%= item['startYear'] + " " + item['label'] %></p>
         <% }); %>
         </div>
         <% } %>
@@ -271,9 +271,9 @@
         <div class="heading_11">
         <% _.forEach(mergeExpPos, function(item) { %>
         <% if (item['endYear']) { %>
-          <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['label'] %></p>
+          <p><%= item['startYear'] + " - " + item['endYear'] + " " + item['label'] %></p>
         <% } else { %>
-          <p><%= item['startYear'] + " - " + item['startYear'] + ", " + item['label'] %></p>
+          <p><%= item['startYear'] + " - " + item['startYear'] + " " + item['label'] %></p>
         <% } %>
         <% }); %>
         </div>
@@ -332,22 +332,22 @@
     <% _.forEach(mergeExpPos, function(item) { %>
      <div class="heading_11">
           <tr>
-          <td>
+          <td width="15%">
             <p><%= item['period'] %></p>
           </td>
-          <td>
+          <td width="45%">
              <p>Title: <%= item['title'] %></p>
           </td>
-          <td>
+          <td width="40%">
           </td>
         </tr>
         <tr>
-          <td>
+          <td width="15%">
           </td>
-          <td>
+          <td width="45%">
             <p>Role: <%= item['role'] %></p>
           </td>
-          <td>
+          <td width="40%">
             <p>Sponsor/Donor: <%= item['donor'] %></p>
           </td>
         </tr>

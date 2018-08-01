@@ -204,9 +204,8 @@ class WidgetsNIHParser {
       var full_label = (label + ", " + org_label + " " + start_year + " - " + end_year);
       pastAppointmentsList.push({'label':label, 'orig_label':label, 'org_label':org_label, 'startYear':start_year, 'endYear':end_year});
     });
-
-
-    pastAppointmentsList.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} );
+    //console.log(pastAppointmentsList);
+    //pastAppointmentsList.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} );
     return {'pastappointments': pastAppointmentsList}
   };
 
@@ -464,7 +463,7 @@ class WidgetsNIHParser {
       //if(value['attributes']['serviceType']  != 'Scholarly Societies') {
         var label = value['label'];
         var date = value['attributes']['date'].substr(0,4);
-        var label = (label + " " + date);
+        var label = (date + " " + label);
         awardList.push({'label':label});
       //}
     });
