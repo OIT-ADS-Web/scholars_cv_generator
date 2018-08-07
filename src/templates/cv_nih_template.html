@@ -19,6 +19,8 @@
      div.text_10_times_italics { font-size: 10pt; font-family: "TimesNewRoman"; font-style: italic; }
      .break { page-break-before: always; }
      .br.nospace { display: none; }
+     .bold { font-weight: bold; }
+     .italics { font-style: italic; }
      p.border{ border-top-style: solid; border-top-width: thin; }
      p { line-height: 6pt; margin-top: 3pt; margin-bottom: 0pt; }
      p.space { line-height: 12pt; }
@@ -63,101 +65,130 @@
   <div class="container">
 
      <!-- Cover Sheet -->
-      <div class="heading_14">
-      <p>Scholars@Duke Users: How to Complete the NIH Biosketch</p>
-      </div>
-
-      <div class="text_10_times">
-        <p>The Scholars NIH Biosketch contains output from your Scholars@Duke profile displayed in a Word document that you can edit directly. To make permanent changes, you must add or correct information in the source systems, either Scholars@Duke, Elements, dFac (Duke’s faculty system) or SPS (Duke’s Sponsored Projects System).</p>
-       </div>
-       <div class="text_10_times">
-        <p class="space">Titles, affiliations, and educational information comes from dFac, Duke’s faculty system. To add or correct information in dFac, contact your departmental dFac user or your <a href="http://about.scholars.duke.edu/locate-power-user"> Scholars power user</a>.</p>
-       </div>
-
-       <div class="text_10_times">
-        <p class="space">For more information, see Generating an NIH Biosketch in the Scholars User Guide or the biosketch format pages, instructions, and samples on the <a href="https://grants.nih.gov/grants/forms/biosketch.htm">NIH website</a>.
-      </div>
-
-      <div class="text_10_times">
-        <p style="font-style:bold;"> Note: </p>
-      </div>
-
-      <div class="heading_10">
-        <p> Data from dFac </p>
-      </div>
-
-      <div class="text_10_times">
-        <p> To add or correct information in dFac, contact your departmental dFac user or your <a href="http://about.scholars.duke.edu/locate-power-user"> Scholars power user. </a></p>
-        <ul>
-          <li>Name</li>
-          <li>Position Title (Preferred Title)</li>
-          <li>Institution/Degree(s)/Completion Date (Education, Training & Certifications)</li>
-          <li>Positions and Employment (Current Appointments & Affiliations | Duke Appointment History)</li>
-          <li>Honors (Specialty Board Certifications) </li>
-        </ul>
-      </div>
-
-      <div class="heading_10">
-        <p> Data from <a href="http://scholars.duke.edu">Scholars@Duke </a></p>
-      </div>
-
-
-      <div class="text_10_times">
-        <p> To add or edit this information, click the “Manage This Profile” button on your profile and navigate to the corresponding section. </p>
-        <ul>
-          <li>Personal Statement: Comes from the Overview section in <a href="http://scholars.duke.edu">Scholars@Duke</a></li>
-          <li>Honors: Comes from the Awards and Honors section in <a href="http://scholars.duke.edu">Scholars@Duke</a></li>
-        </ul>
-      </div>
-
-
-      <div class="heading_10">
-        <p>Data from Sponsored Project System (SPS)</p>
-      </div>
-
-      <div class="text_10_times">
-        <p> To add or correct information in SPS, contact your <a href="http://about.scholars.duke.edu/locate-power-user">Scholars power user </a> or your department’s SPS contact to work with the appropriate office (Office of Research Administration (ORA) or the Office of Research Support (ORS). </p>
-        <ul>
-          <li>Ongoing Research Support</li>
-          <li>Completed Research Support</a></li>
-        </ul>
-        <div class="text_10_times">
-          <p style="font-style:bold;"> Note: </p>
+      <div class="row">
+        <div class="heading_14">
+        <p>Scholars@Duke Users: How to Complete the NIH Biosketch</p>
         </div>
       </div>
 
-      <div class="heading_10">
-        <p>Data from Elements</p>
-      </div>
-
+      <div class="row">
       <div class="text_10_times">
-        <p> To add or correct publications, edit your publications list in <a href="http://elements.duke.edu/">Elements</a>. See the <a href="https://elements.duke.edu/information.html">Elements Help</a> to learn how to add subtypes to publications records:</p>
-        <ul>
-          <li>Refereed journal article: Journal Article type with either the Academic Article subtype or no subtype </li>
-          <li>Study-related manuscripts on multicenter clinical trials: Journal Article type, Clinical Trial Manuscript subtype, and the Contributor role</li>
-          <li>Letters:  Any publication type with subtype Letter </li>
-          <li>Editorials:  Any publication type with subtype Editorial Comment </li>
-          <li>Books:  Book type </li>
-          <li>Chapters:  Book Section type </li>
-          <li>Selected abstracts:  Journal Article type and subtype Abstract </li>
-          <li>Scientific reviews:  Book Review type </li>
-          <li>Non-authored publications: Any publication type with the Contributor role with the Author role removed</li>
-          <li>Other publications: Other Articles type and/or any of the subtypes not listed above</li>
-        </ul>
+        <p>The Scholars NIH Biosketch contains output from your Scholars@Duke profile displayed in a Word document that you can edit directly. To make permanent changes, you must add or correct information in the source systems, either Scholars@Duke, Elements, dFac (Duke’s faculty system) or SPS (Duke’s Sponsored Projects System).</p>
+       </div>
       </div>
 
+      <div class="row">
+       <div class="text_10_times">
+        <p class="space">Titles, affiliations, and educational information comes from dFac, Duke’s faculty system. To add or correct information in dFac, contact your departmental dFac user or your <a href="http://about.scholars.duke.edu/locate-power-user"> Scholars power user</a>.</p>
+       </div>
+      </div>
+
+      <div class="row">
+       <div class="text_10_times">
+        <p class="space">For more information, see Generating an NIH Biosketch in the Scholars User Guide or the biosketch format pages, instructions, and samples on the <a href="https://grants.nih.gov/grants/forms/biosketch.htm">NIH website</a>.</p>
+       </div>
+      </div>
+
+      <div class="row">
+        <div class="text_10_times">
+          <span class="bold"> Note: </span><span class="italics">delete this cover page before submitting your biosketch.</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="heading_10">
+          <p> Data from dFac </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="text_10_times">
+          <p> To add or correct information in dFac, contact your departmental dFac user or your <a href="http://about.scholars.duke.edu/locate-power-user"> Scholars power user. </a></p>
+          <ul>
+            <li>Name</li>
+            <li>Position Title (Preferred Title)</li>
+            <li>Institution/Degree(s)/Completion Date (Education, Training & Certifications)</li>
+            <li>Positions and Employment (Current Appointments & Affiliations | Duke Appointment History)</li>
+            <li>Honors (Specialty Board Certifications) </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="heading_10">
+          <p> Data from <a href="http://scholars.duke.edu">Scholars@Duke </a></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="text_10_times">
+          <p> To add or edit this information, click the “Manage This Profile” button on your profile and navigate to the corresponding section. </p>
+          <ul>
+            <li>Personal Statement: Comes from the Overview section in <a href="http://scholars.duke.edu">Scholars@Duke</a></li>
+            <li>Honors: Comes from the Awards and Honors section in <a href="http://scholars.duke.edu">Scholars@Duke</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="heading_10">
+          <p>Data from Sponsored Project System (SPS)</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="text_10_times">
+          <p> To add or correct information in SPS, contact your <a href="http://about.scholars.duke.edu/locate-power-user">Scholars power user </a> or your department’s SPS contact to work with the appropriate office (Office of Research Administration (ORA) or the Office of Research Support (ORS). </p>
+          <ul>
+            <li>Ongoing Research Support</li>
+            <li>Completed Research Support</a></li>
+          </ul>
+          <div class="text_10_times">
+            <span class="bold"> Note: </span> You can also add to both sections above by adding data in <a href="http://scholars.duke.edu">Scholars@Duke</a> in the Fellowships, Supported Research & Other Grants section.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="heading_10">
+          <p>Data from Elements</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="text_10_times">
+          <p> To add or correct publications, edit your publications list in <a href="http://elements.duke.edu/">Elements</a>. See the <a href="https://elements.duke.edu/information.html">Elements Help</a> to learn how to add subtypes to publications records:</p>
+          <ul>
+            <li>Refereed journal article: Journal Article type with either the Academic Article subtype or no subtype </li>
+            <li>Study-related manuscripts on multicenter clinical trials: Journal Article type, Clinical Trial Manuscript subtype, and the Contributor role</li>
+            <li>Letters:  Any publication type with subtype Letter </li>
+            <li>Editorials:  Any publication type with subtype Editorial Comment </li>
+            <li>Books:  Book type </li>
+            <li>Chapters:  Book Section type </li>
+            <li>Selected abstracts:  Journal Article type and subtype Abstract </li>
+            <li>Scientific reviews:  Book Review type </li>
+            <li>Non-authored publications: Any publication type with the Contributor role with the Author role removed</li>
+            <li>Other publications: Other Articles type and/or any of the subtypes not listed above</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
        <div class="heading_10">
         <p>Other sections:</p>
+       </div>
       </div>
 
-      <div class="text_10_times">
-        <p> The remaining biosketch sections must be completed by entering data directly into the Microsoft Word document:</p>
-        <ul>
-          <li>eRA Commons User Name </li>
-          <li>Institution Location</li>
-          <li>Field of Study </li>
-          <li>Contributions to Science</li>
-        </ul>
+      <div class="row">
+        <div class="text_10_times">
+          <p> The remaining biosketch sections must be completed by entering data directly into the Microsoft Word document:</p>
+          <ul>
+            <li>eRA Commons User Name </li>
+            <li>Institution Location</li>
+            <li>Field of Study </li>
+            <li>Contributions to Science</li>
+          </ul>
+        </div>
       </div>
 
     <!-- Page Break -->
