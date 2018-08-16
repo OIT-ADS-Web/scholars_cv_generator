@@ -309,36 +309,34 @@
       </div>
 
       <% if (allPositions.length > 0) { %>
-      <% allPositions.sort(function(a,b) {return (a.startYear < b.startYear)  ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
-        <div class="heading_11">
-        <% _.forEach(allPositions, function(item) { %>
-        <p><%= item['startYear'] + " " + item['label'] %></p>
-        <% }); %>
-        </div>
-        <% } %>
+       <% allPositions.sort(function(a,b) {return (a.startYear < b.startYear)  ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
+       <table>
+         <% _.forEach(allPositions, function(item) { %>
+        <tr>
+          <td style="padding-right: 37px; overflow: hidden; display: inline-block; white-space: nowrap;"><div class="heading_11"><p><%= item['startYear'] + " - " %></p></div></td>
+          <td><div class="heading_11"><p><%= item['label'] %></p></div></td>
+        </tr>
+         <% }); %>
+       </table>
+       <% } %>
 
-      <% var mergeExpPos = Object.assign(pastappointments,otherPositions) %>
-      <% if (mergeExpPos.length > 0) { %>
-      <% mergeExpPos.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
-        <div class="heading_11">
-        <% _.forEach(mergeExpPos, function(item) { %>
-        <% if (item['endYear']) { %>
-          <p><%= item['startYear'] + " - " + item['endYear'] + " " + item['label'] %></p>
-        <% } else { %>
-          <p><%= item['startYear'] + " - " + item['startYear'] + " " + item['label'] %></p>
-        <% } %>
-        <% }); %>
-        </div>
-        <% } %>
-
-      <!--<% if (pastappointments.length > 0) { %>
-      <% pastappointments.sort(function(a,b) {return (a.startYear > b.startYear)  ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
-        <div class="regular_10">
-        <% _.forEach(pastappointments, function(item) { %>
-        <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['label'] %></p>
-        <% }); %>
-        </div>
-        <% } %>-->
+       <% var mergeExpPos = Object.assign(pastappointments,otherPositions) %>
+       <% if (mergeExpPos.length > 0) { %>
+        <% mergeExpPos.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
+        <table>
+         <% _.forEach(mergeExpPos, function(item) { %>
+        <tr>
+          <% if (item['endYear']) { %>
+            <td style="overflow: hidden; display: inline-block; white-space: nowrap;"><div class="heading_11"><p><%= item['startYear'] + " - " + item['endYear'] %></p></div></td>
+            <td><div class="heading_11"><p><%= item['label'] %></p></div></td>
+          <% } else { %>
+            <td style="overflow: hidden; display: inline-block; white-space: nowrap;"><div class="heading_11"><p><%= item['startYear'] + " - " + item['startYear'] %></p></div></td>
+            <td><div class="heading_11"><p><%= item['label'] %></p></div></td>
+          <% } %>
+        </tr>
+         <% }); %>
+       </table>
+       <% } %>
 
         <br/>
        <div class="heading_12">
