@@ -462,9 +462,10 @@ class WidgetsNIHParser {
     _.forEach(awards, function(value) {
       //if(value['attributes']['serviceType']  != 'Scholarly Societies') {
         var label = value['label'];
+        var only_label = label;
         var date = value['attributes']['date'].substr(0,4);
         var label = (date + " " + label);
-        awardList.push({'label':label});
+        awardList.push({'label':label, 'year':date, 'only_label':only_label});
       //}
     });
     return {'awards': awardList}
