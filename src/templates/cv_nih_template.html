@@ -344,9 +344,14 @@
       </div>
       <% if (awards.length > 0) { %>
         <br/>
+        <table>
         <% _.forEach(awards, function(item) { %>
-        <div class="heading_11"><%= item['label'] %></div>
+        <tr>
+          <td style="overflow: hidden; display: inline-block; white-space: nowrap;"><div class="heading_11"><p><%= item['year'] %></p></div></td>
+           <td><div class="heading_11"><p><%= item['only_label'] %></p></div></td>
+        </tr>
         <% }); %>
+        </table>
       <% } %>
 
       <% if (licences.length > 0) { %>
