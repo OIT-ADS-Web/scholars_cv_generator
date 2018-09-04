@@ -483,6 +483,7 @@ class WidgetsNIHParser {
       var endDate = new Date(value.attributes['endDate']);
       var today = new Date();
       var startYear = value.attributes['startDate'].substr(0,4);
+      var endYear = value.attributes['endDate'].substr(0,4);
 
       var pi = value.attributes['piName'];
       var period = startDate.getFullYear() + " - " + endDate.getFullYear();
@@ -493,15 +494,15 @@ class WidgetsNIHParser {
 
       if(startDate < today && endDate > today)
       {
-         currentGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear, 'donor': donor})
+         currentGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear, 'donor': donor, 'endYear': endYear})
       }
       if(endDate < today)
       {
-         completedGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear, 'donor': donor})
+         completedGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear, 'donor': donor, 'endYear': endYear})
       }
       if(startDate > today)
       {
-         pendingGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear, 'donor': donor})
+         pendingGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role, 'startYear': startYear, 'donor': donor, 'endYear': endYear})
       }
     });
 
