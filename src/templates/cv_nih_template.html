@@ -341,11 +341,16 @@
       <% } %>
 
       <% if (licences.length > 0) { %>
+      <br/>
+      <div class="heading_12">
+        <p>Licensures and Board Certifications</p>
+      </div>
       <% var lic = ""; %>
+      <br/>
       <% _.forEach(licences, function(item) { %>
       <% lic = item['label']; %>
-      <% }); %>
       <div class="regular_10"><p>${lic}</p></div>
+      <% }); %>
       <% } %>
       </div>
 
@@ -409,65 +414,44 @@
 } %>
 
    <% var mergeExpPos = Object.assign(currentGrants,currentGifts) %>
+   <div class="row">
+   <div class="heading_12">Ongoing Research Support</div>
    <% if (mergeExpPos.length > 0) { %>
    <!--<% mergeExpPos.sort(function(a,b) {return (a.endYear < b.endYear) ? 1 : ((b.endYear < a.endYear) ? -1 : 0);} ); %>-->
    <% var mergeExpPos1 = multiSort(mergeExpPos, {endYear: 'desc', startYear: 'desc'}); %>
-        <div class="row">
-         <div class="heading_12">Ongoing Research Support</div>
+
          <div class="regular_10">
           <% _.forEach(mergeExpPos1, function(item) { %>
               <p>Period: <%= item['period'] %></p>
               <p>Title: <%= item['title'] %></p>
               <p>Role: <%= item['role'] %></p>
               <p>Sponsor: <%= item['donor'] %></p>
+              <br/>
           <% }); %>
          </div>
-        </div>
-      <% } else { %>
-       <div class="row">
-         <div class="heading_12">Ongoing Research Support</div>
-         <div class="regular_10">
-              <p>Period: </p>
-              <p>Title: </p>
-              <p>Role: </p>
-              <p>Sponsor: </p>
-         </div>
-       </div>
        <% } %>
+    </div>
+   </div>
 
 
    <% var mergeExpPos = Object.assign(completedGrants,completedGifts) %>
-
+   <div class="row">
+   <div class="heading_12">Completed Research Support</div>
    <% if (mergeExpPos.length > 0) { %>
-
- <% var mergeExpPos1 = multiSort(mergeExpPos, {endYear: 'desc', startYear: 'desc'}); %>
-
-        <div class="row">
-         <div class="heading_12">Completed Research Support</div>
+   <% var mergeExpPos1 = multiSort(mergeExpPos, {endYear: 'desc', startYear: 'desc'}); %>
          <div class="regular_10">
           <% _.forEach(mergeExpPos1, function(item) { %>
               <p>Period: <%= item['period'] %></p>
               <p>Title: <%= item['title'] %></p>
               <p>Role: <%= item['role'] %></p>
               <p>Sponsor: <%= item['donor'] %></p>
-              <br/><br/>
+              <br/>
           <% }); %>
-         </div>
         </div>
-      <% } else { %>
-       <div class="row">
-         <div class="heading_12">Completed Research Support</div>
-         <div class="regular_10">
-              <p>Period: </p>
-              <p>Title: </p>
-              <p>Role: </p>
-              <p>Sponsor: </p>
-              <br/><br/>
-         </div>
-       </div>
-       <% } %>
+    <% } %>
+  </div>
+  </div>
 
- </div>
 </body>
 </html>
 
