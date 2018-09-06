@@ -309,6 +309,7 @@
       </div>
 
       <% if (allPositions.length > 0) { %>
+      <br/>
        <% allPositions.sort(function(a,b) {return (a.startYear < b.startYear)  ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
          <% _.forEach(allPositions, function(item) { %>
           <div class="regular_10"><p><%= item['startYear'] + " - " + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + ", " + item['label'] %></p></div>
@@ -333,6 +334,7 @@
         <p>Honors</p>
       </div>
       <% if (awards.length > 0) { %>
+        <br/>
         <% _.forEach(awards, function(item) { %>
          <div class="regular_10"><p><%= item['only_label'] + " " +  item['year'] %></p></div>
         <% }); %>
