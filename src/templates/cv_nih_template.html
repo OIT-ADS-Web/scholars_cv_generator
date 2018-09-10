@@ -21,6 +21,7 @@
      .br.nospace { display: none; }
      .bold { font-weight: bold; }
      .italics { font-style: italic; }
+     .underline { text-decoration: underline; }
      p.border{ border-top-style: solid; border-top-width: thin; }
      p { line-height: 6pt; margin-top: 3pt; margin-bottom: 0pt; }
      p.space { line-height: 12pt; }
@@ -79,13 +80,13 @@
 
       <div class="row">
        <div class="text_10_times">
-        <p class="space">Titles, affiliations, and educational information comes from dFac, Duke’s faculty system. To add or correct information in dFac, contact your departmental dFac user or your <a href="http://about.scholars.duke.edu/locate-power-user"> Scholars power user</a>.</p>
+        <p class="space">Titles, affiliations, and educational information comes from dFac, Duke’s faculty system. To add or correct information in dFac, contact your departmental dFac user or your <a href="http://about.scholars.duke.edu/locate-power-user"><span class="underline">Scholars power user</span></a>.</p>
        </div>
       </div>
 
       <div class="row">
        <div class="text_10_times">
-        <p class="space">For more information, see Generating an NIH Biosketch in the Scholars User Guide or the biosketch format pages, instructions, and samples on the <a href="https://grants.nih.gov/grants/forms/biosketch.htm">NIH website</a>.</p>
+        <p class="space">For more information, see Generating an NIH Biosketch in the Scholars User Guide or the biosketch format pages, instructions, and samples on the <a href="https://grants.nih.gov/grants/forms/biosketch.htm"><span class="underline">NIH website</span></a>.</p>
        </div>
       </div>
 
@@ -103,7 +104,7 @@
 
       <div class="row">
         <div class="text_10_times">
-          <p> To add or correct information in dFac, contact your departmental dFac user or your <a href="http://about.scholars.duke.edu/locate-power-user"> Scholars power user. </a></p>
+          <p> To add or correct information in dFac, contact your departmental dFac user or your <a href="http://about.scholars.duke.edu/locate-power-user"><span class="underline"> Scholars power user</span></a>.</p>
           <ul>
             <li>Name</li>
             <li>Position Title (Preferred Title)</li>
@@ -116,7 +117,7 @@
 
       <div class="row">
         <div class="heading_10">
-          <p> Data from <a href="http://scholars.duke.edu">Scholars@Duke </a></p>
+          <p> Data from <a href="http://scholars.duke.edu"><span class="underline">Scholars@Duke</span></a></p>
         </div>
       </div>
 
@@ -124,8 +125,8 @@
         <div class="text_10_times">
           <p> To add or edit this information, click the “Manage This Profile” button on your profile and navigate to the corresponding section. </p>
           <ul>
-            <li>Personal Statement: Comes from the Overview section in <a href="http://scholars.duke.edu">Scholars@Duke</a></li>
-            <li>Honors: Comes from the Awards and Honors section in <a href="http://scholars.duke.edu">Scholars@Duke</a></li>
+            <li>Personal Statement: Comes from the Overview section in <a href="http://scholars.duke.edu"><span class="underline">Scholars@Duke</span></a></li>
+            <li>Honors: Comes from the Awards and Honors section in <a href="http://scholars.duke.edu"><span class="underline">Scholars@Duke</span></a></li>
           </ul>
         </div>
       </div>
@@ -138,13 +139,13 @@
 
       <div class="row">
         <div class="text_10_times">
-          <p> To add or correct information in SPS, contact your <a href="http://about.scholars.duke.edu/locate-power-user">Scholars power user </a> or your department’s SPS contact to work with the appropriate office (Office of Research Administration (ORA) or the Office of Research Support (ORS). </p>
+          <p> To add or correct information in SPS, contact your <a href="http://about.scholars.duke.edu/locate-power-user"><span class="underline">Scholars power user</span></a> or your department’s SPS contact to work with the appropriate office (Office of Research Administration (ORA) or the Office of Research Support (ORS). </p>
           <ul>
             <li>Ongoing Research Support</li>
             <li>Completed Research Support</a></li>
           </ul>
           <div class="text_10_times">
-            <span class="bold"> Note: </span> You can also add to both sections above by adding data in <a href="http://scholars.duke.edu">Scholars@Duke</a> in the Fellowships, Supported Research & Other Grants section.
+            <span class="bold"> Note: </span> You can also add to both sections above by adding data in <a href="http://scholars.duke.edu"><span class="underline">Scholars@Duke</span></a> in the Fellowships, Supported Research & Other Grants section.
           </div>
         </div>
       </div>
@@ -157,7 +158,7 @@
 
       <div class="row">
         <div class="text_10_times">
-          <p> To add or correct publications, edit your publications list in <a href="http://elements.duke.edu/">Elements</a>. See the <a href="https://elements.duke.edu/information.html">Elements Help</a> to learn how to add subtypes to publications records:</p>
+          <p> To add or correct publications, edit your publications list in <a href="http://elements.duke.edu/"><span class="underline">Elements</span></a>. See the <a href="https://elements.duke.edu/information.html"><span class="underline">Elements Help</span></a> to learn how to add subtypes to publications records:</p>
           <ul>
             <li>Refereed journal article: Journal Article type with either the Academic Article subtype or no subtype </li>
             <li>Study-related manuscripts on multicenter clinical trials: Journal Article type, Clinical Trial Manuscript subtype, and the Contributor role</li>
@@ -282,8 +283,6 @@
         <p>${overview}</p>
      </div>
 
-     <br/>
-
      <div class="row"></div>
       <% journals.sort(function(a,b) {return (a.year < b.year) ? 1 : ((b.year < a.year) ? -1 : 0);} ); %>
 
@@ -309,10 +308,9 @@
       </div>
 
       <% if (allPositions.length > 0) { %>
-      <br/>
        <% allPositions.sort(function(a,b) {return (a.startYear < b.startYear)  ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
          <% _.forEach(allPositions, function(item) { %>
-          <div class="regular_10"><p><%= item['startYear'] + " - " + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + ", " + item['label'] %></p></div>
+          <div class="regular_10"><p><%= item['startYear'] + " - " + "present" + ", " + item['label'] %></p></div>
          <% }); %>
        <% } %>
 
@@ -334,19 +332,17 @@
         <p>Honors</p>
       </div>
       <% if (awards.length > 0) { %>
-        <br/>
         <% _.forEach(awards, function(item) { %>
          <div class="regular_10"><p><%= item['only_label'] + " " +  item['year'] %></p></div>
         <% }); %>
       <% } %>
 
-      <% if (licences.length > 0) { %>
       <br/>
+      <% if (licences.length > 0) { %>
       <div class="heading_12">
         <p>Licensures and Board Certifications</p>
       </div>
       <% var lic = ""; %>
-      <br/>
       <% _.forEach(licences, function(item) { %>
       <% lic = item['label']; %>
       <div class="regular_10"><p>${lic}</p></div>
