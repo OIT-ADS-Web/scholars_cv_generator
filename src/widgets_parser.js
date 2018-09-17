@@ -243,15 +243,17 @@ class WidgetsParser {
     var publications = data['publications'] || [];
 
     let figureCitation = function(value) {
-      var citation = value.attributes['mlaCitation']
-            .replace(stripOpeningTag,"")
-            .replace(stripClosingTag, "");
-
-      citation = citation.replace(stripHtml, "");
       
       var vivoType = value['vivoType'];
   
       if (vivoType === "http://purl.org/ontology/bibo/AcademicArticle") {
+        
+        var citation = value.attributes['mlaCitation']
+            .replace(stripOpeningTag,"")
+            .replace(stripClosingTag, "");
+
+        citation = citation.replace(stripHtml, "");
+
         let pubmed = value.attributes['pmid'];
         let pubmedid = value.attributes['pmcid'];    
  
@@ -270,7 +272,9 @@ class WidgetsParser {
       let citation = figureCitation(value)
       let vivoType = value['vivoType'];
        
-      pubTypes[vivoType].push({'citation': citation})
+      if(typeof citation !== 'undefined') {
+        pubTypes[vivoType].push({'citation': citation})
+      }
       
     });
 
