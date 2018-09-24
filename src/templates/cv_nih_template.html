@@ -23,7 +23,7 @@
      .italics { font-style: italic; }
      .underline { text-decoration: underline; }
      p.border{ border-top-style: solid; border-top-width: thin; }
-     p { line-height: 6pt; margin-top: 3pt; margin-bottom: 0pt; }
+     p { margin-top: 3pt; margin-bottom: 0pt; }
      p.space { line-height: 12pt; }
       #education_table td
       {
@@ -117,7 +117,7 @@
 
       <div class="row">
         <div class="heading_10">
-          <p> Data from <a href="http://scholars.duke.edu"><span class="underline">Scholars@Duke</span></a></p>
+          <p> Data from Scholars@Duke</p>
         </div>
       </div>
 
@@ -125,8 +125,8 @@
         <div class="text_10_times">
           <p> To add or edit this information, click the “Manage This Profile” button on your profile and navigate to the corresponding section. </p>
           <ul>
-            <li>Personal Statement: Comes from the Overview section in <a href="http://scholars.duke.edu"><span class="underline">Scholars@Duke</span></a></li>
-            <li>Honors: Comes from the Awards and Honors section in <a href="http://scholars.duke.edu"><span class="underline">Scholars@Duke</span></a></li>
+            <li>Personal Statement: Comes from the Overview section in Scholars@Duke</li>
+            <li>Honors: Comes from the Awards and Honors section in Scholars@Duke</li>
           </ul>
         </div>
       </div>
@@ -145,7 +145,7 @@
             <li>Completed Research Support</a></li>
           </ul>
           <div class="text_10_times">
-            <span class="bold"> Note: </span> You can also add to both sections above by adding data in <a href="http://scholars.duke.edu"><span class="underline">Scholars@Duke</span></a> in the Fellowships, Supported Research & Other Grants section.
+            <span class="bold"> Note: </span> You can also add to both sections above by adding data in Scholars@Duke in the Fellowships, Supported Research & Other Grants section.
           </div>
         </div>
       </div>
@@ -273,95 +273,108 @@
       <% }); %>
       <% } %>
     </table>
-
     <br/>
+
     <div class="row">
-     <div class="heading_14">
-       <p>A. Personal Statement</p>
-     </div>
-     <div class="regular_10">
+    <div class="heading_14">
+      A. Personal Statement
+    </div>
+   </div>
+  
+   <div class="row">
+    <div class="regular_10">
         <p>${overview}</p>
-     </div>
-
-     <div class="row"></div>
-      <% journals.sort(function(a,b) {return (a.year < b.year) ? 1 : ((b.year < a.year) ? -1 : 0);} ); %>
-
-      <% if (journals.length > 0) { %>
-      <div class="regular_10">
-          <ol>
-          <% var i = 1; %>
-          <% _.forEach(journals, function(item) { %>
-            <% if (i <= 4) { %>
-              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
-            <% } %>
-            <% i = i + 1 %>
-          <% }); %>
-          </ol>
-      </div>
-      <% } %>
-    </div>
-
-    <div class="row">
-      <div class="heading_14">B. Positions and Honors </div>
-      <div class="heading_12">
-        <p>Positions and Employment</p>
-      </div>
-
-      <% if (allPositions.length > 0) { %>
-       <% allPositions.sort(function(a,b) {return (a.startYear < b.startYear)  ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
-         <% _.forEach(allPositions, function(item) { %>
-          <div class="regular_10"><p><%= item['startYear'] + " - " + "present" + ", " + item['label'] %></p></div>
-         <% }); %>
-       <% } %>
-
-       <% var mergeExpPos = Object.assign(pastappointments,otherPositions) %>
-       <% if (mergeExpPos.length > 0) { %>
-        <% mergeExpPos.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
-         <% _.forEach(mergeExpPos, function(item) { %>
-          <% if (item['endYear']) { %>
-            <div class="regular_10"><p><%= item['startYear'] + " - " + item['endYear']  + ", " + item['label'] %></p></div>
-          <% } else { %>
-            <div class="regular_10"><p><%= item['startYear'] + " - " + item['startYear'] + ", " + item['label'] %></p></div>
-          <% } %>
-
-         <% }); %>
-       <% } %>
-
-        <br/>
-       <div class="heading_12">
-        <p>Honors</p>
-      </div>
-      <% if (awards.length > 0) { %>
-        <% _.forEach(awards, function(item) { %>
-         <div class="regular_10"><p><%= item['only_label'] + " " +  item['year'] %></p></div>
-        <% }); %>
-      <% } %>
-
-      <br/>
-      <% if (licences.length > 0) { %>
-      <div class="heading_12">
-        <p>Licensures and Board Certifications</p>
-      </div>
-      <% var lic = ""; %>
-      <% _.forEach(licences, function(item) { %>
-      <% lic = item['label']; %>
-      <div class="regular_10"><p>${lic}</p></div>
-      <% }); %>
-      <% } %>
-      </div>
-
-    <div class="row">
-    <div class="heading_14">
-      <p>C. Contribution to Science</p>
-    </div>
-    </div>
-
-    <div class="row">
-    <div class="heading_14">
-      <p>D. Additional Information: Research Support</p>
     </div>
    </div>
 
+   <div class="row">
+   <% if (journals.length > 0) { %>
+   <% var i = 1; %>
+   <% journals.sort(function(a,b) {return (a.year < b.year) ? 1 : ((b.year < a.year) ? -1 : 0);} ); %> 
+         <div class="regular_10">
+           <ol>
+          <% _.forEach(journals, function(item) { %>
+              <% if (i <= 4) { %>
+              <li><span><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %><br/></span></li>
+              <% } %>
+              <% i = i + 1 %>
+          <% }); %>
+           </ol>
+         </div>
+       <% } %>
+    </div>
+   </div>
+    
+    <div class="row">
+    <div class="heading_14">
+      B. Positions and Honors 
+    </div>
+    </div>
+
+   <div class="row">
+   <div class="heading_12">Positions and Employment</div>
+   <div class="regular_10">
+   <% var mergeExpPos = Object.assign(pastappointments,otherPositions) %>
+   <% if (allPositions.length > 0) { %>
+   <% var i = 1; %>
+   <% allPositions.sort(function(a,b) {return (a.startYear < b.startYear)  ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
+          <% _.forEach(allPositions, function(item) { %>
+              <span><%= item['startYear'] + " - " + "present" + ", " + item['label']%><br/></span>
+          <% }); %>
+    <% } %>
+    <% if (mergeExpPos.length > 0) { %>
+    <% mergeExpPos.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
+        <% _.forEach(allPositions, function(item) { %>
+          <% if (item['endYear']) { %>
+            <span><%= item['startYear'] + " - " + item['endYear']  + ", " + item['label'] %><br/></span>
+          <% } else { %>
+            <span><%= item['startYear'] + " - " + item['startYear']  + ", " + item['label'] %><br/></span>
+          <% } %>
+         <% }); %>
+    <% } %>
+    </div>
+    </div>
+   </div>
+
+   <div class="row">
+   <div class="heading_12">Honors</div>
+   <% if (awards.length > 0) { %>
+   <% var i = 1; %>
+   <% allPositions.sort(function(a,b) {return (a.startYear < b.startYear)  ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
+         <div class="regular_10">
+          <% _.forEach(awards, function(item) { %>
+              <span><%= item['only_label'] + " " +  item['year']%><br/></span>
+          <% }); %>
+         </div>
+    <% } %>
+    </div>
+   </div>
+
+   <% if (licences.length > 0) { %>
+   <div class="row">
+   <div class="heading_12">Licensures and Board Certifications</div>
+         <div class="regular_10">
+          <% _.forEach(licences, function(item) { %>
+              <span><%= item['label'] %><br/></span>
+          <% }); %>
+         </div>
+    </div>
+   </div>
+   <% } %>
+
+    <div class="row">
+    <div class="heading_14">
+      C. Contribution to Science
+    </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+    <div class="heading_14">
+      D. Additional Information: Research Support
+    </div>
+   </div>
 
    <% function multiSort(array, sortObject = {}) {
   console.log("HeLLLO");
@@ -415,14 +428,17 @@
    <% if (mergeExpPos.length > 0) { %>
    <!--<% mergeExpPos.sort(function(a,b) {return (a.endYear < b.endYear) ? 1 : ((b.endYear < a.endYear) ? -1 : 0);} ); %>-->
    <% var mergeExpPos1 = multiSort(mergeExpPos, {endYear: 'desc', startYear: 'desc'}); %>
-
+   <% var i = 1 %>     
          <div class="regular_10">
           <% _.forEach(mergeExpPos1, function(item) { %>
-              <p>Period: <%= item['period'] %></p>
-              <p>Title: <%= item['title'] %></p>
-              <p>Role: <%= item['role'] %></p>
-              <p>Sponsor: <%= item['donor'] %></p>
-              <br/>
+              <span>Period: <%= item['period'] %><br/>
+              Title: <%= item['title'] %><br/>
+              Role: <%= item['role'] %><br/>
+              Sponsor: <%= item['donor'] %><br/></span>
+              <% if(i < mergeExpPos1.length) {%>
+              <div class="row"></div>
+              <% } %>
+              <% i = i + 1 %>
           <% }); %>
          </div>
        <% } %>
@@ -435,13 +451,17 @@
    <div class="heading_12">Completed Research Support</div>
    <% if (mergeExpPos.length > 0) { %>
    <% var mergeExpPos1 = multiSort(mergeExpPos, {endYear: 'desc', startYear: 'desc'}); %>
+   <% var i = 1 %>
          <div class="regular_10">
           <% _.forEach(mergeExpPos1, function(item) { %>
-              <p>Period: <%= item['period'] %></p>
-              <p>Title: <%= item['title'] %></p>
-              <p>Role: <%= item['role'] %></p>
-              <p>Sponsor: <%= item['donor'] %></p>
-              <br/>
+              <span>Period: <%= item['period'] %><br/>
+              Title: <%= item['title'] %><br/>
+              Role: <%= item['role'] %><br/>
+              Sponsor: <%= item['donor'] %><br/></span>
+              <% if(i < mergeExpPos1.length) {%>
+              <div class="row"></div>
+              <% } %>
+              <% i = i + 1 %>
           <% }); %>
         </div>
     <% } %>
