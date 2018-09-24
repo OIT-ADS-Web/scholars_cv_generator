@@ -324,7 +324,7 @@
     <% } %>
     <% if (mergeExpPos.length > 0) { %>
     <% mergeExpPos.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
-        <% _.forEach(allPositions, function(item) { %>
+        <% _.forEach(mergeExpPos, function(item) { %>
           <% if (item['endYear']) { %>
             <span><%= item['startYear'] + " - " + item['endYear']  + ", " + item['label'] %><br/></span>
           <% } else { %>
