@@ -239,30 +239,30 @@ class WidgetsParser {
       'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle': [],
       'http://vivoweb.org/ontology/core#Software': []              
     };
-    
+
     var publications = data['publications'] || [];
 
     let figureCitation = function(value) {
       
       var vivoType = value['vivoType'];
-  
-      if (vivoType === "http://purl.org/ontology/bibo/AcademicArticle") {
-        
-        var citation = value.attributes['mlaCitation']
-            .replace(stripOpeningTag,"")
-            .replace(stripClosingTag, "");
+     
+      if (Object.keys(pubTypes).indexOf(vivoType) > 0) {
+       
+          var citation = value.attributes['mlaCitation']
+              .replace(stripOpeningTag,"")
+              .replace(stripClosingTag, "");
 
-        citation = citation.replace(stripHtml, "");
+          citation = citation.replace(stripHtml, "");
 
-        let pubmed = value.attributes['pmid'];
-        let pubmedid = value.attributes['pmcid'];    
- 
-        if (typeof pubmed !== 'undefined' && typeof pubmedid !== 'undefined') {
-          citation = citation + " PMID: " + pubmed + ". PMCID: " + pubmedid + ".";
-        }
-        else if (typeof pubmed !== 'undefined') {
-          citation = citation + " PMID: " + pubmed + ".";
-        };  
+          let pubmed = value.attributes['pmid'];
+          let pubmedid = value.attributes['pmcid'];    
+   
+          if (typeof pubmed !== 'undefined' && typeof pubmedid !== 'undefined') {
+            citation = citation + " PMID: " + pubmed + ". PMCID: " + pubmedid + ".";
+          }
+          else if (typeof pubmed !== 'undefined') {
+            citation = citation + " PMID: " + pubmed + ".";
+          };  
       }
       return citation
     };
