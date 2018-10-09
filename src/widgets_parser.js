@@ -246,23 +246,27 @@ class WidgetsParser {
       
       var vivoType = value['vivoType'];
   
-      if (vivoType === "http://purl.org/ontology/bibo/AcademicArticle") {
+      if (vivoType === "http://purl.org/ontology/bibo/AcademicArticle" || vivoType === "http://purl.org/ontology/bibo/Book"  || 
+        vivoType === "http://purl.org/ontology/bibo/BookSection" || vivoType === "http://vivo.duke.edu/vivo/ontology/duke-extension#BookSeries" || vivoType === "http://vivoweb.org/ontology/core#ConferencePaper"  || 
+        vivoType === "http://vivoweb.org/ontology/core#Dataset" || vivoType === "http://vivo.duke.edu/vivo/ontology/dukeextension#DigitalPublication" || vivoType === "http://vivo.duke.edu/vivo/ontology/duke-extension#JournalIssue" || 
+        vivoType === "http://purl.org/ontology/bibo/Report" || vivoType === "http://purl.org/ontology/bibo/EditedBook" || vivoType === "http://purl.org/ontology/bibo/Thesis" || vivoType === "http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle" ||
+        vivoType === "http://vivoweb.org/ontology/core#Software")  {
         
-        var citation = value.attributes['mlaCitation']
-            .replace(stripOpeningTag,"")
-            .replace(stripClosingTag, "");
+          var citation = value.attributes['mlaCitation']
+              .replace(stripOpeningTag,"")
+              .replace(stripClosingTag, "");
 
-        citation = citation.replace(stripHtml, "");
+          citation = citation.replace(stripHtml, "");
 
-        let pubmed = value.attributes['pmid'];
-        let pubmedid = value.attributes['pmcid'];    
- 
-        if (typeof pubmed !== 'undefined' && typeof pubmedid !== 'undefined') {
-          citation = citation + " PMID: " + pubmed + ". PMCID: " + pubmedid + ".";
-        }
-        else if (typeof pubmed !== 'undefined') {
-          citation = citation + " PMID: " + pubmed + ".";
-        };  
+          let pubmed = value.attributes['pmid'];
+          let pubmedid = value.attributes['pmcid'];    
+   
+          if (typeof pubmed !== 'undefined' && typeof pubmedid !== 'undefined') {
+            citation = citation + " PMID: " + pubmed + ". PMCID: " + pubmedid + ".";
+          }
+          else if (typeof pubmed !== 'undefined') {
+            citation = citation + " PMID: " + pubmed + ".";
+          };  
       }
       return citation
     };
