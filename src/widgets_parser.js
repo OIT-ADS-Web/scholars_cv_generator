@@ -239,19 +239,15 @@ class WidgetsParser {
       'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle': [],
       'http://vivoweb.org/ontology/core#Software': []              
     };
-    
+
     var publications = data['publications'] || [];
 
     let figureCitation = function(value) {
       
       var vivoType = value['vivoType'];
-  
-      if (vivoType === "http://purl.org/ontology/bibo/AcademicArticle" || vivoType === "http://purl.org/ontology/bibo/Book"  || vivoType === "http://vivoweb.org/ontology/core#Review" ||
-        vivoType === "http://purl.org/ontology/bibo/BookSection" || vivoType === "http://vivo.duke.edu/vivo/ontology/duke-extension#BookSeries" || vivoType === "http://vivoweb.org/ontology/core#ConferencePaper"  || 
-        vivoType === "http://vivoweb.org/ontology/core#Dataset" || vivoType === "http://vivo.duke.edu/vivo/ontology/dukeextension#DigitalPublication" || vivoType === "http://vivo.duke.edu/vivo/ontology/duke-extension#JournalIssue" || 
-        vivoType === "http://purl.org/ontology/bibo/Report" || vivoType === "http://purl.org/ontology/bibo/EditedBook" || vivoType === "http://purl.org/ontology/bibo/Thesis" || vivoType === "http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle" ||
-        vivoType === "http://vivoweb.org/ontology/core#Software")  {
-        
+     
+      if (Object.keys(pubTypes).indexOf(vivoType) > 0) {
+       
           var citation = value.attributes['mlaCitation']
               .replace(stripOpeningTag,"")
               .replace(stripClosingTag, "");
