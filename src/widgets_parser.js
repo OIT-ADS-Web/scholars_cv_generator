@@ -246,7 +246,7 @@ class WidgetsParser {
       
       var vivoType = value['vivoType'];
      
-      if (Object.keys(pubTypes).indexOf(vivoType) > 0) {
+      if (Object.keys(pubTypes).indexOf(vivoType) > -1) {
        
           var citation = value.attributes['mlaCitation']
               .replace(stripOpeningTag,"")
