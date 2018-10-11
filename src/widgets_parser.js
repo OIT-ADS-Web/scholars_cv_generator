@@ -706,15 +706,15 @@ class WidgetsParser {
                      talk_label = talk;
 
                      if (typeof value.attributes['locationOrVenue'] != 'undefined') {
-                      talk_label += ". " + value.attributes['locationOrVenue'];
+                      talk_label += ". <b>" + value.attributes['locationOrVenue'] + "</b>";
                      } 
                     
                      if (typeof value.attributes['hostOrganization'] != 'undefined') {
                       //talk_label = talk + ". " + talk_hostorg + ". " + value.attributes['locationOrVenue'] + ". " + monthNames[date.getMonth()] + " " + date.getFullYear();
-                      talk_label += ". " + value.attributes['hostOrganization'];
+                      talk_label += ". <b>" + value.attributes['hostOrganization'] + "</b>";
                      } 
 
-                     talk_label += ". " + monthNames[date.getMonth()] + " " + date.getFullYear();
+                     talk_label += ". " + monthNames[date.getMonth()] + " " +  date.getDay() + ", " + date.getFullYear();
 
                      presentationList['invitedtalks'].push({'label':talk_label});
                      break;
