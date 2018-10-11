@@ -651,7 +651,7 @@ class WidgetsParser {
         
         if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation' ) {
              
-             var label = value['label'];     
+             var label = value['label'];   
              var serviceType = value.attributes['serviceType'];
              let vivoType = value['vivoType'];
              
@@ -698,7 +698,25 @@ class WidgetsParser {
                 }
 
                 case "Invited Talk": {
-                     presentationList['invitedtalks'].push({'label':label});
+                     var talk = value.attributes['nameOfTalk'];
+                     var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+                     var date = new Date(value.attributes['startDate']);
+                     var talk_label = "";
+                     talk_label = talk;
+
+                     if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+                      talk_label += ". " + value.attributes['locationOrVenue'];
+                     } 
+                    
+                     if (typeof value.attributes['hostOrganization'] != 'undefined') {
+                      //talk_label = talk + ". " + talk_hostorg + ". " + value.attributes['locationOrVenue'] + ". " + monthNames[date.getMonth()] + " " + date.getFullYear();
+                      talk_label += ". " + value.attributes['hostOrganization'];
+                     } 
+
+                     talk_label += ". " + monthNames[date.getMonth()] + " " + date.getFullYear();
+
+                     presentationList['invitedtalks'].push({'label':talk_label});
                      break;
                 }
 
