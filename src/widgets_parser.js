@@ -452,16 +452,28 @@ class WidgetsParser {
     };
 
      let figureLec = function(value) {
+       var full_label = "";
+       var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+       var label = value['label'];   
+       var serviceType = value.attributes['serviceType'];
+       let vivoType = value['vivoType'];
 
-      var full_label = "";
-      var label = value['label'];     
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
+       if(serviceType == 'Lecture') {
+          var talk = value.attributes['nameOfTalk'];
+          var date = new Date(value.attributes['startDate']);
+          full_label = talk;
 
-      if(serviceType == 'Lecture') {
-          full_label = label; 
-      }
-      
+          if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+              full_label += ". " + value.attributes['locationOrVenue'];
+          } 
+                    
+          if (typeof value.attributes['hostOrganization'] != 'undefined') {
+             full_label  += ". " + value.attributes['hostOrganization'];
+          } 
+
+          full_label += ". " + monthNames[date.getMonth()] + " " +  date.getDay() + ", " + date.getFullYear();
+       }
       return full_label;
     };
 
