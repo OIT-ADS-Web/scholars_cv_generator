@@ -452,16 +452,28 @@ class WidgetsParser {
     };
 
      let figureLec = function(value) {
+       var full_label = "";
+       var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+       var label = value['label'];   
+       var serviceType = value.attributes['serviceType'];
+       let vivoType = value['vivoType'];
 
-      var full_label = "";
-      var label = value['label'];     
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
+       if(serviceType == 'Lecture') {
+          var talk = value.attributes['nameOfTalk'];
+          var date = new Date(value.attributes['startDate']);
+          full_label = talk;
 
-      if(serviceType == 'Lecture') {
-          full_label = label; 
-      }
-      
+          if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+              full_label += ". " + value.attributes['locationOrVenue'];
+          } 
+                    
+          if (typeof value.attributes['hostOrganization'] != 'undefined') {
+             full_label  += ". " + value.attributes['hostOrganization'];
+          } 
+
+          full_label += ". " + monthNames[date.getMonth()] + " " +  date.getDay() + ", " + date.getFullYear();
+       }
       return full_label;
     };
 
@@ -651,54 +663,73 @@ class WidgetsParser {
         
         if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation' ) {
              
-             var label = value['label'];     
+             var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+             var label = value['label'];   
              var serviceType = value.attributes['serviceType'];
              let vivoType = value['vivoType'];
+
+             var talk = value.attributes['nameOfTalk'];
+             var date = new Date(value.attributes['startDate']);
+             var talk_label = "";
+             talk_label = talk;
+
+             if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+                talk_label += ". " + value.attributes['locationOrVenue'];
+             } 
+                    
+             if (typeof value.attributes['hostOrganization'] != 'undefined') {
+                //talk_label = talk + ". " + talk_hostorg + ". " + value.attributes['locationOrVenue'] + ". " + monthNames[date.getMonth()] + " " + date.getFullYear();
+                talk_label += ". " + value.attributes['hostOrganization'];
+             } 
+
+             talk_label += ". " + monthNames[date.getMonth()] + " " +  date.getDay() + ", " + date.getFullYear();
+
              
              switch(serviceType) {
 
                 case "Other": {
-                    presentationList['posters'].push({'label':label});
+                    presentationList['posters'].push({'label':talk_label});
                     break;
                 }
 
                 case "Instructional Course, Workshop, or Symposium": {
-                    presentationList['courses'].push({'label':label});
+                    presentationList['courses'].push({'label':talk_label});
                     break;
                 }
 
                 case "National Scientific Meeting": {
-                    presentationList['nationalmeetings'].push({'label':label});
+                    presentationList['nationalmeetings'].push({'label':talk_label});
                     break;
                 }
 
                 case "Keynote/Named Lecture": {
-                    presentationList['lectures'].push({'label':label});
+                    presentationList['lectures'].push({'label':talk_label});
                     break;
                 }
 
                 case "International Meeting or Conference": {
-                    presentationList['internationalmeetings'].push({'label':label});
+                    presentationList['internationalmeetings'].push({'label':talk_label});
                     break;
                 }
 
                 case "Visiting Professorship Lecture": {
-                     presentationList['professorships'].push({'label':label});
+                     presentationList['professorships'].push({'label':talk_label});
                      break;
                 }
 
                 case "Broadcast Appearance": {
-                     presentationList['broadcasts'].push({'label':label});
+                     presentationList['broadcasts'].push({'label':talk_label});
                      break;
                 }
 
                 case "Interview": {
-                     presentationList['interviews'].push({'label':label});
+                     presentationList['interviews'].push({'label':talk_label});
                      break;
                 }
 
                 case "Invited Talk": {
-                     presentationList['invitedtalks'].push({'label':label});
+                     presentationList['invitedtalks'].push({'label':talk_label});
                      break;
                 }
 
