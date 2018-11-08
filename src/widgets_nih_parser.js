@@ -100,17 +100,21 @@ class WidgetsNIHParser {
     return {'preferredTitle': preferred_title }
   }
 
+  // GB - 2018/11/08 - added nonFacultyPosition since biosketch loading was breaking after "Hello 2", but the missing startYear attribute may still prove a problem. Unclear presently.
+
   parsePositions(data) {
     //console.log("Hello 1");
     let positions = data['positions'] || [];
     var primaryPositions = []
     var secondaryPositions = []
+    var nonFacultyPositions = []
     var variousPositions = []
     var allPositions = []
 
     let positionTypes = {
       'primaryPosition': 'http://vivoweb.org/ontology/core#PrimaryPosition',
-      'secondaryPosition': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition'
+      'secondaryPosition': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition',
+      'nonFacultyPosition': 'http://vivoweb.org/ontology/core#NonFacultyAcademicPosition'
     };
 
     console.log("Hello 2");
@@ -128,18 +132,26 @@ class WidgetsNIHParser {
           secondaryPositions.push({'label':label})
           break;
         }
+        case positionTypes['nonFacultyPosition']: {
+          nonFacultyPositions.push({'label':label})
+          break;
+        }
         default: {
           variousPositions.push({'label':label})
           break;
         }
       }
-      allPositions.push({'label':label, 'startYear': year})
+      if (year != null) {
+        allPositions.push({'label':label, 'startYear': year})
+      } else
+        allPositions.push({'label':label, 'startYear': ""})
     });
 
     let results = {
       'primaryPositions': primaryPositions,
       'secondaryPositions': secondaryPositions,
       'variousPositions': variousPositions,
+      'nonFacultyPositions': nonFacultyPositions,
       'allPositions': allPositions
     }
 
@@ -224,7 +236,6 @@ class WidgetsNIHParser {
   };
 
   parsePublications(data) {
-
     var pubTypes = {
       'journals': [],
       'manuscripts': [],
