@@ -100,21 +100,17 @@ class WidgetsNIHParser {
     return {'preferredTitle': preferred_title }
   }
 
-  // GB - 2018/11/08 - added nonFacultyPosition since biosketch loading was breaking after "Hello 2", but the missing startYear attribute may still prove a problem. Unclear presently.
-
   parsePositions(data) {
     //console.log("Hello 1");
     let positions = data['positions'] || [];
     var primaryPositions = []
     var secondaryPositions = []
-    var nonFacultyPositions = []
     var variousPositions = []
     var allPositions = []
 
     let positionTypes = {
       'primaryPosition': 'http://vivoweb.org/ontology/core#PrimaryPosition',
-      'secondaryPosition': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition',
-      'nonFacultyPosition': 'http://vivoweb.org/ontology/core#NonFacultyAcademicPosition'
+      'secondaryPosition': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition'
     };
 
     console.log("Hello 2");
@@ -122,7 +118,11 @@ class WidgetsNIHParser {
     _.forEach(positions, function(value) {
       var vivoType = value['vivoType'];
       var label = value['label'];
-      var year = value['attributes']['startYear'].substr(0,4);
+      if (data['vivoType'] == "http://vivoweb.org/ontology/core#FacultyMember") {
+        var year = value['attributes']['startYear'].substr(0,4);
+      } else {
+        var year = "";
+      }
       switch(vivoType) {
         case positionTypes['primaryPosition']: {
           primaryPositions.push({'label': label})
@@ -132,26 +132,18 @@ class WidgetsNIHParser {
           secondaryPositions.push({'label':label})
           break;
         }
-        case positionTypes['nonFacultyPosition']: {
-          nonFacultyPositions.push({'label':label})
-          break;
-        }
         default: {
           variousPositions.push({'label':label})
           break;
         }
       }
-      if (year != null) {
-        allPositions.push({'label':label, 'startYear': year})
-      } else
-        allPositions.push({'label':label, 'startYear': ""})
+      allPositions.push({'label':label, 'startYear': year})
     });
 
     let results = {
       'primaryPositions': primaryPositions,
       'secondaryPositions': secondaryPositions,
       'variousPositions': variousPositions,
-      'nonFacultyPositions': nonFacultyPositions,
       'allPositions': allPositions
     }
 
@@ -712,12 +704,6 @@ class WidgetsNIHParser {
 
 };
 
-
 export {
   WidgetsNIHParser
 }
-
-
-
-
-
