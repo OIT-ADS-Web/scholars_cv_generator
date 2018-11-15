@@ -118,7 +118,11 @@ class WidgetsNIHParser {
     _.forEach(positions, function(value) {
       var vivoType = value['vivoType'];
       var label = value['label'];
-      var year = value['attributes']['startYear'].substr(0,4);
+      if (data['vivoType'] == "http://vivoweb.org/ontology/core#FacultyMember") {
+        var year = value['attributes']['startYear'].substr(0,4);
+      } else {
+        var year = "";
+      }
       switch(vivoType) {
         case positionTypes['primaryPosition']: {
           primaryPositions.push({'label': label})
@@ -224,7 +228,6 @@ class WidgetsNIHParser {
   };
 
   parsePublications(data) {
-
     var pubTypes = {
       'journals': [],
       'manuscripts': [],
@@ -701,12 +704,6 @@ class WidgetsNIHParser {
 
 };
 
-
 export {
   WidgetsNIHParser
 }
-
-
-
-
-
