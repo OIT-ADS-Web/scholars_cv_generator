@@ -239,12 +239,12 @@ class WidgetsSOMParser {
         let pubmed = value.attributes['pmid'];
         let pubmedid = value.attributes['pmcid'];    
  
-        if (typeof pubmed !== 'undefined' && typeof pubmedid !== 'undefined') {
+        /*if (typeof pubmed !== 'undefined' && typeof pubmedid !== 'undefined') {
           citation = citation + " PMID: " + pubmed + ". PMCID: " + pubmedid + ".";
         }
         else if (typeof pubmed !== 'undefined') {
           citation = citation + " PMID: " + pubmed + ".";
-        };  
+        }; */
       }
       return citation
     };
