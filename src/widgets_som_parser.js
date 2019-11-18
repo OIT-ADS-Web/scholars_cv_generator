@@ -232,7 +232,6 @@ class WidgetsSOMParser {
             .replace(stripClosingTag, "");
 
       citation = citation.replace(stripHtml, "");
-      
       var vivoType = value['vivoType'];
   
       if (vivoType === "http://purl.org/ontology/bibo/AcademicArticle") {
@@ -292,7 +291,9 @@ class WidgetsSOMParser {
       }
       
       if(subtype == '' || subtype == 'academic article') {
-          pubTypes['journals'].push({'citation': citation, 'year': year})
+          if(value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle') {
+              pubTypes['journals'].push({'citation': citation, 'year': year})
+          }
       }
       if(subtype == 'Clinical Trial Manuscript' && role == "contributor") {
           pubTypes['manuscripts'].push({'citation': citation, 'year': year})
@@ -332,6 +333,7 @@ class WidgetsSOMParser {
       return result;
     }, {});
 
+    //console.log(results);
     return results
   }
 
@@ -439,12 +441,12 @@ class WidgetsSOMParser {
     let awards = data['awards'];
     var awardList = [];
     _.forEach(awards, function(value) {
-      //if(value['attributes']['serviceType']  != 'Scholarly Societies') {
+      if(value['attributes']['serviceType']  != 'Scholarly Societies') {
         var label = value['label'];
         var date = value['attributes']['date'].substr(0,4);
         var label = (label + " " + date);   
         awardList.push({'label':label});
-      //}
+      }
     });
     return {'awards': awardList}
   };
