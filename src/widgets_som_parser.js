@@ -232,7 +232,6 @@ class WidgetsSOMParser {
             .replace(stripClosingTag, "");
 
       citation = citation.replace(stripHtml, "");
-      
       var vivoType = value['vivoType'];
   
       if (vivoType === "http://purl.org/ontology/bibo/AcademicArticle") {
@@ -334,6 +333,7 @@ class WidgetsSOMParser {
       return result;
     }, {});
 
+    //console.log(results);
     return results
   }
 
