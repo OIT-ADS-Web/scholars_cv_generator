@@ -441,7 +441,7 @@ class WidgetsSOMParser {
     let awards = data['awards'];
     var awardList = [];
     _.forEach(awards, function(value) {
-      if(value['attributes']['serviceType']  != 'Scholarly Societies') {
+      if(value['attributes']['serviceType']  != 'Scholarly Society') {
         var label = value['label'];
         var date = value['attributes']['date'].substr(0,4);
         var label = (label + " " + date);   
