@@ -601,14 +601,14 @@
     </div>
     <% } %> 
    
-   <% var mergeExpPos = Object.assign(community_service, professional_development, lectures, other_activities, event_admin, committee_service) %>
-   <% mergeExpPos.sort(function(a,b) {return (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0);} ); %>
-   <% if (mergeExpPos.length > 0) { %>
+
+   <% full_org_and_participation_list.sort(function(a,b) {return (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0);} ); %>
+   <% if (full_org_and_participation_list.length > 0) { %>
     <div class="row">
     <div class="heading_10">ORGANIZATIONS AND PARTICIPATION <br>
       <span class="regular_10_italic">Include offices held, committee assignments, society membership and participation in society meeting external to Duke.</span></div>
     <div class="regular_10">
-        <% _.forEach(mergeExpPos, function(item) { %>
+        <% _.forEach(full_org_and_participation_list, function(item) { %>
                    <p><%= item['label'] %></p>
         <% }); %>
     </div>
