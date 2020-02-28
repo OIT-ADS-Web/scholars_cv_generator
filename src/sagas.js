@@ -15,8 +15,6 @@ import * as medWidgets from './widgets_som_parser'
 import * as nihWidgets from './widgets_nih_parser'
 
 function checkStatus(res) {
-  console.log("sagas.checkStatus")
-
   if (res.status >= 400) {
     let message = `Status: ${res.status}`
     throw new Error(message)
@@ -26,8 +24,6 @@ function checkStatus(res) {
 }
 
 export function fetchWidgetsData(uri) {
-  console.log("sagas.fetchWidgetsData")
- 
   let widgets_base_url = process.env.WIDGETS_URL
   
   const widgetsUrl = `${widgets_base_url}/api/v0.9/people/complete/all.json?uri=${uri}`
@@ -76,22 +72,19 @@ export function generateNihTemplate(results) {
 
 export function generateMedicineTemplate(results) {
   let widgetsParser = new medWidgets.WidgetsSOMParser()
-
   var data = widgetsParser.convert(results)
   let compiled = _.template(htmlMedicineTemplate,'imports': {'_': _})
   let template = compiled(data)
  
   return template
-
 }
 
 export function generateCVfromHtml(html, uri, template) {
-  console.log("sagas.generateCVfromHtml")
 
   try {
     loadFile(blankTemplate, function(err,content) {
       if (err) { 
-        console.log(err)
+        console.error(err)
       }
     
       var zip = new JSZip(content)
@@ -107,7 +100,6 @@ export function generateCVfromHtml(html, uri, template) {
       let personNumber = uri.substr(index+1)
       
       let now = moment().format()
-      //let fileName = `${personNumber}_${now}.docx`
       let fileName = ''
 
       if(template == "basic"){
@@ -124,60 +116,12 @@ export function generateCVfromHtml(html, uri, template) {
     })
 
   } catch (e) {
-   console.log(e)
+   console.error(e)
   }
 
 }
-
-/*
-export function generateCV(results, uri) {
-  console.log("sagas.generateCV")
-
-  try {
-    
-    loadFile(blankTemplate, function(err,content) {
-      if (err) { 
-        console.log(err)
-      }
-    
-      var zip = new JSZip(content)
-      
-      let widgetsParser = new widgets.WidgetsParser()
-
-      var data = widgetsParser.convert(results)
-
-      var compiled = _.template(htmlTemplate,'imports': {'_': _})
-      var template = compiled(data)
-      
-      zip.file("word/document.html", template) 
-
-      var blob = zip.generate({
-          type:"blob",
-          mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        }
-      ) //Output the document using Data-URI
-  
-      let index = uri.lastIndexOf("/")
-      let personNumber = uri.substr(index+1)
-      
-      let now = moment().format()
-      let fileName = `${personNumber}_${now}.docx`
-      
-      //console.log(template)
-      FileSaver.saveAs(blob, fileName)
-
-    })
-  
-
-  } catch (e) {
-   console.log(e)
-  }
-
-}
-*/
 
 export function* fetchCV(action) {
-  console.log("sagas.fetchCV")
   const { uri } = action
   const { template } = action
   const { format } = action
@@ -187,7 +131,6 @@ export function* fetchCV(action) {
 
     yield put(receiveCV(results))
 
-    //yield call(generateCV, results, uri)
     if(template == "basic"){
       if (format == "word") {
         const html = yield call(generateTemplate, results)
@@ -221,16 +164,8 @@ export function* fetchCV(action) {
         yield put(setHtml(html))
       }
     }
-    else{
-      //const html = yield call(generateTemplate, results)
-      //yield put(setHtml(html))
-    //  yield call(generateCVfromHtml, html, uri, "basic")
-    }
-    
-    // FIXME: how to get html
-    // yield put(setHtml(html))
   } catch(e) {
-    //yield put(cvFailed(e.message))
+    console.error(e)
   } 
 }
 
@@ -238,9 +173,6 @@ function* watchForCV() {
   while(true) {
     const action = yield take(types.REQUEST_CV)
     
-    console.log("watchForCV")
-    console.log(action)
- 
     yield fork(fetchCV, action)
   }
 }

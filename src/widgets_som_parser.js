@@ -8,12 +8,6 @@ import _ from 'lodash'
 // https://stackoverflow.com/questions/35590543/how-do-you-chain-functions-using-lodash
 class WidgetsSOMParser {
   
-  /*
-  constructor(data) {
-    this.data = data
-  }
-  */
-
   pluralize(word) {
       switch(word) {
         case "thesis": {
@@ -142,13 +136,16 @@ class WidgetsSOMParser {
     var profexpList = []
     _.forEach(educations, function(value) {
       let institution = value.attributes['institution'];
-      let endYear = value.attributes['endDate'].substr(0,4);
+      let endYear = value.attributes['endDate'] ? value.attributes['endDate'].substr(0,4) : '';
       let label = value['label'];
       var degree = value.attributes['degree'];
       var fullLabel = "";
       if (typeof degree != 'undefined') {
         var degree = value.attributes['degree'];
-        fullLabel = (degree + ", " + institution + ", " + endYear);
+        fullLabel = (degree + ", " + institution);
+        if (endYear != '') {
+          fullLabel = (fullLabel + ", " + endYear);
+        }
         educationList.push({'label': fullLabel, 'endYear': endYear}) 
       } 
       else {
@@ -333,7 +330,6 @@ class WidgetsSOMParser {
       return result;
     }, {});
 
-    //console.log(results);
     return results
   }
 
