@@ -8,12 +8,6 @@ import _ from 'lodash'
 // https://stackoverflow.com/questions/35590543/how-do-you-chain-functions-using-lodash
 class WidgetsSOMParser {
   
-  /*
-  constructor(data) {
-    this.data = data
-  }
-  */
-
   pluralize(word) {
       switch(word) {
         case "thesis": {
@@ -336,7 +330,6 @@ class WidgetsSOMParser {
       return result;
     }, {});
 
-    //console.log(results);
     return results
   }
 
