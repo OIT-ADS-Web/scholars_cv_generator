@@ -179,7 +179,7 @@ class WidgetsParser {
 
     _.forEach(educations, function(value) {
       let institution = value.attributes['institution'];
-      let endYear = [value.attributes['endDate'].substr(0,4)];
+      let endYear = value.attributes['endDate'] ? value.attributes['endDate'].substr(0,4) : '';
       let label = value['label'];
      
       var degree = value.attributes['degree'];
@@ -187,10 +187,16 @@ class WidgetsParser {
 
       if (typeof degree != 'undefined') {
         var degree = value.attributes['degree'];
-        fullLabel = (degree + ", " + institution + " " + endYear);
+        fullLabel = (degree + ", " + institution);
+        if (endYear != '') {
+          fullLabel = (fullLabel + " " + endYear);
+        }
       }
       else {
-        fullLabel = (label + ", " + institution + " " + endYear);
+        fullLabel = (label + ", " + institution);
+        if (endYear != '') {
+          fullLabel = (fullLabel + " " + endYear);
+        }
       }
       educationList.push({'label': fullLabel, 'endYear': endYear}) 
     });
@@ -571,15 +577,11 @@ class WidgetsParser {
   // one way to do it:
 
   parseMedicalLicences(data) {
-    //console.log("Hello in med licenses");
-    //console.log("Data " + JSON.stringify(data));
     let licences = data['licenses'];
     var licenceList = [];
     _.forEach(licences, function(value) {
       var label = value['label'];
       var lic_date = label.substr(label.length - 4);
-      //var date = value['attributes']['date'].substr(0,4);
-      //var label = (label + " " + date);   
       var number = value['attributes']['number'];
       var state = value['attributes']['state'];
       label = state + ", " + number + ", " + lic_date;

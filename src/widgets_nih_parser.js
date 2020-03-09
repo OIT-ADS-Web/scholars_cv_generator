@@ -8,12 +8,6 @@ import _ from 'lodash'
 // https://stackoverflow.com/questions/35590543/how-do-you-chain-functions-using-lodash
 class WidgetsNIHParser {
 
-  /*
-  constructor(data) {
-    this.data = data
-  }
-  */
-
   pluralize(word) {
       switch(word) {
         case "thesis": {
@@ -94,14 +88,11 @@ class WidgetsNIHParser {
   }
 
   parsepreferredTitle(data){
-    console.log("Hello preferredTitle");
     var preferred_title = data['attributes']['preferredTitle'];
-    console.log(">>>>> Title: "+ preferred_title);
     return {'preferredTitle': preferred_title }
   }
 
   parsePositions(data) {
-    //console.log("Hello 1");
     let positions = data['positions'] || [];
     var primaryPositions = []
     var secondaryPositions = []
@@ -113,7 +104,6 @@ class WidgetsNIHParser {
       'secondaryPosition': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition'
     };
 
-    console.log("Hello 2");
     // group by 'type'
     _.forEach(positions, function(value) {
       var vivoType = value['vivoType'];
@@ -147,25 +137,26 @@ class WidgetsNIHParser {
       'allPositions': allPositions
     }
 
-    console.log("Hello 3");
     return results
   };
 
   parseEducations(data) {
-    console.log("Hello 4");
     var educations = data['educations'] || [];
     var educationList = []
     var profexpList = []
     _.forEach(educations, function(value) {
       let institution = value.attributes['institution'];
-      let endYear = value.attributes['endDate'].substr(0,4);
       let label = value['label'];
       let endDate = value.attributes['endDate'];
+      let endYear = endDate ? endDate.substr(0,4) : '';
       var degree = value.attributes['degree'];
       var fullLabel = "";
       if (typeof degree != 'undefined') {
         var degree = value.attributes['degree'];
-        fullLabel = (degree + ", " + institution + ", " + endYear);
+        fullLabel = (degree + ", " + institution);
+        if (endYear != '') {
+          fullLabel = (fullLabel + ", " + endYear);
+        }
         educationList.push({'label': fullLabel, 'endYear': endYear, 'institution': institution, 'degree': degree, 'education': label, 'endDate': endDate})
       }
       else {
@@ -176,7 +167,6 @@ class WidgetsNIHParser {
     });
 
     let results = {'educations': educationList, 'profExperiences': profexpList}
-    console.log(educationList);
     return results
   }
 
@@ -208,8 +198,6 @@ class WidgetsNIHParser {
       var full_label = (label + ", " + org_label + " " + start_year + " - " + end_year);
       pastAppointmentsList.push({'label':label, 'orig_label':label, 'org_label':org_label, 'startYear':start_year, 'endYear':end_year});
     });
-    //console.log(pastAppointmentsList);
-    //pastAppointmentsList.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} );
     return {'pastappointments': pastAppointmentsList}
   };
 
