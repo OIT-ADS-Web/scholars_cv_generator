@@ -370,6 +370,12 @@ class WidgetsSOMParser {
                     break;
                 }
 
+                case "Event Attendance": {
+                  consultAppointmentsList['event_attendance'].push({'label':label, 'date':startDate});
+                  consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                  break;
+                }
+
                 case "Lecture": {
                     consultAppointmentsList['lectures'].push({'label':label, 'date':startDate});
                     consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
