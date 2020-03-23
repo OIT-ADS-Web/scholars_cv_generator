@@ -335,7 +335,7 @@ class WidgetsSOMParser {
 
   parseConsultantAppointments(data) {
 
-    var consultAppointmentsList = { 'community_service': [], 'editorial_activities': [], 'prof_editorial_activities': [], 'professional_development': [], 'lectures': [], 'consulting': [], 'prof_consulting': [], 'other_activities': [], 'event_admin': [], 'committee_service': [], 'full_org_and_participation_list': [] };
+    var consultAppointmentsList = { 'community_service': [], 'editorial_activities': [], 'prof_editorial_activities': [], 'professional_development': [], 'event_attendance': [], 'lectures': [], 'consulting': [], 'prof_consulting': [], 'other_activities': [], 'event_admin': [], 'committee_service': [], 'full_org_and_participation_list': [] };
     let professionalActivities = data['professionalActivities'];
 
      _.forEach(professionalActivities, function(value) {
