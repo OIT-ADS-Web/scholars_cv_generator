@@ -335,7 +335,7 @@ class WidgetsSOMParser {
 
   parseConsultantAppointments(data) {
 
-    var consultAppointmentsList = { 'community_service': [], 'editorial_activities': [], 'prof_editorial_activities': [], 'professional_development': [], 'lectures': [], 'consulting': [], 'prof_consulting': [], 'other_activities': [], 'event_admin': [], 'committee_service': [] };
+    var consultAppointmentsList = { 'community_service': [], 'editorial_activities': [], 'prof_editorial_activities': [], 'professional_development': [], 'event_attendance': [], 'lectures': [], 'consulting': [], 'prof_consulting': [], 'other_activities': [], 'event_admin': [], 'committee_service': [], 'full_org_and_participation_list': [] };
     let professionalActivities = data['professionalActivities'];
 
      _.forEach(professionalActivities, function(value) {
@@ -352,6 +352,7 @@ class WidgetsSOMParser {
 
                 case "Community Service": {
                     consultAppointmentsList['community_service'].push({'label':label, 'date':startDate});
+                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
                     break;
                 }
 
@@ -365,11 +366,19 @@ class WidgetsSOMParser {
 
                 case "Professional Development": {
                     consultAppointmentsList['professional_development'].push({'label':label, 'date':startDate});
+                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
                     break;
+                }
+
+                case "Event Attendance": {
+                  consultAppointmentsList['event_attendance'].push({'label':label, 'date':startDate});
+                  consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                  break;
                 }
 
                 case "Lecture": {
                     consultAppointmentsList['lectures'].push({'label':label, 'date':startDate});
+                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
                     break;
                 }
 
@@ -389,16 +398,19 @@ class WidgetsSOMParser {
 
                 case "Other": {
                     consultAppointmentsList['other_activities'].push({'label':label, 'date':startDate});
+                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
                     break;
                 }
 
                 case "Event/Organization Administration": {
                     consultAppointmentsList['event_admin'].push({'label':label, 'date':startDate});
+                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
                     break;
                 }
 
                 case "Committee Service": {
                     consultAppointmentsList['committee_service'].push({'label':label, 'date':startDate});
+                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
                     break;
                 }
 
