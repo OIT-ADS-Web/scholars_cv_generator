@@ -462,6 +462,7 @@ class WidgetsSOMParser {
   parseGrants(data) {
     
     var grants = data['grants'] || [];
+    var gifts = data['gifts'] || [];
     var currentGrantList = []
     var completedGrantList = []
     var pendingGrantList = []
@@ -475,6 +476,30 @@ class WidgetsSOMParser {
       var period = startDate.getFullYear() + " - " + endDate.getFullYear();
       var title = value['label'] + ", awarded by " + value.attributes['awardedBy'];
       var role = value.attributes['roleName'];
+
+      if(startDate < today && endDate > today)
+      {
+         currentGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
+      }
+      if(endDate < today)
+      {
+         completedGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
+      }
+      if(startDate > today)
+      {
+         pendingGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
+      }
+    });
+
+    _.forEach(gifts, function(value) {
+      var startDate = new Date(value.attributes['dateTimeStart']);
+      var endDate = new Date(value.attributes['dateTimeEnd']);
+      var today = new Date();
+
+      var pi = value.attributes['piName'];
+      var period = startDate.getFullYear() + " - " + endDate.getFullYear();
+      var title = value['label'] + ", awarded by " + value.attributes['donor'];
+      var role = value.attributes['role'];
 
       if(startDate < today && endDate > today)
       {
