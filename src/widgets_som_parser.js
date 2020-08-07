@@ -352,7 +352,9 @@ class WidgetsSOMParser {
 
                 case "Community Service": {
                     consultAppointmentsList['community_service'].push({'label':label, 'date':startDate});
-                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                      consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    }
                     break;
                 }
 
@@ -366,27 +368,33 @@ class WidgetsSOMParser {
 
                 case "Professional Development": {
                     consultAppointmentsList['professional_development'].push({'label':label, 'date':startDate});
-                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                      consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    }
                     break;
                 }
 
                 case "Event Attendance": {
                   consultAppointmentsList['event_attendance'].push({'label':label, 'date':startDate});
-                  consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                  if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                  }
                   break;
                 }
 
                 case "Lecture": {
                     consultAppointmentsList['lectures'].push({'label':label, 'date':startDate});
-                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                      consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    }
                     break;
                 }
 
                 case "Consulting": {
                     consultAppointmentsList['consulting'].push({'label':label, 'date':startDate});
                     if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession'){
-                        label = label.replace(/\./g,',');
-                        consultAppointmentsList['prof_consulting'].push({'label':label, 'date':startDate});
+                      label = label.replace(/\./g,',');
+                      consultAppointmentsList['prof_consulting'].push({'label':label, 'date':startDate});
                     }
                     break;
                 }
@@ -398,19 +406,25 @@ class WidgetsSOMParser {
 
                 case "Other": {
                     consultAppointmentsList['other_activities'].push({'label':label, 'date':startDate});
-                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                      consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    }
                     break;
                 }
 
                 case "Event/Organization Administration": {
                     consultAppointmentsList['event_admin'].push({'label':label, 'date':startDate});
-                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                      consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    }
                     break;
                 }
 
                 case "Committee Service": {
                     consultAppointmentsList['committee_service'].push({'label':label, 'date':startDate});
-                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                      consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    }
                     break;
                 }
 
@@ -426,7 +440,7 @@ class WidgetsSOMParser {
       result[name] = value
       return result;
     }, {});
-
+    console.log(results);
     return results 
   }
 
