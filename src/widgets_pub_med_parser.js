@@ -352,7 +352,9 @@ class WidgetsPubMedParser {
 
                 case "Community Service": {
                     consultAppointmentsList['community_service'].push({'label':label, 'date':startDate});
-                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                      consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    }
                     break;
                 }
 
@@ -366,27 +368,33 @@ class WidgetsPubMedParser {
 
                 case "Professional Development": {
                     consultAppointmentsList['professional_development'].push({'label':label, 'date':startDate});
-                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                      consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    }
                     break;
                 }
 
                 case "Event Attendance": {
                   consultAppointmentsList['event_attendance'].push({'label':label, 'date':startDate});
-                  consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                  if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                  }
                   break;
                 }
 
                 case "Lecture": {
                     consultAppointmentsList['lectures'].push({'label':label, 'date':startDate});
-                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                      consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    }
                     break;
                 }
 
                 case "Consulting": {
                     consultAppointmentsList['consulting'].push({'label':label, 'date':startDate});
                     if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession'){
-                        label = label.replace(/\./g,',');
-                        consultAppointmentsList['prof_consulting'].push({'label':label, 'date':startDate});
+                      label = label.replace(/\./g,',');
+                      consultAppointmentsList['prof_consulting'].push({'label':label, 'date':startDate});
                     }
                     break;
                 }
@@ -398,19 +406,25 @@ class WidgetsPubMedParser {
 
                 case "Other": {
                     consultAppointmentsList['other_activities'].push({'label':label, 'date':startDate});
-                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                      consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    }
                     break;
                 }
 
                 case "Event/Organization Administration": {
                     consultAppointmentsList['event_admin'].push({'label':label, 'date':startDate});
-                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                      consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    }
                     break;
                 }
 
                 case "Committee Service": {
                     consultAppointmentsList['committee_service'].push({'label':label, 'date':startDate});
-                    consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    if( value['vivoType'] != 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity'){
+                      consultAppointmentsList['full_org_and_participation_list'].push({'label':label, 'date':startDate});
+                    }
                     break;
                 }
 
@@ -426,7 +440,7 @@ class WidgetsPubMedParser {
       result[name] = value
       return result;
     }, {});
-
+    console.log(results);
     return results 
   }
 
@@ -462,6 +476,7 @@ class WidgetsPubMedParser {
   parseGrants(data) {
     
     var grants = data['grants'] || [];
+    var gifts = data['gifts'] || [];
     var currentGrantList = []
     var completedGrantList = []
     var pendingGrantList = []
@@ -475,6 +490,30 @@ class WidgetsPubMedParser {
       var period = startDate.getFullYear() + " - " + endDate.getFullYear();
       var title = value['label'] + ", awarded by " + value.attributes['awardedBy'];
       var role = value.attributes['roleName'];
+
+      if(startDate < today && endDate > today)
+      {
+         currentGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
+      }
+      if(endDate < today)
+      {
+         completedGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
+      }
+      if(startDate > today)
+      {
+         pendingGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
+      }
+    });
+
+    _.forEach(gifts, function(value) {
+      var startDate = new Date(value.attributes['dateTimeStart']);
+      var endDate = new Date(value.attributes['dateTimeEnd']);
+      var today = new Date();
+
+      var pi = value.attributes['piName'];
+      var period = startDate.getFullYear() + " - " + endDate.getFullYear();
+      var title = value['label'] + ", awarded by " + value.attributes['donor'];
+      var role = value.attributes['role'];
 
       if(startDate < today && endDate > today)
       {
