@@ -272,26 +272,54 @@ class WidgetsPubMedParser {
             break;
       }
 
-      var subtypes = value['attributes']['subtypes'];
-      // If subtypes have multiple, split by ';' and sort by 'order of magnitute'
-      let subtypeList = [];
-
-      if(subtypes != ''){
-        // often list of 1
-        subtypeList = subtypes.split(';')
-      }
-
       var year = value['attributes']['year'];
        // substring year for first 4 digits
       if(year != ''){
          year = year;
       }
-      if(subtypeList.length == 0 || _.includes(subtypeList, 'academic article')) {
+
+      var subtypes = value['attributes']['subtypes'];
+      let subtypeList = [];
+
+      // 1) If subtypes have multiple, split by ';'
+      if(subtypes != ''){
+        // often just list of 1
+        subtypeList = subtypes.split(';')
+      }
+
+      let orderOfMagnitude = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III", 
+        "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Review", "Scientific Integrity Review", 
+        "Systematic Review", "Support of Research Systematic Review", "Journal Article", "Editorial", 
+        "Letter", "English Abstract"
+      ]
+
+      // 2) sort by 'order of magnitute'
+      subtypeList.sort(function(a, b) {
+         return orderOfMagnitude.indexOf(a) - orderOfMagnitude.indexOf(b)
+      })
+
+      let isRefereed = function() {
+        return subtypeList.length == 0 || 
+        ((_.intersection(subtypeList, ["Journal Article", "academic article"]).length > 0 &&
+        !(_.intersection(subtypeList, ["Multicenter Study", "Review",  "Scientific Integrity Review",
+          "Systematic Review", "Support of Research Systematic Review"]).length > 0))
+        ) && value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle'
+      }
+      console.log(isRefereed())
+
+      let isManuscript = function() {
+        return _.intersection(subtypeList, ["Multicenter Study", "Adaptive Clinical Trial", 
+        "Clinical Trial, Phase III", "Clinical Trial, Phase IV", "Pragmatic Clinical Trial",
+        ]).length > 0 || 
+        (_.includes(subtypeList, "Journal Article") && _.includes(subtypeList, "Multicenter Study"))
+      }
+
+      if(isRefereed()) {
         if(value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle') {
-            pubTypes['journals'].push({'citation': citation, 'year': year})
+          pubTypes['journals'].push({'citation': citation, 'year': year})
         }
       }
-      if(_.includes(subtypeList, 'Clinical Trials') && role == "contributor") {
+      if(isManuscript()) {
         pubTypes['manuscripts'].push({'citation': citation, 'year': year})
       }
       if(_.includes(subtypeList, 'Letter')) {
@@ -300,10 +328,21 @@ class WidgetsPubMedParser {
       if(_.includes(subtypeList, 'Editorial') || _.includes(subtypeList, 'Editorial Comment')) {
         pubTypes['editorials'].push({'citation': citation, 'year': year})
       }
-      if(_.includes(subtypeList, 'Abstract')) {
+
+      let isAbstract = function() {
+        return _.includes(subtypeList, 'English Abstract') &&
+        !(_.includes(subtypeList, 'Journal Article'))
+      }
+      if(isAbstract()) {
         pubTypes['abstracts'].push({'citation': citation,'year': year})
       }
-      if(_.includes(subtypeList, 'Review')) {
+      
+      let isReview = function() {
+        return _.intersection(subtypeList, ["Review", "Scientific Integrity Review", 
+        "Systematic Review", "Support of Research Systematic Review",
+        ]).length > 0
+      }
+      if(isReview()) {
         pubTypes['reviews'].push({'citation': citation, 'year': year})
       }
       if(value['vivoType'] == 'http://purl.org/ontology/bibo/Book') {
@@ -312,17 +351,7 @@ class WidgetsPubMedParser {
       if (value['vivoType'] == 'http://purl.org/ontology/bibo/BookSection') {
         pubTypes['booksections'].push({'citation': citation, 'year': year})
       }
-      if(_.includes(subtypeList, 'Clinical Trials') && role == "contributor") {
-        pubTypes['nonauthored'].push({'citation': citation, 'year': year})
-      }
-      // the rest ...
-      let matchList = ['Addendum','Blog','Corrigendum','Essay','Fictional Work', 'Interview', 
-        'Occasional writing','Poetry', 'Rapid Communication','Scholarly Commentary','Working paper'
-      ]
-      if(value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle' || 
-         _.intersection(subtypeList, matchList).length > 0 ) {
-          pubTypes['others'].push({'citation': citation, 'year': year})
-      }
+      /* NOTE: 'nonauthored' and 'others' not populated */
     });
 
     let results = _.transform(pubTypes, (result, value, key) => { 
