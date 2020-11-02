@@ -272,13 +272,13 @@ class WidgetsPubMedParser {
             break;
       }
 
-      var subtype = value['attributes']['subtypes'];
-      // If subtypes have multiple of them, pick first one
-      if(subtype != ''){
-         if(subtype.indexOf(',') > -1){
-            var index = subtype.indexOf(',');
-            subtype = subtype.substr(0,index);
-         }
+      var subtypes = value['attributes']['subtypes'];
+      // If subtypes have multiple, split by ';' and sort by 'order of magnitute'
+      let subtypeList = [];
+
+      if(subtypes != ''){
+        // often list of 1
+        subtypeList = subtypes.split(';')
       }
 
       var year = value['attributes']['year'];
@@ -286,41 +286,42 @@ class WidgetsPubMedParser {
       if(year != ''){
          year = year;
       }
-      
-      if(subtype == '' || subtype == 'academic article') {
-          if(value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle') {
-              pubTypes['journals'].push({'citation': citation, 'year': year})
-          }
+      if(subtypeList.length == 0 || _.includes(subtypeList, 'academic article')) {
+        if(value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle') {
+            pubTypes['journals'].push({'citation': citation, 'year': year})
+        }
       }
-      if(subtype == 'Clinical Trials' && role == "contributor") {
-          pubTypes['manuscripts'].push({'citation': citation, 'year': year})
+      if(_.includes(subtypeList, 'Clinical Trials') && role == "contributor") {
+        pubTypes['manuscripts'].push({'citation': citation, 'year': year})
       }
-      if(subtype == 'Letter') {
-          pubTypes['letters'].push({'citation': citation, 'year': year})
+      if(_.includes(subtypeList, 'Letter')) {
+        pubTypes['letters'].push({'citation': citation, 'year': year})
       }
-      if(subtype == 'Editorial' || subtype == 'Editorial Comment') {
-          pubTypes['editorials'].push({'citation': citation, 'year': year})
+      if(_.includes(subtypeList, 'Editorial') || _.includes(subtypeList, 'Editorial Comment')) {
+        pubTypes['editorials'].push({'citation': citation, 'year': year})
       }
-      if(subtype == 'Abstract') {
-          pubTypes['abstracts'].push({'citation': citation,'year': year})
+      if(_.includes(subtypeList, 'Abstract')) {
+        pubTypes['abstracts'].push({'citation': citation,'year': year})
       }
-      if(subtype == 'Review') {
-          pubTypes['reviews'].push({'citation': citation, 'year': year})
-      }
-      if(value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle' || subtype == 'Addendum' || subtype == 'Blog' ||
-        subtype == 'Corrigendum' || subtype == 'Essay' || subtype == 'Fictional Work' || subtype == 'Interview' ||
-        subtype == 'Occasional writing' || subtype == 'Poetry' || subtype == 'Rapid Communication' || subtype == 'Scholarly Commentary' ||
-        subtype == 'Working paper') {
-          pubTypes['others'].push({'citation': citation, 'year': year})
-      }
-      if(subtype != 'Clinical Trials' && role == "contributor") {
-          pubTypes['nonauthored'].push({'citation': citation, 'year': year})
+      if(_.includes(subtypeList, 'Review')) {
+        pubTypes['reviews'].push({'citation': citation, 'year': year})
       }
       if(value['vivoType'] == 'http://purl.org/ontology/bibo/Book') {
-         pubTypes['books'].push({'citation': citation, 'year': year})
+        pubTypes['books'].push({'citation': citation, 'year': year})
       }
       if (value['vivoType'] == 'http://purl.org/ontology/bibo/BookSection') {
-         pubTypes['booksections'].push({'citation': citation, 'year': year})
+        pubTypes['booksections'].push({'citation': citation, 'year': year})
+      }
+      if(_.includes(subtypeList, 'Clinical Trials') && role == "contributor") {
+        pubTypes['nonauthored'].push({'citation': citation, 'year': year})
+      }
+      // the rest ...
+      let matchList = ['Addendum','Blog','Corrigendum','Essay','Fictional Work', 'Interview', 
+        'Occasional writing','Poetry', 'Rapid Communication','Scholarly Commentary','Working paper'
+      ]
+      if(value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle' || 
+         _.intersection(subtypeList, matchList).length > 0 ) {
+          pubTypes['others'].push({'citation': citation, 'year': year})
       }
     });
 
