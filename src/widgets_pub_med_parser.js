@@ -316,17 +316,17 @@ class WidgetsPubMedParser {
 
       if(isRefereed()) {
         if(value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle') {
-          pubTypes['journals'].push({'citation': citation, 'year': year})
+          pubTypes['journals'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
         }
       }
       if(isManuscript()) {
-        pubTypes['manuscripts'].push({'citation': citation, 'year': year})
+        pubTypes['manuscripts'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
       }
       if(_.includes(subtypeList, 'Letter')) {
-        pubTypes['letters'].push({'citation': citation, 'year': year})
+        pubTypes['letters'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
       }
       if(_.includes(subtypeList, 'Editorial') || _.includes(subtypeList, 'Editorial Comment')) {
-        pubTypes['editorials'].push({'citation': citation, 'year': year})
+        pubTypes['editorials'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
       }
 
       let isAbstract = function() {
@@ -334,7 +334,7 @@ class WidgetsPubMedParser {
         !(_.includes(subtypeList, 'Journal Article'))
       }
       if(isAbstract()) {
-        pubTypes['abstracts'].push({'citation': citation,'year': year})
+        pubTypes['abstracts'].push({'citation': citation,'year': year, 'subtypes': subtypeList})
       }
       
       let isReview = function() {
@@ -343,13 +343,13 @@ class WidgetsPubMedParser {
         ]).length > 0
       }
       if(isReview()) {
-        pubTypes['reviews'].push({'citation': citation, 'year': year})
+        pubTypes['reviews'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
       }
       if(value['vivoType'] == 'http://purl.org/ontology/bibo/Book') {
-        pubTypes['books'].push({'citation': citation, 'year': year})
+        pubTypes['books'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
       }
       if (value['vivoType'] == 'http://purl.org/ontology/bibo/BookSection') {
-        pubTypes['booksections'].push({'citation': citation, 'year': year})
+        pubTypes['booksections'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
       }
       /* NOTE: 'nonauthored' and 'others' not populated */
     });
