@@ -305,7 +305,6 @@ class WidgetsPubMedParser {
           "Systematic Review", "Support of Research Systematic Review"]).length > 0))
         ) && value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle'
       }
-      console.log(isRefereed())
 
       let isManuscript = function() {
         return _.intersection(subtypeList, ["Multicenter Study", "Adaptive Clinical Trial", 
@@ -470,7 +469,6 @@ class WidgetsPubMedParser {
       result[name] = value
       return result;
     }, {});
-    console.log(results);
     return results 
   }
 
