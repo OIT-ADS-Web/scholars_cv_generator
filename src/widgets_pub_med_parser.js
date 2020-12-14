@@ -299,19 +299,51 @@ class WidgetsPubMedParser {
       })
 
       let isRefereed = function() {
+        let exclusion = ["Multicenter Study", "Review",  "Scientific Integrity Review",
+          "Systematic Review", "Support of Research Systematic Review",
+          "Adaptive Clinical Trial", "Clinical Trial, Phase III", "Clinical Trial, Phase IV",
+          "Pragmatic Clinical Trial"]
+        let inclusion = ["Journal Article", "academic article"]
         return subtypeList.length == 0 || 
-        ((_.intersection(subtypeList, ["Journal Article", "academic article"]).length > 0 &&
-        !(_.intersection(subtypeList, ["Multicenter Study", "Review",  "Scientific Integrity Review",
-          "Systematic Review", "Support of Research Systematic Review"]).length > 0))
+        ((_.intersection(subtypeList, inclusion).length > 0 &&
+        !(_.intersection(subtypeList, exclusion).length > 0))
         ) && value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle'
       }
 
       let isManuscript = function() {
-        return _.intersection(subtypeList, ["Multicenter Study", "Adaptive Clinical Trial", 
-        "Clinical Trial, Phase III", "Clinical Trial, Phase IV", "Pragmatic Clinical Trial",
-        ]).length > 0 || 
-        (_.includes(subtypeList, "Journal Article") && _.includes(subtypeList, "Multicenter Study"))
+        let inclusion = ["Multicenter Study", "Adaptive Clinical Trial", 
+          "Clinical Trial, Phase III", "Clinical Trial, Phase IV", "Pragmatic Clinical Trial",
+          "Journal Article"]
+        // NOTE: include AND pattern (instead of !exclude AND - like a lot of others)
+        return _.intersection(subtypeList, inclusion).length > 0 && _.includes(subtypeList, "Multicenter Study")
       }
+
+      let isLetter = function() {
+        let exclusion = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III",
+          "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Journal Article"]
+         return !(_.intersection(subtypeList, exclusion).length > 0) && _.includes(subtypeList, 'Letter')
+      }
+      let isEditorial = function() {
+        let exclusion = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III",
+            "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Review", "Scientific Integrity Review",
+            "Systematic Review", "Support of Research Systematic Review", "Journal Article"]
+          return !(_.intersection(subtypeList, exclusion).length > 0) &&
+             (_.includes(subtypeList, 'Editorial') || _.includes(subtypeList, 'Editorial Comment'))
+      }
+      let isAbstract = function() {
+        let exclusion = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III", 
+          "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Review", "Scientific Integrity Review",
+          "Systematic Review", "Support of Research Systematic Review", "Journal Article", "Editorial",
+          "Letter"]
+        return !(_.intersection(subtypeList, exclusion).length > 0) && _.includes(subtypeList, 'English Abstract')
+      }
+      let isReview = function() {
+        let checkList = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III", 
+          "Clinical Trial, Phase IV", "Pragmatic Clinical Trial"]
+        let inclusion = ["Review", "Scientific Integrity Review", "Systematic Review", "Support of Research Systematic Review"]
+        return !(_.intersection(subtypeList, checkList).length > 0) && (_.intersection(subtypeList, inclusion).length > 0)
+      }
+
 
       if(isRefereed()) {
         if(value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle') {
@@ -321,25 +353,14 @@ class WidgetsPubMedParser {
       if(isManuscript()) {
         pubTypes['manuscripts'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
       }
-      if(_.includes(subtypeList, 'Letter')) {
+      if(isLetter()) {
         pubTypes['letters'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
       }
-      if(_.includes(subtypeList, 'Editorial') || _.includes(subtypeList, 'Editorial Comment')) {
+      if(isEditorial()) {
         pubTypes['editorials'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
-      }
-
-      let isAbstract = function() {
-        return _.includes(subtypeList, 'English Abstract') &&
-        !(_.includes(subtypeList, 'Journal Article'))
       }
       if(isAbstract()) {
         pubTypes['abstracts'].push({'citation': citation,'year': year, 'subtypes': subtypeList})
-      }
-      
-      let isReview = function() {
-        return _.intersection(subtypeList, ["Review", "Scientific Integrity Review", 
-        "Systematic Review", "Support of Research Systematic Review",
-        ]).length > 0
       }
       if(isReview()) {
         pubTypes['reviews'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
