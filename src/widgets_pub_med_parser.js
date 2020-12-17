@@ -287,7 +287,7 @@ class WidgetsPubMedParser {
         subtypeList = subtypes.split(';')
       }
 
-      let orderOfMagnitude = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III", 
+      let orderOfMagnitude = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III",
         "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Review", "Scientific Integrity Review", 
         "Systematic Review", "Support of Research Systematic Review", "Journal Article", "Editorial", 
         "Letter", "English Abstract"
@@ -303,7 +303,7 @@ class WidgetsPubMedParser {
           "Systematic Review", "Support of Research Systematic Review",
           "Adaptive Clinical Trial", "Clinical Trial, Phase III", "Clinical Trial, Phase IV",
           "Pragmatic Clinical Trial"]
-        let inclusion = ["Journal Article", "academic article"]
+        let inclusion = ["Journal Article", "Journal", "academic article"]
         return subtypeList.length == 0 || 
         ((_.intersection(subtypeList, inclusion).length > 0 &&
         !(_.intersection(subtypeList, exclusion).length > 0))
@@ -312,10 +312,10 @@ class WidgetsPubMedParser {
 
       let isManuscript = function() {
         let inclusion = ["Multicenter Study", "Adaptive Clinical Trial", 
-          "Clinical Trial, Phase III", "Clinical Trial, Phase IV", "Pragmatic Clinical Trial",
-          "Journal Article"]
+          "Clinical Trial, Phase III", "Clinical Trial, Phase IV", "Pragmatic Clinical Trial"]
         // NOTE: include AND pattern (instead of !exclude AND - like a lot of others)
-        return _.intersection(subtypeList, inclusion).length > 0 && _.includes(subtypeList, "Multicenter Study")
+        return ((_.intersection(subtypeList, inclusion).length > 0) && _.includes(subtypeList, 'Journal Article'))
+          || _.includes(subtypeList, "Multicenter Study")
       }
 
       let isLetter = function() {
@@ -326,7 +326,7 @@ class WidgetsPubMedParser {
       let isEditorial = function() {
         let exclusion = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III",
             "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Review", "Scientific Integrity Review",
-            "Systematic Review", "Support of Research Systematic Review", "Journal Article"]
+            "Systematic Review", "Support of Research Systematic Review", "Journal Article", "Journal"]
           return !(_.intersection(subtypeList, exclusion).length > 0) &&
              (_.includes(subtypeList, 'Editorial') || _.includes(subtypeList, 'Editorial Comment'))
       }

@@ -14,10 +14,12 @@ let keys = Object.keys(publications)
 // can be -> 'journals', 'manuscripts', 'letters', 'editorials',
 // 'abstracts', 'reviews', 'others', 'nonauthored', 'books',
 // 'booksections'
+let total = 0
 for (var key of keys) {
     let obj = publications[key]
     if (Array.isArray(obj)) {
         console.log(`****${key}:${obj.length}*****`)
+        total += obj.length 
         obj.forEach(publication => {
             console.log(publication)
         })
@@ -25,3 +27,5 @@ for (var key of keys) {
        console.log(key + " empty object")
     }
 }
+console.log("total gathered =" + total)
+
