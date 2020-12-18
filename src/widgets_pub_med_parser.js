@@ -327,7 +327,7 @@ class WidgetsPubMedParser {
       let isEditorial = function() {
         let exclusion = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III",
             "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Review", "Scientific Integrity Review",
-            "Systematic Review", "Support of Research Systematic Review", "Journal Article"]
+            "Systematic Review", "Support of Research Systematic Review", "Journal Article", "Journal"]
           return !(_.intersection(subtypeList, exclusion).length > 0) &&
              (_.includes(subtypeList, 'Editorial') || _.includes(subtypeList, 'Editorial Comment'))
       }
