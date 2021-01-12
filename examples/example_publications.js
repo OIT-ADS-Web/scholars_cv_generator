@@ -20,12 +20,13 @@ let total = 0
 for (var key of keys) {
     let obj = grouped[key]
     if (Array.isArray(obj)) {
-        console.log(`****${key}:${obj.length}*****`)
+        console.log(`[${key}:${obj.length}]`)
         total += obj.length 
         obj.forEach(publication => {
-            console.log(publication.uri)
+            //console.log(publication.uri)
             let expect = expected[publication.uri]
             if (key != expect) {
+              console.log(publication.uri)
               console.log("*** found in " + key + " supposed to be in " + expect + ";subtypes:" + publication.subtypes)
             }
         })
