@@ -243,6 +243,7 @@ class WidgetsPubMedParser {
       
       let vivoType = value['vivoType'];
       let citation = figureCitation(value)
+      let uri = value['uri'];
 
       var role = "";
       switch(value['attributes']['authorshipType']) 
@@ -345,31 +346,32 @@ class WidgetsPubMedParser {
       }
 
 
+      // NOTE: uri column is added for debugging/tracing purposes - not used on CV
       if(isRefereed()) {
         if(value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle') {
-          pubTypes['journals'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
+          pubTypes['journals'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
         }
       }
       if(isManuscript()) {
-        pubTypes['manuscripts'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
+        pubTypes['manuscripts'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
       }
       if(isLetter()) {
-        pubTypes['letters'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
+        pubTypes['letters'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
       }
       if(isEditorial()) {
-        pubTypes['editorials'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
+        pubTypes['editorials'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
       }
       if(isAbstract()) {
-        pubTypes['abstracts'].push({'citation': citation,'year': year, 'subtypes': subtypeList})
+        pubTypes['abstracts'].push({'citation': citation,'year': year, 'subtypes': subtypeList, 'uri': uri})
       }
       if(isReview()) {
-        pubTypes['reviews'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
+        pubTypes['reviews'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
       }
       if(value['vivoType'] == 'http://purl.org/ontology/bibo/Book') {
-        pubTypes['books'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
+        pubTypes['books'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
       }
       if (value['vivoType'] == 'http://purl.org/ontology/bibo/BookSection') {
-        pubTypes['booksections'].push({'citation': citation, 'year': year, 'subtypes': subtypeList})
+        pubTypes['booksections'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
       }
       /* NOTE: 'nonauthored' and 'others' not populated */
     });
