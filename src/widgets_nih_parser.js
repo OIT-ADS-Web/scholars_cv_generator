@@ -291,8 +291,8 @@ class WidgetsNIHParser {
       var subtype = value['attributes']['subtypes'];
       // If subtypes have multiple of them, pick first one
       if(subtype != ''){
-         if(subtype.indexOf(',') > -1){
-            var index = subtype.indexOf(',');
+         if(subtype.indexOf(';') > -1){
+            var index = subtype.indexOf(';');
             subtype = subtype.substr(0,index);
          }
       }
