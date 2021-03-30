@@ -27,6 +27,10 @@ Navigate to:
 
   http://localhost:8334
   
+To see a template working in the browser (no file download), point to a widgets URL:
+
+  http://localhost:8334/?uri=https://scholars2-test.oit.duke.edu/individual/per8345372&template=medicine&format=html
+
 
 ## Building and Deploying
 
@@ -37,21 +41,6 @@ Navigate to:
   
   ```
 
-## Duke specific Information
-
-  Then there is a simple script that copies files.
-  ```
-  ./deploy_acceptance.sh
-  
-  ```
-
-NOTE: this is only for acceptance and is accessible here:
-
-https://scholars2-test.oit.duke.edu/scholars_search/scholars_cv_generator/
-
-
-Eventually (in the future) there should be a *scholars_cv_deploy* project of some sort, like 
-the *scholars_search_deploy* project (see gitlab).
 
 
 

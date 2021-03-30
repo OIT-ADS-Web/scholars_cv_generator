@@ -14,6 +14,8 @@ import * as medWidgets from './widgets_som_parser'
 
 import * as nihWidgets from './widgets_nih_parser'
 
+import * as pubmedWidgets from './widgets_pub_med_parser'
+
 function checkStatus(res) {
   if (res.status >= 400) {
     let message = `Status: ${res.status}`
@@ -37,6 +39,7 @@ import blankTemplate from './templates/BlankTemplate.docx'
 import htmlTemplate from './templates/cv_template.html'
 import htmlMedicineTemplate from './templates/cv_medicine_template.html'
 import htmlNihTemplate from './templates/cv_nih_template.html'
+import htmlPubmedTemplate from './templates/cv_pub_med_template.html'
 
 import FileSaver from 'file-saver'
 
@@ -64,6 +67,17 @@ export function generateNihTemplate(results) {
 
   var data = widgetsParser.convert(results)
   let compiled = _.template(htmlNihTemplate,'imports': {'_': _})
+  let template = compiled(data)
+ 
+  return template
+
+}
+
+export function generatePubMedTemplate(results) {
+  let widgetsParser = new pubmedWidgets.WidgetsPubMedParser()
+
+  var data = widgetsParser.convert(results)
+  let compiled = _.template(htmlPubmedTemplate,'imports': {'_': _})
   let template = compiled(data)
  
   return template
@@ -110,6 +124,9 @@ export function generateCVfromHtml(html, uri, template) {
       } 
       else if(template == "nih"){
         fileName = 'NIH CV.docx'
+      }
+      else if(template == "pubmed"){
+        fileName = "PubMed CV.docx"
       }
 
       FileSaver.saveAs(blob, fileName)
@@ -161,6 +178,17 @@ export function* fetchCV(action) {
       }
       else if(format == "html"){
         const html = yield call(generateNihTemplate, results)
+        yield put(setHtml(html))
+      }
+    }
+    else if(template == "pubmed") {
+      if (format == "word") {
+        const html = yield call(generatePubMedTemplate, results)
+        yield put(setHtml(html))
+        yield call(generateCVfromHtml, html, uri, "pubmed")
+      }
+      else if(format == "html"){
+        const html = yield call(generatePubMedTemplate, results)
         yield put(setHtml(html))
       }
     }

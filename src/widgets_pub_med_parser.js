@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 // http://www.scottmessinger.com/2015/05/19/functional-programming-with-lodash/
 // https://stackoverflow.com/questions/35590543/how-do-you-chain-functions-using-lodash
-class WidgetsSOMParser {
+class WidgetsPubMedParser {
   
   pluralize(word) {
       switch(word) {
@@ -243,6 +243,7 @@ class WidgetsSOMParser {
       
       let vivoType = value['vivoType'];
       let citation = figureCitation(value)
+      let uri = value['uri'];
 
       var role = "";
       switch(value['attributes']['authorshipType']) 
@@ -272,56 +273,107 @@ class WidgetsSOMParser {
             break;
       }
 
-      var subtype = value['attributes']['subtypes'];
-      // If subtypes have multiple of them, pick first one
-      if(subtype != ''){
-         if(subtype.indexOf(';') > -1){
-            var index = subtype.indexOf(';');
-            subtype = subtype.substr(0,index);
-         }
-      }
-
       var year = value['attributes']['year'];
        // substring year for first 4 digits
       if(year != ''){
          year = year;
       }
-      
-      if(subtype == '' || subtype == 'academic article') {
-          if(value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle') {
-              pubTypes['journals'].push({'citation': citation, 'year': year})
-          }
+
+      var subtypes = value['attributes']['subtypes'];
+      let subtypeList = [];
+
+      // 1) If subtypes have multiple, split by ';'
+      if(subtypes != ''){
+        // often just list of 1
+        subtypeList = subtypes.split(';')
       }
-      if(subtype == 'Clinical Trial Manuscript' && role == "contributor") {
-          pubTypes['manuscripts'].push({'citation': citation, 'year': year})
+
+      let orderOfMagnitude = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III",
+        "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Review", "Scientific Integrity Review", 
+        "Systematic Review", "Support of Research Systematic Review", "Journal Article", "Editorial", 
+        "Letter", "English Abstract"
+      ]
+
+      // 2) sort by 'order of magnitute'
+      subtypeList.sort(function(a, b) {
+         return orderOfMagnitude.indexOf(a) - orderOfMagnitude.indexOf(b)
+      })
+
+      let isRefereed = function() {
+        let exclusion = ["Multicenter Study", "Review",  "Scientific Integrity Review",
+          "Systematic Review", "Support of Research Systematic Review",
+          "Adaptive Clinical Trial", "Clinical Trial, Phase III", "Clinical Trial, Phase IV",
+          "Pragmatic Clinical Trial"]
+        let inclusion = ["Journal Article", "Journal", "academic article"]
+        return subtypeList.length == 0 || 
+        ((_.intersection(subtypeList, inclusion).length > 0 &&
+        !(_.intersection(subtypeList, exclusion).length > 0))
+        ) && value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle'
       }
-      if(subtype == 'Letter') {
-          pubTypes['letters'].push({'citation': citation, 'year': year})
+
+      let isManuscript = function() {
+        let inclusion = ["Multicenter Study", "Adaptive Clinical Trial", 
+          "Clinical Trial, Phase III", "Clinical Trial, Phase IV", "Pragmatic Clinical Trial"]
+        // NOTE: include AND pattern (instead of !exclude AND - like a lot of others)
+        return ((_.intersection(subtypeList, inclusion).length > 0) && _.includes(subtypeList, 'Journal Article'))
+          || _.includes(subtypeList, "Multicenter Study")
       }
-      if(subtype == 'Editorial' || subtype == 'Editorial Comment') {
-          pubTypes['editorials'].push({'citation': citation, 'year': year})
+
+      let isLetter = function() {
+        let exclusion = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III",
+          "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Journal Article"]
+         return !(_.intersection(subtypeList, exclusion).length > 0) && _.includes(subtypeList, 'Letter')
       }
-      if(subtype == 'Abstract') {
-          pubTypes['abstracts'].push({'citation': citation,'year': year})
+      let isEditorial = function() {
+        let exclusion = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III",
+            "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Review", "Scientific Integrity Review",
+            "Systematic Review", "Support of Research Systematic Review", "Journal Article", "Journal"]
+          return !(_.intersection(subtypeList, exclusion).length > 0) &&
+             (_.includes(subtypeList, 'Editorial') || _.includes(subtypeList, 'Editorial Comment'))
       }
-      if(subtype == 'Review') {
-          pubTypes['reviews'].push({'citation': citation, 'year': year})
+      let isAbstract = function() {
+        let exclusion = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III", 
+          "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Review", "Scientific Integrity Review",
+          "Systematic Review", "Support of Research Systematic Review", "Journal Article", "Editorial",
+          "Letter"]
+        return !(_.intersection(subtypeList, exclusion).length > 0) && _.includes(subtypeList, 'English Abstract')
       }
-      if(value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle' || subtype == 'Addendum' || subtype == 'Blog' ||
-        subtype == 'Corrigendum' || subtype == 'Essay' || subtype == 'Fictional Work' || subtype == 'Interview' ||
-        subtype == 'Occasional writing' || subtype == 'Poetry' || subtype == 'Rapid Communication' || subtype == 'Scholarly Commentary' ||
-        subtype == 'Working paper') {
-          pubTypes['others'].push({'citation': citation, 'year': year})
+      let isReview = function() {
+        let checkList = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III", 
+          "Clinical Trial, Phase IV", "Pragmatic Clinical Trial"]
+        let inclusion = ["Review", "Scientific Integrity Review", "Systematic Review", "Support of Research Systematic Review"]
+        return !(_.intersection(subtypeList, checkList).length > 0) && (_.intersection(subtypeList, inclusion).length > 0)
       }
-      if(subtype != 'Clinical Trial Manuscript' && role == "contributor") {
-          pubTypes['nonauthored'].push({'citation': citation, 'year': year})
+
+
+      // NOTE: uri column is added for debugging/tracing purposes - not used on CV
+      if(isRefereed()) {
+        if(value['vivoType'] == 'http://purl.org/ontology/bibo/AcademicArticle') {
+          pubTypes['journals'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
+        }
+      }
+      if(isManuscript()) {
+        pubTypes['manuscripts'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
+      }
+      if(isLetter()) {
+        pubTypes['letters'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
+      }
+      if(isEditorial()) {
+        pubTypes['editorials'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
+      }
+      if(isAbstract()) {
+        pubTypes['abstracts'].push({'citation': citation,'year': year, 'subtypes': subtypeList, 'uri': uri})
+      }
+      if(isReview()) {
+        pubTypes['reviews'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
       }
       if(value['vivoType'] == 'http://purl.org/ontology/bibo/Book') {
-         pubTypes['books'].push({'citation': citation, 'year': year})
+        pubTypes['books'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
       }
       if (value['vivoType'] == 'http://purl.org/ontology/bibo/BookSection') {
-         pubTypes['booksections'].push({'citation': citation, 'year': year})
+        pubTypes['booksections'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
       }
+      /* NOTE: 'nonauthored' and 'others' not populated */
     });
 
     let results = _.transform(pubTypes, (result, value, key) => { 
@@ -440,7 +492,6 @@ class WidgetsSOMParser {
       result[name] = value
       return result;
     }, {});
-    console.log(results);
     return results 
   }
 
@@ -539,6 +590,8 @@ class WidgetsSOMParser {
 
     if (overview != null) {
       var mentorship_activities = overview;
+      //mentorship_activities =  mentorship_activities.replace(/(&nbsp;)*/g,"");
+      //mentorship_activities =  mentorship_activities.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'mentorship_activities': mentorship_activities}
   };
@@ -549,6 +602,9 @@ class WidgetsSOMParser {
 
     if (activities != null) {
       var teaching_activities = activities;
+      //var teaching_activities = activities.replace(stripHtml, "");
+      //teaching_activities =  teaching_activities.replace(/(&nbsp;)*/g,"");
+      //teaching_activities =  teaching_activities.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'teaching_activities': teaching_activities}
   };
@@ -621,6 +677,8 @@ class WidgetsSOMParser {
 
     if (activities != null) {
       var clinical_activities = activities;
+      //clinical_activities = clinical_activities.replace(/(&nbsp;)*/g,"");
+      //clinical_activities =  clinical_activities.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'clinical_activities': clinical_activities}
   };
@@ -631,6 +689,8 @@ class WidgetsSOMParser {
 
     if (activities != null) {
       var academic_activities = activities;
+      //academic_activities = academic_activities.replace(/(&nbsp;)*/g,"");
+      //academic_activities =  academic_activities.replace(/[<]br[^>]*[>]/gi,"");
     }
     return {'academic_activities': academic_activities}
   };
@@ -666,7 +726,7 @@ class WidgetsSOMParser {
 
 
 export { 
-  WidgetsSOMParser
+  WidgetsPubMedParser
 }
 
 
