@@ -230,6 +230,11 @@ class WidgetsPubMedParser {
             .replace(stripClosingTag, "");
 
       citation = citation.replace(stripHtml, "");
+
+      var doi = value.attributes['doi'];
+      if (typeof doi !== 'undefined') {
+        citation = citation + " doi:" + doi + ".";
+      }
       var vivoType = value['vivoType'];
   
       if (vivoType === "http://purl.org/ontology/bibo/AcademicArticle") {
