@@ -223,8 +223,9 @@ class WidgetsSOMParser {
     
     var publications = data['publications'] || [];
 
+    let defaultCitationFormat = 'nlmCitation'
     let figureCitation = function(value) {
-      var citation = value.attributes['icmjeCitation']
+      var citation = value.attributes[defaultCitationFormat]
             .replace(stripOpeningTag,"")
             .replace(stripClosingTag, "");
 
