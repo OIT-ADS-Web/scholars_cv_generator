@@ -91,22 +91,14 @@ class WidgetsPubMedParser {
     let positions = data['positions'] || [];
     var primaryPositions = []
     var secondaryPositions = []
-    // others
-    var administrativePositions = []
-    var jointPositions = []
-    var membershipPositions = []
-    var staffPositions = []
-    var affiliatePositions = []
-    var studentPositions = []
     // remaining
     var otherPositions = []
     var allPositions = []
 
     _.forEach(positions, function(value) {
-      //var vivoType = value['vivoType'];
-      var label = value['label'];
-      var year = value['attributes']['startYear'].substr(0,4);
-      var category = value['attributes']['appointmentTypeCode'];
+      let label = value['label'];
+      let year = value['attributes']['startYear'].substr(0,4);
+      let category = value['attributes']['appointmentTypeCode'];
 
       switch(category) {
         case 'P': {
@@ -115,30 +107,6 @@ class WidgetsPubMedParser {
         }
         case 'S': {
           secondaryPositions.push({'label':label})
-          break;
-        }
-        case 'A': {
-          administrativePositions.push({'label':label})
-          break;
-        }
-        case 'J': {
-          jointPositions.push({'label':label})
-          break;
-        }
-        case 'M': {
-          membershipPositions.push({'label':label})
-          break;
-        }
-        case 'Staff': {
-          staffPositions.push({'label':label})
-          break;
-        }
-        case 'Affiliate': {
-          affiliatePositions.push({'label':label})
-          break;
-        }
-        case 'Student': {
-          studentPositions.push({'label':label})
           break;
         }
         default: {
@@ -169,9 +137,6 @@ class WidgetsPubMedParser {
 
     pastAppointmentsList.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} );
     
-    let academicPositions = _.concat(jointPositions, membershipPositions, affiliatePositions,
-      staffPositions, studentPositions, otherPositions)
-    
     let arrs = [allPositions, pastAppointmentsList]
     let merged = [...new Set(arrs.flat())];
 
@@ -182,9 +147,6 @@ class WidgetsPubMedParser {
       // NOTE: these do *not* include pastAppointments
       'primaryPositions': primaryPositions,
       'secondaryPositions': secondaryPositions,
-      'administrativePositions': administrativePositions,
-      'academicPositions': academicPositions,
-      'otherPositions': otherPositions,
       'allPositions': allPositions,
       'pastAppointments': pastAppointmentsList,
       // NOTE: these *do* include past appointments
