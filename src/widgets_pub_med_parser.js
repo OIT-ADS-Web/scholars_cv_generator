@@ -102,20 +102,6 @@ class WidgetsPubMedParser {
     var otherPositions = []
     var allPositions = []
 
-    /*
-    let positionTypes = {
-      'P': 'http://vivoweb.org/ontology/core#PrimaryPosition',
-      'S': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition',
-      'A': 'http://vivo.duke.edu/vivo/ontology/duke-extension#FacultyAdministrativePosition',
-      'J': 'http://vivo.duke.edu/vivo/ontology/duke-extension#JointPosition',
-      'M': 'http://vivo.duke.edu/vivo/ontology/duke-extension#MembershipPosition',
-      'Staff': 'http://vivoweb.org/ontology/core#NonFacultyAcademicPosition',
-      'Affiliate': 'http://vivo.duke.edu/vivo/ontology/duke-extension#AffiliatePosition',
-      'Student': 'http://vivo.duke.edu/vivo/ontology/duke-extension#StudentPosition'
-    };
-    */
-
-    // group by 'type'    
     _.forEach(positions, function(value) {
       //var vivoType = value['vivoType'];
       var label = value['label'];
@@ -253,25 +239,6 @@ class WidgetsPubMedParser {
     });
     return {'otherPositions':other_positions}
   };
-
-
-  /*
-  parsePastAppointments(data) {
-    let pastappointments = data['pastAppointments'];
-    var pastAppointmentsList = [];
-    _.forEach(pastappointments, function(value) {
-      var label = value['label'];
-      var org_label = value['attributes']['organizationLabel'];
-      var start_year = value['attributes']['startYear'].substr(0,4);
-      var end_year = value['attributes']['endYear'].substr(0,4);
-      var full_label = (label + ", " + org_label + " " + start_year + " - " + end_year);   
-      pastAppointmentsList.push({'label':full_label, 'orig_label':label, 'org_label':org_label, 'startYear':start_year, 'endYear':end_year});
-    });
-
-    pastAppointmentsList.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} );
-    return {'pastappointments': pastAppointmentsList}
-  };
-  */
 
   parseMedicalLicences(data) {
     let licences = data['licenses'];
@@ -790,23 +757,6 @@ class WidgetsPubMedParser {
     return {'academic_activities': academic_activities}
   };
 
-  /*
-  groupedAppointments(data) {
-    // NOTE: maybe wasteful to parse twice
-    let allPositions = this.parsePositions(data)['allPositions']
-    let pastAppointments = this.parsePastAppointments(data)['pastappointments']
-    
-    let arrs = [allPositions, pastAppointments]
-    let grouped = [...new Set(arrs.flat())];
-
-    // NOTE: need type code or something
-    //_.forEach(positions, function(value) {
-    //var vivoType = value['vivoType'];
-    // _.forEach(group
-    return {'mergeExpPos': grouped}
-  }
-  */
-
   convert(data) {
     var results = {}
 
@@ -815,11 +765,8 @@ class WidgetsPubMedParser {
     _.merge(results, this.parseEmail(data))
     _.merge(results, this.parseTitle(data))
     _.merge(results, this.parseEducations(data))
-    //
     _.merge(results, this.parsePositions(data))
     _.merge(results, this.parseOtherPositions(data))
-    //_.merge(results, this.parsePastAppointments(data))
-    // 
     _.merge(results, this.parseMedicalLicences(data))
     _.merge(results, this.parsePublications(data))
     _.merge(results, this.parseConsultantAppointments(data))
@@ -831,9 +778,7 @@ class WidgetsPubMedParser {
     _.merge(results, this.parsePresentations(data))
     _.merge(results, this.parseClinicalActivities(data))
     _.merge(results, this.parseacademicActivities(data))
-    // 
-    //_.merge(results, this.groupedAppointments(results))
-    
+
     return results
   }
  
