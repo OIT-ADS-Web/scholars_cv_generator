@@ -91,41 +91,67 @@ class WidgetsPubMedParser {
     let positions = data['positions'] || [];
     var primaryPositions = []
     var secondaryPositions = []
-    var variousPositions = []
+    // remaining
+    var otherPositions = []
     var allPositions = []
 
-    let positionTypes = {
-      'primaryPosition': 'http://vivoweb.org/ontology/core#PrimaryPosition',
-      'secondaryPosition': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition'
-    };
-
-    // group by 'type'    
     _.forEach(positions, function(value) {
-      var vivoType = value['vivoType'];
-      var label = value['label'];
-      var year = value['attributes']['startYear'].substr(0,4);
-      switch(vivoType) {
-        case positionTypes['primaryPosition']: {
+      let label = value['label'];
+      let year = value['attributes']['startYear'].substr(0,4);
+      let category = value['attributes']['appointmentTypeCode'];
+
+      switch(category) {
+        case 'P': {
           primaryPositions.push({'label': label})
           break;
         }
-        case positionTypes['secondaryPosition']: {
+        case 'S': {
           secondaryPositions.push({'label':label})
           break;
         }
         default: {
-          variousPositions.push({'label':label})
+          otherPositions.push({'label':label})
           break;
         }
       }
-      allPositions.push({'orig_label':label, 'startYear': year})
+      allPositions.push({'orig_label':label, 'startYear': year, 'category': category})
     });
 
+    let pastAppointments = data['pastAppointments'];
+    var pastAppointmentsList = [];
+    _.forEach(pastAppointments, function(value) {
+      var label = value['label'];
+      var org_label = value['attributes']['organizationLabel'];
+      var start_year = value['attributes']['startYear'].substr(0,4);
+      var end_year = value['attributes']['endYear'].substr(0,4);
+      let category = value['attributes']['appointmentTypeCode'];
+
+      var full_label = (label + ", " + org_label + " " + start_year + " - " + end_year);   
+      pastAppointmentsList.push({'label':full_label, 
+        'orig_label':label, 
+        'org_label':org_label, 
+        'startYear':start_year, 
+        'endYear':end_year,
+        'category': category});
+    });
+
+    pastAppointmentsList.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} );
+    
+    let arrs = [allPositions, pastAppointmentsList]
+    let merged = [...new Set(arrs.flat())];
+
+    let academicAppointments = merged.filter(pos => pos.category != 'A');
+    let administrativeAppointments = merged.filter(pos => pos.category == 'A');
+
     let results = {
+      // NOTE: these do *not* include pastAppointments
       'primaryPositions': primaryPositions,
       'secondaryPositions': secondaryPositions,
-      'variousPositions': variousPositions,
-      'allPositions': allPositions
+      'allPositions': allPositions,
+      'pastAppointments': pastAppointmentsList,
+      // NOTE: these *do* include past appointments
+      'academicAppointments': academicAppointments,
+      'administrativeAppointments': administrativeAppointments
     }
     return results
   };
@@ -174,22 +200,6 @@ class WidgetsPubMedParser {
       }
     });
     return {'otherPositions':other_positions}
-  };
-
-  parsepastAppointments(data) {
-    let pastappointments = data['pastAppointments'];
-    var pastAppointmentsList = [];
-    _.forEach(pastappointments, function(value) {
-      var label = value['label'];
-      var org_label = value['attributes']['organizationLabel'];
-      var start_year = value['attributes']['startYear'].substr(0,4);
-      var end_year = value['attributes']['endYear'].substr(0,4);
-      var full_label = (label + ", " + org_label + " " + start_year + " - " + end_year);   
-      pastAppointmentsList.push({'label':full_label, 'orig_label':label, 'org_label':org_label, 'startYear':start_year, 'endYear':end_year});
-    });
-
-    pastAppointmentsList.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} );
-    return {'pastappointments': pastAppointmentsList}
   };
 
   parseMedicalLicences(data) {
@@ -709,7 +719,6 @@ class WidgetsPubMedParser {
     return {'academic_activities': academic_activities}
   };
 
-
   convert(data) {
     var results = {}
 
@@ -717,10 +726,9 @@ class WidgetsPubMedParser {
     _.merge(results, this.parsePhone(data))
     _.merge(results, this.parseEmail(data))
     _.merge(results, this.parseTitle(data))
-    _.merge(results, this.parsePositions(data))
     _.merge(results, this.parseEducations(data))
+    _.merge(results, this.parsePositions(data))
     _.merge(results, this.parseOtherPositions(data))
-    _.merge(results, this.parsepastAppointments(data))
     _.merge(results, this.parseMedicalLicences(data))
     _.merge(results, this.parsePublications(data))
     _.merge(results, this.parseConsultantAppointments(data))
@@ -732,7 +740,7 @@ class WidgetsPubMedParser {
     _.merge(results, this.parsePresentations(data))
     _.merge(results, this.parseClinicalActivities(data))
     _.merge(results, this.parseacademicActivities(data))
-    
+
     return results
   }
  
