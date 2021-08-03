@@ -597,12 +597,15 @@ class WidgetsPubMedParser {
     _.forEach(gifts, function(value) {
       var uri = value['uri']
       var startDate = new Date(value.attributes['dateTimeStart']);
-      var endDate = new Date(value.attributes['dateTimeEnd']); // can be null
+      
+      var dateTimeEnd = value.attributes['dateTimeEnd'] || value.attributes['dateTimeStart']
+      var endDate = new Date(dateTimeEnd); // end can be null, so defaulting to same as start
+      
       var today = new Date();
 
       var startYear = startDate.getFullYear();
       var endYear = endDate.getFullYear();
-      var period = startYear + " - " + endYear;
+      var period = (startYear == endYear) ? startYear : startYear + " - " + endYear;
       var title = value['label'] + ", awarded by " + value.attributes['donor'];
       var role = value.attributes['role'];
       
