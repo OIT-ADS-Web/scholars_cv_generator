@@ -636,10 +636,6 @@ class WidgetsPubMedParser {
 
     // NOTE: need to sort once all are collected
     // reverse chronological order, first by end date and next by start date
-    //currentGrantList.sort(function(a,b) {return (a.endYear < b.endYear) ? 1 : ((b.endYear < a.endYear) ? -1 : 0);} );
-    //completedGrantList.sort(function(a,b) {return (a.endYear < b.endYear) ? 1 : ((b.endYear < a.endYear) ? -1 : 0);} );
-    //pendingGrantList.sort(function(a,b) {return (a.endYear < b.endYear) ? 1 : ((b.endYear < a.endYear) ? -1 : 0);} );
-  
     currentGrantList = _.orderBy(currentGrantList, ['endYear', 'startYear'], ['desc', 'desc']);
     completedGrantList = _.orderBy(completedGrantList, ['endYear', 'startYear'], ['desc', 'desc']);
     pendingGrantList = _.orderBy(pendingGrantList, ['endYear', 'startYear'], ['desc', 'desc']);
