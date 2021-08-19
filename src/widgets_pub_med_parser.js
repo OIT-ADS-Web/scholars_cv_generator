@@ -549,62 +549,103 @@ class WidgetsPubMedParser {
   };
 
   parseGrants(data) {
-    
+    var label = data['label']   
     var grants = data['grants'] || [];
     var gifts = data['gifts'] || [];
+
     var currentGrantList = []
     var completedGrantList = []
     var pendingGrantList = []
-    
+    var otherGrantList = [] // NOTE: this should be empty
+
     _.forEach(grants, function(value) {
+      var uri = value['uri']
       var startDate = new Date(value.attributes['startDate']);
       var endDate = new Date(value.attributes['endDate']);
       var today = new Date();
-
-      var pi = value.attributes['piName'];
-      var period = startDate.getFullYear() + " - " + endDate.getFullYear();
+       
+      var startYear = startDate.getFullYear();
+      var endYear = endDate.getFullYear();
+      var period = startYear + " - " + endYear;
       var title = value['label'] + ", awarded by " + value.attributes['awardedBy'];
       var role = value.attributes['roleName'];
+      var pi = value.attributes['piName'];
+ 
+      var summary = {
+        'pi': pi, 
+        'period': period, 
+        'title': title, 
+        'role': role,
+        'uri': uri,
+        'startYear': startYear,
+        'endYear': endYear,
+        'type': 'Grant' // just to debug, since they are mixed as one
+      }
 
-      if(startDate < today && endDate > today)
-      {
-         currentGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
-      }
-      if(endDate < today)
-      {
-         completedGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
-      }
-      if(startDate > today)
-      {
-         pendingGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
+      if(startDate < today && endDate > today) {
+         currentGrantList.push(summary)
+      } else if(endDate < today) {
+         completedGrantList.push(summary)
+      } else if(startDate > today) {
+         pendingGrantList.push(summary)
+      } else {
+        // catching missed
+        otherGrantList.push(summary)
       }
     });
 
     _.forEach(gifts, function(value) {
+      var uri = value['uri']
       var startDate = new Date(value.attributes['dateTimeStart']);
-      var endDate = new Date(value.attributes['dateTimeEnd']);
+      
+      var dateTimeEnd = value.attributes['dateTimeEnd'] || value.attributes['dateTimeStart']
+      var endDate = new Date(dateTimeEnd); // end can be null, so defaulting to same as start
+      
       var today = new Date();
 
-      var pi = value.attributes['piName'];
-      var period = startDate.getFullYear() + " - " + endDate.getFullYear();
+      var startYear = startDate.getFullYear();
+      var endYear = endDate.getFullYear();
+      var period = (startYear == endYear) ? startYear : startYear + " - " + endYear;
       var title = value['label'] + ", awarded by " + value.attributes['donor'];
       var role = value.attributes['role'];
+      
+      // NOTE: there is no 'piName' attribute for gifts
+      var pi = (role == "PI") ? label : ""
+      var summary = {
+        'pi': pi, 
+        'period': period, 
+        'title': title, 
+        'role': role,
+        'uri': uri,
+        'startYear': startYear,
+        'endYear': endYear,
+        'type': 'Gift'
+      }
 
-      if(startDate < today && endDate > today)
-      {
-         currentGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
-      }
-      if(endDate < today)
-      {
-         completedGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
-      }
-      if(startDate > today)
-      {
-         pendingGrantList.push({'pi': pi, 'period': period, 'title': title, 'role': role})
+      if(startDate < today && endDate > today) {
+         currentGrantList.push(summary)
+      } else if(endDate < today) {
+         completedGrantList.push(summary)
+      } else if(startDate > today) {
+         pendingGrantList.push(summary)
+      } else {
+        // catching missed
+        otherGrantList.push(summary)
       }
     });
 
-    let results = {'currentGrants': currentGrantList, 'completedGrants': completedGrantList, 'pendingGrants': pendingGrantList }
+    // NOTE: need to sort once all are collected
+    // reverse chronological order, first by end date and next by start date
+    currentGrantList = _.orderBy(currentGrantList, ['endYear', 'startYear'], ['desc', 'desc']);
+    completedGrantList = _.orderBy(completedGrantList, ['endYear', 'startYear'], ['desc', 'desc']);
+    pendingGrantList = _.orderBy(pendingGrantList, ['endYear', 'startYear'], ['desc', 'desc']);
+
+    let results = {
+      'currentGrants': currentGrantList, 
+      'completedGrants': completedGrantList, 
+      'pendingGrants': pendingGrantList,
+      'otherGrants': otherGrantList
+    }
     return results
   };
 
