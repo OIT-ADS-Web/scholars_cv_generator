@@ -73,9 +73,9 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
 
-angular-expressions@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/angular-expressions/-/angular-expressions-0.3.0.tgz#c73cdb5e15c32d40b16005c2941d6523ef1f141b"
+angular-expressions@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/angular-expressions/-/angular-expressions-1.1.2.tgz#9115a9f36c252ac83246bc49cb26802f84bf622f"
 
 ansi-escapes@^2.0.0:
   version "2.0.0"
