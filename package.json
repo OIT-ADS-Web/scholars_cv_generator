@@ -39,7 +39,7 @@
     "jquery": "^3.2.1",
     "json-loader": "^0.5.4",
     "json2csv": "^3.4.2",
-    "jszip": "^2.6.1",
+    "jszip": "^3.7.0",
     "jszip-utils": "0.0.2",
     "less": "^2.6.0",
     "less-loader": "^4.0.5",
