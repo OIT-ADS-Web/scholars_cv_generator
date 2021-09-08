@@ -101,15 +101,6 @@ export function generateCVfromHtml(html, uri, template) {
         console.error(err)
       }
     
-      var zip = new JSZip(content)
-      zip.file("word/document.html", html) 
-
-      var blob = zip.generate({
-          type:"blob",
-          mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        }
-      ) //Output the document using Data-URI
-
       let index = uri.lastIndexOf("/")
       let personNumber = uri.substr(index+1)
       
@@ -129,7 +120,21 @@ export function generateCVfromHtml(html, uri, template) {
         fileName = "PubMed CV.docx"
       }
 
-      FileSaver.saveAs(blob, fileName)
+      JSZip.loadAsync(content)
+      .then(function (zip) {
+        zip.file("word/document.html", html)
+        return zip
+      })
+      .then(function (zip) {
+        return zip.generateAsync({ 
+          type:"blob",
+          mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        })
+      })
+      .then(function (blob) {
+         FileSaver.saveAs(blob, fileName)
+      });
+
     })
 
   } catch (e) {
