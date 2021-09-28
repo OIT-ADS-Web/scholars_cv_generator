@@ -658,7 +658,7 @@ class WidgetsParser {
 
   parsePresentations(data) {
 
-    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'posters': [], 'internationalmeetings': [],  'broadcasts': [], 'interviews':[], 'invitedtalks':[] };
+    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'internationalmeetings': [],  'broadcasts': [], 'interviews':[], 'invitedtalks':[] };
     let professionalActivities = data['professionalActivities'];
 
      _.forEach(professionalActivities, function(value) {
@@ -691,7 +691,7 @@ class WidgetsParser {
              switch(serviceType) {
 
                 case "Other": {
-                    presentationList['posters'].push({'label':talk_label});
+                    //NOTE: 'other' skipped
                     break;
                 }
 
