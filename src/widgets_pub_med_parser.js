@@ -608,14 +608,21 @@ class WidgetsPubMedParser {
       var period = (startYear == endYear) ? startYear : startYear + " - " + endYear;
       var title = value['label'] + ", awarded by " + value.attributes['donor'];
       var role = value.attributes['role'];
-      
+
+      var roleDescription = function(role) {
+        switch (role) {
+          case "PI": return "Principal Investigator"
+          case "Co-PI": return "Co-Principal Investigator" 
+          default: return role
+        }
+      }
       // NOTE: there is no 'piName' attribute for gifts
       var pi = (role == "PI") ? label : ""
       var summary = {
         'pi': pi, 
         'period': period, 
         'title': title, 
-        'role': role,
+        'role': roleDescription(role),
         'uri': uri,
         'startYear': startYear,
         'endYear': endYear,
