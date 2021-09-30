@@ -577,7 +577,7 @@ class WidgetsNIHParser {
 
   parsePresentations(data) {
 
-    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'posters': [], 'internationalmeetings': [] };
+    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'internationalmeetings': [] };
     let professionalActivities = data['professionalActivities'];
 
      _.forEach(professionalActivities, function(value) {
@@ -591,7 +591,7 @@ class WidgetsNIHParser {
              switch(serviceType) {
 
                 case "Other": {
-                    presentationList['posters'].push({'label':label});
+                    // NOTE: 'other' is just skipped
                     break;
                 }
 

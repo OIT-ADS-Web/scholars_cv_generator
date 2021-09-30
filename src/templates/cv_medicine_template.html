@@ -861,23 +861,12 @@
         </div>
       <% } %>
 
-       <% if (posters.length > 0) { %>
-        <div class="row">
-         <div class="heading_10">Posters (for national meetings)</div>
-         <div class="regular_10">
-          <% _.forEach(posters, function(item) { %>
-              <p><%= item['label'] %></p>
-          <% }); %>
-         </div>
-        </div>
-        <% } else { %>
-        <div class="row">
-         <div class="heading_10">Posters (for national meetings)</div>
-         <div class="regular_10">
-          <p>&nbsp;</p>
-         </div>
-        </div>
-      <% } %>
+      <div class="row">
+       <div class="heading_10">Posters (for national meetings)</div>
+       <div class="regular_10">
+        <p>&nbsp;</p>
+       </div>
+      </div>
     </div>
 
     <% if (academic_activities) { %>
