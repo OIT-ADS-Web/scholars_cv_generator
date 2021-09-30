@@ -345,7 +345,7 @@ class WidgetsPubMedParser {
 
       let isLetter = function() {
         let exclusion = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III",
-          "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Journal Article"]
+          "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Journal Article", "Journal"]
          return !(_.intersection(subtypeList, exclusion).length > 0) && _.includes(subtypeList, 'Letter')
       }
       let isEditorial = function() {
