@@ -345,7 +345,7 @@ class WidgetsPubMedParser {
 
       let isLetter = function() {
         let exclusion = ["Multicenter Study", "Adaptive Clinical Trial", "Clinical Trial, Phase III",
-          "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Journal Article"]
+          "Clinical Trial, Phase IV", "Pragmatic Clinical Trial", "Journal Article", "Journal"]
          return !(_.intersection(subtypeList, exclusion).length > 0) && _.includes(subtypeList, 'Letter')
       }
       let isEditorial = function() {
@@ -608,14 +608,21 @@ class WidgetsPubMedParser {
       var period = (startYear == endYear) ? startYear : startYear + " - " + endYear;
       var title = value['label'] + ", awarded by " + value.attributes['donor'];
       var role = value.attributes['role'];
-      
+
+      var roleDescription = function(role) {
+        switch (role) {
+          case "PI": return "Principal Investigator"
+          case "Co-PI": return "Co-Principal Investigator" 
+          default: return role
+        }
+      }
       // NOTE: there is no 'piName' attribute for gifts
       var pi = (role == "PI") ? label : ""
       var summary = {
         'pi': pi, 
         'period': period, 
         'title': title, 
-        'role': role,
+        'role': roleDescription(role),
         'uri': uri,
         'startYear': startYear,
         'endYear': endYear,
@@ -676,7 +683,7 @@ class WidgetsPubMedParser {
 
   parsePresentations(data) {
 
-    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'posters': [], 'internationalmeetings': [] };
+    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'internationalmeetings': [] };
     let professionalActivities = data['professionalActivities'];
 
      _.forEach(professionalActivities, function(value) {
@@ -690,7 +697,7 @@ class WidgetsPubMedParser {
              switch(serviceType) {
 
                 case "Other": {
-                    presentationList['posters'].push({'label':label});
+                    //NOTE: 'other' skipped
                     break;
                 }
 
