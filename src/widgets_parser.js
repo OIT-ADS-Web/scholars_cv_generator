@@ -7,7 +7,7 @@ import _ from 'lodash'
 // http://www.scottmessinger.com/2015/05/19/functional-programming-with-lodash/
 // https://stackoverflow.com/questions/35590543/how-do-you-chain-functions-using-lodash
 class WidgetsParser {
-  
+
   /*
   constructor(data) {
     this.data = data
@@ -44,13 +44,13 @@ class WidgetsParser {
           return `${word}s`
         }
       }
-      
+
   }
 
   shortName(uri) {
       // NOTE: two types of URIs (at this point)
       // 'http://purl.org/ontology/bibo/AcademicArticle': [],
-      // 'http://vivoweb.org/ontology/core#Review': [], 
+      // 'http://vivoweb.org/ontology/core#Review': [],
       var index = uri.lastIndexOf("#")
       if (index < 0) {
         index = uri.lastIndexOf("/")
@@ -65,7 +65,7 @@ class WidgetsParser {
     var firstName = data['attributes']['firstName'];
     var middleName = data['attributes']['middleName'];
     var lastName = data['attributes']['lastName'];
-  
+
     var fullName = "";
 
     if (typeof middleName != 'undefined' && middleName != null && middleName.length > 0) {
@@ -127,7 +127,7 @@ class WidgetsParser {
       'secondaryPosition': 'http://vivo.duke.edu/vivo/ontology/duke-extension#SecondaryPosition'
     };
 
-    // group by 'type'    
+    // group by 'type'
     _.forEach(positions, function(value) {
       var vivoType = value['vivoType'];
       var label = value['label'];
@@ -165,7 +165,7 @@ class WidgetsParser {
           var label = value['label'];
           var startYear = value['attributes']['startDate'].substr(0,4);
           var endYear = value['attributes']['endDate'].substr(0,4);
-          var full_label = label + ". " + startYear + " - " + endYear;   
+          var full_label = label + ". " + startYear + " - " + endYear;
           other_positions.push({'label':full_label});
       }
     });
@@ -181,7 +181,7 @@ class WidgetsParser {
       let institution = value.attributes['institution'];
       let endYear = value.attributes['endDate'] ? value.attributes['endDate'].substr(0,4) : '';
       let label = value['label'];
-     
+
       var degree = value.attributes['degree'];
       var fullLabel = ""
 
@@ -198,14 +198,14 @@ class WidgetsParser {
           fullLabel = (fullLabel + " " + endYear);
         }
       }
-      educationList.push({'label': fullLabel, 'endYear': endYear}) 
+      educationList.push({'label': fullLabel, 'endYear': endYear})
     });
-  
+
     let results = {'educations': educationList.reverse()}
     return results
   }
-  
-  
+
+
   parsecurrentResearchInterests(data) {
     let overview = data['interestsOverview'] || null;
     var currentResearchInterests = null
@@ -228,32 +228,32 @@ class WidgetsParser {
 
 
   parsePublications(data) {
-    
+
     var pubTypes = {
       'http://purl.org/ontology/bibo/AcademicArticle': [],
-      'http://purl.org/ontology/bibo/Book': [], 
-      'http://vivoweb.org/ontology/core#Review': [], 
-      'http://purl.org/ontology/bibo/BookSection': [], 
+      'http://purl.org/ontology/bibo/Book': [],
+      'http://vivoweb.org/ontology/core#Review': [],
+      'http://purl.org/ontology/bibo/BookSection': [],
       'http://vivo.duke.edu/vivo/ontology/duke-extension#BookSeries': [],
       'http://vivoweb.org/ontology/core#ConferencePaper': [],
       'http://vivoweb.org/ontology/core#Dataset': [],
       'http://vivo.duke.edu/vivo/ontology/dukeextension#DigitalPublication': [],
       'http://vivo.duke.edu/vivo/ontology/duke-extension#JournalIssue': [],
-      'http://purl.org/ontology/bibo/Report': [], 
-      'http://purl.org/ontology/bibo/EditedBook': [], 
+      'http://purl.org/ontology/bibo/Report': [],
+      'http://purl.org/ontology/bibo/EditedBook': [],
       'http://purl.org/ontology/bibo/Thesis': [],
       'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle': [],
-      'http://vivoweb.org/ontology/core#Software': []              
+      'http://vivoweb.org/ontology/core#Software': []
     };
 
     var publications = data['publications'] || [];
 
     let figureCitation = function(value) {
-      
+
       var vivoType = value['vivoType'];
-     
+
       if (Object.keys(pubTypes).indexOf(vivoType) > -1) {
-       
+
           var citation = value.attributes['mlaCitation']
               .replace(stripOpeningTag,"")
               .replace(stripClosingTag, "");
@@ -261,31 +261,31 @@ class WidgetsParser {
           citation = citation.replace(stripHtml, "");
 
           let pubmed = value.attributes['pmid'];
-          let pubmedid = value.attributes['pmcid'];    
-   
+          let pubmedid = value.attributes['pmcid'];
+
           if (typeof pubmed !== 'undefined' && typeof pubmedid !== 'undefined') {
             citation = citation + " PMID: " + pubmed + ". PMCID: " + pubmedid + ".";
           }
           else if (typeof pubmed !== 'undefined') {
             citation = citation + " PMID: " + pubmed + ".";
-          };  
+          };
       }
       return citation
     };
 
     _.forEach(publications, function(value) {
-      
+
       let citation = figureCitation(value)
       let vivoType = value['vivoType'];
-       
+
       if(typeof citation !== 'undefined') {
         pubTypes[vivoType].push({'citation': citation})
       }
-      
+
     });
 
 
-    let results = _.transform(pubTypes, (result, value, key) => { 
+    let results = _.transform(pubTypes, (result, value, key) => {
       let name = this.shortName(key)
       result[name] = value
       return result;
@@ -328,7 +328,7 @@ class WidgetsParser {
     _.forEach(awards, function(value) {
       var label = value['label'];
       var date = value['attributes']['date'].substr(0,4);
-      var label = (label + " " + date);   
+      var label = (label + " " + date);
       awardList.push({'label':label});
     });
     return {'awards': awardList}
@@ -336,23 +336,23 @@ class WidgetsParser {
 
   parseProfessionalActivities(data) {
     var professionalActivitiesTypes = {
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] }, 
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] }, 
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] }, 
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] },
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] },
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] },
       'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec':[], 'other':[] }
     };
-    
+
     var professionalActivities = data['professionalActivities'];
 
     let figureCS = function(value) {
 
       var full_label = "";
-      var label = value['label'];                  
+      var label = value['label'];
       var serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
-      
+
       if(serviceType == 'Community Outreach') {
-          full_label = label; 
+          full_label = label;
       }
 
       return full_label;
@@ -361,12 +361,12 @@ class WidgetsParser {
     let figureConsulting = function(value) {
 
       var full_label = "";
-      var label = value['label'];                  
+      var label = value['label'];
       var serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
-      
+
       if(serviceType == 'Consulting') {
-          full_label = label; 
+          full_label = label;
       }
 
       return full_label;
@@ -376,12 +376,12 @@ class WidgetsParser {
     let figureCmts = function(value) {
 
       var full_label = "";
-      var label = value['label'];                  
+      var label = value['label'];
       var serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
-      
+
       if(serviceType == 'Committee Service') {
-          full_label = label; 
+          full_label = label;
       }
 
       return full_label;
@@ -390,12 +390,12 @@ class WidgetsParser {
     let figureCi = function(value) {
 
       var full_label = "";
-      var label = value['label'];                  
+      var label = value['label'];
       var serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
-      
+
       if(serviceType == 'Curriculum Innovations') {
-          full_label = label; 
+          full_label = label;
       }
 
       return full_label;
@@ -404,12 +404,12 @@ class WidgetsParser {
     let figureEoa = function(value) {
 
       var full_label = "";
-      var label = value['label'];                  
+      var label = value['label'];
       var serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
-      
+
       if(serviceType == 'Event/Organization Administration') {
-          full_label = label; 
+          full_label = label;
       }
 
       return full_label;
@@ -418,12 +418,12 @@ class WidgetsParser {
     let figureEva = function(value) {
 
       var full_label = "";
-      var label = value['label'];                  
+      var label = value['label'];
       var serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
-      
+
       if(serviceType == 'Event Attendance') {
-          full_label = label; 
+          full_label = label;
       }
 
       return full_label;
@@ -432,28 +432,28 @@ class WidgetsParser {
     let figureEA = function(value) {
 
       var full_label = "";
-      var label = value['label'];     
+      var label = value['label'];
       var serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
 
       if(serviceType == 'Editorial Activities') {
           full_label = label;
       }
-      
+
       return full_label;
     };
 
     let figurePD = function(value) {
 
       var full_label = "";
-      var label = value['label'];     
+      var label = value['label'];
       var serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
-  
+
       if(serviceType == 'Professional Development') {
-          full_label = label; 
+          full_label = label;
       }
-      
+
       return full_label;
     };
 
@@ -461,7 +461,7 @@ class WidgetsParser {
        var full_label = "";
        var monthNames = ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"];
-       var label = value['label'];   
+       var label = value['label'];
        var serviceType = value.attributes['serviceType'];
        let vivoType = value['vivoType'];
 
@@ -472,13 +472,13 @@ class WidgetsParser {
 
           if (typeof value.attributes['locationOrVenue'] != 'undefined') {
               full_label += ". " + value.attributes['locationOrVenue'];
-          } 
-                    
+          }
+
           if (typeof value.attributes['hostOrganization'] != 'undefined') {
              full_label  += ". " + value.attributes['hostOrganization'];
-          } 
+          }
 
-          full_label += ". " + monthNames[date.getMonth()] + " " +  date.getDay() + ", " + date.getFullYear();
+          full_label += ". " + monthNames[date.getMonth()] + " " +  date.getDate() + ", " + date.getFullYear();
        }
       return full_label;
     };
@@ -486,19 +486,19 @@ class WidgetsParser {
     let figureOther = function(value) {
 
       var full_label = "", new_start_date = "";
-      var label = value['label'];     
+      var label = value['label'];
       var serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
-      
+
       if(serviceType == 'Other') {
-          full_label = label; 
+          full_label = label;
       }
-      
+
       return full_label;
     };
 
     _.forEach(professionalActivities, function(value) {
-    
+
       let community_service = figureCS(value)
       let consulting = figureConsulting(value)
       let committee_service = figureCmts(value)
@@ -511,7 +511,7 @@ class WidgetsParser {
       let others = figureOther(value)
 
       let vivoType = value['vivoType'];
-      
+
       if(community_service != ""){
         professionalActivitiesTypes[vivoType]['cs'].push(community_service);
       }
@@ -542,7 +542,7 @@ class WidgetsParser {
       if(others != ""){
         professionalActivitiesTypes[vivoType]['other'].push(others);
       }
-      
+
     });
 
     let pluralize = function(word) {
@@ -565,7 +565,7 @@ class WidgetsParser {
     }
 
 
-    let results = _.transform(professionalActivitiesTypes, (result, value, key) => { 
+    let results = _.transform(professionalActivitiesTypes, (result, value, key) => {
       let name = this.shortName(key)
       result[name] = value
       return result;
@@ -618,7 +618,7 @@ class WidgetsParser {
       var org_label = value['attributes']['organizationLabel'];
       var start_year = value['attributes']['startYear'].substr(0,4);
       var end_year = value['attributes']['endYear'].substr(0,4);
-      var full_label = (label + ", " + org_label + " " + start_year + " - " + end_year);   
+      var full_label = (label + ", " + org_label + " " + start_year + " - " + end_year);
       pastAppointmentsList.push({'label':full_label, 'orig_label':label, 'org_label':org_label, 'startYear':start_year, 'endYear':end_year});
     });
 
@@ -662,12 +662,12 @@ class WidgetsParser {
     let professionalActivities = data['professionalActivities'];
 
      _.forEach(professionalActivities, function(value) {
-        
+
         if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation' ) {
-             
+
              var monthNames = ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"];
-             var label = value['label'];   
+             var label = value['label'];
              var serviceType = value.attributes['serviceType'];
              let vivoType = value['vivoType'];
 
@@ -678,16 +678,16 @@ class WidgetsParser {
 
              if (typeof value.attributes['locationOrVenue'] != 'undefined') {
                 talk_label += ". " + value.attributes['locationOrVenue'];
-             } 
-                    
+             }
+
              if (typeof value.attributes['hostOrganization'] != 'undefined') {
                 //talk_label = talk + ". " + talk_hostorg + ". " + value.attributes['locationOrVenue'] + ". " + monthNames[date.getMonth()] + " " + date.getFullYear();
                 talk_label += ". " + value.attributes['hostOrganization'];
-             } 
+             }
 
-             talk_label += ". " + monthNames[date.getMonth()] + " " +  date.getDay() + ", " + date.getFullYear();
+             talk_label += ". " + monthNames[date.getMonth()] + " " +  date.getDate() + ", " + date.getFullYear();
 
-             
+
              switch(serviceType) {
 
                 case "Other": {
@@ -742,7 +742,7 @@ class WidgetsParser {
 
       });
 
-    let results = _.transform(presentationList, (result, value, key) => { 
+    let results = _.transform(presentationList, (result, value, key) => {
       let name = key
       result[name] = value
       return result;
@@ -763,14 +763,14 @@ class WidgetsParser {
       var startDate = new Date(value.attributes['startYear']);
       var start_date = monthNames[startDate.getMonth()] + " " + startDate.getDate() + ", " + startDate.getFullYear();
       var start_year = value['attributes']['startYear'].substr(0,4);
-      
+
       var endDate = "", end_date = "", end_year = "";
       if(value['attributes']['endYear']){
       endDate = new Date(value.attributes['endYear']);
       end_date = monthNames[endDate.getMonth()] + " " + endDate.getDate() + ", " + endDate.getFullYear();
       end_year = value['attributes']['endYear'].substr(0,4);
       }
-      
+
       var venue = value['attributes']['venue'];
 
       if(end_date != ""){
@@ -779,7 +779,7 @@ class WidgetsParser {
       else{
         label = label + ", " + start_date;
       }
-      
+
       artisticEventsList.push({'label':label, 'startYear':start_year, 'startDate': start_date });
     });
     return {'artisticEvents': artisticEventsList}
@@ -788,36 +788,36 @@ class WidgetsParser {
   parseArtisticWorks(data) {
     var artisticWorkTypes = {
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#AudioRecording': [],
-      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Ceramic': [], 
-      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Composition': [], 
-      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Choreography': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Ceramic': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Composition': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Choreography': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalComposition': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#CostumeDesign': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#DanceProduction': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#DecorativeArt': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#DigitalMedia': [],
-      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Drawing': [], 
-      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Exhibit': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Drawing': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Exhibit': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Film': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#GraphicDesign': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Illustration': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Installation': [],
-      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#LightingDesign': [], 
-      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MotionGraphics': [], 
-      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MuseumCollection': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#LightingDesign': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MotionGraphics': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MuseumCollection': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MusicalPerformance': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#NewMedia': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Painting': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Photograph': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Print': [],
-      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#RadioTelevisionProgram': [], 
-      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#RepertoirePortfolio': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#RadioTelevisionProgram': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#RepertoirePortfolio': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Script': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#Sculpture': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#SetDesign': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#SoundDesign': [],
-      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#TheatricalProduction': [], 
-      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#VideoRecording': [], 
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#TheatricalProduction': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-art-extension#VideoRecording': [],
       'http://vivo.duke.edu/vivo/ontology/duke-art-extension#MultipleTypes': []
     };
 
@@ -828,22 +828,22 @@ class WidgetsParser {
       var monthNames = ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"];
       var date = new Date(value.attributes["date"]);
-      var artisticWork = value["label"] + " (" + value.attributes["role"] + "), " + monthNames[date.getMonth()] + " " + date.getFullYear() + ".";//value.attributes["date"].substr(0,4);    
+      var artisticWork = value["label"] + " (" + value.attributes["role"] + "), " + monthNames[date.getMonth()] + " " + date.getFullYear() + ".";//value.attributes["date"].substr(0,4);
       var vivoType = value['vivoType'];
       return artisticWork
     };
 
     _.forEach(artisticWorks, function(value) {
-      
+
       let artisticWork = figureartisticWork(value)
       let vivoType = value['vivoType'];
-       
+
       artisticWorkTypes[vivoType].push({'artisticWork': artisticWork})
-      
+
     });
 
 
-    let results = _.transform(artisticWorkTypes, (result, value, key) => { 
+    let results = _.transform(artisticWorkTypes, (result, value, key) => {
       let name = this.shortName(key)
       result[name] = value
       return result;
@@ -885,11 +885,11 @@ class WidgetsParser {
 
     return results
   }
- 
+
 };
 
 
-export { 
+export {
   WidgetsParser
 }
 
