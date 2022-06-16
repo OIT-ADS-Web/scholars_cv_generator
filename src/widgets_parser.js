@@ -257,9 +257,10 @@ class WidgetsParser {
     };
 
     var publications = data['publications'] || [];
-    var preferredCitationFormat = data['attributes']['preferredCitationFormat'] || [];
+    // default to mla
+    var preferredCitationFormat = data['attributes']['preferredCitationFormat'] || 'http://vivo.duke.edu/vivo/ontology/duke-extension#mlaCitation';
 
-    // still default to mla just in case
+    // another default to mla just in case
     var citationAttribute = citationTypes[preferredCitationFormat] || 'mlaCitation'
     console.debug("using " + citationAttribute + " citation format");
 
