@@ -228,7 +228,17 @@ class WidgetsParser {
 
 
   parsePublications(data) {
-
+    /// matches a 'preferredCitationFormat' entry with the publication attribute e.g.
+    // if someone has #chicagoCitation as preferred, should pull value.attributes['chicagoCitation']
+    // as the citation
+    var citationTypes = {
+      'http://vivo.duke.edu/vivo/ontology/duke-extension#chicagoCitation': 'chicagoCitation',
+      'http://vivo.duke.edu/vivo/ontology/duke-extension#mlaCitation': 'mlaCitation',
+      'http://vivo.duke.edu/vivo/ontology/duke-extension#nlmCitation': 'nlmCitation',
+      'http://vivo.duke.edu/vivo/ontology/duke-extension#apaCitation': 'apaCitation',
+      'http://vivo.duke.edu/vivo/ontology/duke-extension#icmjeCitation': 'icmjeCitation'
+    }
+    
     var pubTypes = {
       'http://purl.org/ontology/bibo/AcademicArticle': [],
       'http://purl.org/ontology/bibo/Book': [],
@@ -247,6 +257,12 @@ class WidgetsParser {
     };
 
     var publications = data['publications'] || [];
+    // default to mla
+    var preferredCitationFormat = data['attributes']['preferredCitationFormat'] || 'http://vivo.duke.edu/vivo/ontology/duke-extension#mlaCitation';
+
+    // another default to mla just in case
+    var citationAttribute = citationTypes[preferredCitationFormat] || 'mlaCitation'
+    console.debug("using " + citationAttribute + " citation format");
 
     let figureCitation = function(value) {
 
@@ -254,7 +270,7 @@ class WidgetsParser {
 
       if (Object.keys(pubTypes).indexOf(vivoType) > -1) {
 
-          var citation = value.attributes['mlaCitation']
+          var citation = value.attributes[citationAttribute]
               .replace(stripOpeningTag,"")
               .replace(stripClosingTag, "");
 
