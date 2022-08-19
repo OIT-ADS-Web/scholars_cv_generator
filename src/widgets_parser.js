@@ -868,7 +868,17 @@ class WidgetsParser {
       let date = new Date(value.attributes["date"]);
       let precision = value.attributes["date_precision"];
       let dateFormatted = this.formatDatePrecision(date, precision)
-      let artisticWork = `${value["label"]} ( ${value.attributes["role"]} ), ${dateFormatted} .`;
+      let commissioned = value.attributes["commissioning_body"] || null
+      let link = value.attributes["link_url"] || null
+
+      var artisticWork = `${value["label"]} (${value.attributes["role"]}). `;
+      if (commissioned) {
+        artisticWork = artisticWork + `Commissioned by ${commissioned}. `
+      }
+      artisticWork = artisticWork + `${dateFormatted} .`
+      if (link) {
+        artisticWork = artisticWork + `${link}`
+      }
       let vivoType = value['vivoType'];
       return artisticWork
     };
