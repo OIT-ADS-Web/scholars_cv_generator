@@ -120,17 +120,6 @@
     </div>
     <% } %>
 
-    <% if (licences.length > 0) { %>
-    <div class="row">
-      <div class="heading_10">MEDICAL LICENSURE</div>
-      <div class="regular_10">
-      <% _.forEach(licences, function(item) { %>
-       <p><%= item['label'] %></p>
-      <% }); %>
-    </div>
-    </div>
-    <% } %>
-
     <% if (pastappointments.length > 0) { %>
      <div class="row">
       <div class="heading_10">DUKE APPOINTMENT HISTORY</div>
