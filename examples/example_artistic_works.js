@@ -11,5 +11,6 @@ let widgetsParser = new WidgetsParser()
 
 let works = widgetsParser.parseArtisticWorks(data)
 let events = widgetsParser.parseArtisticEvents(data)
-let details = {...works, ...events }
+let awards = widgetsParser.parseAwards(data)
+let details = {...works, ...events, ...awards }
 console.log(details)
