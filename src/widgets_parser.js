@@ -131,17 +131,20 @@ class WidgetsParser {
     _.forEach(positions, function(value) {
       var vivoType = value['vivoType'];
       var label = value['label'];
+      // FDP-3864: add org to label
+      var orgLabel = value['attributes']['organizationLabel'];
+      var apptLabel = label + ',' + orgLabel;
       switch(vivoType) {
         case positionTypes['primaryPosition']: {
-          primaryPositions.push({'label': label})
+          primaryPositions.push({'label': apptLabel})
           break;
         }
         case positionTypes['secondaryPosition']: {
-          secondaryPositions.push({'label':label})
+          secondaryPositions.push({'label': apptLabel})
           break;
         }
         default: {
-          secondaryPositions.push({'label':label})
+          secondaryPositions.push({'label': apptLabel})
           break;
         }
       }
