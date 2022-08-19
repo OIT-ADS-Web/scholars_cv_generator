@@ -250,13 +250,14 @@ class WidgetsParser {
       'http://vivo.duke.edu/vivo/ontology/duke-extension#BookSeries': [],
       'http://vivoweb.org/ontology/core#ConferencePaper': [],
       'http://vivoweb.org/ontology/core#Dataset': [],
-      'http://vivo.duke.edu/vivo/ontology/dukeextension#DigitalPublication': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-extension#DigitalPublication': [],
       'http://vivo.duke.edu/vivo/ontology/duke-extension#JournalIssue': [],
       'http://purl.org/ontology/bibo/Report': [],
       'http://purl.org/ontology/bibo/EditedBook': [],
       'http://purl.org/ontology/bibo/Thesis': [],
       'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle': [],
-      'http://vivoweb.org/ontology/core#Software': []
+      'http://vivoweb.org/ontology/core#Software': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-extension#Preprint': [],
     };
 
     var publications = data['publications'] || [];
