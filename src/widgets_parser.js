@@ -590,21 +590,6 @@ class WidgetsParser {
     return results
 
   };
-  // one way to do it:
-
-  parseMedicalLicences(data) {
-    let licences = data['licenses'];
-    var licenceList = [];
-    _.forEach(licences, function(value) {
-      var label = value['label'];
-      var lic_date = label.substr(label.length - 4);
-      var number = value['attributes']['number'];
-      var state = value['attributes']['state'];
-      label = state + ", " + number + ", " + lic_date;
-      licenceList.push({'label':label});
-    });
-    return {'licences': licenceList}
-  };
 
   parseClinicalActivities(data) {
     let activities = data['attributes']['clinicalOverview'] || null;
