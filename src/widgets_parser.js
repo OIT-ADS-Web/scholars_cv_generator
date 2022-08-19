@@ -60,6 +60,41 @@ class WidgetsParser {
       return this.pluralize(name)
   }
 
+  // stole from here:
+  // https://stackoverflow.com/questions/13627308/add-st-nd-rd-and-th-ordinal-suffix-to-a-number
+  ordinal_suffix_of(i) {
+    var j = i % 10,
+        k = i % 100;
+    if (j == 1 && k != 11) {
+        return i + "st";
+    }
+    if (j == 2 && k != 12) {
+        return i + "nd";
+    }
+    if (j == 3 && k != 13) {
+        return i + "rd";
+    }
+    return i + "th";
+  }
+  
+  formatDatePrecision(date, precision) {
+      var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+ 
+      var year = date.getFullYear() 
+      if (precision == "http://vivoweb.org/ontology/core#yearMonthPrecision") {
+        var month = monthNames[date.getMonth()]
+        return `${month} ${year}`;
+      } else if (precision == "http://vivoweb.org/ontology/core#yearMonthDayPrecision") {
+        var month = monthNames[date.getMonth()]
+        var day = date.getDay()
+        var dayString = `${day}${this.ordinal_suffix_of(day)}`
+        return `${month} ${dayString}, ${year}`
+      } else if (precision == "http://vivoweb.org/ontology/core#yearPrecision") {
+          return `${year}`
+      }
+      return "" // if no match
+  }
 
   parseName(data) {
     var firstName = data['attributes']['firstName'];
@@ -209,7 +244,7 @@ class WidgetsParser {
   }
 
 
-  parsecurrentResearchInterests(data) {
+  parseCurrentResearchInterests(data) {
     let overview = data['interestsOverview'] || null;
     var currentResearchInterests = null
 
@@ -829,18 +864,18 @@ class WidgetsParser {
 
     var artisticWorks = data['artisticWorks'] || [];
 
-    let figureartisticWork = function(value) {
-      var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
-      var date = new Date(value.attributes["date"]);
-      var artisticWork = value["label"] + " (" + value.attributes["role"] + "), " + monthNames[date.getMonth()] + " " + date.getFullYear() + ".";//value.attributes["date"].substr(0,4);
-      var vivoType = value['vivoType'];
+    let figureArtisticWork = (value) => {
+      let date = new Date(value.attributes["date"]);
+      let precision = value.attributes["date_precision"];
+      let dateFormatted = this.formatDatePrecision(date, precision)
+      let artisticWork = `${value["label"]} ( ${value.attributes["role"]} ), ${dateFormatted} .`;
+      let vivoType = value['vivoType'];
       return artisticWork
     };
 
     _.forEach(artisticWorks, function(value) {
 
-      let artisticWork = figureartisticWork(value)
+      let artisticWork = figureArtisticWork(value)
       let vivoType = value['vivoType'];
 
       artisticWorkTypes[vivoType].push({'artisticWork': artisticWork})
@@ -885,7 +920,7 @@ class WidgetsParser {
     _.merge(results, this.parseArtisticWorks(data))
     _.merge(results, this.parseMedicalLicences(data))
     _.merge(results, this.parseClinicalActivities(data))
-    _.merge(results, this.parsecurrentResearchInterests(data))
+    _.merge(results, this.parseCurrentResearchInterests(data))
     _.merge(results, this.parseLeadershipPositions(data))
 
     return results
