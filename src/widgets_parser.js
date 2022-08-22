@@ -407,206 +407,84 @@ class WidgetsParser {
       'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec':[], 'other':[] }
     };
 
+    var abbreviations = {
+      'Community Outreach': 'cs',
+      'Lecture': 'lec',
+      'Consulting' : 'consulting',
+      'Committee Service': 'cmts',
+      'Curriculum Innovations': 'ci',
+      'Event/Organization Administration': 'eoa',
+      'Event Attendance': 'eva',
+      'Editorial Activities': 'ea',
+      'Professional Development': 'pd', 
+      'Other': 'other',
+      // NOTE: not sure of a comprehensive list
+      'Keynote/Named Lecture': 'other',
+      'Broadcast Appearance': 'other',
+      'Service Learning' : 'other',
+      'Keynote': 'other'
+    }
+    // TODO: add name, venue, weblink, end date
+    /*
+     {
+         "uri":"https://scholars.duke.edu/individual/service_to_prof200042790",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession",
+         "label":"My Consulting Role. name. host. February 2028 - 2029",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Consulting",
+            "endDate":"2029-01-01T00:00:00",
+            "role":"My Consulting Role",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2028-02-01T00:00:00"
+         }
+    */
     var professionalActivities = data['professionalActivities'];
-
-    let figureCS = function(value) {
-
+    
+    let figureLectureLabel = (value) => {
       var full_label = "";
+      var talk = value.attributes['nameOfTalk'];
+      var start_date = new Date(value.attributes['startDate']);
+      var end_date = new Date(value.attributes['endDate']);
+      full_label = talk;
+
+      if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+        full_label += ". " + value.attributes['locationOrVenue'];
+      }
+
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
+      full_label += ". " + start_date.getFullYear() + " - " + end_date.getFullYear()
+      return full_label;
+    };
+    
+    let figureDefaultLabel = (value) => {
       var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
+      return label
+    };
+  
+    let figureProfessionalActivity = (value) => {
+      var full_label = ""
+      if (value.attributes['serviceType'] == 'Lecture') {
+        full_label = figureLectureLabel(value)
+      } else {
+        full_label = figureDefaultLabel(value)
+      }
+      return full_label
+    }
+    professionalActivities.forEach((value) => {
+      let serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
 
-      if(serviceType == 'Community Outreach') {
-          full_label = label;
-      }
+      let label = figureProfessionalActivity(value);
+      let key = abbreviations[serviceType] || 'other'
 
-      return full_label;
-    };
-
-    let figureConsulting = function(value) {
-
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Consulting') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-
-    let figureCmts = function(value) {
-
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Committee Service') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-    let figureCi = function(value) {
-
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Curriculum Innovations') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-    let figureEoa = function(value) {
-
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Event/Organization Administration') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-    let figureEva = function(value) {
-
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Event Attendance') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-    let figureEA = function(value) {
-
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Editorial Activities') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-    let figurePD = function(value) {
-
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Professional Development') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-     let figureLec = function(value) {
-       var full_label = "";
-       var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
-       var label = value['label'];
-       var serviceType = value.attributes['serviceType'];
-       let vivoType = value['vivoType'];
-
-       if(serviceType == 'Lecture') {
-          var talk = value.attributes['nameOfTalk'];
-          var date = new Date(value.attributes['startDate']);
-          full_label = talk;
-
-          if (typeof value.attributes['locationOrVenue'] != 'undefined') {
-              full_label += ". " + value.attributes['locationOrVenue'];
-          }
-
-          if (typeof value.attributes['hostOrganization'] != 'undefined') {
-             full_label  += ". " + value.attributes['hostOrganization'];
-          }
-
-          full_label += ". " + monthNames[date.getMonth()] + " " +  date.getDate() + ", " + date.getFullYear();
-       }
-      return full_label;
-    };
-
-    let figureOther = function(value) {
-
-      var full_label = "", new_start_date = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Other') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-    _.forEach(professionalActivities, function(value) {
-
-      let community_service = figureCS(value)
-      let consulting = figureConsulting(value)
-      let committee_service = figureCmts(value)
-      let curriculum_inovation = figureCi(value)
-      let event_org_administration = figureEoa(value)
-      let event_attendance = figureEva(value)
-      let professional_development = figurePD(value)
-      let editorial_activities = figureEA(value)
-      let lectures = figureLec(value)
-      let others = figureOther(value)
-
-      let vivoType = value['vivoType'];
-
-      if(community_service != ""){
-        professionalActivitiesTypes[vivoType]['cs'].push(community_service);
-      }
-      if(consulting != ""){
-        professionalActivitiesTypes[vivoType]['consulting'].push(consulting);
-      }
-      if(committee_service != ""){
-        professionalActivitiesTypes[vivoType]['cmts'].push(committee_service);
-      }
-      if(curriculum_inovation != ""){
-        professionalActivitiesTypes[vivoType]['ci'].push(curriculum_inovation);
-      }
-      if(editorial_activities != ""){
-        professionalActivitiesTypes[vivoType]['ea'].push(editorial_activities);
-      }
-      if(event_org_administration != ""){
-        professionalActivitiesTypes[vivoType]['eoa'].push(event_org_administration);
-      }
-      if(event_attendance != ""){
-        professionalActivitiesTypes[vivoType]['eva'].push(event_attendance);
-      }
-      if(professional_development != ""){
-        professionalActivitiesTypes[vivoType]['pd'].push(professional_development);
-      }
-      if(lectures != ""){
-        professionalActivitiesTypes[vivoType]['lec'].push(lectures);
-      }
-      if(others != ""){
-        professionalActivitiesTypes[vivoType]['other'].push(others);
-      }
+      professionalActivitiesTypes[vivoType][key].push(label)
 
     });
 
