@@ -424,32 +424,17 @@ class WidgetsParser {
       'Service Learning' : 'other',
       'Keynote': 'other'
     }
-    // TODO: add name, venue, weblink, end date
-    /*
-     {
-         "uri":"https://scholars.duke.edu/individual/service_to_prof200042790",
-         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession",
-         "label":"My Consulting Role. name. host. February 2028 - 2029",
-         "attributes":{
-            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthPrecision",
-            "serviceOrEventName":"name",
-            "serviceType":"Consulting",
-            "endDate":"2029-01-01T00:00:00",
-            "role":"My Consulting Role",
-            "description":"desc",
-            "hostOrganization":"host",
-            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
-            "locationOrVenue":"venue",
-            "startDate":"2028-02-01T00:00:00"
-         }
-    */
     var professionalActivities = data['professionalActivities'];
     
     let figureLectureLabel = (value) => {
       var full_label = "";
       var talk = value.attributes['nameOfTalk'];
       var start_date = new Date(value.attributes['startDate']);
+      var start_date_precision = value.attributes["startDatePrecision"]
+
       var end_date = new Date(value.attributes['endDate']);
+      var end_date_precision = value.attributes["endDatePrecision"]
+
       full_label = talk;
 
       if (typeof value.attributes['locationOrVenue'] != 'undefined') {
@@ -459,7 +444,10 @@ class WidgetsParser {
       if (typeof value.attributes['hostOrganization'] != 'undefined') {
         full_label  += ". " + value.attributes['hostOrganization'];
       }
-      full_label += ". " + start_date.getFullYear() + " - " + end_date.getFullYear()
+      let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
+      let endFormatted = this.formatDatePrecision(end_date, end_date_precision)
+
+      full_label += ". " + startFormatted + " - " + endFormatted
       return full_label;
     };
     
@@ -830,8 +818,5 @@ class WidgetsParser {
 export {
   WidgetsParser
 }
-
-
-
 
 
