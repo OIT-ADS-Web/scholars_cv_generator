@@ -18,9 +18,14 @@
      div.container { width: 100%; }
      div.row { margin-bottom: 1em; padding-bottom: 1em;}
      div.slight-indent { margin-left: 24pt; }
+     .break { page-break-before: always; }
     </style>
   </head>
   <body>
+  <div class="container">
+    <h1>CV: ${name}</h1>
+    <br class="break"></br>
+  </div>
   <div class="container">
     <% var degree = ""; %>
     <% _.forEach(educations, function(item) { %>
@@ -140,6 +145,20 @@
       <% }); %>
     </div>
     </div>
+    <% } %>
+
+    <% if (Object.keys(weblinks).length > 0) { %>
+     <div class="row">
+       <div class="heading_10">Links</div>
+       <div class="regular_10">
+        <% _.map(weblinks, function(val, key) { %>
+          <div class="heading_12"><%= key %></div>
+          <% _.forEach(val, function(item) { %>
+            <p><%= item['label'] %>(<%= item['uri'] %>)</p>
+          <% }); %>
+        <% }); %>
+       </div>
+     </div>
     <% } %>
 
     <div class="row">
@@ -299,7 +318,7 @@
        </div>
       <% } %>
 
-      <% if (prePrints.length > 0) { %>
+      <% if (preprints.length > 0) { %>
        <div class="row">
          <div class="heading_10">Pre-Print</div>
          <div class="regular_10">
