@@ -792,6 +792,25 @@ class WidgetsParser {
     return {'weblinks': grouped}
   };
 
+  parseGifts(data) {
+    var gifts = data['gifts'] || [];
+    var giftList = []
+
+    _.forEach(gifts, function(value) {
+        var title = value['label'];
+        var role = value.attributes['role'];
+        var donor = value.attributes['donor'];
+        var end = value.attributes['dateTimeEndYear']
+        var start = value.attributes['dateTimeStartYear']
+     
+        let label = `${title} - ${role}/${donor} (${start}-${end})` 
+        giftList.push({'label': label})
+    });
+    // TODO: not sure if this is the goal
+    let results = {'gifts': giftList }
+    return results
+  };
+
   convert(data) {
     var results = {}
 
@@ -822,7 +841,8 @@ class WidgetsParser {
     _.merge(results, this.parseCurrentResearchInterests(data))
     _.merge(results, this.parseLeadershipPositions(data))
     _.merge(results, this.parseWebpages(data))
-
+    _.merge(results, this.parseGifts(data))
+ 
     return results
   }
 
