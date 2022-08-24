@@ -779,6 +779,19 @@ class WidgetsParser {
 
   };
 
+  parseWebpages(data) {
+    var webpages = data['webpages'] || [];
+    var weblinks = []
+    webpages.forEach((value) => {
+      let label = value['label']
+      let linkUri = value.attributes['linkURI']
+      let category = value.attributes['category']
+      weblinks.push({'category': category, 'label':label, 'uri': linkUri})
+    });
+    let grouped = _.groupBy(weblinks, 'category')
+    return {'weblinks': grouped}
+  };
+
   convert(data) {
     var results = {}
 
@@ -804,10 +817,11 @@ class WidgetsParser {
     _.merge(results, this.parseOtherPositions(data))
     _.merge(results, this.parseArtisticEvents(data))
     _.merge(results, this.parseArtisticWorks(data))
-    _.merge(results, this.parseMedicalLicences(data))
+    //_.merge(results, this.parseMedicalLicences(data))
     _.merge(results, this.parseClinicalActivities(data))
     _.merge(results, this.parseCurrentResearchInterests(data))
     _.merge(results, this.parseLeadershipPositions(data))
+    _.merge(results, this.parseWebpages(data))
 
     return results
   }
