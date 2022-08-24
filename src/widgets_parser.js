@@ -168,7 +168,7 @@ class WidgetsParser {
       var label = value['label'];
       // FDP-3864: add org to label
       var orgLabel = value['attributes']['organizationLabel'];
-      var apptLabel = label + ',' + orgLabel;
+      var apptLabel = label + ', ' + orgLabel;
       switch(vivoType) {
         case positionTypes['primaryPosition']: {
           primaryPositions.push({'label': apptLabel})
@@ -751,7 +751,7 @@ class WidgetsParser {
       if (commissioned) {
         artisticWork = artisticWork + `Commissioned by ${commissioned}. `
       }
-      artisticWork = artisticWork + `${dateFormatted} .`
+      artisticWork = artisticWork + `${dateFormatted} . `
       if (link) {
         artisticWork = artisticWork + `${link}`
       }
