@@ -87,10 +87,12 @@ class WidgetsParser {
         return `${month} ${year}`;
       } else if (precision == "http://vivoweb.org/ontology/core#yearMonthDayPrecision") {
         var month = monthNames[date.getMonth()]
-        var day = date.getDay()
-        var dayString = `${day}${this.ordinal_suffix_of(day)}`
+        var day = date.getDate()
+        var dayString = `${this.ordinal_suffix_of(day)}`
         return `${month} ${dayString}, ${year}`
       } else if (precision == "http://vivoweb.org/ontology/core#yearPrecision") {
+          return `${year}`
+      } else {
           return `${year}`
       }
       return "" // if no match
@@ -419,7 +421,7 @@ class WidgetsParser {
       'Professional Development': 'pd', 
       'Other': 'other',
       // NOTE: not sure of a comprehensive list
-      'Keynote/Named Lecture': 'other',
+      'Keynote/Named Lecture': 'lec',
       'Broadcast Appearance': 'other',
       'Service Learning' : 'other',
       'Keynote': 'other'
@@ -577,34 +579,31 @@ class WidgetsParser {
     var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'internationalmeetings': [],  'broadcasts': [], 'interviews':[], 'invitedtalks':[] };
     let professionalActivities = data['professionalActivities'];
 
-     _.forEach(professionalActivities, function(value) {
+    professionalActivities.forEach((value) => {
 
         if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation' ) {
+            var label = value['label'];
+            var serviceType = value.attributes['serviceType'];
+            let vivoType = value['vivoType'];
 
-             var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
-             var label = value['label'];
-             var serviceType = value.attributes['serviceType'];
-             let vivoType = value['vivoType'];
+            var talk = value.attributes['nameOfTalk'];
+            var startDate = new Date(value.attributes['startDate']);
+            var startDatePrecision = value.attributes['startDatePrecision']
 
-             var talk = value.attributes['nameOfTalk'];
-             var date = new Date(value.attributes['startDate']);
-             var talk_label = "";
-             talk_label = talk;
+            var talk_label = talk;
 
-             if (typeof value.attributes['locationOrVenue'] != 'undefined') {
-                talk_label += ". " + value.attributes['locationOrVenue'];
-             }
+            if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+               talk_label += ". " + value.attributes['locationOrVenue'];
+            }
 
-             if (typeof value.attributes['hostOrganization'] != 'undefined') {
-                //talk_label = talk + ". " + talk_hostorg + ". " + value.attributes['locationOrVenue'] + ". " + monthNames[date.getMonth()] + " " + date.getFullYear();
-                talk_label += ". " + value.attributes['hostOrganization'];
-             }
+            if (typeof value.attributes['hostOrganization'] != 'undefined') {
+               talk_label += ". " + value.attributes['hostOrganization'];
+            }
+            let dateFormatted = this.formatDatePrecision(startDate, startDatePrecision)
 
-             talk_label += ". " + monthNames[date.getMonth()] + " " +  date.getDate() + ", " + date.getFullYear();
+            talk_label += ". " + dateFormatted
 
-
-             switch(serviceType) {
+            switch(serviceType) {
 
                 case "Other": {
                     //NOTE: 'other' skipped
