@@ -667,35 +667,26 @@ class WidgetsParser {
   }
 
   parseArtisticEvents(data) {
-    var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
     let artisticEvents = data['artisticEvents'];
     var artisticEventsList = [];
-    _.forEach(artisticEvents, function(value) {
+    artisticEvents.forEach((value) => {
       var label = value['label'];
       label = label.replace(" |", ",");
 
-      var startDate = new Date(value.attributes['startYear']);
-      var start_date = monthNames[startDate.getMonth()] + " " + startDate.getDate() + ", " + startDate.getFullYear();
-      var start_year = value['attributes']['startYear'].substr(0,4);
-
-      var endDate = "", end_date = "", end_year = "";
-      if(value['attributes']['endYear']){
-      endDate = new Date(value.attributes['endYear']);
-      end_date = monthNames[endDate.getMonth()] + " " + endDate.getDate() + ", " + endDate.getFullYear();
-      end_year = value['attributes']['endYear'].substr(0,4);
-      }
+      var start_year = value['attributes']['startYear'] // always present?
+      var end_year = value['attributes']['endYear'] || null // can be null
 
       var venue = value['attributes']['venue'];
 
-      if(end_date != ""){
-        label = label + ", " + start_date + " - " + end_date;
+      if(end_year){
+        label = label + ". " + start_year.substr(0,4) + " - " + end_year.substr(0,4);
       }
       else{
-        label = label + ", " + start_date;
+        label = label + ". " + start_year.substr(0,4);
       }
 
-      artisticEventsList.push({'label':label, 'startYear':start_year, 'startDate': start_date });
+      // startYear is used for sorting
+      artisticEventsList.push({'label':label, 'startYear':start_year });
     });
     return {'artisticEvents': artisticEventsList}
   };
