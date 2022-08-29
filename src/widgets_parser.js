@@ -303,7 +303,6 @@ class WidgetsParser {
 
     // another default to mla just in case
     var citationAttribute = citationTypes[preferredCitationFormat] || 'mlaCitation'
-    console.debug("using " + citationAttribute + " citation format");
 
     let figureCitation = function(value) {
 
@@ -403,31 +402,15 @@ class WidgetsParser {
 
   parseProfessionalActivities(data) {
     var professionalActivitiesTypes = {
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] },
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] },
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] },
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec':[], 'other':[] }
-    };
-
-    var abbreviations = {
-      'Community Outreach': 'cs',
-      'Lecture': 'lec',
-      'Consulting' : 'consulting',
-      'Committee Service': 'cmts',
-      'Curriculum Innovations': 'ci',
-      'Event/Organization Administration': 'eoa',
-      'Event Attendance': 'eva',
-      'Editorial Activities': 'ea',
-      'Professional Development': 'pd', 
-      'Other': 'other',
-      // NOTE: not sure of a comprehensive list
-      'Keynote/Named Lecture': 'lec',
-      'Broadcast Appearance': 'other',
-      'Service Learning' : 'other',
-      'Keynote': 'other'
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : [],
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : []
     }
     var professionalActivities = data['professionalActivities'];
-    
+ 
+    /* TODO: need something complicated like this for some? */
+    /*
     let figureLectureLabel = (value) => {
       var full_label = "";
       var talk = value.attributes['nameOfTalk'];
@@ -453,29 +436,62 @@ class WidgetsParser {
       return full_label;
     };
     
-    let figureDefaultLabel = (value) => {
-      var label = value['label'];
+    */
+    let presentationLabel = (value) => {
+      let label = value['label']
       return label
-    };
-  
-    let figureProfessionalActivity = (value) => {
+    }
+    let serviceToProfessionLabel = (value) => {
+      let label = value['label']
+      return label
+    }
+    let serviceToUniversityLabel = (value) => {
+      let label = value['label']
+      return label
+    }
+    let outreachLabel = (value) => {
+      let label = value['label']
+      return label
+    }
+
+
+    let figureProfessionalActivity = (vivoType, value) => {
+      /*
+       *
+      does each one have a different 'label' procedure?
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : [],
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : []
+      */
       var full_label = ""
-      if (value.attributes['serviceType'] == 'Lecture') {
-        full_label = figureLectureLabel(value)
-      } else {
-        full_label = figureDefaultLabel(value)
+      switch (vivoType) {
+        case 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': {
+          return presentationLabel(value) 
+        }
+        case 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': {
+          return serviceToProfessionLabel(value)
+        }
+        case 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity': {
+          return serviceToUniversityLabel(value)
+        }
+        case 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach': {
+          return outreachLabel(value)
+        }
+        default:
+          // are those 4 all the types?
+          console.error(`do not know how to create label for ${vivoType}`)
+          return value['label']
       }
       return full_label
     }
+    
     professionalActivities.forEach((value) => {
       let serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
 
-      let label = figureProfessionalActivity(value);
-      let key = abbreviations[serviceType] || 'other'
-
-      professionalActivitiesTypes[vivoType][key].push(label)
-
+      let label = figureProfessionalActivity(vivoType, value);
+      professionalActivitiesTypes[vivoType].push({'label': label}) // should be array
     });
 
     let pluralize = function(word) {
@@ -490,13 +506,12 @@ class WidgetsParser {
           return "outreach"
         }
         case "presentation": {
-          return "Presentation"
+          return "presentations"
         }
         default:
           return `${word}s`
       }
     }
-
 
     let results = _.transform(professionalActivitiesTypes, (result, value, key) => {
       let name = this.shortName(key)
@@ -544,7 +559,7 @@ class WidgetsParser {
     return {'pastappointments': pastAppointmentsList}
   };
 
-  parseteachingActivities(data) {
+  parseTeachingActivities(data) {
     let activities = data['attributes']['teachingActivities'] || null;
     var teaching_activities = null
 
@@ -554,7 +569,7 @@ class WidgetsParser {
     return {'teaching_activities': teaching_activities}
   };
 
-  parsementorshipOverview(data) {
+  parseMentorshipOverview(data) {
     let overview = data['attributes']['mentorshipOverview'] || null;
     var mentorship_activities = null
 
@@ -564,7 +579,7 @@ class WidgetsParser {
     return {'mentorship_activities': mentorship_activities}
   };
 
-  parseacademicActivities(data) {
+  parseAcademicActivities(data) {
     let activities = data['attributes']['academicActivities'] || null;
     var academic_activities = null
 
@@ -576,11 +591,11 @@ class WidgetsParser {
 
   parsePresentations(data) {
 
-    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'internationalmeetings': [],  'broadcasts': [], 'interviews':[], 'invitedtalks':[] };
+    var presentationList = []
+
     let professionalActivities = data['professionalActivities'];
 
     professionalActivities.forEach((value) => {
-
         if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation' ) {
             var label = value['label'];
             var serviceType = value.attributes['serviceType'];
@@ -602,7 +617,9 @@ class WidgetsParser {
             let dateFormatted = this.formatDatePrecision(startDate, startDatePrecision)
 
             talk_label += ". " + dateFormatted
-
+            presentationList.push({'label':talk_label});
+ 
+            /*
             switch(serviceType) {
 
                 case "Other": {
@@ -653,17 +670,19 @@ class WidgetsParser {
                 default:
                   break;
               }
+              */
          }
 
       });
 
-    let results = _.transform(presentationList, (result, value, key) => {
-      let name = key
-      result[name] = value
-      return result;
-    }, {});
-
-    return results
+    //let results = _.transform(presentationList, (result, value, key) => {
+    //  let name = key
+    //  result[name] = value
+    //  return result;
+    //}, {});
+    return {'presentations': presentationList}
+ 
+    //return results
   }
 
   parseArtisticEvents(data) {
@@ -818,15 +837,14 @@ class WidgetsParser {
     _.merge(results, this.parseGrants(data))
     _.merge(results, this.parseAwards(data))
     _.merge(results, this.parseProfessionalActivities(data))
-    _.merge(results, this.parsePresentations(data))
+    //_.merge(results, this.parsePresentations(data))
     _.merge(results, this.parsepastAppointments(data))
-    _.merge(results, this.parseteachingActivities(data))
-    _.merge(results, this.parsementorshipOverview(data))
-    _.merge(results, this.parseacademicActivities(data))
+    _.merge(results, this.parseTeachingActivities(data))
+    _.merge(results, this.parseMentorshipOverview(data))
+    _.merge(results, this.parseAcademicActivities(data))
     _.merge(results, this.parseOtherPositions(data))
     _.merge(results, this.parseArtisticEvents(data))
     _.merge(results, this.parseArtisticWorks(data))
-    //_.merge(results, this.parseMedicalLicences(data))
     _.merge(results, this.parseClinicalActivities(data))
     _.merge(results, this.parseCurrentResearchInterests(data))
     _.merge(results, this.parseLeadershipPositions(data))
