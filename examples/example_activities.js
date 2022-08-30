@@ -10,5 +10,6 @@ import { WidgetsParser } from '../src/widgets_parser'
 let widgetsParser = new WidgetsParser()
 
 let prof = widgetsParser.parseProfessionalActivities(data)
-let details = {...prof }
+let teaching = widgetsParser.parseTeachingActivities(data)
+let details = {...prof, ...teaching }
 console.log(details)
