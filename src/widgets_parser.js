@@ -623,102 +623,6 @@ class WidgetsParser {
     return {'academic_activities': academic_activities}
   };
 
-  parsePresentations(data) {
-
-    var presentationList = []
-
-    let professionalActivities = data['professionalActivities'];
-
-    professionalActivities.forEach((value) => {
-        if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation' ) {
-            var label = value['label'];
-            var serviceType = value.attributes['serviceType'];
-            let vivoType = value['vivoType'];
-
-            var talk = value.attributes['nameOfTalk'];
-            var startDate = new Date(value.attributes['startDate']);
-            var startDatePrecision = value.attributes['startDatePrecision']
-
-            var talk_label = talk;
-
-            if (typeof value.attributes['locationOrVenue'] != 'undefined') {
-               talk_label += ". " + value.attributes['locationOrVenue'];
-            }
-
-            if (typeof value.attributes['hostOrganization'] != 'undefined') {
-               talk_label += ". " + value.attributes['hostOrganization'];
-            }
-            let dateFormatted = this.formatDatePrecision(startDate, startDatePrecision)
-
-            talk_label += ". " + dateFormatted
-            presentationList.push({'label':talk_label});
- 
-            /*
-            switch(serviceType) {
-
-                case "Other": {
-                    //NOTE: 'other' skipped
-                    break;
-                }
-
-                case "Instructional Course, Workshop, or Symposium": {
-                    presentationList['courses'].push({'label':talk_label});
-                    break;
-                }
-
-                case "National Scientific Meeting": {
-                    presentationList['nationalmeetings'].push({'label':talk_label});
-                    break;
-                }
-
-                case "Keynote/Named Lecture": {
-                    presentationList['lectures'].push({'label':talk_label});
-                    break;
-                }
-
-                case "International Meeting or Conference": {
-                    presentationList['internationalmeetings'].push({'label':talk_label});
-                    break;
-                }
-
-                case "Visiting Professorship Lecture": {
-                     presentationList['professorships'].push({'label':talk_label});
-                     break;
-                }
-
-                case "Broadcast Appearance": {
-                     presentationList['broadcasts'].push({'label':talk_label});
-                     break;
-                }
-
-                case "Interview": {
-                     presentationList['interviews'].push({'label':talk_label});
-                     break;
-                }
-
-                case "Invited Talk": {
-                     presentationList['invitedtalks'].push({'label':talk_label});
-                     break;
-                }
-
-                default:
-                  break;
-              }
-              */
-         }
-
-      });
-
-    //let results = _.transform(presentationList, (result, value, key) => {
-    //  let name = key
-    //  result[name] = value
-    //  return result;
-    //}, {});
-    return {'presentations': presentationList}
- 
-    //return results
-  }
-
   parseArtisticEvents(data) {
     let artisticEvents = data['artisticEvents'];
     var artisticEventsList = [];
@@ -871,7 +775,6 @@ class WidgetsParser {
     _.merge(results, this.parseGrants(data))
     _.merge(results, this.parseAwards(data))
     _.merge(results, this.parseProfessionalActivities(data))
-    //_.merge(results, this.parsePresentations(data))
     _.merge(results, this.parsepastAppointments(data))
     _.merge(results, this.parseTeachingActivities(data))
     _.merge(results, this.parseMentorshipOverview(data))
