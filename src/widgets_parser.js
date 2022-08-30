@@ -409,18 +409,8 @@ class WidgetsParser {
     }
     var professionalActivities = data['professionalActivities'];
  
-    /* TODO: need something complicated like this for some? */
-    /*
-    let figureLectureLabel = (value) => {
-      var full_label = "";
-      var talk = value.attributes['nameOfTalk'];
-      var start_date = new Date(value.attributes['startDate']);
-      var start_date_precision = value.attributes["startDatePrecision"]
-
-      var end_date = new Date(value.attributes['endDate']);
-      var end_date_precision = value.attributes["endDatePrecision"]
-
-      full_label = talk;
+    let presentationLabel = (value) => {
+      var full_label = value.attributes['nameOfTalk'];
 
       if (typeof value.attributes['locationOrVenue'] != 'undefined') {
         full_label += ". " + value.attributes['locationOrVenue'];
@@ -429,31 +419,75 @@ class WidgetsParser {
       if (typeof value.attributes['hostOrganization'] != 'undefined') {
         full_label  += ". " + value.attributes['hostOrganization'];
       }
+      var start_date = new Date(value.attributes['startDate']);
+      var start_date_precision = value.attributes["startDatePrecision"]
+
+      var end_date = new Date(value.attributes['endDate']);
+      var end_date_precision = value.attributes["endDatePrecision"]
+
       let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
       let endFormatted = this.formatDatePrecision(end_date, end_date_precision)
 
       full_label += ". " + startFormatted + " - " + endFormatted
       return full_label;
-    };
-    
-    */
-    let presentationLabel = (value) => {
-      let label = value['label']
-      return label
     }
     let serviceToProfessionLabel = (value) => {
-      let label = value['label']
-      return label
+      var full_label = value.attributes['role']; // always role?
+      
+      if (typeof value.attributes['serviceOrEventName'] != 'undefined') {
+        full_label += ". " + value.attributes['serviceOrEventName'];
+      }
+
+      if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+        full_label += ". " + value.attributes['locationOrVenue'];
+      }
+
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
+      return full_label;
     }
     let serviceToUniversityLabel = (value) => {
-      let label = value['label']
-      return label
+      var full_label = value.attributes['role']; // always role?
+      if (typeof value.attributes['serviceOrEventName'] != 'undefined') {
+        full_label += ". " + value.attributes['serviceOrEventName'];
+      }
+
+      if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+        full_label += ". " + value.attributes['locationOrVenue'];
+      }
+
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
+      var start_date = new Date(value.attributes['startDate']);
+      var start_date_precision = value.attributes["startDatePrecision"]
+
+      var end_date = new Date(value.attributes['endDate']);
+      var end_date_precision = value.attributes["endDatePrecision"]
+
+      let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
+      let endFormatted = this.formatDatePrecision(end_date, end_date_precision)
+
+      full_label += ". " + startFormatted + " - " + endFormatted
+      return full_label;
     }
     let outreachLabel = (value) => {
-      let label = value['label']
-      return label
-    }
+      var full_label = value.attributes['role']; // always role?
+      if (typeof value.attributes['serviceOrEventName'] != 'undefined') {
+        full_label += ". " + value.attributes['serviceOrEventName'];
+      }
+      if (typeof value.attributes['geoFocus'] != 'undefined') {
+        full_label += ". " + value.attributes['geoFocus'];
+      }
 
+      var start_date = new Date(value.attributes['startDate']);
+      var start_date_precision = value.attributes["startDatePrecision"]
+      let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
+ 
+      full_label += ". " + startFormatted
+      return full_label;
+    }
 
     let figureProfessionalActivity = (vivoType, value) => {
       /*
