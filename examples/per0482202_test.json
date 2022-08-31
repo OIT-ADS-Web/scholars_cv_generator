@@ -1,0 +1,1614 @@
+{
+   "uri":"https://scholars.duke.edu/individual/per0482202",
+   "active":true,
+   "updatedAt":"2022-08-19T16:04:47Z",
+   "vivoType":"http://vivoweb.org/ontology/core#NonFacultyAcademic",
+   "label":"Murry, Damaris",
+   "title":"Dir, IT",
+   "publications":[
+      {
+         "uri":"https://scholars.duke.edu/individual/pub1452214",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-extension#Preprint",
+         "label":"Test PrePrint Publication for Damaris",
+         "attributes":{
+            "icmjeCitation":"<div>Murry D. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1452214\">Test PrePrint Publication for Damaris</a>. 2021.</div>",
+            "mlaCitation":"<div>Murry, Damaris. <i><a href=\"https://scholars2-test.oit.duke.edu/individual/pub1452214\">Test PrePrint Publication for Damaris</a></i>. 14 June 2021.</div>",
+            "isFavorite":"false",
+            "authorList":"Murry, D",
+            "datetime":"https://scholars.duke.edu/individual/dateValue20210614",
+            "apaCitation":"<div>Murry, D. (2021). <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1452214\">Test PrePrint Publication for Damaris</a>.</div>",
+            "year":"2021-06-14T00:00:00",
+            "publicationSource":"manual",
+            "chicagoCitation":"<div>Murry, Damaris. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub1452214\">Test PrePrint Publication for Damaris</a>,” June 14, 2021.</div>",
+            "authorshipType":"http://vivoweb.org/ontology/core#Authorship",
+            "subtypes":"",
+            "nlmCitation":"<div>Murry D. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1452214\">Test PrePrint Publication for Damaris</a>. 2021.</div>"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/pub1425189",
+         "vivoType":"http://purl.org/ontology/bibo/AcademicArticle",
+         "label":"Ultra-black Camouflage in Deep-Sea Fishes. -- MANUAL RECORD FOR TESTING",
+         "attributes":{
+            "icmjeCitation":"<div>Davis AL, Thomas KN, Goetz FE, Robison BH, Johnsen S, Osborn KJ. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1425189\">Ultra-black Camouflage in Deep-Sea Fishes. -- MANUAL RECORD FOR TESTING</a>. Current Biology : Cb. 2020 Sep;30(17):3470-3476.e3.</div>",
+            "mlaCitation":"<div>Davis, Alexander L., et al. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub1425189\">Ultra-black Camouflage in Deep-Sea Fishes. -- MANUAL RECORD FOR TESTING</a>.” <i>Current Biology : Cb</i>, vol. 30, no. 17, Sept. 2020, pp. 3470-3476.e3. <i>Manual</i>, doi:10.1016/j.cub.2020.06.044.</div>",
+            "isFavorite":"false",
+            "authorList":"Davis, AL; Thomas, KN; Goetz, FE; Robison, BH; Johnsen, S; Osborn, KJ",
+            "datetime":"https://scholars.duke.edu/individual/dateValue202009",
+            "abstract":"At oceanic depths >200 m, there is little ambient sunlight, but bioluminescent organisms provide another light source that can reveal animals to visual predators and prey [1-4]. Transparency and mirrored surfaces-common camouflage strategies under the diffuse solar illumination of shallower waters-are conspicuous when illuminated by directed bioluminescent sources due to reflection from the body surface [5, 6]. Pigmentation allows animals to absorb light from bioluminescent sources, rendering them visually undetectable against the dark background of the deep sea [5]. We present evidence suggesting pressure to reduce reflected bioluminescence led to the evolution of ultra-black skin (reflectance <0.5%) in 16 species of deep-sea fishes across seven distantly related orders. Histological data suggest this low reflectance is mediated by a continuous layer of densely packed melanosomes in the exterior-most layer of the dermis [7, 8] and that this layer lacks the unpigmented gaps between pigment cells found in other darkly colored fishes [9-13]. Using finite-difference, time-domain modeling and comparisons with melanosomes found in other ectothermic vertebrates [11, 13-21], we find the melanosomes making up the layer in these ultra-black species are optimized in size and shape to minimize reflectance. Low reflectance results from melanosomes scattering light within the layer, increasing the optical path length and therefore light absorption by the melanin. By reducing reflectance, ultra-black fish can reduce the sighting distance of visual predators more than 6-fold compared to fish with 2% reflectance. This biological example of efficient light absorption via a simple architecture of strongly absorbing and highly scattering particles may inspire new ultra-black materials.",
+            "pmid":"32679102",
+            "apaCitation":"<div>Davis, A. L., Thomas, K. N., Goetz, F. E., Robison, B. H., Johnsen, S., &amp; Osborn, K. J. (2020). <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1425189\">Ultra-black Camouflage in Deep-Sea Fishes. -- MANUAL RECORD FOR TESTING</a>. <i>Current Biology : Cb</i>, <i>30</i>(17), 3470-3476.e3. https://doi.org/10.1016/j.cub.2020.06.044</div>",
+            "year":"2020-09-01T00:00:00",
+            "endPage":"3476.e3",
+            "publicationSource":"manual",
+            "chicagoCitation":"<div>Davis, Alexander L., Kate N. Thomas, Freya E. Goetz, Bruce H. Robison, Sönke Johnsen, and Karen J. Osborn. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub1425189\">Ultra-black Camouflage in Deep-Sea Fishes. -- MANUAL RECORD FOR TESTING</a>.” <i>Current Biology : Cb</i> 30, no. 17 (September 2020): 3470-3476.e3. https://doi.org/10.1016/j.cub.2020.06.044.</div>",
+            "authorshipType":"http://vivoweb.org/ontology/core#Authorship",
+            "issue":"17",
+            "subtypes":"Occasional Writing",
+            "nlmCitation":"<div>Davis AL, Thomas KN, Goetz FE, Robison BH, Johnsen S, Osborn KJ. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1425189\">Ultra-black Camouflage in Deep-Sea Fishes. -- MANUAL RECORD FOR TESTING</a>. Current Biology : Cb. 2020 Sep;30(17):3470-3476.e3.</div>",
+            "publicationVenue":"https://scholars.duke.edu/individual/jou0960-9822",
+            "publishedIn":"Current Biology : Cb",
+            "startPage":"3470",
+            "doi":"10.1016/j.cub.2020.06.044",
+            "volume":"30"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/pub1363635",
+         "vivoType":"http://purl.org/ontology/bibo/BookSection",
+         "label":"Chapter Title",
+         "attributes":{
+            "icmjeCitation":"<div>Murry D. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1363635\">Chapter Title</a>. In: Book Title. 2019.</div>",
+            "mlaCitation":"<div>Murry, Damaris. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub1363635\">Chapter Title</a>.” <i>Book Title</i>, 2019.</div>",
+            "isFavorite":"false",
+            "authorList":"Murry, D",
+            "datetime":"https://scholars.duke.edu/individual/dateValue20190131",
+            "abstract":"abstract 2\nhttps://scholars.duke.edu",
+            "apaCitation":"<div>Murry, D. (2019). <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1363635\">Chapter Title</a>. In <i>Book Title</i>.</div>",
+            "year":"2019-01-31T00:00:00",
+            "publicationSource":"manual",
+            "chicagoCitation":"<div>Murry, Damaris. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub1363635\">Chapter Title</a>.” In <i>Book Title</i>, 2019.</div>",
+            "authorshipType":"http://vivoweb.org/ontology/core#Authorship",
+            "subtypes":"Chapter",
+            "nlmCitation":"<div>Murry D. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1363635\">Chapter Title</a>. Book Title. 2019.</div>",
+            "parentBookTitle":"Book Title"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/pub1448748",
+         "vivoType":"http://purl.org/ontology/bibo/BookSection",
+         "label":"Testing the merging of two manual records",
+         "attributes":{
+            "icmjeCitation":"<div>Murry D. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1448748\">Testing the merging of two manual records</a>. In 2019.</div>",
+            "mlaCitation":"<div>Murry, Damaris. <i><a href=\"https://scholars2-test.oit.duke.edu/individual/pub1448748\">Testing the merging of two manual records</a></i>. 2019.</div>",
+            "isFavorite":"false",
+            "authorList":"Murry, D",
+            "datetime":"https://scholars.duke.edu/individual/dateValue20190128",
+            "abstract":"abstract 1",
+            "apaCitation":"<div>Murry, D. (2019). <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1448748\">Testing the merging of two manual records</a>.</div>",
+            "year":"2019-01-28T00:00:00",
+            "publicationSource":"manual",
+            "chicagoCitation":"<div>Murry, Damaris. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub1448748\">Testing the merging of two manual records</a>,” 2019.</div>",
+            "authorshipType":"http://vivoweb.org/ontology/core#Authorship",
+            "subtypes":"",
+            "nlmCitation":"<div>Murry D. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1448748\">Testing the merging of two manual records</a>. 2019.</div>"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/pub761308",
+         "vivoType":"http://purl.org/ontology/bibo/AcademicArticle",
+         "label":"Protein modification by deamidation indicates variations in joint extracellular matrix turnover.",
+         "attributes":{
+            "icmjeCitation":"<div>Catterall JB, Hsueh MF, Stabler TV, McCudden CR, Bolognesi M, Zura R, et al. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub761308\">Protein modification by deamidation indicates variations in joint extracellular matrix turnover.</a> J Biol Chem. 2012 Feb 10;287(7):4640–51.</div>",
+            "mlaCitation":"<div>Catterall, Jonathan B., et al. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub761308\">Protein modification by deamidation indicates variations in joint extracellular matrix turnover.</a>” <i>J Biol Chem</i>, vol. 287, no. 7, Feb. 2012, pp. 4640–51. <i>Pubmed</i>, doi:10.1074/jbc.M111.249649.</div>",
+            "isFavorite":"false",
+            "authorList":"Catterall, JB; Hsueh, MF; Stabler, TV; McCudden, CR; Bolognesi, M; Zura, R; Jordan, JM; Renner, JB; Feng, S; Kraus, VB",
+            "datetime":"https://scholars.duke.edu/individual/dateValue20120210",
+            "conferenceLocation":"United States",
+            "abstract":"As extracellular proteins age, they undergo and accumulate nonenzymatic post-translational modifications that cannot be repaired. We hypothesized that these could be used to systemically monitor loss of extracellular matrix due to chronic arthritic diseases such as osteoarthritis (OA). To test this, we predicted sites of deamidation in cartilage oligomeric matrix protein (COMP) and confirmed, by mass spectroscopy, the presence of deamidated (Asp(64)) and native (Asn(64)) COMP epitopes (mean 0.95% deamidated COMP (D-COMP) relative to native COMP) in cartilage. An Asp(64), D-COMP-specific ELISA was developed using a newly created monoclonal antibody 6-1A12. In a joint replacement study, serum D-COMP (p = 0.017), but not total COMP (p = 0.5), declined significantly after replacement demonstrating a joint tissue source for D-COMP. In analyses of 450 participants from the Johnston County Osteoarthritis Project controlled for age, gender, and race, D-COMP was associated with radiographic hip (p < 0.0001) but not knee (p = 0.95) OA severity. In contrast, total COMP was associated with radiographic knee (p < 0.0001) but not hip (p = 0.47) OA severity. D-COMP was higher in soluble proteins extracted from hip cartilage proximal to OA lesions compared with remote from lesions (p = 0.007) or lesional and remote OA knee (p < 0.01) cartilage. Total COMP in cartilage did not vary by joint site or proximity to the lesion. This study demonstrates the presence of D-COMP in articular cartilage and the systemic circulation, and to our knowledge, it is the first biomarker to show specificity for a particular joint site. We believe that enrichment of deamidated epitope in hip OA cartilage indicates a lesser repair response of hip OA compared with knee OA cartilage.",
+            "pmid":"22179616",
+            "apaCitation":"<div>Catterall, J. B., Hsueh, M. F., Stabler, T. V., McCudden, C. R., Bolognesi, M., Zura, R., … Kraus, V. B. (2012). <a href=\"https://scholars2-test.oit.duke.edu/individual/pub761308\">Protein modification by deamidation indicates variations in joint extracellular matrix turnover.</a> <i>J Biol Chem</i>, <i>287</i>(7), 4640–4651. https://doi.org/10.1074/jbc.M111.249649</div>",
+            "year":"2012-02-10T00:00:00",
+            "pmcid":"PMC3281605",
+            "endPage":"4651",
+            "publicationSource":"pubmed",
+            "chicagoCitation":"<div>Catterall, Jonathan B., Ming F. Hsueh, Thomas V. Stabler, Christopher R. McCudden, Michael Bolognesi, Robert Zura, Joanne M. Jordan, Jordan B. Renner, Sheng Feng, and Virginia B. Kraus. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub761308\">Protein modification by deamidation indicates variations in joint extracellular matrix turnover.</a>” <i>J Biol Chem</i> 287, no. 7 (February 10, 2012): 4640–51. https://doi.org/10.1074/jbc.M111.249649.</div>",
+            "authorshipType":"http://vivoweb.org/ontology/core#Authorship",
+            "issue":"7",
+            "subtypes":"Clinical Trial;Journal Article",
+            "nlmCitation":"<div>Catterall JB, Hsueh MF, Stabler TV, McCudden CR, Bolognesi M, Zura R, Jordan JM, Renner JB, Feng S, Kraus VB. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub761308\">Protein modification by deamidation indicates variations in joint extracellular matrix turnover.</a> J Biol Chem. 2012 Feb 10;287(7):4640–4651.</div>",
+            "publicationVenue":"https://scholars.duke.edu/individual/jou1083-351X",
+            "publishedIn":"Journal of Biological Chemistry",
+            "startPage":"4640",
+            "doi":"10.1074/jbc.M111.249649",
+            "volume":"287"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/pub1148982",
+         "vivoType":"http://vivoweb.org/ontology/core#ConferencePaper",
+         "label":"Photoluminescent nanofibers for solid-state lighting applications",
+         "attributes":{
+            "icmjeCitation":"<div>Davis JL, Han L, Hoertz P, Guzan K, Mills KC, Walls HJ, et al. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1148982\">Photoluminescent nanofibers for solid-state lighting applications</a>. In: Materials Research Society Symposium Proceedings. 2010. p. 29–34.</div>",
+            "mlaCitation":"<div>Davis, J. L., et al. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub1148982\">Photoluminescent nanofibers for solid-state lighting applications</a>.” <i>Materials Research Society Symposium Proceedings</i>, vol. 1240, 2010, pp. 29–34.</div>",
+            "isFavorite":"false",
+            "authorList":"Davis, JL; Han, L; Hoertz, P; Guzan, K; Mills, KC; Walls, HJ; Walker, TA; Magnus-Aryitey, D",
+            "datetime":"https://scholars.duke.edu/individual/dateValue20101201",
+            "abstract":"Photoluminescent nanofibers (PLN) can be formed by combining electrospun polymeric nanofibers and luminescent particles such as quantum dots (QD). The physical properties of PLNs are dependent upon many different nanoscale parameters associated with the nanofiber, the luminescent particles, and their interactions. By understanding and manipulating these properties, the performance of the resulting optical structure can be tailored for desired end-use applications. For example, the quantum efficiency of quantum dots in the PLN structure depends upon multiple parameters including quantum dot chemistry, the method of forming the PLN nanocomposites, and preventing agglomeration of the quantum dot particles. This is especially important in solution-based electrospinning environments where some common solvents may have a detrimental effect on the performance of the PLN. With the proper control of these parameters, high quantum efficiencies can be readily obtained for PLNs. Achieving high quantum efficiencies is critical in applications such as solid-state lighting where PLNs can be an effective secondary conversion material for producing white light. Methods of optimizing the performance of PLNs through nanoscale manipulation of the nanofiber are discussed along with guidelines for tailoring the performance of nanofibers and quantum dots for application-specific requirements. © 2010 Materials Research Society.",
+            "apaCitation":"<div>Davis, J. L., Han, L., Hoertz, P., Guzan, K., Mills, K. C., Walls, H. J., … Magnus-Aryitey, D. (2010). <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1148982\">Photoluminescent nanofibers for solid-state lighting applications</a>. In <i>Materials Research Society Symposium Proceedings</i> (Vol. 1240, pp. 29–34).</div>",
+            "year":"2010-12-01T00:00:00",
+            "endPage":"34",
+            "publicationSource":"scopus",
+            "chicagoCitation":"<div>Davis, J. L., L. Han, P. Hoertz, K. Guzan, K. C. Mills, H. J. Walls, T. A. Walker, and D. Magnus-Aryitey. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub1148982\">Photoluminescent nanofibers for solid-state lighting applications</a>.” In <i>Materials Research Society Symposium Proceedings</i>, 1240:29–34, 2010.</div>",
+            "authorshipType":"http://vivoweb.org/ontology/core#Authorship",
+            "subtypes":"",
+            "isbn13":"9781617822162",
+            "nlmCitation":"<div>Davis JL, Han L, Hoertz P, Guzan K, Mills KC, Walls HJ, Walker TA, Magnus-Aryitey D. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1148982\">Photoluminescent nanofibers for solid-state lighting applications</a>. Materials Research Society Symposium Proceedings. 2010. p. 29–34.</div>",
+            "publicationVenue":"https://scholars.duke.edu/individual/jou0272-9172",
+            "publishedIn":"Materials Research Society Symposium Proceedings",
+            "startPage":"29",
+            "volume":"1240"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/pub1462595",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-extension#DigitalPublication",
+         "label":"Just testing a digital publication entry",
+         "attributes":{
+            "icmjeCitation":"<div>Mangiafico P. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1462595\">Just testing a digital publication entry</a>.</div>",
+            "mlaCitation":"<div>Mangiafico, Paolo. <i><a href=\"https://scholars2-test.oit.duke.edu/individual/pub1462595\">Just testing a digital publication entry</a></i>.</div>",
+            "isFavorite":"false",
+            "authorList":"Mangiafico, P",
+            "apaCitation":"<div>Mangiafico, P. (n.d.). <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1462595\">Just testing a digital publication entry</a>.</div>",
+            "publicationSource":"manual",
+            "chicagoCitation":"<div>Mangiafico, Paolo. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub1462595\">Just testing a digital publication entry</a>,” n.d.</div>",
+            "authorshipType":"http://vivoweb.org/ontology/core#Contribution",
+            "subtypes":"",
+            "nlmCitation":"<div>Mangiafico P. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1462595\">Just testing a digital publication entry</a>.</div>"
+         }
+      }
+   ],
+   "awards":[
+      {
+         "uri":"https://scholars.duke.edu/individual/awd49380",
+         "vivoType":"http://vivoweb.org/ontology/core#Award",
+         "label":"recent award. myself.",
+         "attributes":{
+            "serviceType":"University",
+            "name":"recent award",
+            "datePrecision":"http://vivoweb.org/ontology/core#yearMonthPrecision",
+            "awardedBy":"myself",
+            "awardedByUri":"https://scholars.duke.edu/individual/insmyself",
+            "date":"2019-10-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/awd49120",
+         "vivoType":"http://vivoweb.org/ontology/core#Award",
+         "label":"Test Award for Damaris. Duke University Test.",
+         "attributes":{
+            "serviceType":"Scholarly Society",
+            "name":"Test Award for Damaris",
+            "datePrecision":"http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+            "awardedBy":"Duke University Test",
+            "awardedByUri":"https://scholars.duke.edu/individual/insdukeuniversitytest",
+            "date":"2015-09-25T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/awd49183",
+         "vivoType":"http://vivoweb.org/ontology/core#Award",
+         "label":"My Department Award. Office of the Provost.",
+         "attributes":{
+            "serviceType":"Department",
+            "name":"My Department Award",
+            "datePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "awardedBy":"Office of the Provost",
+            "awardedByUri":"https://scholars.duke.edu/individual/insofficeoftheprovost",
+            "date":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/awd49184",
+         "vivoType":"http://vivoweb.org/ontology/core#Award",
+         "label":"My National Award. Office of the Provost.",
+         "attributes":{
+            "serviceType":"National",
+            "name":"My National Award",
+            "datePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "awardedBy":"Office of the Provost",
+            "awardedByUri":"https://scholars.duke.edu/individual/insofficeoftheprovost",
+            "date":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/awd49140",
+         "vivoType":"http://vivoweb.org/ontology/core#Award",
+         "label":"asdfad. afdaf.",
+         "attributes":{
+            "serviceType":"School",
+            "name":"asdfad",
+            "datePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "awardedBy":"afdaf",
+            "awardedByUri":"https://scholars.duke.edu/individual/insafdaf",
+            "date":"2014-01-01T00:00:00"
+         }
+      }
+   ],
+   "artisticWorks":[
+      {
+         "uri":"https://scholars.duke.edu/individual/art14680",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-art-extension#AudioRecording",
+         "label":"My Artistic Work",
+         "attributes":{
+            "role":"Archivist",
+            "abstract":"abstract",
+            "commissioning_body":"Duke",
+            "role_description":"role desc",
+            "link_label":"Vimeo",
+            "date":"2028-01-01T00:00:00",
+            "type_description":"Audio Recording",
+            "link_url":"http://www.duke.edu",
+            "date_precision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "collaborators":"Damaris Murry"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/art14700",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-art-extension#MultipleTypes",
+         "label":"My Painted Costume",
+         "attributes":{
+            "role":"Consultant, Creator, Designer",
+            "abstract":"abstract of my work",
+            "commissioning_body":"Duke University Libraries",
+            "role_description":"Consultant 2020-2022\r\nDesigner 1995-2019",
+            "link_label":"View image here",
+            "date":"2022-01-01T00:00:00",
+            "type_description":"Costume Design, Painting",
+            "link_url":"http://www.duke.edu",
+            "date_precision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "collaborators":"Damaris Murry"
+         }
+      }
+   ],
+   "artisticEvents":[
+      {
+         "uri":"https://scholars.duke.edu/individual/artevent_26400",
+         "vivoType":"http://purl.org/NET/c4dm/event.owl#Event",
+         "label":"Dawn of the Planet of the Apes | Films on the Quad at Duke University, Durham, NC",
+         "attributes":{
+            "description":"this was a special screening on the east campus lawn",
+            "startYear":"2017-04-19T00:00:00",
+            "venue":"Duke University, Durham, NC"
+         }
+      }
+   ],
+   "grants":[
+      
+   ],
+   "courses":[
+      
+   ],
+   "professionalActivities":[
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_prof200042790",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession",
+         "label":"My Consulting Role. name. host. February 2028 - 2029",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Consulting",
+            "endDate":"2029-01-01T00:00:00",
+            "role":"My Consulting Role",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2028-02-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/presentation100090381",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
+         "label":"My Keynote. series. host. 2028",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"series",
+            "serviceType":"Keynote/Named Lecture",
+            "nameOfTalk":"My Keynote",
+            "hostOrganization":"host",
+            "locationOrVenue":"venue",
+            "startDate":"2028-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_univ300082224",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity",
+         "label":"My Editorial Activities. name. host. June 11, 2024 - November 21, 2029",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Editorial Activities",
+            "endDate":"2029-11-21T00:00:00",
+            "role":"My Editorial Activities",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2024-06-11T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_prof200042789",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession",
+         "label":"My Committee Service. name. host. June 11, 2024 - July 17, 2025",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Committee Service",
+            "endDate":"2025-07-17T00:00:00",
+            "role":"My Committee Service",
+            "description":"description",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2024-06-11T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_prof200042794",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession",
+         "label":"My other service. name. host. June 2024 - September 2027",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Other",
+            "endDate":"2027-09-01T00:00:00",
+            "role":"My other service",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearMonthPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2024-06-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_prof200042792",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession",
+         "label":"My event. name. host. June 2024 - August 2024",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Event Attendance",
+            "endDate":"2024-08-01T00:00:00",
+            "role":"My event",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearMonthPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2024-06-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_univ300082221",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity",
+         "label":"host. My Committee Service. June 2024 - June 2024",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthPrecision",
+            "serviceType":"Committee Service",
+            "committeeType":"Student Organization",
+            "endDate":"2024-06-01T00:00:00",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearMonthPrecision",
+            "locationOrVenue":"venue",
+            "committeeName":"My Committee Service",
+            "startDate":"2024-06-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/presentation100090341",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
+         "label":"My Broadcast. name. host. 2022 - 2024",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Broadcast Appearance",
+            "endDate":"2024-01-01T00:00:00",
+            "nameOfTalk":"My Broadcast",
+            "description":"description",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2022-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_prof200042793",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession",
+         "label":"My prof development. name. host. March 4, 2021 - August 7, 2026",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Professional Development",
+            "endDate":"2026-08-07T00:00:00",
+            "role":"My prof development",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2021-03-04T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_univ300082227",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity",
+         "label":"My Other service to Duke. name. host. March 2021 - June 2024",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Other",
+            "endDate":"2024-06-01T00:00:00",
+            "role":"My Other service to Duke",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearMonthPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2021-03-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/presentation100090361",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
+         "label":"My Lecture. name. host. 2021 - 2028",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Lecture",
+            "endDate":"2028-01-01T00:00:00",
+            "nameOfTalk":"My Lecture",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2021-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_prof200042791",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession",
+         "label":"My Editorial Activities. name. host. 2020 - 2024",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Editorial Activities",
+            "endDate":"2024-01-01T00:00:00",
+            "role":"My Editorial Activities",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2020-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_univ300082225",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity",
+         "label":"My Event Attendance. name. host. 2020 - 2024",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Event Attendance",
+            "endDate":"2024-01-01T00:00:00",
+            "role":"My Event Attendance",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2020-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/outreach19690",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach",
+         "label":"volunteer. Event #2. 2018",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"Event #2",
+            "serviceType":"Service Learning",
+            "role":"volunteer",
+            "startDate":"2018-01-01T00:00:00",
+            "geoFocus":"New Zealand"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/outreach19691",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach",
+         "label":"volunteer. Event #3. 2017",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"Event #3",
+            "serviceType":"Consulting",
+            "role":"volunteer",
+            "startDate":"2017-01-01T00:00:00",
+            "geoFocus":"Australia"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/outreach19689",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach",
+         "label":"volunteer. Event #1. 2017",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"Event #1",
+            "serviceType":"Service Learning",
+            "role":"volunteer",
+            "startDate":"2017-01-01T00:00:00",
+            "geoFocus":"Australia"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/presentation100090005",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
+         "label":"Ths is the name of my talk. The State of Things. NPR. 2015",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"The State of Things",
+            "serviceType":"Keynote",
+            "nameOfTalk":"Ths is the name of my talk",
+            "description":"This is the summary of my talk.",
+            "hostOrganization":"NPR",
+            "locationOrVenue":"American Tobacco Campus, Durham, NC",
+            "startDate":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_univ300082223",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity",
+         "label":"My Curriculum Innovations. name. host. June 10, 2014 - January 28, 2020",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Curriculum Innovations",
+            "endDate":"2020-01-28T00:00:00",
+            "role":"My Curriculum Innovations",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2014-06-10T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_prof200042241",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession",
+         "label":"Tutor. Week of Tutoring Event. Duke University. 2014 - 2015",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"Week of Tutoring Event",
+            "serviceType":"Consulting",
+            "endDate":"2015-01-01T00:00:00",
+            "role":"Tutor",
+            "description":"A description of this activity",
+            "hostOrganization":"Duke University",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"Downtown Durham",
+            "startDate":"2014-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/presentation100090345",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
+         "label":"My Invited Talk. name. host. 2011 - 2014",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Invited Talk",
+            "endDate":"2014-01-01T00:00:00",
+            "nameOfTalk":"My Invited Talk",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2011-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_univ300081741",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity",
+         "label":"Professional Development Course. Lynda.com Host Org. February 2, 2010",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+            "serviceType":"Professional Development",
+            "role":"Professional Development Course",
+            "description":"A description of this activity",
+            "hostOrganization":"Lynda.com Host Org",
+            "locationOrVenue":"Lynda.com Venue/Location",
+            "startDate":"2010-02-02T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/outreach19569",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach",
+         "label":"Volunteer. Summer Volunteer Series. ECHO. 2008",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"Summer Volunteer Series",
+            "serviceType":"Advocacy",
+            "role":"Volunteer",
+            "description":"A description of my volunteer work.",
+            "hostOrganization":"ECHO",
+            "locationOrVenue":"Fort Meyers",
+            "startDate":"2008-01-01T00:00:00",
+            "geoFocus":"Florida"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/presentation100090344",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
+         "label":"My Interview. name. host. 2006 - 2008",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Interview",
+            "endDate":"2008-01-01T00:00:00",
+            "nameOfTalk":"My Interview",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2006-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_univ300082222",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity",
+         "label":"My Consulting. name. host. June 8, 2004 - January 28, 2020",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Consulting",
+            "endDate":"2020-01-28T00:00:00",
+            "role":"My Consulting",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearMonthDayPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2004-06-08T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/presentation100090343",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
+         "label":"International Meeting. name. host. 2004 - 2024",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"International Meeting or Conference",
+            "endDate":"2024-01-01T00:00:00",
+            "nameOfTalk":"International Meeting",
+            "description":"description",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2004-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/presentation100090342",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
+         "label":"Instructional course. name. host. 2004 - 2009",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Instructional Course, Workshop, or Symposium",
+            "endDate":"2009-01-01T00:00:00",
+            "nameOfTalk":"Instructional course",
+            "description":"description",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2004-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/presentation100090362",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
+         "label":"My NS Meeting. name. host. 2000 - 2024",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"National Scientific Meeting",
+            "endDate":"2024-01-01T00:00:00",
+            "nameOfTalk":"My NS Meeting",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2000-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/presentation100090363",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
+         "label":"My Other presentation. name. host. 2000 - 2005",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Other",
+            "endDate":"2005-01-01T00:00:00",
+            "nameOfTalk":"My Other presentation",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"2000-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/service_to_univ300082226",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity",
+         "label":"My Prof developmetn. name. host. 1984 - 2024",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Professional Development",
+            "endDate":"2024-01-01T00:00:00",
+            "role":"My Prof developmetn",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"1984-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/presentation100090364",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
+         "label":"My VP Lecture. name. host. 1984 - 2020",
+         "attributes":{
+            "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "serviceOrEventName":"name",
+            "serviceType":"Visiting Professorship Lecture",
+            "endDate":"2020-01-01T00:00:00",
+            "nameOfTalk":"My VP Lecture",
+            "description":"desc",
+            "hostOrganization":"host",
+            "endDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
+            "locationOrVenue":"venue",
+            "startDate":"1984-01-01T00:00:00"
+         }
+      }
+   ],
+   "positions":[
+      {
+         "uri":"https://scholars.duke.edu/individual/apt50000496_0482202",
+         "vivoType":"http://vivoweb.org/ontology/core#NonFacultyAcademicPosition",
+         "label":"Dir, IT",
+         "attributes":{
+            "schoolLabel":"Trinity College of Arts & Sciences",
+            "organizationLabel":"Biology",
+            "organizationUri":"https://scholars.duke.edu/individual/org50000496",
+            "rank":"6",
+            "appointmentTypeCode":"Staff",
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "schoolUri":"https://scholars.duke.edu/individual/org50000491"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/apt50000498_0482202",
+         "vivoType":"http://vivoweb.org/ontology/core#NonFacultyAcademicPosition",
+         "label":"Dir, IT",
+         "attributes":{
+            "schoolLabel":"Trinity College of Arts & Sciences",
+            "organizationLabel":"Chemistry",
+            "organizationUri":"https://scholars.duke.edu/individual/org50000498",
+            "rank":"6",
+            "appointmentTypeCode":"Staff",
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "schoolUri":"https://scholars.duke.edu/individual/org50000491"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/apt50000500_0482202",
+         "vivoType":"http://vivoweb.org/ontology/core#NonFacultyAcademicPosition",
+         "label":"Dir, IT",
+         "attributes":{
+            "schoolLabel":"Trinity College of Arts & Sciences",
+            "organizationLabel":"Computer Science",
+            "organizationUri":"https://scholars.duke.edu/individual/org50000500",
+            "rank":"6",
+            "appointmentTypeCode":"Staff",
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "schoolUri":"https://scholars.duke.edu/individual/org50000491"
+         }
+      }
+   ],
+   "addresses":[
+      {
+         "uri":"https://scholars.duke.edu/individual/per_addr0482202_work_location",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#Location",
+         "label":"2024 W Main St, Bay C Suite 102, Room C108, Durham, NC 27705",
+         "attributes":{
+            "city":"Durham",
+            "state":"NC",
+            "postalCode":"27705",
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "address1":"2024 W Main St, Bay C Suite 102, Room C108"
+         }
+      }
+   ],
+   "educations":[
+      
+   ],
+   "researchAreas":[
+      {
+         "uri":"https://scholars.duke.edu/individual/dukehttp://scholars.duke.edu/keywords/Muser_Mentor#concept",
+         "vivoType":"http://www.w3.org/2004/02/skos/core#Concept",
+         "label":"Muser Mentor",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/dukehttp://scholars.duke.edu/keywords/nanospinning#concept",
+         "vivoType":"http://www.w3.org/2004/02/skos/core#Concept",
+         "label":"Nanospinning",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202"
+         }
+      },
+      {
+         "uri":"http://id.loc.gov/authorities/subjects/sh85094833#concept",
+         "vivoType":"http://www.w3.org/2004/02/skos/core#Concept",
+         "label":"Ontology",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202"
+         }
+      }
+   ],
+   "webpages":[
+      
+   ],
+   "geographicalFocus":[
+      {
+         "uri":"http://dbpedia.org/resource/Arizona",
+         "vivoType":"GeographicRegion",
+         "label":"Arizona",
+         "attributes":{
+            "focusTypeLabel":"Teaching",
+            "focusType":"http://vivo.duke.edu/vivo/ontology/duke-geo-extension#GeographicTeaching",
+            "personUri":"https://scholars.duke.edu/individual/per0482202"
+         }
+      },
+      {
+         "uri":"http://aims.fao.org/aos/geopolitical.owl#Bahamas_the",
+         "vivoType":"GeographicRegion",
+         "label":"Bahamas",
+         "attributes":{
+            "focusTypeLabel":"Teaching",
+            "focusType":"http://vivo.duke.edu/vivo/ontology/duke-geo-extension#GeographicTeaching",
+            "personUri":"https://scholars.duke.edu/individual/per0482202"
+         }
+      },
+      {
+         "uri":"http://dbpedia.org/resource/Florida",
+         "vivoType":"GeographicRegion",
+         "label":"Florida",
+         "attributes":{
+            "focusTypeLabel":"Research",
+            "focusType":"http://vivo.duke.edu/vivo/ontology/duke-geo-extension#GeographicResearch",
+            "personUri":"https://scholars.duke.edu/individual/per0482202"
+         }
+      },
+      {
+         "uri":"http://aims.fao.org/aos/geopolitical.owl#Ghana",
+         "vivoType":"GeographicRegion",
+         "label":"Ghana",
+         "attributes":{
+            "focusTypeLabel":"Expertise",
+            "focusType":"http://vivo.duke.edu/vivo/ontology/duke-geo-extension#GeographicExpertise",
+            "personUri":"https://scholars.duke.edu/individual/per0482202"
+         }
+      },
+      {
+         "uri":"http://dbpedia.org/resource/Minnesota",
+         "vivoType":"GeographicRegion",
+         "label":"Minnesota",
+         "attributes":{
+            "focusTypeLabel":"Research",
+            "focusType":"http://vivo.duke.edu/vivo/ontology/duke-geo-extension#GeographicResearch",
+            "personUri":"https://scholars.duke.edu/individual/per0482202"
+         }
+      },
+      {
+         "uri":"http://dbpedia.org/resource/Taiwan",
+         "vivoType":"GeographicRegion",
+         "label":"Taiwan",
+         "attributes":{
+            "focusTypeLabel":"Research",
+            "focusType":"http://vivo.duke.edu/vivo/ontology/duke-geo-extension#GeographicResearch",
+            "personUri":"https://scholars.duke.edu/individual/per0482202"
+         }
+      }
+   ],
+   "newsfeeds":[
+      {
+         "uri":"https://scholars.duke.edu/individual/news0482202_manual33988",
+         "vivoType":"http://vivoweb.org/ontology/core#NewsRelease",
+         "label":"Q&A FDP's \"News Story\"",
+         "attributes":{
+            "newsDatetimeObj":"https://scholars.duke.edu/individual/dateValue20181127",
+            "newsLink":"http://www.duke.edu",
+            "newsDatetime":"2018-11-27T00:00:00",
+            "newsMonth":"11",
+            "newsDay":"27",
+            "newsYear":"2018",
+            "newsSource":"VIVO"
+         }
+      }
+   ],
+   "attributes":{
+      "imageThumbnail500Download":"https://scholars.duke.edu/individual/f0482202",
+      "officehours":"updating office hours updated 7.22.2021",
+      "preferredTitle":"Dir, IT",
+      "phoneNumber":"+1 919 660 0996",
+      "primaryEmail":"damaris.murry@duke.edu",
+      "profileURL":"https://scholars2-test.oit.duke.edu/person/damaris.murry",
+      "imageModTime":"2021-11-16T10:27:01",
+      "mentorshipOverview":"Something happens to the font when you include a numbered list:<br /><ol>\r\n<li>this is a test mentoring overview</li>\r\n<li>two</li>\r\n<li>three</li>\r\n<li>four</li>\r\n</ol>",
+      "imageUri":"https://scholars.duke.edu/individual/file_i0482202",
+      "mentorshipAvailabilities":"Fellow, Undergraduate",
+      "netid":"dm253",
+      "alternateId":"0614679",
+      "interestsOverview":"<strong>Investigating temperature impacts on snapping shrimp claw kinematics<br /></strong>Most movements in the animal kingdom are driven by direct muscle power. Such movements are limited in power-output, but some animals use specialized power amplification mechanisms to exceed this threshold and generate the fastest movements in the animal kingdom. One of these animals is the snapping shrimp, which produces the second loudest sound in the ocean using their specialized mechanism to close their claw at super-high speeds. Little is known about how temperature impacts these mechanisms, and the goal of this project is to increase this understanding. <br /><br />We have 1 opening in our lab. Students, click <a href=\"https://muser.duke.edu/projects/investigating-temperature-impacts-snapping-shrimp-claw-kinematics\">here </a>to apply in Muser!",
+      "imageDownload":"https://scholars.duke.edu/individual/i0482202",
+      "lastName":"Murry",
+      "firstName":"Damaris",
+      "imageThumbnailUri":"https://scholars.duke.edu/individual/file_t0482202",
+      "clinicalOverview":"I help clinically everyday",
+      "imageThumbnailDownload":"https://scholars.duke.edu/individual/t0482202",
+      "overview":"&lt;a href=\"\"&gt; www.duke.edu&lt;/a&gt;&nbsp; My Overivew.",
+      "preferredCitationFormat":"http://vivo.duke.edu/vivo/ontology/duke-extension#chicagoCitation",
+      "imageThumbnail500Uri":"https://scholars.duke.edu/individual/file_f0482202",
+      "imageFileName":"image_0482202.jpg",
+      "teachingActivities":"I like to teach! <a href=\"http://www.duke.edu\">www.duke.edu</a>"
+   },
+   "gifts":[
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. ",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. ",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. ",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. ",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related r",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related r",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related r",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related r",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"$15,000",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"$15,000",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"$15,000",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"$15,000",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"$15,000",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. ",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"$15,000",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. ",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"$15,000",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. ",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"$15,000",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. ",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"$15,000",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related r",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"$15,000",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related r",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"$15,000",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related r",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10140",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"Gift #2",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2015",
+            "donor":"Duke University",
+            "giftAmount":"$15,000",
+            "role":"Principal Investigator",
+            "dateTimeStart":"2014-01-01T00:00:00",
+            "description":"The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related research. The NIH both conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.The National Institutes of Health (NIH) is a biomedical research facility primarily located in Bethesda, Maryland. An agency of the United States Department of Health and Human Services, it is the primary agency of the United States government responsible for biomedical and health-related r",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2015",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2014",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2014-e2015",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2015-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10080",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"A gift for me",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "donor":"Duke University",
+            "giftAmount":"$100",
+            "role":"data curator",
+            "dateTimeStart":"2013-01-01T00:00:00",
+            "description":"here is a description of the gift I received",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2013",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2014",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2013",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2013-e2014",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2014-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10080",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"A gift for me",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "donor":"Duke University",
+            "giftAmount":"$100",
+            "role":"data curator",
+            "dateTimeStart":"2013-01-01T00:00:00",
+            "description":"here is a description of the gift I received",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2013",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2014",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2013",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2013-e2014",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2014-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10080",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"A gift for me",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "donor":"Duke University",
+            "giftAmount":"$100",
+            "role":"data curator",
+            "dateTimeStart":"2013-01-01T00:00:00",
+            "description":"here is a description of the gift I received",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2013",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2014",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2013",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2013-e2014",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2014-01-01T00:00:00"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/gift10080",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#Gift",
+         "label":"A gift for me",
+         "attributes":{
+            "dateTimeStartMonth":"1",
+            "dateTimeEndValue":"https://scholars.duke.edu/individual/dateValue2014",
+            "donor":"Duke University",
+            "giftAmount":"$100",
+            "role":"data curator",
+            "dateTimeStart":"2013-01-01T00:00:00",
+            "description":"here is a description of the gift I received",
+            "dateTimeStartValue":"https://scholars.duke.edu/individual/dateValue2013",
+            "dateTimeEndDay":"1",
+            "dateTimeEndYear":"2014",
+            "dateTimeStartDay":"1",
+            "dateTimeStartYear":"2013",
+            "dateTimeInterval":"https://scholars.duke.edu/individual/dateInterval-s2013-e2014",
+            "dateTimeEndMonth":"1",
+            "dateTimeEnd":"2014-01-01T00:00:00"
+         }
+      }
+   ],
+   "academicPositions":[
+      
+   ],
+   "licenses":[
+      {
+         "uri":"https://scholars.duke.edu/individual/medical_licensure10000",
+         "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-cv-extension#MedicalLicensure",
+         "label":"1234. Idaho. 2018",
+         "attributes":{
+            "number":"1234",
+            "state":"Idaho",
+            "datetime":"https://scholars.duke.edu/individual/dateValue2018",
+            "year":"2018-01-01T00:00:00"
+         }
+      }
+   ],
+   "pastAppointments":[
+      
+   ]
+}
