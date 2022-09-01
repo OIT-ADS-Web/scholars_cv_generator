@@ -60,23 +60,6 @@ class WidgetsParser {
       return this.pluralize(name)
   }
 
-  // stole from here:
-  // https://stackoverflow.com/questions/13627308/add-st-nd-rd-and-th-ordinal-suffix-to-a-number
-  ordinal_suffix_of(i) {
-    var j = i % 10,
-        k = i % 100;
-    if (j == 1 && k != 11) {
-        return i + "st";
-    }
-    if (j == 2 && k != 12) {
-        return i + "nd";
-    }
-    if (j == 3 && k != 13) {
-        return i + "rd";
-    }
-    return i + "th";
-  }
-  
   formatDatePrecision(date, precision) {
       var monthNames = ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"];
@@ -88,8 +71,7 @@ class WidgetsParser {
       } else if (precision == "http://vivoweb.org/ontology/core#yearMonthDayPrecision") {
         var month = monthNames[date.getMonth()]
         var day = date.getDate()
-        var dayString = `${this.ordinal_suffix_of(day)}`
-        return `${month} ${dayString}, ${year}`
+        return `${month} ${day}, ${year}`
       } else if (precision == "http://vivoweb.org/ontology/core#yearPrecision") {
           return `${year}`
       } else {
@@ -411,6 +393,10 @@ class WidgetsParser {
  
     let presentationLabel = (value) => {
       var full_label = value.attributes['nameOfTalk'];
+      
+      if (typeof value.attributes['serviceOrEventName'] != 'undefined') {
+        full_label += ". " + value.attributes['serviceOrEventName'];
+      }
 
       if (typeof value.attributes['locationOrVenue'] != 'undefined') {
         full_label += ". " + value.attributes['locationOrVenue'];
@@ -422,13 +408,15 @@ class WidgetsParser {
       var start_date = new Date(value.attributes['startDate']);
       var start_date_precision = value.attributes["startDatePrecision"]
 
-      var end_date = new Date(value.attributes['endDate']);
-      var end_date_precision = value.attributes["endDatePrecision"]
-
       let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
-      let endFormatted = this.formatDatePrecision(end_date, end_date_precision)
-
-      full_label += ". " + startFormatted + " - " + endFormatted
+      if (typeof end_date != 'undefined') {
+        var end_date = new Date(value.attributes['endDate']);
+        var end_date_precision = value.attributes["endDatePrecision"]
+        let endFormatted = this.formatDatePrecision(end_date, end_date_precision)
+        full_label += ". " + startFormatted + " - " + endFormatted
+      } else {
+        full_label += ". " + startFormatted
+      }
       return full_label;
     }
     let serviceToProfessionLabel = (value) => {
@@ -445,6 +433,20 @@ class WidgetsParser {
       if (typeof value.attributes['hostOrganization'] != 'undefined') {
         full_label  += ". " + value.attributes['hostOrganization'];
       }
+      var start_date = new Date(value.attributes['startDate']);
+      var start_date_precision = value.attributes["startDatePrecision"]
+
+      let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
+      if (typeof end_date != 'undefined') {
+        var end_date = new Date(value.attributes['endDate']);
+        var end_date_precision = value.attributes["endDatePrecision"]
+        let endFormatted = this.formatDatePrecision(end_date, end_date_precision)
+        full_label += ". " + startFormatted + " - " + endFormatted
+      } else {
+        full_label += ". " + startFormatted
+      }
+      return full_label;
+ 
       return full_label;
     }
     let serviceToUniversityLabel = (value) => {
@@ -462,14 +464,16 @@ class WidgetsParser {
       }
       var start_date = new Date(value.attributes['startDate']);
       var start_date_precision = value.attributes["startDatePrecision"]
-
-      var end_date = new Date(value.attributes['endDate']);
-      var end_date_precision = value.attributes["endDatePrecision"]
-
       let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
-      let endFormatted = this.formatDatePrecision(end_date, end_date_precision)
-
-      full_label += ". " + startFormatted + " - " + endFormatted
+      
+      if (typeof value.attributes['endDate'] != 'undefined') {
+        var end_date = new Date(value.attributes['endDate']);
+        var end_date_precision = value.attributes["endDatePrecision"]
+        let endFormatted = this.formatDatePrecision(end_date, end_date_precision)
+        full_label += ". " + startFormatted + " - " + endFormatted
+      } else {
+        full_label += ". " + startFormatted
+      }
       return full_label;
     }
     let outreachLabel = (value) => {
