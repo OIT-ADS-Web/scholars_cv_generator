@@ -368,15 +368,11 @@ class WidgetsParser {
       // FIXME: can any, all of these be null?
       var service = value['attributes']['serviceType']
       var awardedBy = value['attributes']['awardedBy']
-      var link = value['attributes']['awardedByUri']
       var name = value['attributes']['name']
       var date = new Date(value['attributes']['date'])
       var precision = value['attributes']['datePrecision']
       var dateFormatted = this.formatDatePrecision(date, precision)
       var award = `${name} (${service}). ${awardedBy}. ${dateFormatted}. `
-      if (link) {
-        award = award + `${link}`
-      }
       awardList.push({'label': award});
     });
     return {'awards': awardList}
