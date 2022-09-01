@@ -450,7 +450,16 @@ class WidgetsParser {
       return full_label;
     }
     let serviceToUniversityLabel = (value) => {
-      var full_label = value.attributes['role']; // always role?
+      // NOTE: has to be either 'role' or 'committeeName and committeeType'
+      var full_label = ''
+      if (typeof value.attributes['role'] != 'undefined') {
+        let role = value.attributes['role']
+        full_label = `${role}`
+      } else {
+        let committeeName = value.attributes['committeeName']
+        let committeeType = value.attributes['committeeType']
+        full_label = `${committeeName}. ${committeeType}`
+      }
       if (typeof value.attributes['serviceOrEventName'] != 'undefined') {
         full_label += ". " + value.attributes['serviceOrEventName'];
       }
