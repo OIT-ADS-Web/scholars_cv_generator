@@ -107,6 +107,11 @@ class WidgetsParser {
     return {'email': email }
   }
 
+  parseProfileUrl(data) {
+    let url = data['attributes']['profileUrl'];
+    return {'profileUrl': url }
+  }
+
   parseLocations(data) {
     let addresses = data['addresses'] || [];
     var locations = [];
@@ -748,13 +753,18 @@ class WidgetsParser {
   };
 
   parseWebpages(data) {
+    // only care about these 'categories':
+    // LinkedIn | Twitter | Personal Website | Lab Website | Google Scholar | Scholars@Duke Pro
+    let categories = ['Lab Page', 'LinkedIn', 'Twitter', 'Google Scholar', 'Personal Page']
     var webpages = data['webpages'] || [];
     var weblinks = []
     webpages.forEach((value) => {
       let label = value['label']
       let linkUri = value.attributes['linkURI']
       let category = value.attributes['category']
-      weblinks.push({'category': category, 'label':label, 'uri': linkUri})
+      if (categories.includes(category)) {
+        weblinks.push({'category': category, 'label':label, 'uri': linkUri})
+      }
     });
     let grouped = _.groupBy(weblinks, 'category')
     return {'weblinks': grouped}
@@ -785,6 +795,7 @@ class WidgetsParser {
     _.merge(results, this.parseName(data))
     _.merge(results, this.parsePhone(data))
     _.merge(results, this.parseEmail(data))
+    _.merge(results, this.parseProfileUrl(data))
     _.merge(results, this.parseTitle(data))
     _.merge(results, this.parseLocations(data))
     _.merge(results, this.parseAddresses(data))
