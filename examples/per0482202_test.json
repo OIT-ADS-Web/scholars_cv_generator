@@ -1,7 +1,7 @@
 {
    "uri":"https://scholars.duke.edu/individual/per0482202",
    "active":true,
-   "updatedAt":"2022-08-19T16:04:47Z",
+   "updatedAt":"2022-08-31T20:17:49Z",
    "vivoType":"http://vivoweb.org/ontology/core#NonFacultyAcademic",
    "label":"Murry, Damaris",
    "title":"Dir, IT",
@@ -23,6 +23,33 @@
             "authorshipType":"http://vivoweb.org/ontology/core#Authorship",
             "subtypes":"",
             "nlmCitation":"<div>Murry D. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1452214\">Test PrePrint Publication for Damaris</a>. 2021.</div>"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/pub1442111",
+         "vivoType":"http://purl.org/ontology/bibo/AcademicArticle",
+         "label":"The orbital hoods of snapping shrimp have surface features that may represent tradeoffs between vision and protection. -- MANUAL RECORD FOR TESTING",
+         "attributes":{
+            "icmjeCitation":"<div>Kingston ACN, Chappell DR, Koch L, Johnsen S, Speiser DI. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1442111\">The orbital hoods of snapping shrimp have surface features that may represent tradeoffs between vision and protection. -- MANUAL RECORD FOR TESTING</a>. Arthropod Structure &amp; Development. 2021 Mar;61:101025–101025.</div>",
+            "mlaCitation":"<div>Kingston, Alexandra C. N., et al. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub1442111\">The orbital hoods of snapping shrimp have surface features that may represent tradeoffs between vision and protection. -- MANUAL RECORD FOR TESTING</a>.” <i>Arthropod Structure &amp; Development</i>, vol. 61, Mar. 2021, pp. 101025–101025. <i>Manual</i>, doi:10.1016/j.asd.2020.101025.</div>",
+            "isFavorite":"false",
+            "authorList":"Kingston, ACN; Chappell, DR; Koch, L; Johnsen, S; Speiser, DI",
+            "datetime":"https://scholars.duke.edu/individual/dateValue202103",
+            "abstract":"Snapping shrimp (Alpheidae) are decapod crustaceans named for the snapping claws with which they produce cavitation bubbles. Snapping shrimp use the shock waves released by collapsing cavitation bubbles as weapons. Along with their distinctive claws, snapping shrimp have orbital hoods, extensions of their carapace that cover their heads and eyes. Snapping shrimp view the world through their orbital hoods, so we asked if the surfaces of the orbital hoods of the snapping shrimp Alpheus heterochaelis have features that minimize the scattering of light. Using SEM, we found that surface features, primarily microbial epibionts, covered less space on the surfaces of the orbital hoods of A. heterochaelis (∼18%) than they do elsewhere on the carapace (∼50%). Next, we asked if these surface features influence aerophobicity. By measuring the contact angles of air bubbles, we found the orbital hoods of A. heterochaelis are less aerophobic than other regions of the carapace. Surfaces that are less aerophobic are more likely to have cavitation bubbles adhere to them and are more likely to have shock waves cause new cavitation bubbles to nucleate upon them. Computational modeling indicates the orbital hoods of A. heterochaelis face a functional trade-off: fewer surface features, such as less extensive communities of microbial epibionts, may minimize the scattering of light at the cost of making the adhesion and nucleation of cavitation bubbles more likely.",
+            "pmid":"33508710",
+            "apaCitation":"<div>Kingston, A. C. N., Chappell, D. R., Koch, L., Johnsen, S., &amp; Speiser, D. I. (2021). <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1442111\">The orbital hoods of snapping shrimp have surface features that may represent tradeoffs between vision and protection. -- MANUAL RECORD FOR TESTING</a>. <i>Arthropod Structure &amp; Development</i>, <i>61</i>, 101025–101025. https://doi.org/10.1016/j.asd.2020.101025</div>",
+            "year":"2021-03-01T00:00:00",
+            "endPage":"101025",
+            "publicationSource":"manual",
+            "chicagoCitation":"<div>Kingston, Alexandra C. N., Daniel R. Chappell, Loann Koch, Sönke Johnsen, and Daniel I. Speiser. “<a href=\"https://scholars2-test.oit.duke.edu/individual/pub1442111\">The orbital hoods of snapping shrimp have surface features that may represent tradeoffs between vision and protection. -- MANUAL RECORD FOR TESTING</a>.” <i>Arthropod Structure &amp; Development</i> 61 (March 2021): 101025–101025. https://doi.org/10.1016/j.asd.2020.101025.</div>",
+            "authorshipType":"http://vivoweb.org/ontology/core#Authorship",
+            "subtypes":"Short Story",
+            "nlmCitation":"<div>Kingston ACN, Chappell DR, Koch L, Johnsen S, Speiser DI. <a href=\"https://scholars2-test.oit.duke.edu/individual/pub1442111\">The orbital hoods of snapping shrimp have surface features that may represent tradeoffs between vision and protection. -- MANUAL RECORD FOR TESTING</a>. Arthropod Structure &amp; Development. 2021 Mar;61:101025–101025.</div>",
+            "publicationVenue":"https://scholars.duke.edu/individual/jou1467-8039",
+            "publishedIn":"Arthropod Structure & Development",
+            "startPage":"101025",
+            "doi":"10.1016/j.asd.2020.101025",
+            "volume":"61"
          }
       },
       {
@@ -250,7 +277,7 @@
             "type_description":"Audio Recording",
             "link_url":"http://www.duke.edu",
             "date_precision":"http://vivoweb.org/ontology/core#yearPrecision",
-            "collaborators":"Damaris Murry"
+            "collaborators":"Damaris Murry; Lamont Cannon"
          }
       },
       {
@@ -259,7 +286,7 @@
          "label":"My Painted Costume",
          "attributes":{
             "role":"Consultant, Creator, Designer",
-            "abstract":"abstract of my work",
+            "abstract":"a longer abstract of my work",
             "commissioning_body":"Duke University Libraries",
             "role_description":"Consultant 2020-2022\r\nDesigner 1995-2019",
             "link_label":"View image here",
@@ -267,7 +294,7 @@
             "type_description":"Costume Design, Painting",
             "link_url":"http://www.duke.edu",
             "date_precision":"http://vivoweb.org/ontology/core#yearPrecision",
-            "collaborators":"Damaris Murry"
+            "collaborators":"Damaris Murry; Lamont Cannon; Somebody not from Duke"
          }
       }
    ],
@@ -280,6 +307,27 @@
             "description":"this was a special screening on the east campus lawn",
             "startYear":"2017-04-19T00:00:00",
             "venue":"Duke University, Durham, NC"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/artevent_25560",
+         "vivoType":"http://purl.org/NET/c4dm/event.owl#Event",
+         "label":"Name of Work test | Event Title at Venue name",
+         "attributes":{
+            "description":"Description of Event",
+            "startYear":"2014-07-11T00:00:00",
+            "endYear":"2028-10-24T00:00:00",
+            "venue":"Venue name"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/artevent_25561",
+         "vivoType":"http://purl.org/NET/c4dm/event.owl#Event",
+         "label":"Phantom of the Opera | private screening at Los Angeles, CA",
+         "attributes":{
+            "description":"Description of the PHantom of the Opera event",
+            "startYear":"2013-12-01T00:00:00",
+            "venue":"Los Angeles, CA"
          }
       }
    ],
@@ -310,12 +358,13 @@
       {
          "uri":"https://scholars.duke.edu/individual/presentation100090381",
          "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
-         "label":"My Keynote. series. host. 2028",
+         "label":"My Keynote. series name. host. 2028",
          "attributes":{
             "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
-            "serviceOrEventName":"series",
+            "serviceOrEventName":"series name",
             "serviceType":"Keynote/Named Lecture",
             "nameOfTalk":"My Keynote",
+            "description":"A very long description of my most excellent keynote....\r\n\r\nLine 2",
             "hostOrganization":"host",
             "locationOrVenue":"venue",
             "startDate":"2028-01-01T00:00:00"
@@ -599,10 +648,10 @@
       {
          "uri":"https://scholars.duke.edu/individual/presentation100090345",
          "vivoType":"http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation",
-         "label":"My Invited Talk. name. host. 2011 - 2014",
+         "label":"My Invited Talk. series name. host. 2011 - 2014",
          "attributes":{
             "startDatePrecision":"http://vivoweb.org/ontology/core#yearPrecision",
-            "serviceOrEventName":"name",
+            "serviceOrEventName":"series name",
             "serviceType":"Invited Talk",
             "endDate":"2014-01-01T00:00:00",
             "nameOfTalk":"My Invited Talk",
@@ -868,7 +917,196 @@
       }
    ],
    "webpages":[
-      
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212406",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"       x",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Other",
+            "linkURI":"http://unc.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212461",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"  test  ",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Other",
+            "linkURI":"http://www.duke.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212408",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"&",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Other",
+            "linkURI":"http://unc.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212407",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"*",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Other",
+            "linkURI":"http://unc.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212404",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"1",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Other",
+            "linkURI":"http://unc.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212405",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"9",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Other",
+            "linkURI":"http://unc.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212401",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"A",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Other",
+            "linkURI":"http://unc.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212403",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"D",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Other",
+            "linkURI":"http://unc.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212566",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"Department Profile",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Other",
+            "linkURI":"http://www.duke.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212560",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"Google Scholar Page",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Google Scholar",
+            "linkURI":"http://www.duke.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212561",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"LinkedIn",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"LinkedIn",
+            "linkURI":"https://www.linkedin.com/in/damarismurry/"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212402",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"M",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Other",
+            "linkURI":"http://unc.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212564",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"Murry Lab",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Lab Page",
+            "linkURI":"http://www.duke.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212543",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"My CV",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"CV",
+            "linkURI":"http://www.duke.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212563",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"My Website",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Personal Page",
+            "linkURI":"http://www.duke.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212562",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"Twitter",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Twitter",
+            "linkURI":"http://www.duke.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212565",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"Vimeo",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Digital Recording",
+            "linkURI":"http://www.duke.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212400",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"Z",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Other",
+            "linkURI":"http://unc.edu"
+         }
+      },
+      {
+         "uri":"https://scholars.duke.edu/individual/urllink048220212460",
+         "vivoType":"http://www.w3.org/2006/vcard/ns#URL",
+         "label":"z",
+         "attributes":{
+            "personUri":"https://scholars.duke.edu/individual/per0482202",
+            "category":"Other",
+            "linkURI":"http://www.duke.edu"
+         }
+      }
    ],
    "geographicalFocus":[
       {
@@ -955,7 +1193,7 @@
       "phoneNumber":"+1 919 660 0996",
       "primaryEmail":"damaris.murry@duke.edu",
       "profileURL":"https://scholars2-test.oit.duke.edu/person/damaris.murry",
-      "imageModTime":"2021-11-16T10:27:01",
+      "imageModTime":"2022-08-31T16:16:47",
       "mentorshipOverview":"Something happens to the font when you include a numbered list:<br /><ol>\r\n<li>this is a test mentoring overview</li>\r\n<li>two</li>\r\n<li>three</li>\r\n<li>four</li>\r\n</ol>",
       "imageUri":"https://scholars.duke.edu/individual/file_i0482202",
       "mentorshipAvailabilities":"Fellow, Undergraduate",
