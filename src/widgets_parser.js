@@ -107,6 +107,11 @@ class WidgetsParser {
     return {'email': email }
   }
 
+  parseProfileUrl(data) {
+    let url = data['attributes']['profileUrl'];
+    return {'profileUrl': url }
+  }
+
   parseLocations(data) {
     let addresses = data['addresses'] || [];
     var locations = [];
@@ -394,13 +399,14 @@ class WidgetsParser {
         full_label += ". " + value.attributes['serviceOrEventName'];
       }
 
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
+
       if (typeof value.attributes['locationOrVenue'] != 'undefined') {
         full_label += ". " + value.attributes['locationOrVenue'];
       }
 
-      if (typeof value.attributes['hostOrganization'] != 'undefined') {
-        full_label  += ". " + value.attributes['hostOrganization'];
-      }
       var start_date = new Date(value.attributes['startDate']);
       var start_date_precision = value.attributes["startDatePrecision"]
 
@@ -422,13 +428,14 @@ class WidgetsParser {
         full_label += ". " + value.attributes['serviceOrEventName'];
       }
 
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
+
       if (typeof value.attributes['locationOrVenue'] != 'undefined') {
         full_label += ". " + value.attributes['locationOrVenue'];
       }
 
-      if (typeof value.attributes['hostOrganization'] != 'undefined') {
-        full_label  += ". " + value.attributes['hostOrganization'];
-      }
       var start_date = new Date(value.attributes['startDate']);
       var start_date_precision = value.attributes["startDatePrecision"]
 
@@ -460,13 +467,14 @@ class WidgetsParser {
         full_label += ". " + value.attributes['serviceOrEventName'];
       }
 
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
+
       if (typeof value.attributes['locationOrVenue'] != 'undefined') {
         full_label += ". " + value.attributes['locationOrVenue'];
       }
 
-      if (typeof value.attributes['hostOrganization'] != 'undefined') {
-        full_label  += ". " + value.attributes['hostOrganization'];
-      }
       var start_date = new Date(value.attributes['startDate']);
       var start_date_precision = value.attributes["startDatePrecision"]
       let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
@@ -486,10 +494,19 @@ class WidgetsParser {
       if (typeof value.attributes['serviceOrEventName'] != 'undefined') {
         full_label += ". " + value.attributes['serviceOrEventName'];
       }
+
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
+
+      if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+        full_label += ". " + value.attributes['locationOrVenue'];
+      }
+
       if (typeof value.attributes['geoFocus'] != 'undefined') {
         full_label += ". " + value.attributes['geoFocus'];
       }
-
+ 
       var start_date = new Date(value.attributes['startDate']);
       var start_date_precision = value.attributes["startDatePrecision"]
       let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
@@ -736,13 +753,19 @@ class WidgetsParser {
   };
 
   parseWebpages(data) {
+    // only care about these 'categories':
+    // LinkedIn | Twitter | Personal Website | Lab Website | Google Scholar | Scholars@Duke Pro
+    let categories = ['Lab Page', 'LinkedIn', 'Twitter', 'Google Scholar', 'Personal Page']
     var webpages = data['webpages'] || [];
     var weblinks = []
     webpages.forEach((value) => {
       let label = value['label']
       let linkUri = value.attributes['linkURI']
       let category = value.attributes['category']
-      weblinks.push({'category': category, 'label':label, 'uri': linkUri})
+      if (categories.includes(category)) {
+        let replaceCategory = category.replace('Page', 'Website')
+        weblinks.push({'category': replaceCategory, 'label':label, 'uri': linkUri})
+      }
     });
     let grouped = _.groupBy(weblinks, 'category')
     return {'weblinks': grouped}
@@ -754,12 +777,11 @@ class WidgetsParser {
 
     _.forEach(gifts, function(value) {
         var title = value['label'];
-        var role = value.attributes['role'];
         var donor = value.attributes['donor'];
         var end = value.attributes['dateTimeEndYear']
         var start = value.attributes['dateTimeStartYear']
      
-        let label = `${title} - ${role}/${donor} (${start}-${end})` 
+        let label = `${title} - awarded by ${donor} (${start}-${end})` 
         giftList.push({'label': label})
     });
     // TODO: not sure if this is the goal
@@ -773,6 +795,7 @@ class WidgetsParser {
     _.merge(results, this.parseName(data))
     _.merge(results, this.parsePhone(data))
     _.merge(results, this.parseEmail(data))
+    _.merge(results, this.parseProfileUrl(data))
     _.merge(results, this.parseTitle(data))
     _.merge(results, this.parseLocations(data))
     _.merge(results, this.parseAddresses(data))

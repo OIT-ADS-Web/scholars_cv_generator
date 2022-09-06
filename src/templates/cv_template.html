@@ -96,6 +96,18 @@
     </div>
     <% } %>
 
+    <!-- LinkedIn | Twitter | Personal Website | Lab Website | Google Scholar | Scholars@Duke Pro -->
+    <% if (Object.keys(weblinks).length > 0) { %>
+     <div class="row">
+      <% _.map(weblinks, function(val, key) { %>
+        <span>
+          <a href="<%= val[0]['uri'] %>"><%= key %></a>
+        </span> |
+      <% }); %>
+      <span><a href="${profileUrl}">Scholars@Duke Profile</a></span>
+     </div>
+    <% } %>
+
     <% if (primaryPositions.length > 0 || secondaryPositions.length > 0) { %>
     <div class="row">
       <div class="heading_10">CURRENT APPOINTMENTS AND AFFILIATIONS</div>
@@ -141,20 +153,6 @@
       <% }); %>
     </div>
     </div>
-    <% } %>
-
-    <% if (Object.keys(weblinks).length > 0) { %>
-     <div class="row">
-       <div class="heading_10">Links</div>
-       <div class="regular_10">
-        <% _.map(weblinks, function(val, key) { %>
-          <div class="heading_12"><%= key %></div>
-          <% _.forEach(val, function(item) { %>
-            <p><%= item['label'] %>(<%= item['uri'] %>)</p>
-          <% }); %>
-        <% }); %>
-       </div>
-     </div>
     <% } %>
 
     <div class="row">
