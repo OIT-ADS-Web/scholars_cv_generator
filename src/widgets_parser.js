@@ -776,12 +776,11 @@ class WidgetsParser {
 
     _.forEach(gifts, function(value) {
         var title = value['label'];
-        var role = value.attributes['role'];
         var donor = value.attributes['donor'];
         var end = value.attributes['dateTimeEndYear']
         var start = value.attributes['dateTimeStartYear']
      
-        let label = `${title} - ${role}/${donor} (${start}-${end})` 
+        let label = `${title} - awarded by ${donor} (${start}-${end})` 
         giftList.push({'label': label})
     });
     // TODO: not sure if this is the goal
