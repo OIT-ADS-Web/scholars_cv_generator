@@ -394,13 +394,14 @@ class WidgetsParser {
         full_label += ". " + value.attributes['serviceOrEventName'];
       }
 
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
+
       if (typeof value.attributes['locationOrVenue'] != 'undefined') {
         full_label += ". " + value.attributes['locationOrVenue'];
       }
 
-      if (typeof value.attributes['hostOrganization'] != 'undefined') {
-        full_label  += ". " + value.attributes['hostOrganization'];
-      }
       var start_date = new Date(value.attributes['startDate']);
       var start_date_precision = value.attributes["startDatePrecision"]
 
@@ -422,13 +423,14 @@ class WidgetsParser {
         full_label += ". " + value.attributes['serviceOrEventName'];
       }
 
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
+
       if (typeof value.attributes['locationOrVenue'] != 'undefined') {
         full_label += ". " + value.attributes['locationOrVenue'];
       }
 
-      if (typeof value.attributes['hostOrganization'] != 'undefined') {
-        full_label  += ". " + value.attributes['hostOrganization'];
-      }
       var start_date = new Date(value.attributes['startDate']);
       var start_date_precision = value.attributes["startDatePrecision"]
 
@@ -460,13 +462,14 @@ class WidgetsParser {
         full_label += ". " + value.attributes['serviceOrEventName'];
       }
 
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
+
       if (typeof value.attributes['locationOrVenue'] != 'undefined') {
         full_label += ". " + value.attributes['locationOrVenue'];
       }
 
-      if (typeof value.attributes['hostOrganization'] != 'undefined') {
-        full_label  += ". " + value.attributes['hostOrganization'];
-      }
       var start_date = new Date(value.attributes['startDate']);
       var start_date_precision = value.attributes["startDatePrecision"]
       let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
@@ -486,10 +489,19 @@ class WidgetsParser {
       if (typeof value.attributes['serviceOrEventName'] != 'undefined') {
         full_label += ". " + value.attributes['serviceOrEventName'];
       }
+
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
+
+      if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+        full_label += ". " + value.attributes['locationOrVenue'];
+      }
+
       if (typeof value.attributes['geoFocus'] != 'undefined') {
         full_label += ". " + value.attributes['geoFocus'];
       }
-
+ 
       var start_date = new Date(value.attributes['startDate']);
       var start_date_precision = value.attributes["startDatePrecision"]
       let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
