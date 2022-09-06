@@ -763,7 +763,8 @@ class WidgetsParser {
       let linkUri = value.attributes['linkURI']
       let category = value.attributes['category']
       if (categories.includes(category)) {
-        weblinks.push({'category': category, 'label':label, 'uri': linkUri})
+        let replaceCategory = category.replace('Page', 'Website')
+        weblinks.push({'category': replaceCategory, 'label':label, 'uri': linkUri})
       }
     });
     let grouped = _.groupBy(weblinks, 'category')
