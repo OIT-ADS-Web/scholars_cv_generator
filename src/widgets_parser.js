@@ -108,7 +108,7 @@ class WidgetsParser {
   }
 
   parseProfileUrl(data) {
-    let url = data['attributes']['profileUrl'];
+    let url = data['attributes']['profileURL'];
     return {'profileUrl': url }
   }
 
