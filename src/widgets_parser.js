@@ -369,15 +369,18 @@ class WidgetsParser {
     let awards = data['awards'];
     var awardList = [];
     awards.forEach((value) => {
-      var label = value['label']
+      let label = value['label']
       // FIXME: can any, all of these be null?
-      var service = value['attributes']['serviceType']
-      var awardedBy = value['attributes']['awardedBy']
-      var name = value['attributes']['name']
-      var date = new Date(value['attributes']['date'])
-      var precision = value['attributes']['datePrecision']
-      var dateFormatted = this.formatDatePrecision(date, precision)
-      var award = `${name} (${service}). ${awardedBy}. ${dateFormatted}. `
+      let service = value['attributes']['serviceType']
+      let awardedBy = value['attributes']['awardedBy']
+      let name = value['attributes']['name']
+      let date = new Date(value['attributes']['date'])
+      let precision = value['attributes']['datePrecision']
+      let dateFormatted = this.formatDatePrecision(date, precision)
+      var award = `${name} (${service}). ${awardedBy}. ${dateFormatted}`
+      if (typeof value.attributes['weblink'] != 'undefined') {
+        award += ". " + value.attributes['weblink'];
+      }
       awardList.push({'label': award});
     });
     return {'awards': awardList}
@@ -419,6 +422,10 @@ class WidgetsParser {
       } else {
         full_label += ". " + startFormatted
       }
+      if (typeof value.attributes['weblink'] != 'undefined') {
+        full_label += ". " + value.attributes['weblink'];
+      }
+
       return full_label;
     }
     let serviceToProfessionLabel = (value) => {
@@ -448,8 +455,10 @@ class WidgetsParser {
       } else {
         full_label += ". " + startFormatted
       }
-      return full_label;
- 
+      if (typeof value.attributes['weblink'] != 'undefined') {
+        full_label += ". " + value.attributes['weblink'];
+      }
+
       return full_label;
     }
     let serviceToUniversityLabel = (value) => {
@@ -487,6 +496,10 @@ class WidgetsParser {
       } else {
         full_label += ". " + startFormatted
       }
+      if (typeof value.attributes['weblink'] != 'undefined') {
+        full_label += ". " + value.attributes['weblink'];
+      }
+
       return full_label;
     }
     let outreachLabel = (value) => {
@@ -512,6 +525,10 @@ class WidgetsParser {
       let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
  
       full_label += ". " + startFormatted
+      if (typeof value.attributes['weblink'] != 'undefined') {
+        full_label += ". " + value.attributes['weblink'];
+      }
+
       return full_label;
     }
 
