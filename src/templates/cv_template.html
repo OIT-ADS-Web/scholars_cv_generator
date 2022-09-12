@@ -708,20 +708,16 @@
     </div>
     <% } %>
 
-    <% if (grants.length > 0) { %>
-    <div class="row">
+    <% if (allGrants.length > 0) { %>
     <div class="heading_10">GRANTS, FELLOWSHIPS AND SUPPORTED RESEARCH</div>
-    <div class="regular_10">
-      <% _.forEach(grants, function(item) { %>
-          <p><%= item['label'] %>
-          <%= item['awardedBy'] %>
-          <%= item['startDate'] %>
-          <%= item['endDate'] %>
-          (<%= item['role'] %>)</p>
-    <% }); %>
-    </div>
+      <div class="regular_10">
+      <% _.forEach(allGrants, function(item) { %>
+        <p><%= item['label'] %></p>
+      <% }); %>
     </div>
     <% } %>
+
+
 
     <% if (teaching_activities) { %>
     <div class="row">
@@ -816,17 +812,6 @@
       <div class="regular_10"><p>${clinical_activities}</p></div>
     </div>
     <% } %>
-
-    <% if (gifts.length > 0) { %>
-    <div class="heading_10_sub">Fellowship, Supported Research &amp; Other Grants</div>
-      <div class="regular_10">
-      <% _.forEach(gifts, function(item) { %>
-        <p><%= item['label'] %></p>
-      <% }); %>
-    </div>
-    <% } %>
-
-
 
  </div>
 </body>

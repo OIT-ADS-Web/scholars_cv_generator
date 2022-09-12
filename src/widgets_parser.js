@@ -350,21 +350,6 @@ class WidgetsParser {
     return {'teaching': courses}
   }
 
-  parseGrants(data) {
-    let grants = data['grants'];
-    var grantList = []
-    _.forEach(grants, function(value) {
-      var label = value['label'] + ", awarded by "
-      var awardedBy = value.attributes['awardedBy'] + ", ";
-      var startDate = value.attributes['startDate'].substr(0,4) + " - ";
-      var endDate = value.attributes['endDate'].substr(0,4) + " ";
-      var role = value.attributes['roleName'];
-      grantList.push({'label':label, 'awardedBy': awardedBy,
-                              'startDate': startDate, 'endDate': endDate, 'role': role});
-    });
-    return {'grants': grantList }
-  };
-
   parseAwards(data) {
     let awards = data['awards'];
     var awardList = [];
@@ -788,21 +773,44 @@ class WidgetsParser {
     return {'weblinks': grouped}
   };
 
-  parseGifts(data) {
-    var gifts = data['gifts'] || [];
-    var giftList = []
+  parseGrantsAndGifts(data) {
+    let grants = data['grants'] || [];
+    let gifts = data['gifts'] || [];
+    let allGrants = [];
 
-    _.forEach(gifts, function(value) {
-        var title = value['label'];
-        var donor = value.attributes['donor'];
-        var end = value.attributes['dateTimeEndYear']
-        var start = value.attributes['dateTimeStartYear']
-     
-        let label = `${title} - awarded by ${donor} (${start}-${end})` 
-        giftList.push({'label': label})
+    grants.forEach((value) => {
+      let startDate = new Date(value.attributes['startDate']);
+      let endDate = new Date(value.attributes['endDate']);
+
+      let period = startDate.getFullYear() + " - " + endDate.getFullYear();
+      let title = value['label'] + ", awarded by " + value.attributes['awardedBy'];
+
+      let full_label = `${title} ${period}`
+      if (typeof value.attributes['roleName'] != 'undefined') {
+        let role = value.attributes['roleName']
+        full_label += ` (${role})`;
+      }
+
+      allGrants.push({'label': full_label})
     });
-    // TODO: not sure if this is the goal
-    let results = {'gifts': giftList }
+
+    gifts.forEach((value) => {
+      var startDate = new Date(value.attributes['dateTimeStart']);
+      var endDate = new Date(value.attributes['dateTimeEnd']);
+
+      let period = startDate.getFullYear() + " - " + endDate.getFullYear();
+      let title = value['label'] + ", awarded by " + value.attributes['donor'];
+
+      let full_label = `${title} ${period}`
+      if (typeof value.attributes['roleName'] != 'undefined') {
+        let role = value.attributes['roleName']
+        full_label += ` (${role})`;
+      }
+
+      allGrants.push({'label': full_label})
+    });
+
+    let results = {'allGrants': allGrants }
     return results
   };
 
@@ -821,7 +829,6 @@ class WidgetsParser {
     _.merge(results, this.parseResearchInterests(data))
     _.merge(results, this.parsePublications(data))
     _.merge(results, this.parseTeaching(data))
-    _.merge(results, this.parseGrants(data))
     _.merge(results, this.parseAwards(data))
     _.merge(results, this.parseProfessionalActivities(data))
     _.merge(results, this.parsepastAppointments(data))
@@ -835,7 +842,7 @@ class WidgetsParser {
     _.merge(results, this.parseCurrentResearchInterests(data))
     _.merge(results, this.parseLeadershipPositions(data))
     _.merge(results, this.parseWebpages(data))
-    _.merge(results, this.parseGifts(data))
+    _.merge(results, this.parseGrantsAndGifts(data))
  
     return results
   }
