@@ -782,8 +782,8 @@ class WidgetsParser {
       let startDate = new Date(value.attributes['startDate']);
       let endDate = new Date(value.attributes['endDate']);
 
+      // assumes always start/end date?
       let period = startDate.getFullYear() + " - " + endDate.getFullYear();
-      // not always start date/end date
       let title = value['label'] + ", awarded by " + value.attributes['awardedBy'];
 
       let full_label = `${title} ${period}`
