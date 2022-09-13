@@ -782,6 +782,7 @@ class WidgetsParser {
       let startDate = new Date(value.attributes['startDate']);
       let endDate = new Date(value.attributes['endDate']);
 
+      // assumes always start/end date?
       let period = startDate.getFullYear() + " - " + endDate.getFullYear();
       let title = value['label'] + ", awarded by " + value.attributes['awardedBy'];
 
@@ -791,14 +792,23 @@ class WidgetsParser {
         full_label += ` (${role})`;
       }
 
-      allGrants.push({'label': full_label})
+      allGrants.push({'label': full_label, 
+        'startYear': startDate.getFullYear(), 
+        'endYear': endDate.getFullYear()}
+      )
     });
 
     gifts.forEach((value) => {
-      var startDate = new Date(value.attributes['dateTimeStart']);
-      var endDate = new Date(value.attributes['dateTimeEnd']);
-
-      let period = startDate.getFullYear() + " - " + endDate.getFullYear();
+      // assumes *all* have at least start date
+      let startDate = new Date(value.attributes['dateTimeStart']);
+      let startYear = startDate.getFullYear()
+      let endYear = startYear // default in case missing
+      let period = `${startYear}`;
+      if (typeof value.attributes['dateTimeEnd'] != 'undefined') {
+        let endDate = new Date(value.attributes['dateTimeEnd']);
+        let endYear = endDate.getFullYear()
+        period += " - " + `${endYear}`
+      }
       let title = value['label'] + ", awarded by " + value.attributes['donor'];
 
       let full_label = `${title} ${period}`
@@ -807,9 +817,14 @@ class WidgetsParser {
         full_label += ` (${role})`;
       }
 
-      allGrants.push({'label': full_label})
+      allGrants.push({'label': full_label, 
+        'startYear': startYear,
+        'endYear': endYear
+      })
     });
-
+    
+    allGrants = _.orderBy(allGrants, ['endYear', 'startYear'], ['desc', 'desc']);
+ 
     let results = {'allGrants': allGrants }
     return results
   };
