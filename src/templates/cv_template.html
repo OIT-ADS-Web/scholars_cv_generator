@@ -23,6 +23,108 @@
   </head>
   <body>
   <div class="container">
+
+    <!-- COVER SHEET -->
+    <div class="heading_12">About the Scholars@Duke CV Export</div>
+    <div class="times_10_regular">
+      <ul>      
+        <li><p>Named Lectures: Use type Keynote/Named Lecture </p></li>
+        <li><p>The CV contains output from your Scholars@Duke profile displayed in a Word document 
+          that you can edit directly.</p></li>
+        <li>The Scholars@Duke CV is provided for convenience and might not include all of the information 
+          you wish to include on your CV.</li>
+        <li>If you wish to make changes to the data in your CV, it is recommended that, where possible, you 
+           update the data in the source system, either Scholars@Duke, Elements, dFac (Duke’s faculty system) 
+           or SPS (Duke’s Sponsored Projects System). Once the source data is up-to-date, you can regenerate 
+           your CV with the updated data.
+        </li>
+    
+        <li>Titles, affiliations, and educational information comes from dFac, Duke’s faculty system. To add 
+          or correct information in dFac, contact your organization's Scholars power user(s).
+        </li>
+      </ul>
+
+      <div class="times_10_bold">
+        <p style="margin-bottom:0pt;">Delete this cover page before submitting your CV.</p>
+      </div>
+
+      <div class="times_10_bold">
+        Correcting and editing source information**
+      </div>
+
+      <div class="times_10_bold">
+        Name and Degrees:
+      </div>
+
+      Must be updated in dFac on your behalf; contact your organization's Scholars power user(s).
+
+      <div class="times_10_bold">
+      Current Appointments and Affiliations:
+      </div>
+
+      Must be updated in dFac on your behalf; contact your organization's Scholars power user(s).
+
+      <div class="times_10_bold">
+      Education, Training and Certifications:
+      </div>
+
+      Must be updated in dFac on your behalf; contact your organization's Scholars power user(s).
+
+      <div class="times_10_bold">
+      Duke Appointment History:
+      </div>
+
+      Must be updated in dFac on your behalf; contact your organization's Scholars power user(s).
+
+      <div class="times_10_bold">
+      Other Academic Positions:
+      </div>
+
+      Add or edit data in Scholars@Duke in the Academic Positions Outside Duke section.
+
+      <div class="times_10_bold">
+      Publications:
+      </div>
+
+      Add or edit in Elements, the publications system. Click the Help button to learn more about 
+      how to use Elements to add, edit, or claim your publications.
+
+      <div class="times_10_bold">
+      Awards and Honors:
+      </div>
+
+      Add in Scholars@Duke in the Awards and Honors section
+
+      <div class="times_10_bold">
+      Grants, Fellowships and Supported Research:
+      </div>
+
+      Grants data comes from the SPS system and must be corrected on your behalf by your organization’s 
+      Scholars power user. Supplement this information using the "Fellowships, Supported Research & Other Grants" 
+      section in Scholars@Duke.
+
+      <div class="times_10_bold">
+      Mentoring Activities:
+      </div>
+
+      Add or edit in Scholars@Duke in the Advising & Mentoring section.
+
+      <div class="times_10_bold">
+      Courses Taught:
+      </div>
+
+      Courses data comes from PeopleSoft.
+
+      <div class="times_10_bold">
+      Scholarly, Clinical & Service Activities:**
+      </div>
+
+      Add or edit directly in Scholars@Duke. There are subsections for Presentations and Appearances, Outreach, 
+      Service to the Profession, Service to Duke, Academic and Administrative Activities, and Clinical Activities.
+    
+      <!-- Page Break -->
+      <div class="break"><br class="no-space"/></div>
+
     <% var degree = ""; %>
     <% _.forEach(educations, function(item) { %>
       <% if (item['label'].indexOf(",") > 0) { %>
@@ -30,11 +132,8 @@
       <% degree += item['label'].substr(0,n) + ", "; %>
       <% } %>
     <% }); %>
-
-    <% if (degree.lastIndexOf(",") > 0) { %>
-      <% var n = degree.lastIndexOf(","); %>
-      <% degree = degree.substr(0,n); %>
-    <% } %>
+    <% degree = degree.slice(0, -2); %>
+ 
 
     <div class="heading_12">
       CURRICULUM VITAE
