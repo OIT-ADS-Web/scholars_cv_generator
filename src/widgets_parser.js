@@ -212,26 +212,20 @@ class WidgetsParser {
       var degree = value.attributes['degree'];
       var fullLabel = ""
 
+      // NOTE: this means if no 'degree' it is NOT on cv (see profExperiences on SOM cv)
       if (typeof degree != 'undefined') {
         var degree = value.attributes['degree'];
         fullLabel = (degree + ", " + institution);
         if (endYear != '') {
           fullLabel = (fullLabel + " " + endYear);
         }
+        educationList.push({'label': fullLabel})
       }
-      else {
-        fullLabel = (label + ", " + institution);
-        if (endYear != '') {
-          fullLabel = (fullLabel + " " + endYear);
-        }
-      }
-      educationList.push({'label': fullLabel, 'endYear': endYear})
     });
 
-    let results = {'educations': educationList.reverse()}
+    let results = {'educations': educationList}
     return results
   }
-
 
   parseCurrentResearchInterests(data) {
     let overview = data['interestsOverview'] || null;
