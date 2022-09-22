@@ -203,7 +203,7 @@ class WidgetsParser {
   parseEducations(data) {
     var educations = data['educations'] || [];
     var educationList = []
- 
+
     _.forEach(educations, function(value) {
       let institution = value.attributes['institution'];
       let endYear = value.attributes['endDate'] ? value.attributes['endDate'].substr(0,4) : '';
