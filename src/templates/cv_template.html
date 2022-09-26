@@ -15,6 +15,7 @@
      div.heading_10 { font-size: 10pt; font-family: "TimesNewRoman"; font-weight: bold; line-height:12pt; }
      div.heading_10_sub { font-size: 10pt; font-family: "TimesNewRoman"; font-weight: bold; line-height:12pt; margin-top: 6pt;}
      div.regular_10 { font-size: 10pt; font-family: "TimesNewRoman"; line-height: 12pt; }
+     p.publication { margin-bottom: 1em; }
      div.container { width: 100%; }
      div.row { margin-bottom: 1em; padding-bottom: 1em;}
      div.slight-indent { margin-left: 24pt; }
@@ -275,7 +276,7 @@
          <div class="heading_10">Journal Articles</div>
          <div class="regular_10">
           <% _.forEach(academicArticles, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
         </div>
@@ -286,7 +287,7 @@
          <div class="heading_10">Books</div>
          <div class="regular_10">
           <% _.forEach(books, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
         </div>
@@ -297,7 +298,7 @@
          <div class="heading_10">Book Reviews</div>
          <div class="regular_10">
           <% _.forEach(bookReviews, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -308,7 +309,7 @@
          <div class="heading_10">Book Sections</div>
          <div class="regular_10">
           <% _.forEach(bookSections, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -319,7 +320,7 @@
          <div class="heading_10">Book Series</div>
          <div class="regular_10">
           <% _.forEach(bookSeries, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -330,7 +331,7 @@
          <div class="heading_10">Conference Papers</div>
          <div class="regular_10">
           <% _.forEach(conferencePapers, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -341,7 +342,7 @@
          <div class="heading_10">Datasets</div>
          <div class="regular_10">
           <% _.forEach(datasets, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -352,7 +353,7 @@
          <div class="heading_10">Digital Publications</div>
          <div class="regular_10">
           <% _.forEach(digitalPublications, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -364,7 +365,7 @@
          <div class="heading_10">Journal Issues</div>
          <div class="regular_10">
           <% _.forEach(journalIssues, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -375,7 +376,7 @@
          <div class="heading_10">Reports</div>
          <div class="regular_10">
           <% _.forEach(reports, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -386,7 +387,7 @@
          <div class="heading_10">Scholarly Editions</div>
          <div class="regular_10">
           <% _.forEach(scholarlyEditions, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -397,7 +398,7 @@
          <div class="heading_10">Theses and Dissertations</div>
          <div class="regular_10">
           <% _.forEach(theses, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -408,7 +409,7 @@
          <div class="heading_10">Other Articles</div>
          <div class="regular_10">
           <% _.forEach(otherArticles, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -419,7 +420,7 @@
          <div class="heading_10">Software</div>
          <div class="regular_10">
           <% _.forEach(software, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
@@ -430,7 +431,7 @@
          <div class="heading_10">Pre-Print</div>
          <div class="regular_10">
           <% _.forEach(preprints, function(item) { %>
-            <p><%= item['citation'] %></p>
+            <p class="publication"><%= item['citation'] %></p>
           <% }); %>
          </div>
        </div>
