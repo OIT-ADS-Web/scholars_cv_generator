@@ -225,10 +225,11 @@ class WidgetsParser {
           fullLabel = (fullLabel + " " + endYear);
         }
       }
-      educationList.push({'label': fullLabel})
+      educationList.push({'label': fullLabel, 'year': endYear})
     });
 
-    let results = {'educations': educationList.reverse(), 'degrees': degreeList}
+    let sorted = _.orderBy(educationList, ['year']).reverse();
+    let results = {'educations': sorted, 'degrees': degreeList}
     return results
   }
 
