@@ -141,7 +141,7 @@
       <div class="break"><br class="no-space"/></div>
 
     <% var degree = ""; %>
-    <% _.forEach(educations, function(item) { %>
+    <% _.forEach(degrees, function(item) { %>
       <% if (item['label'].indexOf(",") > 0) { %>
       <% var n = item['label'].indexOf(","); %>
       <% degree += item['label'].substr(0,n) + ", "; %>

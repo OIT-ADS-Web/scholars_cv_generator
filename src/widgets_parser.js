@@ -201,29 +201,34 @@ class WidgetsParser {
 
 
   parseEducations(data) {
-    var educations = data['educations'] || [];
-    var educationList = []
+    let educations = data['educations'] || [];
+    let educationList = []
+    let degreeList = []
 
     _.forEach(educations, function(value) {
       let institution = value.attributes['institution'];
       let endYear = value.attributes['endDate'] ? value.attributes['endDate'].substr(0,4) : '';
       let label = value['label'];
 
-      var degree = value.attributes['degree'];
-      var fullLabel = ""
+      let degree = value.attributes['degree'];
+      let fullLabel = ""
 
-      // NOTE: this means if no 'degree' it is NOT on cv (see profExperiences on SOM cv)
       if (typeof degree != 'undefined') {
-        var degree = value.attributes['degree'];
         fullLabel = (degree + ", " + institution);
         if (endYear != '') {
           fullLabel = (fullLabel + " " + endYear);
         }
-        educationList.push({'label': fullLabel})
+        degreeList.push({'label': fullLabel})
+      } else {
+        fullLabel = (label + ", " + institution);
+        if (endYear != '') {
+          fullLabel = (fullLabel + " " + endYear);
+        }
       }
+      educationList.push({'label': fullLabel})
     });
 
-    let results = {'educations': educationList}
+    let results = {'educations': educationList.reverse(), 'degrees': degreeList}
     return results
   }
 
