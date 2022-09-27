@@ -60,6 +60,25 @@ class WidgetsParser {
       return this.pluralize(name)
   }
 
+  formatDatePrecision(date, precision) {
+      var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+ 
+      var year = date.getFullYear() 
+      if (precision == "http://vivoweb.org/ontology/core#yearMonthPrecision") {
+        var month = monthNames[date.getMonth()]
+        return `${month} ${year}`;
+      } else if (precision == "http://vivoweb.org/ontology/core#yearMonthDayPrecision") {
+        var month = monthNames[date.getMonth()]
+        var day = date.getDate()
+        return `${month} ${day}, ${year}`
+      } else if (precision == "http://vivoweb.org/ontology/core#yearPrecision") {
+          return `${year}`
+      } else {
+          return `${year}`
+      }
+      return "" // if no match
+  }
 
   parseName(data) {
     var firstName = data['attributes']['firstName'];
@@ -86,6 +105,11 @@ class WidgetsParser {
   parseEmail(data) {
     var email = data['attributes']['primaryEmail'];
     return {'email': email }
+  }
+
+  parseProfileUrl(data) {
+    let url = data['attributes']['profileURL'];
+    return {'profileUrl': url }
   }
 
   parseLocations(data) {
@@ -131,17 +155,20 @@ class WidgetsParser {
     _.forEach(positions, function(value) {
       var vivoType = value['vivoType'];
       var label = value['label'];
+      // FDP-3864: add org to label
+      var orgLabel = value['attributes']['organizationLabel'];
+      var apptLabel = label + ', ' + orgLabel;
       switch(vivoType) {
         case positionTypes['primaryPosition']: {
-          primaryPositions.push({'label': label})
+          primaryPositions.push({'label': apptLabel})
           break;
         }
         case positionTypes['secondaryPosition']: {
-          secondaryPositions.push({'label':label})
+          secondaryPositions.push({'label': apptLabel})
           break;
         }
         default: {
-          secondaryPositions.push({'label':label})
+          secondaryPositions.push({'label': apptLabel})
           break;
         }
       }
@@ -174,39 +201,39 @@ class WidgetsParser {
 
 
   parseEducations(data) {
-    var educations = data['educations'] || [];
-    var educationList = []
+    let educations = data['educations'] || [];
+    let educationList = []
+    let degreeList = []
 
     _.forEach(educations, function(value) {
       let institution = value.attributes['institution'];
       let endYear = value.attributes['endDate'] ? value.attributes['endDate'].substr(0,4) : '';
       let label = value['label'];
 
-      var degree = value.attributes['degree'];
-      var fullLabel = ""
+      let degree = value.attributes['degree'];
+      let fullLabel = ""
 
       if (typeof degree != 'undefined') {
-        var degree = value.attributes['degree'];
         fullLabel = (degree + ", " + institution);
         if (endYear != '') {
           fullLabel = (fullLabel + " " + endYear);
         }
-      }
-      else {
+        degreeList.push({'label': fullLabel})
+      } else {
         fullLabel = (label + ", " + institution);
         if (endYear != '') {
           fullLabel = (fullLabel + " " + endYear);
         }
       }
-      educationList.push({'label': fullLabel, 'endYear': endYear})
+      educationList.push({'label': fullLabel, 'year': endYear})
     });
 
-    let results = {'educations': educationList.reverse()}
+    let sorted = _.orderBy(educationList, ['year']).reverse();
+    let results = {'educations': sorted, 'degrees': degreeList}
     return results
   }
 
-
-  parsecurrentResearchInterests(data) {
+  parseCurrentResearchInterests(data) {
     let overview = data['interestsOverview'] || null;
     var currentResearchInterests = null
 
@@ -247,13 +274,14 @@ class WidgetsParser {
       'http://vivo.duke.edu/vivo/ontology/duke-extension#BookSeries': [],
       'http://vivoweb.org/ontology/core#ConferencePaper': [],
       'http://vivoweb.org/ontology/core#Dataset': [],
-      'http://vivo.duke.edu/vivo/ontology/dukeextension#DigitalPublication': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-extension#DigitalPublication': [],
       'http://vivo.duke.edu/vivo/ontology/duke-extension#JournalIssue': [],
       'http://purl.org/ontology/bibo/Report': [],
       'http://purl.org/ontology/bibo/EditedBook': [],
       'http://purl.org/ontology/bibo/Thesis': [],
       'http://vivo.duke.edu/vivo/ontology/duke-extension#OtherArticle': [],
-      'http://vivoweb.org/ontology/core#Software': []
+      'http://vivoweb.org/ontology/core#Software': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-extension#Preprint': [],
     };
 
     var publications = data['publications'] || [];
@@ -262,7 +290,6 @@ class WidgetsParser {
 
     // another default to mla just in case
     var citationAttribute = citationTypes[preferredCitationFormat] || 'mlaCitation'
-    console.debug("using " + citationAttribute + " citation format");
 
     let figureCitation = function(value) {
 
@@ -323,242 +350,210 @@ class WidgetsParser {
     return {'teaching': courses}
   }
 
-  parseGrants(data) {
-    let grants = data['grants'];
-    var grantList = []
-    _.forEach(grants, function(value) {
-      var label = value['label'] + ", awarded by "
-      var awardedBy = value.attributes['awardedBy'] + ", ";
-      var startDate = value.attributes['startDate'].substr(0,4) + " - ";
-      var endDate = value.attributes['endDate'].substr(0,4) + " ";
-      var role = value.attributes['roleName'];
-      grantList.push({'label':label, 'awardedBy': awardedBy,
-                              'startDate': startDate, 'endDate': endDate, 'role': role});
-    });
-    return {'grants': grantList }
-  };
-
   parseAwards(data) {
     let awards = data['awards'];
     var awardList = [];
-    _.forEach(awards, function(value) {
-      var label = value['label'];
-      var date = value['attributes']['date'].substr(0,4);
-      var label = (label + " " + date);
-      awardList.push({'label':label});
+    awards.forEach((value) => {
+      let label = value['label']
+      // FIXME: can any, all of these be null?
+      let service = value['attributes']['serviceType']
+      let awardedBy = value['attributes']['awardedBy']
+      let name = value['attributes']['name']
+      let date = new Date(value['attributes']['date'])
+      let precision = value['attributes']['datePrecision']
+      let dateFormatted = this.formatDatePrecision(date, precision)
+      var award = `${name} (${service}). ${awardedBy}. ${dateFormatted}`
+      if (typeof value.attributes['weblink'] != 'undefined') {
+        award += ". " + value.attributes['weblink'];
+      }
+      awardList.push({'label': award});
     });
     return {'awards': awardList}
   };
 
   parseProfessionalActivities(data) {
     var professionalActivitiesTypes = {
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] },
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] },
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec': [], 'other':[] },
-      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : { 'cs': [], 'consulting': [], 'cmts': [], 'ci':[], 'eoa':[], 'eva':[], 'ea': [], 'pd': [], 'lec':[], 'other':[] }
-    };
-
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : [],
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : []
+    }
     var professionalActivities = data['professionalActivities'];
+ 
+    let presentationLabel = (value) => {
+      var full_label = value.attributes['nameOfTalk'];
+      
+      if (typeof value.attributes['serviceOrEventName'] != 'undefined') {
+        full_label += ". " + value.attributes['serviceOrEventName'];
+      }
 
-    let figureCS = function(value) {
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
 
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
+      if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+        full_label += ". " + value.attributes['locationOrVenue'];
+      }
 
-      if(serviceType == 'Community Outreach') {
-          full_label = label;
+      var start_date = new Date(value.attributes['startDate']);
+      var start_date_precision = value.attributes["startDatePrecision"]
+
+      let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
+      if (typeof end_date != 'undefined') {
+        var end_date = new Date(value.attributes['endDate']);
+        var end_date_precision = value.attributes["endDatePrecision"]
+        let endFormatted = this.formatDatePrecision(end_date, end_date_precision)
+        full_label += ". " + startFormatted + " - " + endFormatted
+      } else {
+        full_label += ". " + startFormatted
+      }
+      if (typeof value.attributes['weblink'] != 'undefined') {
+        full_label += ". " + value.attributes['weblink'];
       }
 
       return full_label;
-    };
+    }
+    let serviceToProfessionLabel = (value) => {
+      var full_label = value.attributes['role']; // always role?
+      
+      if (typeof value.attributes['serviceOrEventName'] != 'undefined') {
+        full_label += ". " + value.attributes['serviceOrEventName'];
+      }
 
-    let figureConsulting = function(value) {
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
 
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
+      if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+        full_label += ". " + value.attributes['locationOrVenue'];
+      }
 
-      if(serviceType == 'Consulting') {
-          full_label = label;
+      var start_date = new Date(value.attributes['startDate']);
+      var start_date_precision = value.attributes["startDatePrecision"]
+
+      let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
+      if (typeof end_date != 'undefined') {
+        var end_date = new Date(value.attributes['endDate']);
+        var end_date_precision = value.attributes["endDatePrecision"]
+        let endFormatted = this.formatDatePrecision(end_date, end_date_precision)
+        full_label += ". " + startFormatted + " - " + endFormatted
+      } else {
+        full_label += ". " + startFormatted
+      }
+      if (typeof value.attributes['weblink'] != 'undefined') {
+        full_label += ". " + value.attributes['weblink'];
       }
 
       return full_label;
-    };
+    }
+    let serviceToUniversityLabel = (value) => {
+      // NOTE: has to be either 'role' or 'committeeName and committeeType'
+      var full_label = ''
+      if (typeof value.attributes['role'] != 'undefined') {
+        let role = value.attributes['role']
+        full_label = `${role}`
+      } else {
+        let committeeName = value.attributes['committeeName']
+        let committeeType = value.attributes['committeeType']
+        full_label = `${committeeName}. ${committeeType}`
+      }
+      if (typeof value.attributes['serviceOrEventName'] != 'undefined') {
+        full_label += ". " + value.attributes['serviceOrEventName'];
+      }
 
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
 
-    let figureCmts = function(value) {
+      if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+        full_label += ". " + value.attributes['locationOrVenue'];
+      }
 
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Committee Service') {
-          full_label = label;
+      var start_date = new Date(value.attributes['startDate']);
+      var start_date_precision = value.attributes["startDatePrecision"]
+      let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
+      
+      if (typeof value.attributes['endDate'] != 'undefined') {
+        var end_date = new Date(value.attributes['endDate']);
+        var end_date_precision = value.attributes["endDatePrecision"]
+        let endFormatted = this.formatDatePrecision(end_date, end_date_precision)
+        full_label += ". " + startFormatted + " - " + endFormatted
+      } else {
+        full_label += ". " + startFormatted
+      }
+      if (typeof value.attributes['weblink'] != 'undefined') {
+        full_label += ". " + value.attributes['weblink'];
       }
 
       return full_label;
-    };
+    }
+    let outreachLabel = (value) => {
+      var full_label = value.attributes['role']; // always role?
+      if (typeof value.attributes['serviceOrEventName'] != 'undefined') {
+        full_label += ". " + value.attributes['serviceOrEventName'];
+      }
 
-    let figureCi = function(value) {
+      if (typeof value.attributes['hostOrganization'] != 'undefined') {
+        full_label  += ". " + value.attributes['hostOrganization'];
+      }
 
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
+      if (typeof value.attributes['locationOrVenue'] != 'undefined') {
+        full_label += ". " + value.attributes['locationOrVenue'];
+      }
 
-      if(serviceType == 'Curriculum Innovations') {
-          full_label = label;
+      if (typeof value.attributes['geoFocus'] != 'undefined') {
+        full_label += ". " + value.attributes['geoFocus'];
+      }
+ 
+      var start_date = new Date(value.attributes['startDate']);
+      var start_date_precision = value.attributes["startDatePrecision"]
+      let startFormatted = this.formatDatePrecision(start_date, start_date_precision)
+ 
+      full_label += ". " + startFormatted
+      if (typeof value.attributes['weblink'] != 'undefined') {
+        full_label += ". " + value.attributes['weblink'];
       }
 
       return full_label;
-    };
+    }
 
-    let figureEoa = function(value) {
-
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
+    let figureProfessionalActivity = (vivoType, value) => {
+      /*
+       *
+      does each one have a different 'label' procedure?
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': [],
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity' : [],
+      'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach' : []
+      */
+      var full_label = ""
+      switch (vivoType) {
+        case 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation': {
+          return presentationLabel(value) 
+        }
+        case 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheProfession': {
+          return serviceToProfessionLabel(value)
+        }
+        case 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#ServiceToTheUniversity': {
+          return serviceToUniversityLabel(value)
+        }
+        case 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Outreach': {
+          return outreachLabel(value)
+        }
+        default:
+          // are those 4 all the types?
+          console.error(`do not know how to create label for ${vivoType}`)
+          return value['label']
+      }
+      return full_label
+    }
+    
+    professionalActivities.forEach((value) => {
+      let serviceType = value.attributes['serviceType'];
       let vivoType = value['vivoType'];
 
-      if(serviceType == 'Event/Organization Administration') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-    let figureEva = function(value) {
-
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Event Attendance') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-    let figureEA = function(value) {
-
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Editorial Activities') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-    let figurePD = function(value) {
-
-      var full_label = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Professional Development') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-     let figureLec = function(value) {
-       var full_label = "";
-       var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
-       var label = value['label'];
-       var serviceType = value.attributes['serviceType'];
-       let vivoType = value['vivoType'];
-
-       if(serviceType == 'Lecture') {
-          var talk = value.attributes['nameOfTalk'];
-          var date = new Date(value.attributes['startDate']);
-          full_label = talk;
-
-          if (typeof value.attributes['locationOrVenue'] != 'undefined') {
-              full_label += ". " + value.attributes['locationOrVenue'];
-          }
-
-          if (typeof value.attributes['hostOrganization'] != 'undefined') {
-             full_label  += ". " + value.attributes['hostOrganization'];
-          }
-
-          full_label += ". " + monthNames[date.getMonth()] + " " +  date.getDate() + ", " + date.getFullYear();
-       }
-      return full_label;
-    };
-
-    let figureOther = function(value) {
-
-      var full_label = "", new_start_date = "";
-      var label = value['label'];
-      var serviceType = value.attributes['serviceType'];
-      let vivoType = value['vivoType'];
-
-      if(serviceType == 'Other') {
-          full_label = label;
-      }
-
-      return full_label;
-    };
-
-    _.forEach(professionalActivities, function(value) {
-
-      let community_service = figureCS(value)
-      let consulting = figureConsulting(value)
-      let committee_service = figureCmts(value)
-      let curriculum_inovation = figureCi(value)
-      let event_org_administration = figureEoa(value)
-      let event_attendance = figureEva(value)
-      let professional_development = figurePD(value)
-      let editorial_activities = figureEA(value)
-      let lectures = figureLec(value)
-      let others = figureOther(value)
-
-      let vivoType = value['vivoType'];
-
-      if(community_service != ""){
-        professionalActivitiesTypes[vivoType]['cs'].push(community_service);
-      }
-      if(consulting != ""){
-        professionalActivitiesTypes[vivoType]['consulting'].push(consulting);
-      }
-      if(committee_service != ""){
-        professionalActivitiesTypes[vivoType]['cmts'].push(committee_service);
-      }
-      if(curriculum_inovation != ""){
-        professionalActivitiesTypes[vivoType]['ci'].push(curriculum_inovation);
-      }
-      if(editorial_activities != ""){
-        professionalActivitiesTypes[vivoType]['ea'].push(editorial_activities);
-      }
-      if(event_org_administration != ""){
-        professionalActivitiesTypes[vivoType]['eoa'].push(event_org_administration);
-      }
-      if(event_attendance != ""){
-        professionalActivitiesTypes[vivoType]['eva'].push(event_attendance);
-      }
-      if(professional_development != ""){
-        professionalActivitiesTypes[vivoType]['pd'].push(professional_development);
-      }
-      if(lectures != ""){
-        professionalActivitiesTypes[vivoType]['lec'].push(lectures);
-      }
-      if(others != ""){
-        professionalActivitiesTypes[vivoType]['other'].push(others);
-      }
-
+      let label = figureProfessionalActivity(vivoType, value);
+      professionalActivitiesTypes[vivoType].push({'label': label}) // should be array
     });
 
     let pluralize = function(word) {
@@ -573,13 +568,12 @@ class WidgetsParser {
           return "outreach"
         }
         case "presentation": {
-          return "Presentation"
+          return "presentations"
         }
         default:
           return `${word}s`
       }
     }
-
 
     let results = _.transform(professionalActivitiesTypes, (result, value, key) => {
       let name = this.shortName(key)
@@ -589,21 +583,6 @@ class WidgetsParser {
 
     return results
 
-  };
-  // one way to do it:
-
-  parseMedicalLicences(data) {
-    let licences = data['licenses'];
-    var licenceList = [];
-    _.forEach(licences, function(value) {
-      var label = value['label'];
-      var lic_date = label.substr(label.length - 4);
-      var number = value['attributes']['number'];
-      var state = value['attributes']['state'];
-      label = state + ", " + number + ", " + lic_date;
-      licenceList.push({'label':label});
-    });
-    return {'licences': licenceList}
   };
 
   parseClinicalActivities(data) {
@@ -642,7 +621,7 @@ class WidgetsParser {
     return {'pastappointments': pastAppointmentsList}
   };
 
-  parseteachingActivities(data) {
+  parseTeachingActivities(data) {
     let activities = data['attributes']['teachingActivities'] || null;
     var teaching_activities = null
 
@@ -652,7 +631,7 @@ class WidgetsParser {
     return {'teaching_activities': teaching_activities}
   };
 
-  parsementorshipOverview(data) {
+  parseMentorshipOverview(data) {
     let overview = data['attributes']['mentorshipOverview'] || null;
     var mentorship_activities = null
 
@@ -662,7 +641,7 @@ class WidgetsParser {
     return {'mentorship_activities': mentorship_activities}
   };
 
-  parseacademicActivities(data) {
+  parseAcademicActivities(data) {
     let activities = data['attributes']['academicActivities'] || null;
     var academic_activities = null
 
@@ -672,131 +651,27 @@ class WidgetsParser {
     return {'academic_activities': academic_activities}
   };
 
-  parsePresentations(data) {
-
-    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'internationalmeetings': [],  'broadcasts': [], 'interviews':[], 'invitedtalks':[] };
-    let professionalActivities = data['professionalActivities'];
-
-     _.forEach(professionalActivities, function(value) {
-
-        if( value['vivoType'] == 'http://vivo.duke.edu/vivo/ontology/duke-activity-extension#Presentation' ) {
-
-             var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
-             var label = value['label'];
-             var serviceType = value.attributes['serviceType'];
-             let vivoType = value['vivoType'];
-
-             var talk = value.attributes['nameOfTalk'];
-             var date = new Date(value.attributes['startDate']);
-             var talk_label = "";
-             talk_label = talk;
-
-             if (typeof value.attributes['locationOrVenue'] != 'undefined') {
-                talk_label += ". " + value.attributes['locationOrVenue'];
-             }
-
-             if (typeof value.attributes['hostOrganization'] != 'undefined') {
-                //talk_label = talk + ". " + talk_hostorg + ". " + value.attributes['locationOrVenue'] + ". " + monthNames[date.getMonth()] + " " + date.getFullYear();
-                talk_label += ". " + value.attributes['hostOrganization'];
-             }
-
-             talk_label += ". " + monthNames[date.getMonth()] + " " +  date.getDate() + ", " + date.getFullYear();
-
-
-             switch(serviceType) {
-
-                case "Other": {
-                    //NOTE: 'other' skipped
-                    break;
-                }
-
-                case "Instructional Course, Workshop, or Symposium": {
-                    presentationList['courses'].push({'label':talk_label});
-                    break;
-                }
-
-                case "National Scientific Meeting": {
-                    presentationList['nationalmeetings'].push({'label':talk_label});
-                    break;
-                }
-
-                case "Keynote/Named Lecture": {
-                    presentationList['lectures'].push({'label':talk_label});
-                    break;
-                }
-
-                case "International Meeting or Conference": {
-                    presentationList['internationalmeetings'].push({'label':talk_label});
-                    break;
-                }
-
-                case "Visiting Professorship Lecture": {
-                     presentationList['professorships'].push({'label':talk_label});
-                     break;
-                }
-
-                case "Broadcast Appearance": {
-                     presentationList['broadcasts'].push({'label':talk_label});
-                     break;
-                }
-
-                case "Interview": {
-                     presentationList['interviews'].push({'label':talk_label});
-                     break;
-                }
-
-                case "Invited Talk": {
-                     presentationList['invitedtalks'].push({'label':talk_label});
-                     break;
-                }
-
-                default:
-                  break;
-              }
-         }
-
-      });
-
-    let results = _.transform(presentationList, (result, value, key) => {
-      let name = key
-      result[name] = value
-      return result;
-    }, {});
-
-    return results
-  }
-
   parseArtisticEvents(data) {
-    var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
     let artisticEvents = data['artisticEvents'];
     var artisticEventsList = [];
-    _.forEach(artisticEvents, function(value) {
+    artisticEvents.forEach((value) => {
       var label = value['label'];
       label = label.replace(" |", ",");
 
-      var startDate = new Date(value.attributes['startYear']);
-      var start_date = monthNames[startDate.getMonth()] + " " + startDate.getDate() + ", " + startDate.getFullYear();
-      var start_year = value['attributes']['startYear'].substr(0,4);
-
-      var endDate = "", end_date = "", end_year = "";
-      if(value['attributes']['endYear']){
-      endDate = new Date(value.attributes['endYear']);
-      end_date = monthNames[endDate.getMonth()] + " " + endDate.getDate() + ", " + endDate.getFullYear();
-      end_year = value['attributes']['endYear'].substr(0,4);
-      }
+      var start_year = value['attributes']['startYear'] // always present?
+      var end_year = value['attributes']['endYear'] || null // can be null
 
       var venue = value['attributes']['venue'];
 
-      if(end_date != ""){
-        label = label + ", " + start_date + " - " + end_date;
+      if(end_year){
+        label = label + ". " + start_year.substr(0,4) + " - " + end_year.substr(0,4);
       }
       else{
-        label = label + ", " + start_date;
+        label = label + ". " + start_year.substr(0,4);
       }
 
-      artisticEventsList.push({'label':label, 'startYear':start_year, 'startDate': start_date });
+      // startYear is used for sorting
+      artisticEventsList.push({'label':label, 'startYear':start_year });
     });
     return {'artisticEvents': artisticEventsList}
   };
@@ -840,18 +715,28 @@ class WidgetsParser {
 
     var artisticWorks = data['artisticWorks'] || [];
 
-    let figureartisticWork = function(value) {
-      var monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
-      var date = new Date(value.attributes["date"]);
-      var artisticWork = value["label"] + " (" + value.attributes["role"] + "), " + monthNames[date.getMonth()] + " " + date.getFullYear() + ".";//value.attributes["date"].substr(0,4);
-      var vivoType = value['vivoType'];
+    let figureArtisticWork = (value) => {
+      let date = new Date(value.attributes["date"]);
+      let precision = value.attributes["date_precision"];
+      let dateFormatted = this.formatDatePrecision(date, precision)
+      let commissioned = value.attributes["commissioning_body"] || null
+      let link = value.attributes["link_url"] || null
+
+      var artisticWork = `${value["label"]} (${value.attributes["role"]}). `;
+      if (commissioned) {
+        artisticWork = artisticWork + `Commissioned by ${commissioned}. `
+      }
+      artisticWork = artisticWork + `${dateFormatted} . `
+      if (link) {
+        artisticWork = artisticWork + `${link}`
+      }
+      let vivoType = value['vivoType'];
       return artisticWork
     };
 
     _.forEach(artisticWorks, function(value) {
 
-      let artisticWork = figureartisticWork(value)
+      let artisticWork = figureArtisticWork(value)
       let vivoType = value['vivoType'];
 
       artisticWorkTypes[vivoType].push({'artisticWork': artisticWork})
@@ -869,12 +754,88 @@ class WidgetsParser {
 
   };
 
+  parseWebpages(data) {
+    // only care about these 'categories':
+    // LinkedIn | Twitter | Personal Website | Lab Website | Google Scholar | Scholars@Duke Pro
+    let categories = ['Lab Page', 'LinkedIn', 'Twitter', 'Google Scholar', 'Personal Page']
+    var webpages = data['webpages'] || [];
+    var weblinks = []
+    webpages.forEach((value) => {
+      let label = value['label']
+      let linkUri = value.attributes['linkURI']
+      let category = value.attributes['category']
+      if (categories.includes(category)) {
+        let replaceCategory = category.replace('Page', 'Website')
+        weblinks.push({'category': replaceCategory, 'label':label, 'uri': linkUri})
+      }
+    });
+    let grouped = _.groupBy(weblinks, 'category')
+    return {'weblinks': grouped}
+  };
+
+  parseGrantsAndGifts(data) {
+    let grants = data['grants'] || [];
+    let gifts = data['gifts'] || [];
+    let allGrants = [];
+
+    grants.forEach((value) => {
+      let startDate = new Date(value.attributes['startDate']);
+      let endDate = new Date(value.attributes['endDate']);
+
+      // assumes always start/end date?
+      let period = startDate.getFullYear() + " - " + endDate.getFullYear();
+      let title = value['label'] + ", awarded by " + value.attributes['awardedBy'];
+
+      let full_label = `${title} ${period}`
+      if (typeof value.attributes['roleName'] != 'undefined') {
+        let role = value.attributes['roleName']
+        full_label += ` (${role})`;
+      }
+
+      allGrants.push({'label': full_label, 
+        'startYear': startDate.getFullYear(), 
+        'endYear': endDate.getFullYear()}
+      )
+    });
+
+    gifts.forEach((value) => {
+      // assumes *all* have at least start date
+      let startDate = new Date(value.attributes['dateTimeStart']);
+      let startYear = startDate.getFullYear()
+      let endYear = startYear // default in case missing
+      let period = `${startYear}`;
+      if (typeof value.attributes['dateTimeEnd'] != 'undefined') {
+        let endDate = new Date(value.attributes['dateTimeEnd']);
+        let endYear = endDate.getFullYear()
+        period += " - " + `${endYear}`
+      }
+      let title = value['label'] + ", awarded by " + value.attributes['donor'];
+
+      let full_label = `${title} ${period}`
+      if (typeof value.attributes['roleName'] != 'undefined') {
+        let role = value.attributes['roleName']
+        full_label += ` (${role})`;
+      }
+
+      allGrants.push({'label': full_label, 
+        'startYear': startYear,
+        'endYear': endYear
+      })
+    });
+    
+    allGrants = _.orderBy(allGrants, ['endYear', 'startYear'], ['desc', 'desc']);
+ 
+    let results = {'allGrants': allGrants }
+    return results
+  };
+
   convert(data) {
     var results = {}
 
     _.merge(results, this.parseName(data))
     _.merge(results, this.parsePhone(data))
     _.merge(results, this.parseEmail(data))
+    _.merge(results, this.parseProfileUrl(data))
     _.merge(results, this.parseTitle(data))
     _.merge(results, this.parseLocations(data))
     _.merge(results, this.parseAddresses(data))
@@ -883,22 +844,21 @@ class WidgetsParser {
     _.merge(results, this.parseResearchInterests(data))
     _.merge(results, this.parsePublications(data))
     _.merge(results, this.parseTeaching(data))
-    _.merge(results, this.parseGrants(data))
     _.merge(results, this.parseAwards(data))
     _.merge(results, this.parseProfessionalActivities(data))
-    _.merge(results, this.parsePresentations(data))
     _.merge(results, this.parsepastAppointments(data))
-    _.merge(results, this.parseteachingActivities(data))
-    _.merge(results, this.parsementorshipOverview(data))
-    _.merge(results, this.parseacademicActivities(data))
+    _.merge(results, this.parseTeachingActivities(data))
+    _.merge(results, this.parseMentorshipOverview(data))
+    _.merge(results, this.parseAcademicActivities(data))
     _.merge(results, this.parseOtherPositions(data))
     _.merge(results, this.parseArtisticEvents(data))
     _.merge(results, this.parseArtisticWorks(data))
-    _.merge(results, this.parseMedicalLicences(data))
     _.merge(results, this.parseClinicalActivities(data))
-    _.merge(results, this.parsecurrentResearchInterests(data))
+    _.merge(results, this.parseCurrentResearchInterests(data))
     _.merge(results, this.parseLeadershipPositions(data))
-
+    _.merge(results, this.parseWebpages(data))
+    _.merge(results, this.parseGrantsAndGifts(data))
+ 
     return results
   }
 
@@ -908,8 +868,5 @@ class WidgetsParser {
 export {
   WidgetsParser
 }
-
-
-
 
 
