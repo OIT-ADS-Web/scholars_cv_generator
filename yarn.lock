@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@xmldom/xmldom@^0.8.2":
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.8.3.tgz#beaf980612532aa9a3004aff7e428943aeaa0711"
+
 abbrev@1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
@@ -1561,11 +1565,11 @@ doctrine@^2.0.0:
     esutils "^2.0.2"
     isarray "^1.0.0"
 
-docxtemplater@^3.1.5:
-  version "3.1.6"
-  resolved "https://registry.yarnpkg.com/docxtemplater/-/docxtemplater-3.1.6.tgz#ff10a10826f2ee76be498e44fe4c19e4389beb90"
+docxtemplater@^3.31.4:
+  version "3.31.4"
+  resolved "https://registry.yarnpkg.com/docxtemplater/-/docxtemplater-3.31.4.tgz#bf785ccf68ef873a61fa876c61b76cd50aa03783"
   dependencies:
-    xmldom "^0.1.27"
+    "@xmldom/xmldom" "^0.8.2"
 
 dom-converter@~0.1:
   version "0.1.4"
@@ -5345,10 +5349,6 @@ write@^0.2.1:
 xml-char-classes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/xml-char-classes/-/xml-char-classes-1.0.0.tgz#64657848a20ffc5df583a42ad8a277b4512bbc4d"
-
-xmldom@^0.1.27:
-  version "0.1.27"
-  resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
 
 xtend@^4.0.0:
   version "4.0.1"
