@@ -356,7 +356,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(journals, function(item) { %>              
-              <%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -386,7 +386,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(manuscripts, function(item) { %>
-              <%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -407,7 +407,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(letters, function(item) { %>
-              <%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -428,7 +428,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(editorials, function(item) { %>
-              <%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
          </ol>
          </div>
@@ -449,7 +449,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(books, function(item) { %>
-              <%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -470,7 +470,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(booksections, function(item) { %>
-              <%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -503,7 +503,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(abstracts, function(item) { %>
-              <%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -526,7 +526,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(reviews, function(item) { %>
-              <%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -547,7 +547,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(nonauthored, function(item) { %>
-              <%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -568,7 +568,7 @@
          <div class="regular_10">
           <ol>
           <% _.forEach(others, function(item) { %>
-              <%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
          </div>
@@ -697,15 +697,15 @@
          <div class="heading_10">Current</div>
          <div class="regular_10">
           <% _.forEach(currentGrants, function(item) { %>
-              <p>Project Title: <%= item['title'] %></p>
-              <p>Grant number: </p>
-              <p>PI: <%= item['pi'] %></p>
-              <p>Role: <%= item['role'] %></p>
-              <p>Percent effort: </p>
-              <p>Funding source: </p>
-              <p>Funding amount: </p>
-              <p>Duration: <%= item['period'] %></p>
-              <p>Project synopsis: </p>
+              <p><b>Project Title</b>: <%= item['title'] %></p>
+              <p><b>Grant number</b>: </p>
+              <p><b>PI</b>: <%= item['pi'] %></p>
+              <p><b>Role</b>: <%= item['role'] %></p>
+              <p><b>Percent effort</b>: </p>
+              <p><b>Funding source</b>: </p>
+              <p><b>Funding amount</b>: </p>
+              <p><b>Duration</b>: <%= item['period'] %></p>
+              <p><b>Project synopsis</b>: </p>
               <br/><br/>
           <% }); %>
          </div>
@@ -714,15 +714,15 @@
        <div class="row">
          <div class="heading_10">Current</div>
          <div class="regular_10">
-              <p>Project Title: </p>
-              <p>Grant number: </p>
-              <p>PI: </p>
-              <p>Role: </p>
-              <p>Percent effort: </p>
-              <p>Funding source: </p>
-              <p>Funding amount: </p>
-              <p>Duration: </p>
-              <p>Project synopsis: </p>
+              <p><b>Project Title</b>: </p>
+              <p><b>Grant number</b>: </p>
+              <p><b>PI</b>: </p>
+              <p><b>Role</b>: </p>
+              <p><b>Percent effort</b>: </p>
+              <p><b>Funding source</b>: </p>
+              <p><b>Funding amount</b>: </p>
+              <p><b>Duration</b>: </p>
+              <p><b>Project synopsis</b>: </p>
               <br/><br/>
          </div>
        </div>
@@ -733,15 +733,15 @@
          <div class="heading_10">Completed</div>
          <div class="regular_10">
           <% _.forEach(completedGrants, function(item) { %>
-              <p>Project Title: <%= item['title'] %></p>
-              <p>Grant number: </p>
-              <p>PI: <%= item['pi'] %></p>
-              <p>Role: <%= item['role'] %></p>
-              <p>Percent effort: </p>
-              <p>Funding source: </p>
-              <p>Funding amount: </p>
-              <p>Duration: <%= item['period'] %></p>
-              <p>Project synopsis: </p>
+              <p><b>Project Title</b>: <%= item['title'] %></p>
+              <p><b>Grant number</b>: </p>
+              <p><b>PI</b>: <%= item['pi'] %></p>
+              <p><b>Role</b>: <%= item['role'] %></p>
+              <p><b>Percent effort</b>: </p>
+              <p><b>Funding source</b>: </p>
+              <p><b>Funding amount</b>: </p>
+              <p><b>Duration</b>: <%= item['period'] %></p>
+              <p><b>Project synopsis</b>: </p>
               <br/><br/>
           <% }); %>
          </div>
@@ -750,15 +750,15 @@
        <div class="row">
          <div class="heading_10">Completed</div>
          <div class="regular_10">
-              <p>Project Title: </p>
-              <p>Grant number: </p>
-              <p>PI: </p>
-              <p>Role: </p>
-              <p>Percent effort: </p>
-              <p>Funding source: </p>
-              <p>Funding amount: </p>
-              <p>Duration: </p>
-              <p>Project synopsis: </p>
+              <p><b>Project Title</b>: </p>
+              <p><b>Grant number</b>: </p>
+              <p><b>PI</b>: </p>
+              <p><b>Role</b>: </p>
+              <p><b>Percent effort</b>: </p>
+              <p><b>Funding source</b>: </p>
+              <p><b>Funding amount</b>: </p>
+              <p><b>Duration</b>: </p>
+              <p><b>Project synopsis</b>: </p>
               <br/><br/>
          </div>
        </div>
@@ -769,16 +769,15 @@
          <div class="heading_10">Pending</div>
          <div class="regular_10">
           <% _.forEach(pendingGrants, function(item) { %>
-              <p>Project Title: <%= item['title'] %></p>
-              <p>Grant number: </p>
-              <p>PI: <%= item['pi'] %></p>
-              <p>Role: <%= item['role'] %></p>
-              <p>Percent effort: </p>
-              <p>Funding source: </p>
-              <p>Funding amount: </p>
-              <p>Duration: <%= item['period'] %></p>
-              <p>Project synopsis: </p>
-
+              <p><b>Project Title</b>: <%= item['title'] %></p>
+              <p><b>Grant number</b>: </p>
+              <p><b>PI</b>: <%= item['pi'] %></p>
+              <p><b>Role</b>: <%= item['role'] %></p>
+              <p><b>Percent effort</b>: </p>
+              <p><b>Funding source</b>: </p>
+              <p><b>Funding amount</b>: </p>
+              <p><b>Duration</b>: <%= item['period'] %></p>
+              <p><b>Project synopsis</b>: </p>
               <br/><br/>
           <% }); %>
          </div>
@@ -787,15 +786,15 @@
        <div class="row">
          <div class="heading_10">Pending</div>
          <div class="regular_10">
-              <p>Project Title: </p>
-              <p>Grant number: </p>
-              <p>PI: </p>
-              <p>Role: </p>
-              <p>Percent effort: </p>
-              <p>Funding source: </p>
-              <p>Funding amount: </p>
-              <p>Duration: </p>
-              <p>Project synopsis: </p>
+              <p><b>Project Title</b>: </p>
+              <p><b>Grant number</b>: </p>
+              <p><b>PI</b>: </p>
+              <p><b>Role</b>: </p>
+              <p><b>Percent effort</b>: </p>
+              <p><b>Funding source</b>: </p>
+              <p><b>Funding amount</b>: </p>
+              <p><b>Duration</b>: </p>
+              <p><b>Project synopsis</b>: </p>
               <br/><br/>
          </div>
        </div>
@@ -903,7 +902,7 @@
         </div>
         <% } else { %>
         <div class="row">
-         <div class="heading_10">International Meetings</div>
+         <div class="heading_10">International Meetings: </div>
          <div class="regular_10">
           <p>&nbsp;</p>
          </div>
@@ -930,7 +929,7 @@
      
      <% if (lectures.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Named Lectures</div>
+         <div class="heading_10">Named Lectures: </div>
          <div class="regular_10">
           <% _.forEach(lectures, function(item) { %>
               <p><%= item['label'] %></p>
@@ -968,14 +967,18 @@
     
     <% if (clinical_activities) { %>
     <div class="row">
-    <div class="heading_10">CLINICAL ACTIVITY (describe clinical focus or specialization, clinical commitment as % effort, documentation of regional /institutional referral patterns)</div>
+    <div class="heading_10">CLINICAL ACTIVITY<br/>
+      <span class="regular_10_italic">Describe clinical focus or specialization, clinical commitment as % effort, documentation of regional /institutional referral patterns)</span>
+    </div>
       <div style="font-size:10pt; font-family:TimesNewRoman;">
         <p>${clinical_activities}</p>
       </div>
     </div>
     <% } else { %>
     <div class="row">
-     <div class="heading_10">CLINICAL ACTIVITY (describe clinical focus or specialization, clinical commitment as % effort, documentation of regional /institutional referral patterns)</div>
+     <div class="heading_10">CLINICAL ACTIVITY<br/>
+       <span class="regular_10_italic">Describe clinical focus or specialization, clinical commitment as % effort, documentation of regional /institutional referral patterns)</span>
+     </div>
      <div style="font-size:10pt; font-family:TimesNewRoman;">
       <p>&nbsp;</p>
      </div>
