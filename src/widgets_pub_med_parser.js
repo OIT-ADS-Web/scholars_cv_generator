@@ -549,32 +549,34 @@ class WidgetsPubMedParser {
   };
 
   parseGrants(data) {
-    var label = data['label']   
-    var grants = data['grants'] || [];
-    var gifts = data['gifts'] || [];
+    let label = data['label']   
+    let grants = data['grants'] || [];
+    let gifts = data['gifts'] || [];
 
-    var currentGrantList = []
-    var completedGrantList = []
-    var pendingGrantList = []
-    var otherGrantList = [] // NOTE: this should be empty
+    let currentGrantList = []
+    let completedGrantList = []
+    let pendingGrantList = []
+    let otherGrantList = [] // NOTE: this should be empty
 
     _.forEach(grants, function(value) {
-      var uri = value['uri']
-      var startDate = new Date(value.attributes['startDate']);
-      var endDate = new Date(value.attributes['endDate']);
-      var today = new Date();
+      let uri = value['uri']
+      let startDate = new Date(value.attributes['startDate']);
+      let endDate = new Date(value.attributes['endDate']);
+      let today = new Date();
        
-      var startYear = startDate.getFullYear();
-      var endYear = endDate.getFullYear();
-      var period = startYear + " - " + endYear;
-      var title = value['label'] + ", awarded by " + value.attributes['awardedBy'];
-      var role = value.attributes['roleName'];
-      var pi = value.attributes['piName'];
+      let startYear = startDate.getFullYear();
+      let endYear = endDate.getFullYear();
+      let period = startYear + " - " + endYear;
+      let title = value['label'];
+      let awardedBy = value.attributes['awardedBy'];
+      let role = value.attributes['roleName'];
+      let pi = value.attributes['piName'];
  
       var summary = {
         'pi': pi, 
         'period': period, 
         'title': title, 
+        'awardedBy': awardedBy,
         'role': role,
         'uri': uri,
         'startYear': startYear,
@@ -595,21 +597,22 @@ class WidgetsPubMedParser {
     });
 
     _.forEach(gifts, function(value) {
-      var uri = value['uri']
-      var startDate = new Date(value.attributes['dateTimeStart']);
+      let uri = value['uri']
+      let startDate = new Date(value.attributes['dateTimeStart']);
       
-      var dateTimeEnd = value.attributes['dateTimeEnd'] || value.attributes['dateTimeStart']
-      var endDate = new Date(dateTimeEnd); // end can be null, so defaulting to same as start
+      let dateTimeEnd = value.attributes['dateTimeEnd'] || value.attributes['dateTimeStart']
+      let endDate = new Date(dateTimeEnd); // end can be null, so defaulting to same as start
       
-      var today = new Date();
+      let today = new Date();
 
-      var startYear = startDate.getFullYear();
-      var endYear = endDate.getFullYear();
-      var period = (startYear == endYear) ? startYear : startYear + " - " + endYear;
-      var title = value['label'] + ", awarded by " + value.attributes['donor'];
-      var role = value.attributes['role'];
+      let startYear = startDate.getFullYear();
+      let endYear = endDate.getFullYear();
+      let period = (startYear == endYear) ? startYear : startYear + " - " + endYear;
+      let title = value['label'];
+      let awardedBy = value.attributes['donor'];
+      let role = value.attributes['role'];
 
-      var roleDescription = function(role) {
+      let roleDescription = function(role) {
         switch (role) {
           case "PI": return "Principal Investigator"
           case "Co-PI": return "Co-Principal Investigator" 
@@ -617,11 +620,12 @@ class WidgetsPubMedParser {
         }
       }
       // NOTE: there is no 'piName' attribute for gifts
-      var pi = (role == "PI") ? label : ""
-      var summary = {
+      let pi = (role == "PI") ? label : ""
+      let summary = {
         'pi': pi, 
         'period': period, 
-        'title': title, 
+        'title': title,
+        'awardedBy': awardedBy,
         'role': roleDescription(role),
         'uri': uri,
         'startYear': startYear,
