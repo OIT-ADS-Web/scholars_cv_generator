@@ -200,8 +200,34 @@
         <div class="row"><span class="heading_10">SECONDARY ACADEMIC DEPARTMENT: </span> <span class="regular_10">[ENTER DEPARTMENT HERE]</span></div>
     <% } %>
     
-        <div class="row"><span class="heading_10">OTHER TITLES:</span><br>
-        <span class="regular_10_italic">List any other titles here, one title per row</span></div>
+    <% if(otherPositions.length > 0) { %>
+        <% var title = ""; %>
+        <% _.forEach(otherPositions, function(item) { %>
+        <% title += item['label'] + ', '; %>
+        <% }); %>
+        <% title = title.slice(0,-2); %>
+
+        <div class="row"><span class="heading_10">OTHER TITLES: </span><br/>
+            <span class="regular_10_italic">List any other titles here, one title per row.</span>
+            <div class="regular_10">
+               <p>${title}</p>
+            </div>
+        
+        </div>
+    <% } else { %>
+        <div class="row"><span class="heading_10">OTHER TITLES: </span><br/>
+            <span class="regular_10_italic">List any other titles here, one title per row.</span>
+            <div class="regular_10">
+               <p>&nbsp;</p>
+            </div>
+        </div>  
+    <% } %>
+
+
+
+
+
+
 
     <% if (pastAppointments.length > 0) { %>
         <% var title = ""; %>
@@ -496,7 +522,7 @@
         <% abstracts.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (abstracts.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Selected Abstracts<br>
+         <div class="heading_10">Abstracts<br>
             <span class="regular_10_italic">List up to 10 of your most impactful abstracts</span>
          </div>
          
@@ -510,7 +536,7 @@
         </div>
         <% } else { %>
         <div class="row">
-         <div class="heading_10">Selected Abstracts<br>
+         <div class="heading_10">Abstracts<br>
             <span class="regular_10_italic">List up to 10 of your most impactful abstracts</span>
          </div>
          <div class="regular_10">
@@ -702,7 +728,7 @@
               <p><b>PI</b>: <%= item['pi'] %></p>
               <p><b>Role</b>: <%= item['role'] %></p>
               <p><b>Percent effort</b>: </p>
-              <p><b>Funding source</b>: </p>
+              <p><b>Funding source</b>: <%= item['awardedBy'] %></p>
               <p><b>Funding amount</b>: </p>
               <p><b>Duration</b>: <%= item['period'] %></p>
               <p><b>Project synopsis</b>: </p>
@@ -738,7 +764,7 @@
               <p><b>PI</b>: <%= item['pi'] %></p>
               <p><b>Role</b>: <%= item['role'] %></p>
               <p><b>Percent effort</b>: </p>
-              <p><b>Funding source</b>: </p>
+              <p><b>Funding source</b>: <%= item['awardedBy'] %></p>
               <p><b>Funding amount</b>: </p>
               <p><b>Duration</b>: <%= item['period'] %></p>
               <p><b>Project synopsis</b>: </p>
@@ -774,7 +800,7 @@
               <p><b>PI</b>: <%= item['pi'] %></p>
               <p><b>Role</b>: <%= item['role'] %></p>
               <p><b>Percent effort</b>: </p>
-              <p><b>Funding source</b>: </p>
+              <p><b>Funding source</b>: <%= item['awardedBy'] %></p>
               <p><b>Funding amount</b>: </p>
               <p><b>Duration</b>: <%= item['period'] %></p>
               <p><b>Project synopsis</b>: </p>
@@ -803,7 +829,7 @@
     </div>
     
     <hr>
-  
+
     <% if (mentorship_activities) { %>
     <div class="row">
     <div class="heading_10">MENTORING ACTIVITIES <br>
@@ -938,7 +964,7 @@
         </div>
         <% } else { %>
         <div class="row">
-         <div class="heading_10">Named Lectures</div>
+         <div class="heading_10">Named Lectures: </div>
          <div class="regular_10">
           <p>&nbsp;</p>
          </div>
