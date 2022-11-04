@@ -200,34 +200,13 @@
         <div class="row"><span class="heading_10">SECONDARY ACADEMIC DEPARTMENT: </span> <span class="regular_10">[ENTER DEPARTMENT HERE]</span></div>
     <% } %>
     
-    <% if(otherPositions.length > 0) { %>
-        <% var title = ""; %>
-        <% _.forEach(otherPositions, function(item) { %>
-        <% title += item['label'] + ', '; %>
-        <% }); %>
-        <% title = title.slice(0,-2); %>
 
-        <div class="row"><span class="heading_10">OTHER TITLES: </span><br/>
-            <span class="regular_10_italic">List any other titles here, one title per row.</span>
-            <div class="regular_10">
-               <p>${title}</p>
-            </div>
-        
-        </div>
-    <% } else { %>
         <div class="row"><span class="heading_10">OTHER TITLES: </span><br/>
             <span class="regular_10_italic">List any other titles here, one title per row.</span>
             <div class="regular_10">
                <p>&nbsp;</p>
             </div>
         </div>  
-    <% } %>
-
-
-
-
-
-
 
     <% if (pastAppointments.length > 0) { %>
         <% var title = ""; %>
