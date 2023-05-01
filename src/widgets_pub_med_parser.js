@@ -99,14 +99,14 @@ class WidgetsPubMedParser {
       let label = value['label'];
       let year = value['attributes']['startYear'].substr(0,4);
       let category = value['attributes']['appointmentTypeCode'];
-
+      let organizationLabel = value['attributes']['organizationLabel'];
       switch(category) {
         case 'P': {
-          primaryPositions.push({'label': label})
+          primaryPositions.push({'label': label, 'organizationLabel': organizationLabel})
           break;
         }
         case 'S': {
-          secondaryPositions.push({'label':label})
+          secondaryPositions.push({'label':label, 'organizationLabel': organizationLabel})
           break;
         }
         default: {
@@ -147,6 +147,7 @@ class WidgetsPubMedParser {
       // NOTE: these do *not* include pastAppointments
       'primaryPositions': primaryPositions,
       'secondaryPositions': secondaryPositions,
+      'otherPositions': otherPositions,
       'allPositions': allPositions,
       'pastAppointments': pastAppointmentsList,
       // NOTE: these *do* include past appointments
@@ -324,10 +325,8 @@ class WidgetsPubMedParser {
       })
 
       let isRefereed = function() {
-        let exclusion = ["Multicenter Study", "Review",  "Scientific Integrity Review",
-          "Systematic Review", "Support of Research Systematic Review",
-          "Adaptive Clinical Trial", "Clinical Trial, Phase III", "Clinical Trial, Phase IV",
-          "Pragmatic Clinical Trial"]
+        let exclusion = ["Review",  "Scientific Integrity Review",
+          "Systematic Review", "Support of Research Systematic Review"]
         let inclusion = ["Journal Article", "Journal", "academic article"]
         return subtypeList.length == 0 || 
         ((_.intersection(subtypeList, inclusion).length > 0 &&
@@ -397,9 +396,10 @@ class WidgetsPubMedParser {
       if (value['vivoType'] == 'http://purl.org/ontology/bibo/BookSection') {
         pubTypes['booksections'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
       }
+    
       /* NOTE: 'nonauthored' and 'others' not populated */
     });
-
+    pubTypes['books_booksections'] = pubTypes['books'].concat(pubTypes['booksections'])
     let results = _.transform(pubTypes, (result, value, key) => { 
       let name = key
       result[name] = value
