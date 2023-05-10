@@ -361,7 +361,7 @@
                 &bull;&nbsp;&nbsp;Do not list papers in preparation, submitted papers that have not been accepted for publication<br>
                 &bull;&nbsp;&nbsp;Identify papers accepted for publication but not yet published as "in press"<br>
                 &bull;&nbsp;&nbsp;Include notation if co-first author (e.g., mark with asterisk or caret, describe co-author role)<br>
-                &bull;&nbsp;&nbsp;Include notation if scholarship in JEDAI, advocacy, open science domains (e.g., mark with asterisk or caret, identify domain)<br>
+                &bull;&nbsp;&nbsp;Include notation if scholarship in JEDAI, advocacy, open science domains (e.g., mark with asterisk or caret, identify domain)<br><br>
         </span>
       </div>
        
@@ -369,7 +369,7 @@
 
         <% if (journals.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Publications in refereed journals<br>
+         <div class="heading_10">A. Publications in refereed journals<br>
           <span class="regular_10_italic">Refereed journals are scientific publications that have active editorial boards and a system of critical review of all submissions), including:<br>
                     &bull;&nbsp;&nbsp;Named author publications<br>
                     &bull;&nbsp;&nbsp;Study Group publications (multicenter investigations where you were a PI or investigator, but not a named author)<br>
@@ -388,7 +388,7 @@
         </div>
         <% } else { %>
         <div class="row">
-         <div class="heading_10">Publications in refereed journals<br>
+         <div class="heading_10">A. Publications in refereed journals<br>
             <span class="regular_10_italic">Refereed journals are scientific publications that have active editorial boards and a system of critical review of all submissions), including:<br>
                     &bull;&nbsp;&nbsp;Named author publications<br>
                     &bull;&nbsp;&nbsp;Study Group publications (multicenter investigations where you were a PI or investigator, but not a named author)<br>
@@ -423,7 +423,7 @@
           <p>&nbsp;</p>
          </div>
         </div>
-        <% } %>-->
+        <% } %> 
 
         <% letters.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (letters.length > 0) { %>
@@ -465,12 +465,12 @@
           <p>&nbsp;</p>
          </div>
         </div>
-        <% } %>
+        <% } %> -->
 
         <% books_booksections.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (books_booksections.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Books<br>
+         <div class="heading_10">B. Books<br>
           <span class="regular_10_italic">(Include books and book chapters)</span>
          </div>
          <div class="regular_10">
@@ -483,7 +483,7 @@
         </div>
         <% } else { %>
         <div class="row">
-          <div class="heading_10">Books<br>
+          <div class="heading_10">B. Books<br>
            <span class="regular_10_italic">(Include books and book chapters)</span>
           </div>
          <div class="regular_10">
@@ -493,7 +493,7 @@
         <% } %>
         
         <div class="row">
-         <div class="heading_10">Digital output and other forms of public dissemination<br>
+         <div class="heading_10">C. Digital output and other forms of public dissemination<br>
             <span class="regular_10_italic">Social media, traditional media (e.g. broadcast, news media)</span>
          </div>
          <div class="regular_10">
@@ -504,7 +504,7 @@
         <% abstracts.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (abstracts.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Abstracts<br>
+         <div class="heading_10">D. Abstracts<br>
             <span class="regular_10_italic">List up to 10 of your most impactful abstracts</span>
          </div>
          
@@ -518,7 +518,7 @@
         </div>
         <% } else { %>
         <div class="row">
-         <div class="heading_10">Abstracts<br>
+         <div class="heading_10">D. Abstracts<br>
             <span class="regular_10_italic">List up to 10 of your most impactful abstracts</span>
          </div>
          <div class="regular_10">
@@ -530,7 +530,7 @@
         <% abstracts.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (abstracts.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Non-refereed publications<br>
+         <div class="heading_10">E. Non-refereed publications<br>
             <span class="regular_10_italic">(Non-refereed publications refer to published manuscripts which are not subject to a system of critical review – articles are often solicited by the publisher)</span>
          </div>
          
@@ -544,7 +544,7 @@
         </div>
         <% } else { %>
         <div class="row">
-         <div class="heading_10">Non-refereed publications<br>
+         <div class="heading_10">E. Non-refereed publications<br>
             <span class="regular_10_italic">(Non-refereed publications refer to published manuscripts which are not subject to a system of critical review – articles are often solicited by the publisher)</span>
          </div>
          <div class="regular_10">
@@ -553,7 +553,15 @@
         </div>
         <% } %>
 
-        <% reviews.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <div class="row">
+          <div class="heading_10">F. Other forms of scholarship dissemination (not included above)<br>
+          </div>
+          <div class="regular_10">
+           <p>&nbsp;</p>
+          </div>
+         </div>
+
+        <!-- <% reviews.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (reviews.length > 0) { %>
         <div class="row">
          <div class="heading_10">Scientific reviews</div>
@@ -572,7 +580,7 @@
           <p>&nbsp;</p>
          </div>
         </div>
-        <% } %>
+        <% } %> -->
 
         <% nonauthored.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (nonauthored.length > 0) { %>
@@ -724,7 +732,7 @@
 
     <div class="row">
       <div class="heading_10">RESEARCH SUPPORT <br>
-        <span class="regular_10_italic">Complete the following sections for all external present, past, and pending support including gifts, grants, and contracts:</span></div>
+        <span class="regular_10_italic">Complete the following sections for all external present, past, and pending support including gifts, grants, and contracts:</span></div><br/>
       
         <% if (currentGrants.length > 0) { %>
         <div class="row">
@@ -902,7 +910,7 @@
       <span class="regular_10_italic">
         &bull;&nbsp;&nbsp;Visiting professorships (institution, date)<br>
         &bull;&nbsp;&nbsp;Scientific meetings – invited (lecture title, meeting, date)<br>
-        &bull;&nbsp;&nbsp;Courses, symposiums, workshops – invited (lecture title, meeting role, meeting, date)<br>
+        &bull;&nbsp;&nbsp;Courses, symposiums, workshops – invited (lecture title, meeting role, meeting, date)<br><br>
       </span>
      </div>
      
@@ -1022,27 +1030,33 @@
 
     <% if (academic_activities) { %>
     <div class="row">
-    <div class="heading_10">ACADEMIC, LEADERSHIP AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER<br>
-      <span class="regular_10_italic">List roles / responsibilities, include dates:<br/>
-           &bull;&nbsp;&nbsp;Administrative positions<br/>
-           &bull;&nbsp;&nbsp;Committees<br/>
-           &bull;&nbsp;&nbsp;Leadership positions
-      </span></div>
+    <div class="heading_10">ACADEMIC, LEADERSHIP AND ADMINISTRATIVE ACTIVITIES – SCHOOL OF MEDICINE (list roles / responsibilities, include dates)<br>
+    </div>
     <div style="font-size:10pt; font-family:TimesNewRoman;">
       <p style="margin-top: 6pt;">${academic_activities}</p>
     </div>
     </div>
+    <div class="row">
+      <div class="heading_10">ACADEMIC, LEADERSHIP AND ADMINISTRATIVE ACTIVITIES – HOSPITAL/DUHS (list roles / responsibilities, include dates)<br>
+      </div>
+      <div style="font-size:10pt; font-family:TimesNewRoman;">
+        <p>&nbsp;</p>
+      </div>
+    </div>
     <% } else { %>
     <div class="row">
-     <div class="heading_10">ACADEMIC, LEADERSHIP AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER<br>
-      <span class="regular_10_italic">List roles / responsibilities, include dates:<br/>
-           &bull;&nbsp;&nbsp;Administrative positions<br/>
-           &bull;&nbsp;&nbsp;Committees<br/>
-           &bull;&nbsp;&nbsp;Leadership positions
-      </span></div>
-     <div style="font-size:10pt; font-family:TimesNewRoman;">
-      <p>&nbsp;</p>
-     </div>
+      <div class="heading_10">ACADEMIC, LEADERSHIP AND ADMINISTRATIVE ACTIVITIES – SCHOOL OF MEDICINE (list roles / responsibilities, include dates)<br>
+      </div>
+      <div style="font-size:10pt; font-family:TimesNewRoman;">
+        <p>&nbsp;</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="heading_10">ACADEMIC, LEADERSHIP AND ADMINISTRATIVE ACTIVITIES – HOSPITAL/DUHS (list roles / responsibilities, include dates)<br>
+      </div>
+      <div style="font-size:10pt; font-family:TimesNewRoman;">
+        <p>&nbsp;</p>
+       </div>
     </div>
     <% } %>
     

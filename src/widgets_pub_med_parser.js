@@ -400,6 +400,7 @@ class WidgetsPubMedParser {
       /* NOTE: 'nonauthored' and 'others' not populated */
     });
     pubTypes['books_booksections'] = pubTypes['books'].concat(pubTypes['booksections'])
+    pubTypes['journals'] = pubTypes['journals'].concat(pubTypes['manuscripts'], pubTypes['letters'], pubTypes['editorials'], pubTypes['reviews'])
     let results = _.transform(pubTypes, (result, value, key) => { 
       let name = key
       result[name] = value
