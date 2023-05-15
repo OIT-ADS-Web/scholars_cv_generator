@@ -688,7 +688,7 @@ class WidgetsPubMedParser {
 
   parsePresentations(data) {
 
-    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'internationalmeetings': [] };
+    var presentationList = { 'keynotenamedlectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'internationalmeetings': [], 'invitedtalks': [], 'lectures': [], 'broadcastappearances': [], 'interviews': [], 'others': [] };
     let professionalActivities = data['professionalActivities'];
 
      _.forEach(professionalActivities, function(value) {
@@ -703,6 +703,7 @@ class WidgetsPubMedParser {
 
                 case "Other": {
                     //NOTE: 'other' skipped
+                    presentationList['others'].push({'label':label});
                     break;
                 }
 
@@ -711,13 +712,33 @@ class WidgetsPubMedParser {
                     break;
                 }
 
+                case "Lecture": {
+                  presentationList['lectures'].push({'label':label});
+                  break;
+              }
+                
+                case "Invited Talk": {
+                  presentationList['invitedtalks'].push({'label':label});
+                  break;
+              }
+
+              case "Broadcast Appearance": {
+                presentationList['broadcastappearances'].push({'label':label});
+                break;
+            }
+
+              case "Interview": {
+                presentationList['interviews'].push({'label':label});
+                break;
+            }
+
                 case "National Scientific Meeting": {
                     presentationList['nationalmeetings'].push({'label':label});
                     break;
                 }
 
                 case "Keynote/Named Lecture": {
-                    presentationList['lectures'].push({'label':label});
+                    presentationList['keynotenamedlectures'].push({'label':label});
                     break;
                 }
 

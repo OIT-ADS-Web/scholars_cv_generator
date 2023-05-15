@@ -935,7 +935,7 @@
       
       <% if (internationalmeetings.length > 0) { %>
         <div class="row">
-         <div class="heading_10">International Meetings</div>
+         <div class="heading_10">International Meetings:</div>
          <div class="regular_10">
           <% _.forEach(internationalmeetings, function(item) { %>
               <p><%= item['label'] %></p>
@@ -969,11 +969,48 @@
         </div>
       <% } %>
      
-     <% if (lectures.length > 0) { %>
+      <% if (lectures.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Lectures: </div>
+         <div class="regular_10">
+          <% _.forEach(lectures, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Lectures: </div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (interviews.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Interviews: </div>
+         <div class="regular_10">
+          <% _.forEach(interviews, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Interviews: </div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+    
+
+     <% if (keynotenamedlectures.length > 0) { %>
         <div class="row">
          <div class="heading_10">Named Lectures: </div>
          <div class="regular_10">
-          <% _.forEach(lectures, function(item) { %>
+          <% _.forEach(keynotenamedlectures, function(item) { %>
               <p><%= item['label'] %></p>
           <% }); %>
          </div>
@@ -1004,6 +1041,61 @@
          </div>
         </div>
       <% } %>
+
+      <% if (invitedtalks.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Invited Talks: </div>
+         <div class="regular_10">
+          <% _.forEach(invitedtalks, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Invited Talks: </div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (broadcastappearances.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Broadcast Appearances: </div>
+         <div class="regular_10">
+          <% _.forEach(broadcastappearances, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Broadcast Appearances: </div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (others.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Other: </div>
+         <div class="regular_10">
+          <% _.forEach(others, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Other: </div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
     </div>
     
     
