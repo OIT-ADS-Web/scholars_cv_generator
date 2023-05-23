@@ -178,33 +178,44 @@
 
     <% if(primaryPositions.length > 0) { %>
         <% var title = ""; %>
+        <% var organizationLabel = ""; %>
         <% _.forEach(primaryPositions, function(item) { %>
         <% title += item['label'] + ', '; %>
+        <% organizationLabel += item['organizationLabel'] + ', '; %>
         <% }); %>
         <% title = title.slice(0,-2); %>
+        <% organizationLabel = organizationLabel.slice(0,-2); %>
 
          <div class="row"><span class="heading_10">PRIMARY ACADEMIC RANK: </span> <span class="regular_10">${title}</span></div>
 
-         <div class="row"><span class="heading_10">PRIMARY ACADEMIC DEPARTMENT: </span> <span class="regular_10">[ENTER DEPARTMENT HERE]</span></div>
+         <div class="row"><span class="heading_10">PRIMARY ACADEMIC DEPARTMENT: </span> <span class="regular_10">${organizationLabel}</span></div>
     <% } %>
 
     <% if(secondaryPositions.length > 0) { %>
         <% var title = ""; %>
+        <% var organizationLabel = ""; %>
         <% _.forEach(secondaryPositions, function(item) { %>
         <% title += item['label'] + ', '; %>
+        <% organizationLabel += item['organizationLabel'] + ', '; %>
         <% }); %>
         <% title = title.slice(0,-2); %>
+        <% organizationLabel = organizationLabel.slice(0,-2); %>
 
         <div class="row"><span class="heading_10">SECONDARY ACADEMIC RANK: </span> <span class="regular_10">${title}</span></div>
         
-        <div class="row"><span class="heading_10">SECONDARY ACADEMIC DEPARTMENT: </span> <span class="regular_10">[ENTER DEPARTMENT HERE]</span></div>
+        <div class="row"><span class="heading_10">SECONDARY ACADEMIC DEPARTMENT: </span> <span class="regular_10">${organizationLabel}</span></div>
     <% } %>
-    
-
+  
         <div class="row"><span class="heading_10">OTHER TITLES: </span><br/>
             <span class="regular_10_italic">List any other titles here, one title per row.</span>
             <div class="regular_10">
-               <p>&nbsp;</p>
+              <% if(otherPositions.length > 0) { %>
+                <% var title = ""; %>
+                <% _.forEach(otherPositions, function(item) { %>
+                <% title = item['label']; %>
+                <p>${title}&nbsp;</p>
+                <% }); %>
+            <% } %>
             </div>
         </div>  
 
@@ -224,7 +235,10 @@
         <% lic = item['label']; %>
         <% }); %>
 
-        <div class="row"><span class="heading_10">NC MEDICAL BOARD LICENSE CERTIFICATE NUMBER: </span> <span class="regular_10">${lic}</span></div>
+        <div class="row"><span class="heading_10">NC MEDICAL BOARD LICENSE CERTIFICATE NUMBER: </span> <span class="regular_10">${lic}</span>
+        </br>
+        <span class="regular_10">&emsp;Next Renewal Date: [ENTER NEXT RENEWAL DATE HERE]</span>
+        </div>
      <% } %>
 
     <div class="row">
@@ -266,8 +280,14 @@
       <span class="regular_10_italic">Beginning with first postgraduate position, list institution, position/title and dates in chronological order.</span>
       </div>
       <div class="regular_10">
+      
       <% _.forEach(mergeExpPos, function(item) { %>
-       <p><%= item['label'] + ", " + item['startYear'] + " - " + item['endYear'] %></p>
+        <% var position = item['label'].substring(0, item['label'].indexOf(",")); %>
+        <% if (position == '') { %>
+          <% position = 'position undefined' %>
+          <% } %>
+        <% var institution = item['label'].substring(item['label'].indexOf(",")+1); %>
+       <p><%= institution + "," + position + ", " + item['startYear'] + " - " + item['endYear'] %></p>
       <% }); %>
     </div>
     </div>
@@ -341,7 +361,7 @@
                 &bull;&nbsp;&nbsp;Do not list papers in preparation, submitted papers that have not been accepted for publication<br>
                 &bull;&nbsp;&nbsp;Identify papers accepted for publication but not yet published as "in press"<br>
                 &bull;&nbsp;&nbsp;Include notation if co-first author (e.g., mark with asterisk or caret, describe co-author role)<br>
-                &bull;&nbsp;&nbsp;Include notation if scholarship in JEDAI, advocacy, open science domains (e.g., mark with asterisk or caret, identify domain)<br>
+                &bull;&nbsp;&nbsp;Include notation if scholarship in JEDAI, advocacy, open science domains (e.g., mark with asterisk or caret, identify domain)<br><br>
         </span>
       </div>
        
@@ -349,7 +369,7 @@
 
         <% if (journals.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Publications in refereed journals<br>
+         <div class="heading_10">A. Publications in refereed journals<br>
           <span class="regular_10_italic">Refereed journals are scientific publications that have active editorial boards and a system of critical review of all submissions), including:<br>
                     &bull;&nbsp;&nbsp;Named author publications<br>
                     &bull;&nbsp;&nbsp;Study Group publications (multicenter investigations where you were a PI or investigator, but not a named author)<br>
@@ -368,7 +388,7 @@
         </div>
         <% } else { %>
         <div class="row">
-         <div class="heading_10">Publications in refereed journals<br>
+         <div class="heading_10">A. Publications in refereed journals<br>
             <span class="regular_10_italic">Refereed journals are scientific publications that have active editorial boards and a system of critical review of all submissions), including:<br>
                     &bull;&nbsp;&nbsp;Named author publications<br>
                     &bull;&nbsp;&nbsp;Study Group publications (multicenter investigations where you were a PI or investigator, but not a named author)<br>
@@ -384,7 +404,7 @@
         
         <% } %>
 
-         <% manuscripts.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <!-- <% manuscripts.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (manuscripts.length > 0) { %>
         <div class="row">
          <div class="heading_10">Study-related manuscripts on multicenter clinical trials</div>
@@ -403,7 +423,7 @@
           <p>&nbsp;</p>
          </div>
         </div>
-        <% } %>
+        <% } %> 
 
         <% letters.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (letters.length > 0) { %>
@@ -445,15 +465,17 @@
           <p>&nbsp;</p>
          </div>
         </div>
-        <% } %>
+        <% } %> -->
 
-        <% books.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
-        <% if (books.length > 0) { %>
+        <% books_booksections.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <% if (books_booksections.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Books</div>
+         <div class="heading_10">B. Books<br>
+          <span class="regular_10_italic">(Include books and book chapters)</span>
+         </div>
          <div class="regular_10">
           <ol>
-          <% _.forEach(books, function(item) { %>
+          <% _.forEach(books_booksections, function(item) { %>
               <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
           <% }); %>
           </ol>
@@ -461,28 +483,9 @@
         </div>
         <% } else { %>
         <div class="row">
-         <div class="heading_10">Books</div>
-         <div class="regular_10">
-          <p>&nbsp;</p>
-         </div>
-        </div>
-        <% } %>
-
-        <% booksections.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
-        <% if (booksections.length > 0) { %>
-        <div class="row">
-         <div class="heading_10">Book Chapters</div>
-         <div class="regular_10">
-          <ol>
-          <% _.forEach(booksections, function(item) { %>
-              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
-          <% }); %>
-          </ol>
-         </div>
-        </div>
-        <% } else { %>
-        <div class="row">
-         <div class="heading_10">Book Chapters</div>
+          <div class="heading_10">B. Books<br>
+           <span class="regular_10_italic">(Include books and book chapters)</span>
+          </div>
          <div class="regular_10">
           <p>&nbsp;</p>
          </div>
@@ -490,7 +493,7 @@
         <% } %>
         
         <div class="row">
-         <div class="heading_10">Digital output and other forms of public dissemination<br>
+         <div class="heading_10">C. Digital output and other forms of public dissemination<br>
             <span class="regular_10_italic">Social media, traditional media (e.g. broadcast, news media)</span>
          </div>
          <div class="regular_10">
@@ -501,7 +504,7 @@
         <% abstracts.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (abstracts.length > 0) { %>
         <div class="row">
-         <div class="heading_10">Abstracts<br>
+         <div class="heading_10">D. Abstracts<br>
             <span class="regular_10_italic">List up to 10 of your most impactful abstracts</span>
          </div>
          
@@ -515,7 +518,7 @@
         </div>
         <% } else { %>
         <div class="row">
-         <div class="heading_10">Abstracts<br>
+         <div class="heading_10">D. Abstracts<br>
             <span class="regular_10_italic">List up to 10 of your most impactful abstracts</span>
          </div>
          <div class="regular_10">
@@ -524,7 +527,41 @@
         </div>
         <% } %>
 
-        <% reviews.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <% abstracts.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
+        <% if (abstracts.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">E. Non-refereed publications<br>
+            <span class="regular_10_italic">(Non-refereed publications refer to published manuscripts which are not subject to a system of critical review – articles are often solicited by the publisher)</span>
+         </div>
+         
+         <div class="regular_10">
+          <ol>
+          <% _.forEach(abstracts, function(item) { %>
+              <li><p><%= item['citation'].replace(lastName,"<b>" + lastName + "</b>") %></p></li>
+          <% }); %>
+          </ol>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">E. Non-refereed publications<br>
+            <span class="regular_10_italic">(Non-refereed publications refer to published manuscripts which are not subject to a system of critical review – articles are often solicited by the publisher)</span>
+         </div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+        <% } %>
+
+        <div class="row">
+          <div class="heading_10">F. Other forms of scholarship dissemination (not included above)<br>
+          </div>
+          <div class="regular_10">
+           <p>&nbsp;</p>
+          </div>
+         </div>
+
+        <!-- <% reviews.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (reviews.length > 0) { %>
         <div class="row">
          <div class="heading_10">Scientific reviews</div>
@@ -543,7 +580,7 @@
           <p>&nbsp;</p>
          </div>
         </div>
-        <% } %>
+        <% } %> -->
 
         <% nonauthored.sort(function(a,b) {return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);} ); %>
         <% if (nonauthored.length > 0) { %>
@@ -695,7 +732,7 @@
 
     <div class="row">
       <div class="heading_10">RESEARCH SUPPORT <br>
-        <span class="regular_10_italic">Complete the following sections for all external present, past, and pending support including gifts, grants, and contracts:</span></div>
+        <span class="regular_10_italic">Complete the following sections for all external present, past, and pending support including gifts, grants, and contracts:</span></div><br/>
       
         <% if (currentGrants.length > 0) { %>
         <div class="row">
@@ -873,7 +910,7 @@
       <span class="regular_10_italic">
         &bull;&nbsp;&nbsp;Visiting professorships (institution, date)<br>
         &bull;&nbsp;&nbsp;Scientific meetings – invited (lecture title, meeting, date)<br>
-        &bull;&nbsp;&nbsp;Courses, symposiums, workshops – invited (lecture title, meeting role, meeting, date)<br>
+        &bull;&nbsp;&nbsp;Courses, symposiums, workshops – invited (lecture title, meeting role, meeting, date)<br><br>
       </span>
      </div>
      
@@ -898,7 +935,7 @@
       
       <% if (internationalmeetings.length > 0) { %>
         <div class="row">
-         <div class="heading_10">International Meetings</div>
+         <div class="heading_10">International Meetings:</div>
          <div class="regular_10">
           <% _.forEach(internationalmeetings, function(item) { %>
               <p><%= item['label'] %></p>
@@ -932,11 +969,48 @@
         </div>
       <% } %>
      
-     <% if (lectures.length > 0) { %>
+      <% if (lectures.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Lectures: </div>
+         <div class="regular_10">
+          <% _.forEach(lectures, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Lectures: </div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (interviews.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Interviews: </div>
+         <div class="regular_10">
+          <% _.forEach(interviews, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Interviews: </div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+    
+
+     <% if (keynotenamedlectures.length > 0) { %>
         <div class="row">
          <div class="heading_10">Named Lectures: </div>
          <div class="regular_10">
-          <% _.forEach(lectures, function(item) { %>
+          <% _.forEach(keynotenamedlectures, function(item) { %>
               <p><%= item['label'] %></p>
           <% }); %>
          </div>
@@ -967,6 +1041,61 @@
          </div>
         </div>
       <% } %>
+
+      <% if (invitedtalks.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Invited Talks: </div>
+         <div class="regular_10">
+          <% _.forEach(invitedtalks, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Invited Talks: </div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (broadcastappearances.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Broadcast Appearances: </div>
+         <div class="regular_10">
+          <% _.forEach(broadcastappearances, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Broadcast Appearances: </div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
+      <% if (others.length > 0) { %>
+        <div class="row">
+         <div class="heading_10">Other: </div>
+         <div class="regular_10">
+          <% _.forEach(others, function(item) { %>
+              <p><%= item['label'] %></p>
+          <% }); %>
+         </div>
+        </div>
+        <% } else { %>
+        <div class="row">
+         <div class="heading_10">Other: </div>
+         <div class="regular_10">
+          <p>&nbsp;</p>
+         </div>
+        </div>
+      <% } %>
+
     </div>
     
     
@@ -993,27 +1122,33 @@
 
     <% if (academic_activities) { %>
     <div class="row">
-    <div class="heading_10">ACADEMIC, LEADERSHIP AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER<br>
-      <span class="regular_10_italic">List roles / responsibilities, include dates:<br/>
-           &bull;&nbsp;&nbsp;Administrative positions<br/>
-           &bull;&nbsp;&nbsp;Committees<br/>
-           &bull;&nbsp;&nbsp;Leadership positions
-      </span></div>
+    <div class="heading_10">ACADEMIC, LEADERSHIP AND ADMINISTRATIVE ACTIVITIES – SCHOOL OF MEDICINE (list roles / responsibilities, include dates)<br>
+    </div>
     <div style="font-size:10pt; font-family:TimesNewRoman;">
       <p style="margin-top: 6pt;">${academic_activities}</p>
     </div>
     </div>
+    <div class="row">
+      <div class="heading_10">ACADEMIC, LEADERSHIP AND ADMINISTRATIVE ACTIVITIES – HOSPITAL/DUHS (list roles / responsibilities, include dates)<br>
+      </div>
+      <div style="font-size:10pt; font-family:TimesNewRoman;">
+        <p>&nbsp;</p>
+      </div>
+    </div>
     <% } else { %>
     <div class="row">
-     <div class="heading_10">ACADEMIC, LEADERSHIP AND ADMINISTRATIVE ACTIVITIES OF THE UNIVERSITY AND MEDICAL CENTER<br>
-      <span class="regular_10_italic">List roles / responsibilities, include dates:<br/>
-           &bull;&nbsp;&nbsp;Administrative positions<br/>
-           &bull;&nbsp;&nbsp;Committees<br/>
-           &bull;&nbsp;&nbsp;Leadership positions
-      </span></div>
-     <div style="font-size:10pt; font-family:TimesNewRoman;">
-      <p>&nbsp;</p>
-     </div>
+      <div class="heading_10">ACADEMIC, LEADERSHIP AND ADMINISTRATIVE ACTIVITIES – SCHOOL OF MEDICINE (list roles / responsibilities, include dates)<br>
+      </div>
+      <div style="font-size:10pt; font-family:TimesNewRoman;">
+        <p>&nbsp;</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="heading_10">ACADEMIC, LEADERSHIP AND ADMINISTRATIVE ACTIVITIES – HOSPITAL/DUHS (list roles / responsibilities, include dates)<br>
+      </div>
+      <div style="font-size:10pt; font-family:TimesNewRoman;">
+        <p>&nbsp;</p>
+       </div>
     </div>
     <% } %>
     
