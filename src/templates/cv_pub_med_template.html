@@ -201,9 +201,33 @@
         <% title = title.slice(0,-2); %>
         <% organizationLabel = organizationLabel.slice(0,-2); %>
 
-        <div class="row"><span class="heading_10">SECONDARY ACADEMIC RANK: </span> <span class="regular_10">${title}</span></div>
+        <div class="row"><span class="heading_10">SECONDARY ACADEMIC RANK: </span> <span class="regular_10"></span><br/>
+          <div class="regular_10">
+            <% if(secondaryPositions.length > 0) { %>
+              <% var title = ""; %>
+              <% _.forEach(secondaryPositions, function(item) { %>
+              <% title = item['label']; %>
+              <ul>
+              <li>${title}</li>
+              </ul>
+              <% }); %>
+          <% } %>
+          </div>
+        </div>
         
-        <div class="row"><span class="heading_10">SECONDARY ACADEMIC DEPARTMENT: </span> <span class="regular_10">${organizationLabel}</span></div>
+        <div class="row"><span class="heading_10">SECONDARY ACADEMIC DEPARTMENT: </span> <span class="regular_10"></span><br/>
+          <div class="regular_10">
+            <% if(secondaryPositions.length > 0) { %>
+              <% var organizationLabel = ""; %>
+              <% _.forEach(secondaryPositions, function(item) { %>
+              <% organizationLabel = item['organizationLabel']; %>
+              <ul>
+                <li>${title}</li>
+              </ul>
+              <% }); %>
+          <% } %>
+          </div>
+        </div>
     <% } %>
   
         <div class="row"><span class="heading_10">OTHER TITLES: </span><br/>
@@ -271,85 +295,28 @@
     <% } %>
     
 
-    <% var mergeExpPos = Object.assign(profExperiences, otherPositions) %>
-  
-    <% if (mergeExpPos.length > 0) { %>
-    <% mergeExpPos.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
+    <% profexpSection.sort(function(a,b) {return (a.startYear > b.startYear) ? 1 : ((b.startYear > a.startYear) ? -1 : 0);} ); %>
     <div class="row">
       <div class="heading_10">PROFESSIONAL TRAINING AND ACADEMIC CAREER <br>
       <span class="regular_10_italic">Beginning with first postgraduate position, list institution, position/title and dates in chronological order.</span>
       </div>
       <div class="regular_10">
-      
-      <% _.forEach(mergeExpPos, function(item) { %>
-        <% var position = item['label'].substring(0, item['label'].indexOf(",")); %>
-        <% if (position == '') { %>
-          <% position = 'position undefined' %>
+      <% _.forEach(profexpSection, function(item) { %>
+          <% if (item['isTypeOf'] == 'profExperiences' ) { %>
+            <% var position = item['label'].substring(0, item['label'].indexOf(",")); %>
+            <% var institution = item['label'].substring(item['label'].indexOf(",")+1); %>
+           <p><%= institution + "," + position + ", " + item['startYear'] + " - " + item['endYear'] %></p>
+          <% } else { %>
+            <% if(item['endYear'] != null)  { %>
+              <p><%= item['institution'] + ", " + item['orig_label'] + ", " + item['startYear'] + " - " + item['endYear'] %></p>
+            <% } else { %>    
+              <p><%= item['institution'] + ", " + item['orig_label'] + ", " + item['startYear'] + " - " + "present" %></p>
+            <% } %>
           <% } %>
-        <% var institution = item['label'].substring(item['label'].indexOf(",")+1); %>
-       <p><%= institution + "," + position + ", " + item['startYear'] + " - " + item['endYear'] %></p>
       <% }); %>
     </div>
     </div>
-    <% } else { %>
-    <div class="row">
-      <div class="heading_10">PROFESSIONAL TRAINING AND ACADEMIC CAREER <br>
-      <span class="regular_10_italic">Beginning with first postgraduate position, list institution, position/title and dates in chronological order.</span>
-      </div>
-      <div class="regular_10">
-        <p>&nbsp;</p>
-      </div>
-    </div>
-    <% } %>
-    
-  <% if (academicAppointments.length > 0) { %>
-    <% academicAppointments.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
-    <div class="row">
-      <div class="heading_10">DUKE UNIVERSITY FACULTY ACADEMIC APPOINTMENTS</div>
-      <div class="regular_10">
-        <% _.forEach(academicAppointments, function(item) { %>
-          <% if(item['endYear'] != null)  { %>
-            <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['orig_label'] %></p>
-          <% } else { %>    
-            <p><%= item['startYear'] + " - " + "present" + ", " + item['orig_label'] %></p>
-        <% } %>
-       <% }); %>
-      </div>
-    </div>
-    <% } else { %>
-     <div class="row">
-      <div class="heading_10">DUKE UNIVERSITY FACULTY ACADEMIC APPOINTMENTS</div>
-      <div class="regular_10">
-        <p>&nbsp;</p>
-      </div>
-     </div>
-    <% } %>
-
-
-  <% if (administrativeAppointments.length > 0) { %>
-    <% administrativeAppointments.sort(function(a,b) {return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);} ); %>
-    <div class="row">
-      <div class="heading_10">DUKE UNIVERSITY FACULTY ADMINISTRATIVE APPOINTMENTS</div>
-      <div class="regular_10">
-        <% _.forEach(administrativeAppointments, function(item) { %>
-          <% if(item['endYear'] != null)  { %>
-            <p><%= item['startYear'] + " - " + item['endYear'] + ", " + item['orig_label'] %></p>
-          <% } else { %>    
-            <p><%= item['startYear'] + " - " + "present" + ", " + item['orig_label'] %></p>
-        <% } %>
-       <% }); %>
-      </div>
-    </div>
-  <% } else { %>
-    <div class="row">
-      <div class="heading_10">DUKE UNIVERSITY FACULTY ADMINISTRATIVE APPOINTMENTS</div>
-      <div class="regular_10">
-        <p>&nbsp;</p>
-      </div>
-     </div>
-  <% } %>
-
-
+ 
     <div class="row">
       <div class="heading_10">SCHOLARSHIP<br>
         <span class="regular_10_italic">For journal references:<br>
@@ -805,43 +772,6 @@
          </div>
        </div>
        <% } %> 
-     
-       <% if (pendingGrants.length > 0) { %>
-        <div class="row">
-         <div class="heading_10">Pending</div>
-         <div class="regular_10">
-          <% _.forEach(pendingGrants, function(item) { %>
-              <p><b>Project Title</b>: <%= item['title'] %></p>
-              <p><b>Grant number</b>: </p>
-              <p><b>PI</b>: <%= item['pi'] %></p>
-              <p><b>Role</b>: <%= item['role'] %></p>
-              <p><b>Percent effort</b>: </p>
-              <p><b>Funding source</b>: <%= item['awardedBy'] %></p>
-              <p><b>Funding amount</b>: </p>
-              <p><b>Duration</b>: <%= item['period'] %></p>
-              <p><b>Project synopsis</b>: </p>
-              <br/><br/>
-          <% }); %>
-         </div>
-        </div>
-      <% } else { %>
-       <div class="row">
-         <div class="heading_10">Pending</div>
-         <div class="regular_10">
-              <p><b>Project Title</b>: </p>
-              <p><b>Grant number</b>: </p>
-              <p><b>PI</b>: </p>
-              <p><b>Role</b>: </p>
-              <p><b>Percent effort</b>: </p>
-              <p><b>Funding source</b>: </p>
-              <p><b>Funding amount</b>: </p>
-              <p><b>Duration</b>: </p>
-              <p><b>Project synopsis</b>: </p>
-              <br/><br/>
-         </div>
-       </div>
-       <% } %>
-
     </div>
     
     <hr>

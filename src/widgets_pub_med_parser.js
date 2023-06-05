@@ -92,7 +92,7 @@ class WidgetsPubMedParser {
     var primaryPositions = []
     var secondaryPositions = []
     // remaining
-    var otherPositions = []
+    var otherTitlePositions = []
     var allPositions = []
 
     _.forEach(positions, function(value) {
@@ -110,11 +110,11 @@ class WidgetsPubMedParser {
           break;
         }
         default: {
-          otherPositions.push({'label':label})
+          otherTitlePositions.push({'label':label})
           break;
         }
       }
-      allPositions.push({'orig_label':label, 'startYear': year, 'category': category})
+      allPositions.push({'institution': 'Duke University', 'orig_label':label, 'startYear': year, 'category': category})
     });
 
     let pastAppointments = data['pastAppointments'];
@@ -128,7 +128,8 @@ class WidgetsPubMedParser {
 
       var full_label = (label + ", " + org_label + " " + start_year + " - " + end_year);   
       pastAppointmentsList.push({'label':full_label, 
-        'orig_label':label, 
+        'orig_label':label,
+        'institution': 'Duke University',
         'org_label':org_label, 
         'startYear':start_year, 
         'endYear':end_year,
@@ -142,12 +143,12 @@ class WidgetsPubMedParser {
 
     let academicAppointments = merged.filter(pos => pos.category != 'A');
     let administrativeAppointments = merged.filter(pos => pos.category == 'A');
-
+  
     let results = {
       // NOTE: these do *not* include pastAppointments
       'primaryPositions': primaryPositions,
       'secondaryPositions': secondaryPositions,
-      'otherPositions': otherPositions,
+      'otherTitlePositions': otherTitlePositions,
       'allPositions': allPositions,
       'pastAppointments': pastAppointmentsList,
       // NOTE: these *do* include past appointments
@@ -161,6 +162,7 @@ class WidgetsPubMedParser {
     var educations = data['educations'] || [];
     var educationList = []
     var profexpList = []
+    var isTypeOf = "profExperiences";
     _.forEach(educations, function(value) {
       let institution = value.attributes['institution'];
       let endYear = value.attributes['endDate'] ? value.attributes['endDate'].substr(0,4) : '';
@@ -178,12 +180,16 @@ class WidgetsPubMedParser {
       else {
         let startYear = value.attributes['startDate'].substr(0,4);
         fullLabel = (label + ", " + institution);
-        profexpList.push({'label': fullLabel, 'startYear': startYear, 'endYear': endYear}) 
+        profexpList.push({'label': fullLabel, 'startYear': startYear, 'endYear': endYear, isTypeOf: isTypeOf}) 
       }
     });
-
-    let results = {'educations': educationList, 'profExperiences': profexpList}
+    let profexpAcademicAppointments = this.parsePositions(data).academicAppointments;
+    let profexpAdministrativeAppointments = this.parsePositions(data).administrativeAppointments;
+    let profexpSection = profexpList.concat(profexpAcademicAppointments, profexpAdministrativeAppointments )
+    let results = {'educations': educationList, 'profexpSection': profexpSection, 'profExperiences': profexpList, 'profexpAcademicAppointments': profexpAcademicAppointments, 'profexpAdministrativeAppointments': profexpAdministrativeAppointments}
+    
     return results
+    
   }
 
   parseOtherPositions(data) {
@@ -201,6 +207,7 @@ class WidgetsPubMedParser {
       }
     });
     return {'otherPositions':other_positions}
+    
   };
 
   parseMedicalLicences(data) {
