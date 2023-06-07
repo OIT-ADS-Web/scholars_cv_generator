@@ -70,6 +70,9 @@
     <div class="times_10_bold"><p style="margin-bottom:0pt;">Secondary Academic Appointment:</p></div>
     <div class="times_10_regular">Must be updated in dFac on your behalf; contact your organization's Scholars power user(s).</div>
 
+    <div class="times_10_bold"><p style="margin-bottom:0pt;">Other Titles:</p></div>
+    <div class="times_10_regular">Must be updated in dFac on your behalf; contact your organization's Scholars power user(s).</div>
+
     <div class="times_10_bold"><p style="margin-bottom:0pt;">Rank and date of first Duke Faculty Appointment:</p></div>
     <div class="times_10_regular">Must be updated in dFac on your behalf; contact your organization's Scholars power user(s).</div>
 
@@ -83,9 +86,6 @@
     <div class="times_10_regular">Must be updated in dFac on your behalf; contact your organization's Scholars power user(s).</div>
 
     <div class="times_10_bold"><p style="margin-bottom:0pt;">Specialty Certifications and Dates:</p></div>
-    <div class="times_10_regular">Must be updated in dFac on your behalf; contact your organization's Scholars power user(s).</div>
-
-    <div class="times_10_bold"><p style="margin-bottom:0pt;">Duke University Faculty Appointments:</p></div>
     <div class="times_10_regular">Must be updated in dFac on your behalf; contact your organization's Scholars power user(s).</div>
 
     <div class="times_10_bold"><p style="margin-bottom:0pt;">Publications:</p></div>
@@ -201,29 +201,25 @@
         <% title = title.slice(0,-2); %>
         <% organizationLabel = organizationLabel.slice(0,-2); %>
 
-        <div class="row"><span class="heading_10">SECONDARY ACADEMIC RANK: </span> <span class="regular_10"></span><br/>
+        <div class="row"><span class="heading_10">SECONDARY ACADEMIC RANK(S): </span> <span class="regular_10"></span><br/>
           <div class="regular_10">
             <% if(secondaryPositions.length > 0) { %>
               <% var title = ""; %>
               <% _.forEach(secondaryPositions, function(item) { %>
               <% title = item['label']; %>
-              <ul>
               <li>${title}</li>
-              </ul>
               <% }); %>
           <% } %>
           </div>
         </div>
         
-        <div class="row"><span class="heading_10">SECONDARY ACADEMIC DEPARTMENT: </span> <span class="regular_10"></span><br/>
+        <div class="row"><span class="heading_10">SECONDARY ACADEMIC DEPARTMENT(S): </span> <span class="regular_10"></span><br/>
           <div class="regular_10">
             <% if(secondaryPositions.length > 0) { %>
               <% var organizationLabel = ""; %>
               <% _.forEach(secondaryPositions, function(item) { %>
               <% organizationLabel = item['organizationLabel']; %>
-              <ul>
-                <li>${title}</li>
-              </ul>
+              <li>${title}</li>
               <% }); %>
           <% } %>
           </div>
@@ -233,9 +229,9 @@
         <div class="row"><span class="heading_10">OTHER TITLES: </span><br/>
             <span class="regular_10_italic">List any other titles here, one title per row.</span>
             <div class="regular_10">
-              <% if(otherPositions.length > 0) { %>
+              <% if(otherTitlePositions.length > 0) { %>
                 <% var title = ""; %>
-                <% _.forEach(otherPositions, function(item) { %>
+                <% _.forEach(otherTitlePositions, function(item) { %>
                 <% title = item['label']; %>
                 <p>${title}&nbsp;</p>
                 <% }); %>
