@@ -116,7 +116,6 @@ class WidgetsPubMedParser {
       }
       allPositions.push({'institution': 'Duke University', 'orig_label':label, 'startYear': year, 'category': category})
     });
-
     let pastAppointments = data['pastAppointments'];
     var pastAppointmentsList = [];
     _.forEach(pastAppointments, function(value) {
@@ -185,8 +184,9 @@ class WidgetsPubMedParser {
     });
     let profexpAcademicAppointments = this.parsePositions(data).academicAppointments;
     let profexpAdministrativeAppointments = this.parsePositions(data).administrativeAppointments;
-    let profexpSection = profexpList.concat(profexpAcademicAppointments, profexpAdministrativeAppointments )
-    let results = {'educations': educationList, 'profexpSection': profexpSection, 'profExperiences': profexpList, 'profexpAcademicAppointments': profexpAcademicAppointments, 'profexpAdministrativeAppointments': profexpAdministrativeAppointments}
+    let academicPositionsData = this.parseOtherPositions(data).otherPositions;
+    let profexpSection = profexpList.concat(profexpAcademicAppointments, profexpAdministrativeAppointments, academicPositionsData )
+    let results = {'educations': educationList, 'profexpSection': profexpSection, 'profExperiences': profexpList, 'profexpAcademicAppointments': profexpAcademicAppointments, 'profexpAdministrativeAppointments': profexpAdministrativeAppointments, 'academicPositionsData': academicPositionsData }
     
     return results
     
@@ -202,8 +202,9 @@ class WidgetsPubMedParser {
           var label = value['label'];
           var startYear = value['attributes']['startDate'].substr(0,4);
           var endYear = value['attributes']['endDate'].substr(0,4);
+          var isTypeOf = "academicPositions";
           fullLabel = label;
-          other_positions.push({'label':fullLabel, 'startYear': startYear, 'endYear': endYear});
+          other_positions.push({'label':fullLabel, 'startYear': startYear, 'endYear': endYear, 'isTypeOf' : isTypeOf });
       }
     });
     return {'otherPositions':other_positions}

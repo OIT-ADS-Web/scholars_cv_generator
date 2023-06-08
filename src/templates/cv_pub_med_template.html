@@ -220,7 +220,7 @@
               <% var organizationLabel = ""; %>
               <% _.forEach(secondaryPositions, function(item) { %>
               <% organizationLabel = item['organizationLabel']; %>
-              <span class="regular_10">${title}</span>
+              <span class="regular_10">${organizationLabel}</span>
               <br>
               <% }); %>
           <% } %>
@@ -300,7 +300,14 @@
       </div>
       <div class="regular_10">
       <% _.forEach(profexpSection, function(item) { %>
-          <% if (item['isTypeOf'] == 'profExperiences' ) { %>
+          <% if ( item['isTypeOf'] == 'profExperiences' ) { %>
+            <% var profExperiencesList = item['label'].split(","); %>
+            <% var institution = profExperiencesList[2] + "," + profExperiencesList[3]; %>
+            <% var position = profExperiencesList[0]; %>
+            <% var label = profExperiencesList[1]; %>
+            <p><%= institution + ", " + position + ", " + label + ", " + item['startYear'] + " - " + item['endYear'] %></p>
+          <% } else { %>   
+          <% if ( item['isTypeOf'] == 'academicPositions' ) { %>
             <% var position = item['label'].substring(0, item['label'].indexOf(",")); %>
             <% var institution = item['label'].substring(item['label'].indexOf(",")+1); %>
            <p><%= institution + "," + position + ", " + item['startYear'] + " - " + item['endYear'] %></p>
@@ -311,6 +318,7 @@
               <p><%= item['institution'] + ", " + item['orig_label'] + ", " + item['startYear'] + " - " + "present" %></p>
             <% } %>
           <% } %>
+        <% } %>      
       <% }); %>
     </div>
     </div>
