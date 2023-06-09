@@ -305,20 +305,18 @@
             <% var institution = profExperiencesList[2] + "," + profExperiencesList[3]; %>
             <% var position = profExperiencesList[0]; %>
             <% var label = profExperiencesList[1]; %>
-            <p><%= institution + ", " + position + ", " + label + ", " + item['startYear'] + " - " + item['endYear'] %></p>
+            <% if(item['endYear'] != null)  { %>
+              <p><%= institution + ", " + position + ", " + label + ", " + item['startYear'] + " - " + item['endYear'] %></p>
+            <% } else { %>  
+              <p><%= institution + ", " + position + ", " + label + ", " + item['startYear'] + " - " + "present" %></p>
+            <% } %>
           <% } else { %>   
-          <% if ( item['isTypeOf'] == 'academicPositions' ) { %>
-            <% var position = item['label'].substring(0, item['label'].indexOf(",")); %>
-            <% var institution = item['label'].substring(item['label'].indexOf(",")+1); %>
-           <p><%= institution + "," + position + ", " + item['startYear'] + " - " + item['endYear'] %></p>
-          <% } else { %>
             <% if(item['endYear'] != null)  { %>
               <p><%= item['institution'] + ", " + item['orig_label'] + ", " + item['startYear'] + " - " + item['endYear'] %></p>
             <% } else { %>    
               <p><%= item['institution'] + ", " + item['orig_label'] + ", " + item['startYear'] + " - " + "present" %></p>
             <% } %>
-          <% } %>
-        <% } %>      
+          <% } %>     
       <% }); %>
     </div>
     </div>

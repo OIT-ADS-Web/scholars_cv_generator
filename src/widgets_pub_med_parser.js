@@ -200,11 +200,12 @@ class WidgetsPubMedParser {
       {
           var fullLabel = "";
           var label = value['label'];
+          var institution = value['attributes']['institute'];
+          var role = value['attributes']['role'];
           var startYear = value['attributes']['startDate'].substr(0,4);
           var endYear = value['attributes']['endDate'].substr(0,4);
-          var isTypeOf = "academicPositions";
           fullLabel = label;
-          other_positions.push({'label':fullLabel, 'startYear': startYear, 'endYear': endYear, 'isTypeOf' : isTypeOf });
+          other_positions.push({'label':fullLabel, 'startYear': startYear, 'endYear': endYear, 'institution': institution, 'orig_label': role });
       }
     });
     return {'otherPositions':other_positions}
