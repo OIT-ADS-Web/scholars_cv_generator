@@ -179,7 +179,7 @@ class WidgetsPubMedParser {
       else {
         let startYear = value.attributes['startDate'].substr(0,4);
         fullLabel = (label + ", " + institution);
-        profexpList.push({'label': fullLabel, 'startYear': startYear, 'endYear': endYear, isTypeOf: isTypeOf}) 
+        profexpList.push({'label': label, 'institution': institution, 'startYear': startYear, 'endYear': endYear, isTypeOf: isTypeOf}) 
       }
     });
     let profexpAcademicAppointments = this.parsePositions(data).academicAppointments;

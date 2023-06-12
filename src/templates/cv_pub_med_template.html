@@ -301,14 +301,12 @@
       <div class="regular_10">
       <% _.forEach(profexpSection, function(item) { %>
           <% if ( item['isTypeOf'] == 'profExperiences' ) { %>
-            <% var profExperiencesList = item['label'].split(","); %>
-            <% var institution = profExperiencesList[2] + "," + profExperiencesList[3]; %>
-            <% var position = profExperiencesList[0]; %>
-            <% var label = profExperiencesList[1]; %>
+            <% var institution = item['institution'] %>
+            <% var label = item['label'] %>
             <% if(item['endYear'] != null)  { %>
-              <p><%= institution + ", " + position + ", " + label + ", " + item['startYear'] + " - " + item['endYear'] %></p>
+              <p><%= institution + ", " + label + ", " + item['startYear'] + " - " + item['endYear'] %></p>
             <% } else { %>  
-              <p><%= institution + ", " + position + ", " + label + ", " + item['startYear'] + " - " + "present" %></p>
+              <p><%= institution + ", " + label + ", " + item['startYear'] + " - " + "present" %></p>
             <% } %>
           <% } else { %>   
             <% if(item['endYear'] != null)  { %>
