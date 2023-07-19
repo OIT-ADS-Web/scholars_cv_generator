@@ -241,9 +241,9 @@
             </div>
         </div>  
 
-    <% if (pastAppointments.length > 0) { %>
+    <% if (pastPrimaryAppointments.length > 0) { %>
         <% var title = ""; %>
-        <% _.forEach(pastAppointments, function(item) { %>
+        <% _.forEach(pastPrimaryAppointments, function(item) { %>
         <% title = item['orig_label'] + ', ' + item['startYear'] + ', '; %>
         <% }); %>
       <% title = title.replace(/,\s*$/, ""); %>

@@ -142,7 +142,13 @@ class WidgetsPubMedParser {
 
     let academicAppointments = merged.filter(pos => pos.category != 'A');
     let administrativeAppointments = merged.filter(pos => pos.category == 'A');
-  
+    
+    let pastPrimaryAppointments = pastAppointmentList.filter(pos => pos.category == 'P');
+    // in case sort if lost by filter
+    pastPrimaryAppointments.sort(function(a,b) {
+      return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);
+    });
+ 
     let results = {
       // NOTE: these do *not* include pastAppointments
       'primaryPositions': primaryPositions,
@@ -152,7 +158,9 @@ class WidgetsPubMedParser {
       'pastAppointments': pastAppointmentsList,
       // NOTE: these *do* include past appointments
       'academicAppointments': academicAppointments,
-      'administrativeAppointments': administrativeAppointments
+      'administrativeAppointments': administrativeAppointments,
+      // NOTE: these ONLY include past appts
+      'pastPrimaryAppointments': pastPrimaryAppointments,
     }
     return results
   };
