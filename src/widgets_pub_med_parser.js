@@ -143,7 +143,7 @@ class WidgetsPubMedParser {
     let academicAppointments = merged.filter(pos => pos.category != 'A');
     let administrativeAppointments = merged.filter(pos => pos.category == 'A');
     
-    let pastPrimaryAppointments = pastAppointmentList.filter(pos => pos.category == 'P');
+    let pastPrimaryAppointments = pastAppointmentsList.filter(pos => pos.category == 'P');
     // in case sort if lost by filter
     pastPrimaryAppointments.sort(function(a,b) {
       return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);
