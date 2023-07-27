@@ -92,31 +92,30 @@ class WidgetsPubMedParser {
     var primaryPositions = []
     var secondaryPositions = []
     // remaining
-    var otherPositions = []
+    var otherTitlePositions = []
     var allPositions = []
 
     _.forEach(positions, function(value) {
       let label = value['label'];
       let year = value['attributes']['startYear'].substr(0,4);
       let category = value['attributes']['appointmentTypeCode'];
-
+      let organizationLabel = value['attributes']['organizationLabel'];
       switch(category) {
         case 'P': {
-          primaryPositions.push({'label': label})
+          primaryPositions.push({'label': label, 'organizationLabel': organizationLabel})
           break;
         }
         case 'S': {
-          secondaryPositions.push({'label':label})
+          secondaryPositions.push({'label':label, 'organizationLabel': organizationLabel})
           break;
         }
         default: {
-          otherPositions.push({'label':label})
+          otherTitlePositions.push({'label':label})
           break;
         }
       }
-      allPositions.push({'orig_label':label, 'startYear': year, 'category': category})
+      allPositions.push({'institution': 'Duke University', 'orig_label':label, 'startYear': year, 'category': category})
     });
-
     let pastAppointments = data['pastAppointments'];
     var pastAppointmentsList = [];
     _.forEach(pastAppointments, function(value) {
@@ -128,7 +127,8 @@ class WidgetsPubMedParser {
 
       var full_label = (label + ", " + org_label + " " + start_year + " - " + end_year);   
       pastAppointmentsList.push({'label':full_label, 
-        'orig_label':label, 
+        'orig_label':label,
+        'institution': 'Duke University',
         'org_label':org_label, 
         'startYear':start_year, 
         'endYear':end_year,
@@ -142,16 +142,25 @@ class WidgetsPubMedParser {
 
     let academicAppointments = merged.filter(pos => pos.category != 'A');
     let administrativeAppointments = merged.filter(pos => pos.category == 'A');
-
+    
+    let pastPrimaryAppointments = pastAppointmentsList.filter(pos => pos.category == 'P');
+    // in case sort if lost by filter
+    pastPrimaryAppointments.sort(function(a,b) {
+      return (a.startYear < b.startYear) ? 1 : ((b.startYear < a.startYear) ? -1 : 0);
+    });
+ 
     let results = {
       // NOTE: these do *not* include pastAppointments
       'primaryPositions': primaryPositions,
       'secondaryPositions': secondaryPositions,
+      'otherTitlePositions': otherTitlePositions,
       'allPositions': allPositions,
       'pastAppointments': pastAppointmentsList,
       // NOTE: these *do* include past appointments
       'academicAppointments': academicAppointments,
-      'administrativeAppointments': administrativeAppointments
+      'administrativeAppointments': administrativeAppointments,
+      // NOTE: these ONLY include past appts
+      'pastPrimaryAppointments': pastPrimaryAppointments,
     }
     return results
   };
@@ -160,6 +169,7 @@ class WidgetsPubMedParser {
     var educations = data['educations'] || [];
     var educationList = []
     var profexpList = []
+    var isTypeOf = "profExperiences";
     _.forEach(educations, function(value) {
       let institution = value.attributes['institution'];
       let endYear = value.attributes['endDate'] ? value.attributes['endDate'].substr(0,4) : '';
@@ -177,12 +187,17 @@ class WidgetsPubMedParser {
       else {
         let startYear = value.attributes['startDate'].substr(0,4);
         fullLabel = (label + ", " + institution);
-        profexpList.push({'label': fullLabel, 'startYear': startYear, 'endYear': endYear}) 
+        profexpList.push({'label': label, 'institution': institution, 'startYear': startYear, 'endYear': endYear, isTypeOf: isTypeOf}) 
       }
     });
-
-    let results = {'educations': educationList, 'profExperiences': profexpList}
+    let profexpAcademicAppointments = this.parsePositions(data).academicAppointments;
+    let profexpAdministrativeAppointments = this.parsePositions(data).administrativeAppointments;
+    let academicPositionsData = this.parseOtherPositions(data).otherPositions;
+    let profexpSection = profexpList.concat(profexpAcademicAppointments, profexpAdministrativeAppointments, academicPositionsData )
+    let results = {'educations': educationList, 'profexpSection': profexpSection, 'profExperiences': profexpList, 'profexpAcademicAppointments': profexpAcademicAppointments, 'profexpAdministrativeAppointments': profexpAdministrativeAppointments, 'academicPositionsData': academicPositionsData }
+    
     return results
+    
   }
 
   parseOtherPositions(data) {
@@ -193,13 +208,16 @@ class WidgetsPubMedParser {
       {
           var fullLabel = "";
           var label = value['label'];
+          var institution = value['attributes']['institute'];
+          var role = value['attributes']['role'];
           var startYear = value['attributes']['startDate'].substr(0,4);
           var endYear = value['attributes']['endDate'].substr(0,4);
           fullLabel = label;
-          other_positions.push({'label':fullLabel, 'startYear': startYear, 'endYear': endYear});
+          other_positions.push({'label':fullLabel, 'startYear': startYear, 'endYear': endYear, 'institution': institution, 'orig_label': role });
       }
     });
     return {'otherPositions':other_positions}
+    
   };
 
   parseMedicalLicences(data) {
@@ -324,10 +342,8 @@ class WidgetsPubMedParser {
       })
 
       let isRefereed = function() {
-        let exclusion = ["Multicenter Study", "Review",  "Scientific Integrity Review",
-          "Systematic Review", "Support of Research Systematic Review",
-          "Adaptive Clinical Trial", "Clinical Trial, Phase III", "Clinical Trial, Phase IV",
-          "Pragmatic Clinical Trial"]
+        let exclusion = ["Review",  "Scientific Integrity Review",
+          "Systematic Review", "Support of Research Systematic Review"]
         let inclusion = ["Journal Article", "Journal", "academic article"]
         return subtypeList.length == 0 || 
         ((_.intersection(subtypeList, inclusion).length > 0 &&
@@ -397,9 +413,11 @@ class WidgetsPubMedParser {
       if (value['vivoType'] == 'http://purl.org/ontology/bibo/BookSection') {
         pubTypes['booksections'].push({'citation': citation, 'year': year, 'subtypes': subtypeList, 'uri': uri})
       }
+    
       /* NOTE: 'nonauthored' and 'others' not populated */
     });
-
+    pubTypes['books_booksections'] = pubTypes['books'].concat(pubTypes['booksections'])
+    pubTypes['journals'] = pubTypes['journals'].concat(pubTypes['manuscripts'], pubTypes['letters'], pubTypes['editorials'], pubTypes['reviews'])
     let results = _.transform(pubTypes, (result, value, key) => { 
       let name = key
       result[name] = value
@@ -687,7 +705,7 @@ class WidgetsPubMedParser {
 
   parsePresentations(data) {
 
-    var presentationList = { 'lectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'internationalmeetings': [] };
+    var presentationList = { 'keynotenamedlectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'internationalmeetings': [], 'invitedtalks': [], 'lectures': [], 'broadcastappearances': [], 'interviews': [], 'others': [] };
     let professionalActivities = data['professionalActivities'];
 
      _.forEach(professionalActivities, function(value) {
@@ -702,6 +720,7 @@ class WidgetsPubMedParser {
 
                 case "Other": {
                     //NOTE: 'other' skipped
+                    presentationList['others'].push({'label':label});
                     break;
                 }
 
@@ -710,13 +729,33 @@ class WidgetsPubMedParser {
                     break;
                 }
 
+                case "Lecture": {
+                  presentationList['lectures'].push({'label':label});
+                  break;
+              }
+                
+                case "Invited Talk": {
+                  presentationList['invitedtalks'].push({'label':label});
+                  break;
+              }
+
+              case "Broadcast Appearance": {
+                presentationList['broadcastappearances'].push({'label':label});
+                break;
+            }
+
+              case "Interview": {
+                presentationList['interviews'].push({'label':label});
+                break;
+            }
+
                 case "National Scientific Meeting": {
                     presentationList['nationalmeetings'].push({'label':label});
                     break;
                 }
 
                 case "Keynote/Named Lecture": {
-                    presentationList['lectures'].push({'label':label});
+                    presentationList['keynotenamedlectures'].push({'label':label});
                     break;
                 }
 
