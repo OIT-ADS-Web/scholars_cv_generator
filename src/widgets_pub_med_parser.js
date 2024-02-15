@@ -705,7 +705,7 @@ class WidgetsPubMedParser {
 
   parsePresentations(data) {
 
-    var presentationList = { 'keynotenamedlectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'internationalmeetings': [], 'invitedtalks': [], 'lectures': [], 'broadcastappearances': [], 'interviews': [], 'others': [] };
+    var presentationList = { 'keynotenamedlectures': [], 'professorships': [], 'nationalmeetings': [], 'courses': [], 'internationalmeetings': [], 'invitedtalks': [], 'lectures': [], 'broadcastappearances': [], 'interviews': [], 'otherPresentations': [] };
     let professionalActivities = data['professionalActivities'];
 
      _.forEach(professionalActivities, function(value) {
@@ -720,7 +720,7 @@ class WidgetsPubMedParser {
 
                 case "Other": {
                     //NOTE: 'other' skipped
-                    presentationList['others'].push({'label':label});
+                    presentationList['otherPresentations'].push({'label':label});
                     break;
                 }
 

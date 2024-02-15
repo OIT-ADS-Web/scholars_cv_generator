@@ -1010,11 +1010,11 @@
         </div>
       <% } %>
 
-      <% if (others.length > 0) { %>
+      <% if (otherPresentations.length > 0) { %>
         <div class="row">
          <div class="heading_10">Other: </div>
          <div class="regular_10">
-          <% _.forEach(others, function(item) { %>
+          <% _.forEach(otherPresentations, function(item) { %>
               <p><%= item['label'] %></p>
           <% }); %>
          </div>
