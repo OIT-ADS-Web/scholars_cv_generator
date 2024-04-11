@@ -182,7 +182,7 @@ class WidgetsPubMedParser {
         if (endYear != '') {
           fullLabel = (fullLabel + ", " + endYear);
         }
-        educationList.push({'label': fullLabel, 'endYear': endYear}) 
+        educationList.push({'label': fullLabel, 'institution': institution, 'degree': degree, 'endYear': endYear}) 
       } 
       else {
         let startYear = value.attributes['startDate'].substr(0,4);
