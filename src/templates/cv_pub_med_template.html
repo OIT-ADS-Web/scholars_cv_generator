@@ -195,9 +195,9 @@
         <% title = title.slice(0,-2); %>
         <% organizationLabel = organizationLabel.slice(0,-2); %>
 
-         <div class="row"><span class="heading_12">Primary Academic Rank: </span> <span class="regular_12">${title}</span></div>
+         <div class="row"><span class="heading_12">Primary academic rank: </span> <span class="regular_12">${title}</span></div>
 
-         <div class="row"><span class="heading_12">Primary Academic Department: </span> <span class="regular_12">${organizationLabel}</span></div>
+         <div class="row"><span class="heading_12">Primary academic department: </span> <span class="regular_12">${organizationLabel}</span></div>
     <% } %>
 
     <% if(secondaryPositions.length > 0) { %>
@@ -210,7 +210,7 @@
         <% title = title.slice(0,-2); %>
         <% organizationLabel = organizationLabel.slice(0,-2); %>
 
-        <div class="row"><span class="heading_12">Secondary Academic Rank (if any): </span> <span class="regular_12"></span><br/>
+        <div class="row"><span class="heading_12">Secondary academic rank (if any): </span> <span class="regular_12"></span><br/>
           <div class="regular_12">
             <% if(secondaryPositions.length > 0) { %>
               <% var title = ""; %>
@@ -223,7 +223,7 @@
           </div>
         </div>
         
-        <div class="row"><span class="heading_12">Secondary Academic Department (if any): </span> <span class="regular_12"></span><br/>
+        <div class="row"><span class="heading_12">Secondary academic department (if any): </span> <span class="regular_12"></span><br/>
           <div class="regular_12">
             <% if(secondaryPositions.length > 0) { %>
               <% var organizationLabel = ""; %>
@@ -237,7 +237,7 @@
         </div>
     <% } %>
   
-        <div class="row"><span class="heading_12">Other Titles</span><span class="regular_12_normal"> (if any):</span><br/>
+        <div class="row"><span class="heading_12">Other titles</span><span class="regular_12_normal"> (if any):</span><br/>
             <div class="regular_12">
               <% if(otherTitlePositions.length > 0) { %>
                 <% var title = ""; %>
@@ -255,7 +255,7 @@
         <% title = item['orig_label'] + ', ' + item['startYear'] + ', '; %>
         <% }); %>
       <% title = title.replace(/,\s*$/, ""); %>
-      <div class="row"><span class="heading_12">Rank And Date Of First Duke Faculty Appointment: </span> <span class="regular_12">${title}</span></div>
+      <div class="row"><span class="heading_12">Rank and date of first Duke Faculty appointment: </span> <span class="regular_12">${title}</span></div>
         
     <% } %>
 
@@ -264,13 +264,13 @@
         <% lic = item['label']; %>
         <% }); %>
 
-        <div class="row"><span class="heading_12">NC Medical Board License Certificate Number: </span> <span class="regular_12">${lic}</span>
+        <div class="row"><span class="heading_12">NC Medical Board license certificate number: </span> <span class="regular_12">${lic}</span>
         <br/>
         <span class="regular_12">&emsp;Next Renewal Date (month / day / year): </span>
         </div>
 
     <div class="row">
-      <div class="heading_12">Specialty Certification<span class="regular_12_normal">(s)</span> And Date<span class="regular_12_normal">(s):</span><br>
+      <div class="heading_12">Specialty certification<span class="regular_12_normal">(s)</span> and date<span class="regular_12_normal">(s):</span><br>
       <div class="regular_12">
         <p>&nbsp;</p>
       </div>
@@ -283,7 +283,7 @@
     </div>
     <table>
       <tr>
-        <th><u>Institution</u></th>
+        <th><u>Institution(name,location)</u></th>
         <th><u>Degree</u></th>
         <th><u>Degree Date</u></th>
       </tr>
@@ -757,7 +757,7 @@
         <% if (currentGrants.length > 0) { %>
         <div class="row">
          <div class="heading_12" style="text-indent:5%;">Current:</div>
-         <div class="regular_12" style="text-indent:10%;">
+         <div class="regular_12_normal" style="text-indent:10%;">
           <% _.forEach(currentGrants, function(item) { %>
               <p><b>Project Title</b>: <%= item['title'] %></p>
               <p><b>Grant number</b>: </p>
@@ -775,7 +775,7 @@
        <% } else { %>
        <div class="row">
          <div class="heading_12" style="text-indent:5%;">Current:</div>
-         <div class="regular_12" style="text-indent:10%;">
+         <div class="regular_12_normal" style="text-indent:10%;">
               <p><b>Project Title</b>: </p>
               <p><b>Grant number</b>: </p>
               <p><b>PI</b>: </p>
@@ -793,9 +793,9 @@
        <% if (completedGrants.length > 0) { %>
         <div class="row">
          <div class="heading_12" style="text-indent:5%;">Completed:</div>
-         <div class="regular_12" style="text-indent:10%;">
+         <div class="regular_12_normal" style="text-indent:10%;">
           <% _.forEach(completedGrants, function(item) { %>
-              <p><b>Project Title</b>: <%= item['title'] %></p>
+              <p style="text-indent:-90px;margin-left:10.5em"><span style="display:inline-block;margin:0 0 0 10.5em;padding:0"><b>Project Title</b>: </span><%= item['title'] %></p>
               <p><b>Grant number</b>: </p>
               <p><b>PI</b>: <%= item['pi'] %></p>
               <p><b>Your role</b>: <%= item['role'] %></p>
@@ -811,7 +811,7 @@
        <% } else { %>
        <div class="row">
          <div class="heading_12" style="text-indent:5%;">Completed:</div>
-         <div class="regular_12" style="text-indent:10%;">
+         <div class="regular_12_normal" style="text-indent:10%;">
               <p><b>Project Title</b>: </p>
               <p><b>Grant number</b>: </p>
               <p><b>PI</b>: </p>
