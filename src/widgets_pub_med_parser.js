@@ -183,6 +183,9 @@ class WidgetsPubMedParser {
           fullLabel = (fullLabel + ", " + endYear);
         }
         educationList.push({'label': fullLabel, 'institution': institution, 'degree': degree, 'endYear': endYear}) 
+        // NOTE: need to sort once all are collected
+        // reverse chronological order, first by end date and next by start date
+        educationList = _.orderBy(educationList, ['endYear'], ['desc']);
       } 
       else {
         let startYear = value.attributes['startDate'].substr(0,4);
