@@ -3019,9 +3019,9 @@ jszip-utils@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/jszip-utils/-/jszip-utils-0.0.2.tgz#457d5cbca60a1c2e0706e9da2b544e8e7bc50bf8"
 
-jszip@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.7.0.tgz#9b8b995a4e7c9024653ce743e902076a82fdf4e6"
+jszip@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.8.0.tgz#a2ac3c33fe96a76489765168213655850254d51b"
   dependencies:
     lie "~3.3.0"
     pako "~1.0.2"
